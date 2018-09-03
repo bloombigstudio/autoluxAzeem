@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'auto',
 ]
 
+AUTH_USER_MODEL = 'auto.User'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -77,7 +79,7 @@ WSGI_APPLICATION = 'autolux.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'autolux_db',
+        'NAME': 'auto_db',
         'USER': 'postgres',
         'PASSWORD': '123456',
         'HOST': 'localhost',
@@ -130,4 +132,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 # MEDIA_ROOT = '/home/media/'
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR),'/media/')
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR),'autolux/')
+

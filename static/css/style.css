@@ -5529,3 +5529,15 @@ p.w3ls_para {
     }
 }
 /*-- //responsive media queries --*/
+
+
+/*My css*/
+#password_not_match, #password_validation{
+    font-size: 10px;
+    display: block;
+}
+.center{
+width: 150px;
+
+}
+

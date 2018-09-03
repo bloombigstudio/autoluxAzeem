@@ -111,15 +111,16 @@
 						<div class="modal-body modal-body-sub_agile">
 						<div class="col-md-8 modal_body_left modal_body_left1">
 						<h3 class="agileinfo_sign">Sign In <span>Now</span></h3>
-									<form action="#" method="post">
+                        <form action="{% url 'login' %}" method="post">
+                            {% csrf_token %}
 							<div class="styled-input agile-styled-input-top">
-								<input type="text" name="Name" required="">
-								<label>Name</label>
+                                {{ signIn.email }}
+                                <label>{{ signIn.email.label }}</label>
 								<span></span>
 							</div>
 							<div class="styled-input">
-								<input type="email" name="Email" required="">
-								<label>Email</label>
+                                 {{ signIn.password }}
+                                <label>{{ signIn.password.label }}</label>
 								<span></span>
 							</div>
 							<input type="submit" value="Sign In">
@@ -155,27 +156,41 @@
 						<div class="modal-body modal-body-sub_agile">
 						<div class="col-md-8 modal_body_left modal_body_left1">
 						<h3 class="agileinfo_sign">Sign Up <span>Now</span></h3>
-						 <form action="#" method="post">
-							<div class="styled-input agile-styled-input-top">
-								<input type="text" name="Name" required="">
-								<label>Name</label>
+						 <form action="{% url 'index' %}" method="post">
+                             {% csrf_token %}
+                            <div class="styled-input agile-styled-input-top">
+                                {{ signUp.full_Name }}
+                                <label>{{ signUp.full_Name.label }}</label>
 								<span></span>
 							</div>
-							<div class="styled-input">
-								<input type="email" name="Email" required="">
-								<label>Email</label>
+{#                            <div class="styled-input">#}
+{#                                {{ signUp.username }}#}
+{#                                <label>{{ signUp.username.label }}</label>#}
+{#								<span></span>#}
+{#							</div>#}
+                            <div class="styled-input">
+                                {{ signUp.email }}
+                                <label>{{ signUp.email.label }}</label>
 								<span></span>
 							</div>
-							<div class="styled-input">
-								<input type="password" name="password" required="">
-								<label>Password</label>
+                            <div class="styled-input">
+                                {{ signUp.password1 }}
+                                <label>{{ signUp.password1.label }}</label>
 								<span></span>
 							</div>
-							<div class="styled-input">
-								<input type="password" name="Confirm Password" required="">
-								<label>Confirm Password</label>
+                             <span id='password_validation'></span>
+                            <div class="styled-input">
+                                {{ signUp.password2 }}
+                                <label>{{ signUp.password2.label }}</label>
 								<span></span>
 							</div>
+                             <span id='password_not_match'></span>
+                            <div class="styled-input">
+                                {{ signUp.address }}
+                                <label>{{ signUp.address.label }}</label>
+								<span></span>
+							</div>
+
 							<input type="submit" value="Sign Up">
 						</form>
 						  <ul class="social-nav model-3d-0 footer-social w3_agile_social top_agile_third">
@@ -419,14 +434,14 @@
 										<img src="{% static 'images/banner1.jpg' %}" alt="" class="pro-image-back">
 											<div class="men-cart-pro">
 												<div class="inner-men-cart-pro">
-													<a href="{% url 'single' %}" class="link-product-add-cart">Quick View</a>
+													<a href="{% url 'single' id=0 %}" class="link-product-add-cart">Quick View</a>
 												</div>
 											</div>
 											<span class="product-new-top">New</span>
 
 									</div>
 									<div class="item-info-product ">
-										<h4><a href="{% url 'single' %}">Interior1</a></h4>
+										<h4><a href="{% url 'single' id=0 %}">Interior1</a></h4>
 										<div class="info-product-price">
 											<span class="item_price">$45.99</span>
 											<del>$69.71</del>
@@ -458,39 +473,37 @@
 										<img src="{% static 'images/banner1.jpg' %}" alt="" class="pro-image-back">
 											<div class="men-cart-pro">
 												<div class="inner-men-cart-pro">
-													<a href="{% url 'single' %}" class="link-product-add-cart">Quick View</a>
+													<a href="{% url 'single' id=0 %}" class="link-product-add-cart">Quick View</a>
 												</div>
 											</div>
 											<span class="product-new-top">New</span>
 
 									</div>
 									<div class="item-info-product ">
-										<h4><a href="{% url 'single' %}">Interior2</a></h4>
+										<h4><a href="{% url 'single' id=0 %}">Interior2</a></h4>
 										<div class="info-product-price">
 											<span class="item_price">$45.99</span>
 											<del>$69.71</del>
 										</div>
 										<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-															<form action="#" method="post">
-																<fieldset>
-																	<input type="hidden" name="cmd" value="_cart" />
-																	<input type="hidden" name="add" value="1" />
-																	<input type="hidden" name="business" value=" " />
-																	<input type="hidden" name="item_name" value="Sweatshirt" />
-																	<input type="hidden" name="amount" value="30.99" />
-																	<input type="hidden" name="discount_amount" value="1.00" />
-																	<input type="hidden" name="currency_code" value="USD" />
-																	<input type="hidden" name="return" value=" " />
-																	<input type="hidden" name="cancel_return" value=" " />
-																	<input type="submit" name="submit" value="Add to cart" class="button" />
-																</fieldset>
-															</form>
-														</div>
-
+                                            <form action="#" method="post">
+                                                <fieldset>
+                                                    <input type="hidden" name="cmd" value="_cart" />
+                                                    <input type="hidden" name="add" value="1" />
+                                                    <input type="hidden" name="business" value=" " />
+                                                    <input type="hidden" name="item_name" value="Sweatshirt" />
+                                                    <input type="hidden" name="amount" value="30.99" />
+                                                    <input type="hidden" name="discount_amount" value="1.00" />
+                                                    <input type="hidden" name="currency_code" value="USD" />
+                                                    <input type="hidden" name="return" value=" " />
+                                                    <input type="hidden" name="cancel_return" value=" " />
+                                                    <input type="submit" name="submit" value="Add to cart" class="button" />
+                                                </fieldset>
+                                            </form>
+                                        </div>
 									</div>
 								</div>
 							</div>
-
 
 							<div class="clearfix"></div>
 						</div>
@@ -504,14 +517,14 @@
 										<img src="{% static 'images/banner1.jpg' %}" alt="" class="pro-image-back">
 											<div class="men-cart-pro">
 												<div class="inner-men-cart-pro">
-													<a href="{% url 'single' %}" class="link-product-add-cart">Quick View</a>
+													<a href="{% url 'single' id=0 %}" class="link-product-add-cart">Quick View</a>
 												</div>
 											</div>
 											<span class="product-new-top">New</span>
 
 									</div>
 									<div class="item-info-product ">
-										<h4><a href="{% url 'single' %}">Exterior2</a></h4>
+										<h4><a href="{% url 'single' id=0 %}">Exterior2</a></h4>
 										<div class="info-product-price">
 											<span class="item_price">$130.99</span>
 											<del>$189.71</del>
@@ -549,14 +562,14 @@
 										<img src="{% static 'images/banner1.jpg' %}" alt="" class="pro-image-back">
 											<div class="men-cart-pro">
 												<div class="inner-men-cart-pro">
-													<a href="{% url 'single' %}" class="link-product-add-cart">Quick View</a>
+													<a href="{% url 'single' id=0 %}" class="link-product-add-cart">Quick View</a>
 												</div>
 											</div>
 											<span class="product-new-top">New</span>
 
 									</div>
 									<div class="item-info-product ">
-										<h4><a href="{% url 'single' %}">ABC</a></h4>
+										<h4><a href="{% url 'single' id=0 %}">ABC</a></h4>
 										<div class="info-product-price">
 											<span class="item_price">$140.99</span>
 											<del>$169.71</del>
@@ -593,14 +606,14 @@
 										<img src="{% static 'images/banner1.jpg' %}" alt="" class="pro-image-back">
 											<div class="men-cart-pro">
 												<div class="inner-men-cart-pro">
-													<a href="{% url 'single' %}" class="link-product-add-cart">Quick View</a>
+													<a href="{% url 'single' id=0 %}" class="link-product-add-cart">Quick View</a>
 												</div>
 											</div>
 											<span class="product-new-top">New</span>
 
 									</div>
 									<div class="item-info-product ">
-										<h4><a href="{% url 'single' %}">xyz</a></h4>
+										<h4><a href="{% url 'single' id=0 %}">xyz</a></h4>
 										<div class="info-product-price">
 											<span class="item_price">$80.99</span>
 											<del>$89.71</del>
@@ -636,14 +649,14 @@
 										<img src="{% static 'images/banner1.jpg' %}" alt="" class="pro-image-back">
 											<div class="men-cart-pro">
 												<div class="inner-men-cart-pro">
-													<a href="{% url 'single' %}" class="link-product-add-cart">Quick View</a>
+													<a href="{% url 'single' id=0 %}" class="link-product-add-cart">Quick View</a>
 												</div>
 											</div>
 											<span class="product-new-top">New</span>
 
 									</div>
 									<div class="item-info-product ">
-										<h4><a href="{% url 'single' %}">sdsd</a></h4>
+										<h4><a href="{% url 'single' id=0 %}">sdsd</a></h4>
 										<div class="info-product-price">
 											<span class="item_price">$80.99</span>
 											<del>$89.71</del>
@@ -680,7 +693,7 @@
 			<div class="container">
 				<h6>Delivery across all Pakistan</h6>
 
-				<a class="hvr-outline-out button2" href="{% url 'single' %}">Shop Now </a>
+				<a class="hvr-outline-out button2" href="{% url 'single' id=0%}">Shop Now </a>
 			</div>
 		</div>
 	<!-- //we-offer -->
@@ -815,50 +828,51 @@
 						<div class="modal-body modal-spa">
 							<div class="login-grids">
 								<div class="login">
-									<div class="login-bottom">
-										<h3>Sign up for free</h3>
-										<form>
-											<div class="sign-up">
-												<h4>Email :</h4>
-												<input type="text" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">
-											</div>
-											<div class="sign-up">
-												<h4>Password :</h4>
-												<input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="">
+{#									<div class="login-bottom">#}
+{#										<h3>Sign up for free</h3>#}
+{#										<form>#}
+{#											<div class="sign-up">#}
+{#												<h4>Email :</h4>#}
+{#												<input type="text" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">#}
+{#											</div>#}
+{#											<div class="sign-up">#}
+{#												<h4>Password :</h4>#}
+{#												<input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="">#}
+{##}
+{#											</div>#}
+{#											<div class="sign-up">#}
+{#												<h4>Re-type Password :</h4>#}
+{#												<input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="">#}
+{##}
+{#											</div>#}
+{#											<div class="sign-up">#}
+{#												<input type="submit" value="REGISTER NOW" >#}
+{#											</div>#}
+{##}
+{#										</form>#}
+{#									</div>#}
 
-											</div>
-											<div class="sign-up">
-												<h4>Re-type Password :</h4>
-												<input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="">
-
-											</div>
-											<div class="sign-up">
-												<input type="submit" value="REGISTER NOW" >
-											</div>
-
-										</form>
-									</div>
-									<div class="login-right">
-										<h3>Sign in with your account</h3>
-										<form>
-											<div class="sign-in">
-												<h4>Email :</h4>
-												<input type="text" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">
-											</div>
-											<div class="sign-in">
-												<h4>Password :</h4>
-												<input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="">
-												<a href="#">Forgot password?</a>
-											</div>
-											<div class="single-bottom">
-												<input type="checkbox"  id="brand" value="">
-												<label for="brand"><span></span>Remember Me.</label>
-											</div>
-											<div class="sign-in">
-												<input type="submit" value="SIGNIN" >
-											</div>
-										</form>
-									</div>
+{#                                    <div class="login-right">#}
+{#										<h3>Sign in with your account</h3>#}
+{#										<form>#}
+{#											<div class="sign-in">#}
+{#												<h4>Email :</h4>#}
+{#												<input type="text" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">#}
+{#											</div>#}
+{#											<div class="sign-in">#}
+{#												<h4>Password :</h4>#}
+{#												<input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="">#}
+{#												<a href="#">Forgot password?</a>#}
+{#											</div>#}
+{#											<div class="single-bottom">#}
+{#												<input type="checkbox"  id="brand" value="">#}
+{#												<label for="brand"><span></span>Remember Me.</label>#}
+{#											</div>#}
+{#											<div class="sign-in">#}
+{#												<input type="submit" value="SIGNIN" >#}
+{#											</div>#}
+{#										</form>#}
+{#									</div>#}
 									<div class="clearfix"></div>
 								</div>
 								<p>By logging in you agree to our <a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a></p>
@@ -949,6 +963,28 @@
 			});
 	</script>
 <!-- //here ends scrolling icon -->
+{#    my scripts#}
+    <script>
+
+    $('#id_password1').on('keyup', function () {
+
+      var p = jQuery('#id_password1').val();
+        if(p.length <=7 || p.length >= 33 || !p.match(/\d/) || !p.match(/[a-z]/i))
+            $('#password_validation').html('Must contains min 8 characters including at least 1 digit.').css('color', 'red');
+        else
+            $('#password_validation').hide();
+    });
+
+
+    $('#id_password2').on('keyup', function () {
+
+      if ($('#id_password1').val() == $('#id_password2').val()) {
+        $('#password_not_match').html('Perfect').css('color', 'green');
+      } else
+        $('#password_not_match').html('*Password does not match').css('color', 'red');
+    });
+
+    </script>
 
 
 <!-- for bootstrap working -->

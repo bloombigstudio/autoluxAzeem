@@ -211,7 +211,7 @@
 
 						   <ul class="w3_short">
 								<li><a href="{% url 'index' %}">Home</a><i>|</i></li>
-								<li>Steering</li>
+								<li>{{ selected_item.first.product_id.product_title }}</li>
 							</ul>
 						 </div>
 				</div>
@@ -227,14 +227,14 @@
 				<div class="flexslider">
 
 					<ul class="slides">
-						<li data-thumb="{% static 'images/d2.jpg' %}">
-							<div class="thumb-image"> <img src="{% static 'images/d2.jpg' %}" data-imagezoom="true" class="img-responsive"> </div>
+						<li data-thumb="{{ selected_item.first.first_image.url }}">
+							<div class="thumb-image"> <img src="{{ selected_item.first.first_image.url }}" data-imagezoom="true" class="img-responsive"> </div>
 						</li>
-						<li data-thumb="{% static 'images/d1.jpg' %}">
-							<div class="thumb-image"> <img src="{% static 'images/d1.jpg' %}" data-imagezoom="true" class="img-responsive"> </div>
+						<li data-thumb="{{ selected_item.first.second_image.url }}">
+							<div class="thumb-image"> <img src="{{ selected_item.first.second_image.url }}" data-imagezoom="true" class="img-responsive"> </div>
 						</li>
-						<li data-thumb="{% static 'images/d3.jpg' %}">
-							<div class="thumb-image"> <img src="{% static 'images/d3.jpg' %}" data-imagezoom="true" class="img-responsive"> </div>
+						<li data-thumb="{{ selected_item.first.third_image.url }}">
+							<div class="thumb-image"> <img src="{{ selected_item.first.third_image.url }}" data-imagezoom="true" class="img-responsive"> </div>
 						</li>
 					</ul>
 					<div class="clearfix"></div>
@@ -242,69 +242,77 @@
 			</div>
 		</div>
 		<div class="col-md-8 single-right-left simpleCart_shelfItem">
-					<h3>Steering  (Black)</h3>
-					<p><span class="item_price">$650</span> <del>- $900</del></p>
-					<div class="rating1">
-						<span class="starRating">
-							<input id="rating5" type="radio" name="rating" value="5">
-							<label for="rating5">5</label>
-							<input id="rating4" type="radio" name="rating" value="4">
-							<label for="rating4">4</label>
-							<input id="rating3" type="radio" name="rating" value="3" checked="">
-							<label for="rating3">3</label>
-							<input id="rating2" type="radio" name="rating" value="2">
-							<label for="rating2">2</label>
-							<input id="rating1" type="radio" name="rating" value="1">
-							<label for="rating1">1</label>
-						</span>
-					</div>
-					<div class="description">
-						<h5>Check delivery, payment options and charges at your location</h5>
-						 <form action="#" method="post">
-						<input type="text" value="Enter pincode" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter pincode';}" required="">
-						<input type="submit" value="Check">
-						</form>
-					</div>
-					<div class="color-quality">
-						<div class="color-quality-right">
-							<h5>Quality :</h5>
-							<select id="country1" onchange="change_country(this.value)" class="frm-field required sect">
-								<option value="null">5 Qty</option>
-								<option value="null">6 Qty</option>
-								<option value="null">7 Qty</option>
-								<option value="null">10 Qty</option>
-							</select>
-						</div>
-					</div>
+					<h3>{{ selected_item.first.product_id.product_title }}</h3>
+                        {% if selected_item.first.product_id.product_discounted_price != null %}
+                            <p>
+                                <span class="item_price">Rs {{ selected_item.first.product_id.product_discounted_price }}</span>
+                                <del>Rs {{ selected_item.first.product_id.product_price }}</del>
+                            </p>
+                        {% else %}
+                            <p>
+                                <span class="item_price">Rs {{ selected_item.first.product_id.product_price }}</span>
+                            </p>
+                        {% endif %}
+{#					<div class="rating1">#}
+{#						<span class="starRating">#}
+{#							<input id="rating5" type="radio" name="rating" value="5">#}
+{#							<label for="rating5">5</label>#}
+{#							<input id="rating4" type="radio" name="rating" value="4">#}
+{#							<label for="rating4">4</label>#}
+{#							<input id="rating3" type="radio" name="rating" value="3" checked="">#}
+{#							<label for="rating3">3</label>#}
+{#							<input id="rating2" type="radio" name="rating" value="2">#}
+{#							<label for="rating2">2</label>#}
+{#							<input id="rating1" type="radio" name="rating" value="1">#}
+{#							<label for="rating1">1</label>#}
+{#						</span>#}
+{#					</div>#}
+
+                    <div class="center">
+                        <p>
+                          </p><div class="input-group">
+                              <span class="input-group-btn">
+                                  <button type="button" class="btn btn-danger btn-number"  data-type="minus" data-field="quant[2]">
+                                    <span class="glyphicon glyphicon-minus"></span>
+                                  </button>
+                              </span>
+                              <input type="text" name="quant[2]" class="form-control input-number" value="1" min="1" max="100">
+                              <span class="input-group-btn">
+                                  <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[2]">
+                                      <span class="glyphicon glyphicon-plus"></span>
+                                  </button>
+                              </span>
+                          </div>
+                        <p></p>
+                    </div>
 					<div class="occasion-cart">
 						<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-															<form action="#" method="post">
-																<fieldset>
-																	<input type="hidden" name="cmd" value="_cart">
-																	<input type="hidden" name="add" value="1">
-																	<input type="hidden" name="business" value=" ">
-																	<input type="hidden" name="item_name" value="Wing Sneakers">
-																	<input type="hidden" name="amount" value="650.00">
-																	<input type="hidden" name="discount_amount" value="1.00">
-																	<input type="hidden" name="currency_code" value="USD">
-																	<input type="hidden" name="return" value=" ">
-																	<input type="hidden" name="cancel_return" value=" ">
-																	<input type="submit" name="submit" value="Add to cart" class="button">
-																</fieldset>
-															</form>
-														</div>
+                            <form action="#" method="post">
+                                <fieldset>
+                                    <input type="hidden" name="cmd" value="_cart">
+                                    <input type="hidden" name="add" value="1">
+                                    <input type="hidden" name="business" value=" ">
+                                    <input type="hidden" name="item_name" value="Wing Sneakers">
+                                    <input type="hidden" name="amount" value="650.00">
+                                    <input type="hidden" name="discount_amount" value="1.00">
+                                    <input type="hidden" name="currency_code" value="USD">
+                                    <input type="hidden" name="return" value=" ">
+                                    <input type="hidden" name="cancel_return" value=" ">
+                                    <input type="submit" name="submit" value="Add to cart" class="button">
+                                </fieldset>
+                            </form>
+                        </div>
 
 					</div>
 					<ul class="social-nav model-3d-0 footer-social w3_agile_social single_page_w3ls">
-             <li class="share">Share On : </li>
+                        <li class="share">Share On : </li>
 							<li><a href="#" class="facebook">
 								  <div class="front"><i class="fa fa-facebook" aria-hidden="true"></i></div>
 								  <div class="back"><i class="fa fa-facebook" aria-hidden="true"></i></div></a></li>
 							<li><a href="#" class="instagram">
 								  <div class="front"><i class="fa fa-instagram" aria-hidden="true"></i></div>
 								  <div class="back"><i class="fa fa-instagram" aria-hidden="true"></i></div></a></li>
-						</ul>
-
+                    </ul>
 		      </div>
 	 			<div class="clearfix"> </div>
 				<!-- /new_arrivals -->
@@ -312,58 +320,56 @@
 				<div id="horizontalTab">
 						<ul class="resp-tabs-list">
 							<li>Description</li>
-							<li>Reviews</li>
 							<li>Information</li>
+{#							<li>Information</li>#}
 						</ul>
 					<div class="resp-tabs-container">
 					<!--/tab_one-->
 					   <div class="tab1">
 
 							<div class="single_page_agile_its_w3ls">
-							  <h6>Lorem ipsum dolor sit amet</h6>
-							   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elPellentesque vehicula augue eget nisl ullamcorper, molestie blandit ipsum auctor. Mauris volutpat augue dolor.Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut lab ore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. labore et dolore magna aliqua.</p>
-							   <p class="w3ls_para">Lorem ipsum dolor sit amet, consectetur adipisicing elPellentesque vehicula augue eget nisl ullamcorper, molestie blandit ipsum auctor. Mauris volutpat augue dolor.Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut lab ore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. labore et dolore magna aliqua.</p>
-							</div>
+{#							  <h6>Lorem ipsum dolor sit amet</h6>#}
+							   <p>{{ selected_item.first.product_description }}</p>
+                            </div>
 						</div>
 						<!--//tab_one-->
-						<div class="tab2">
-
-							<div class="single_page_agile_its_w3ls">
-								<div class="bootstrap-tab-text-grids">
-									<div class="bootstrap-tab-text-grid">
-										<div class="bootstrap-tab-text-grid-left">
-											<img src="{% static 'images/t1.jpg' %}" alt=" " class="img-responsive">
-										</div>
-										<div class="bootstrap-tab-text-grid-right">
-											<ul>
-												<li><a href="#">Admin</a></li>
-												<li><a href="#"><i class="fa fa-reply-all" aria-hidden="true"></i> Reply</a></li>
-											</ul>
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing elPellentesque vehicula augue eget.Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis
-												suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem
-												vel eum iure reprehenderit.</p>
-										</div>
-										<div class="clearfix"> </div>
-						             </div>
-									 <div class="add-review">
-										<h4>add a review</h4>
-										<form action="#" method="post">
-												<input type="text" name="Name" required="Name">
-												<input type="email" name="Email" required="Email">
-												<textarea name="Message" required=""></textarea>
-											<input type="submit" value="SEND">
-										</form>
-									</div>
-								 </div>
-
-							 </div>
-						 </div>
+{#						<div class="tab2">#}
+{##}
+{#							<div class="single_page_agile_its_w3ls">#}
+{#								<div class="bootstrap-tab-text-grids">#}
+{#									<div class="bootstrap-tab-text-grid">#}
+{#										<div class="bootstrap-tab-text-grid-left">#}
+{#											<img src="{% static 'images/2.png' %}" alt=" " class="img-responsive">#}
+{#										</div>#}
+{#										<div class="bootstrap-tab-text-grid-right">#}
+{#											<ul>#}
+{#												<li><a href="#">Admin</a></li>#}
+{#												<li><a href="#"><i class="fa fa-reply-all" aria-hidden="true"></i> Reply</a></li>#}
+{#											</ul>#}
+{#											<p>Lorem ipsum dolor sit amet, consectetur adipisicing elPellentesque vehicula augue eget.Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis#}
+{#												suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem#}
+{#												vel eum iure reprehenderit.</p>#}
+{#										</div>#}
+{#										<div class="clearfix"> </div>#}
+{#						             </div>#}
+{#									 <div class="add-review">#}
+{#										<h4>add a review</h4>#}
+{#										<form action="#" method="post">#}
+{#												<input type="text" name="Name" required="Name">#}
+{#												<input type="email" name="Email" required="Email">#}
+{#												<textarea name="Message" required=""></textarea>#}
+{#											<input type="submit" value="SEND">#}
+{#										</form>#}
+{#									</div>#}
+{#								 </div>#}
+{##}
+{#							 </div>#}
+{#						 </div>#}
 						   <div class="tab3">
 
 							<div class="single_page_agile_its_w3ls">
-							  <h6>Steering (Black)</h6>
-							   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elPellentesque vehicula augue eget nisl ullamcorper, molestie blandit ipsum auctor. Mauris volutpat augue dolor.Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut lab ore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. labore et dolore magna aliqua.</p>
-							   <p class="w3ls_para">Lorem ipsum dolor sit amet, consectetur adipisicing elPellentesque vehicula augue eget nisl ullamcorper, molestie blandit ipsum auctor. Mauris volutpat augue dolor.Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut lab ore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. labore et dolore magna aliqua.</p>
+							  <h6>{{ selected_item.first.product_id.product_title }}</h6>
+							   <p>{{ selected_item.first.product_information }}</p>
 							</div>
 						</div>
 					</div>
@@ -372,168 +378,59 @@
 	<!-- //new_arrivals -->
 	  	<!--/slider_owl-->
 
-			<div class="w3_agile_latest_arrivals">
-			<h3 class="wthree_text_info">Featured <span>Arrivals</span></h3>
-			<div class="col-md-3 product-men">
-				 <div class="men-pro-item simpleCart_shelfItem">
-					 <div class="men-thumb-item">
-						 <img src="{% static 'images/banner1.jpg' %}" alt="" class="pro-image-front">
-						 <img src="{% static 'images/banner1.jpg' %}" alt="" class="pro-image-back">
-							 <div class="men-cart-pro">
-								 <div class="inner-men-cart-pro">
-									 <a href="{% url 'single' %}" class="link-product-add-cart">Quick View</a>
-								 </div>
-							 </div>
-							 <span class="product-new-top">New</span>
-
-					 </div>
-					 <div class="item-info-product ">
-						 <h4><a href="{% url 'single' %}">Steering</a></h4>
-						 <div class="info-product-price">
-							 <span class="item_price">$160.99</span>
-							 <del>$290.71</del>
-						 </div>
-						 <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-											 <form action="#" method="post">
-												 <fieldset>
-													 <input type="hidden" name="cmd" value="_cart">
-													 <input type="hidden" name="add" value="1">
-													 <input type="hidden" name="business" value=" ">
-													 <input type="hidden" name="item_name" value="Analog Watch">
-													 <input type="hidden" name="amount" value="30.99">
-													 <input type="hidden" name="discount_amount" value="1.00">
-													 <input type="hidden" name="currency_code" value="USD">
-													 <input type="hidden" name="return" value=" ">
-													 <input type="hidden" name="cancel_return" value=" ">
-													 <input type="submit" name="submit" value="Add to cart" class="button">
-												 </fieldset>
-											 </form>
-										 </div>
-
-					 </div>
-				 </div>
-			 </div>
-                       <div class="col-md-3 product-men">
-					<div class="men-pro-item simpleCart_shelfItem">
-						<div class="men-thumb-item">
-							<img src="{% static 'images/banner1.jpg' %}" alt="" class="pro-image-front">
-							<img src="{% static 'images/banner1.jpg' %}" alt="" class="pro-image-back">
-								<div class="men-cart-pro">
-									<div class="inner-men-cart-pro">
-										<a href="{% url 'single' %}" class="link-product-add-cart">Quick View</a>
-									</div>
-								</div>
-								<span class="product-new-top">New</span>
-
-						</div>
-						<div class="item-info-product ">
-							<h4><a href="{% url 'single' %}">Steering</a></h4>
-							<div class="info-product-price">
-								<span class="item_price">$160.99</span>
-								<del>$290.71</del>
-							</div>
-							<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart">
-														<input type="hidden" name="add" value="1">
-														<input type="hidden" name="business" value=" ">
-														<input type="hidden" name="item_name" value="Analog Watch">
-														<input type="hidden" name="amount" value="30.99">
-														<input type="hidden" name="discount_amount" value="1.00">
-														<input type="hidden" name="currency_code" value="USD">
-														<input type="hidden" name="return" value=" ">
-														<input type="hidden" name="cancel_return" value=" ">
-														<input type="submit" name="submit" value="Add to cart" class="button">
-													</fieldset>
-												</form>
-											</div>
-
-						</div>
-					</div>
-				</div>
-						 <div class="col-md-3 product-men">
-					<div class="men-pro-item simpleCart_shelfItem">
-						<div class="men-thumb-item">
-							<img src="{% static 'images/banner1.jpg' %}" alt="" class="pro-image-front">
-							<img src="{% static 'images/banner1.jpg' %}" alt="" class="pro-image-back">
-								<div class="men-cart-pro">
-									<div class="inner-men-cart-pro">
-										<a href="{% url 'single' %}" class="link-product-add-cart">Quick View</a>
-									</div>
-								</div>
-								<span class="product-new-top">New</span>
-
-						</div>
-						<div class="item-info-product ">
-							<h4><a href="{% url 'single' %}">Steering</a></h4>
-							<div class="info-product-price">
-								<span class="item_price">$160.99</span>
-								<del>$290.71</del>
-							</div>
-							<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart">
-														<input type="hidden" name="add" value="1">
-														<input type="hidden" name="business" value=" ">
-														<input type="hidden" name="item_name" value="Analog Watch">
-														<input type="hidden" name="amount" value="30.99">
-														<input type="hidden" name="discount_amount" value="1.00">
-														<input type="hidden" name="currency_code" value="USD">
-														<input type="hidden" name="return" value=" ">
-														<input type="hidden" name="cancel_return" value=" ">
-														<input type="submit" name="submit" value="Add to cart" class="button">
-													</fieldset>
-												</form>
-											</div>
-
-						</div>
-					</div>
-				</div>
-					   <div class="col-md-3 product-men">
-					<div class="men-pro-item simpleCart_shelfItem">
-						<div class="men-thumb-item">
-							<img src="{% static 'images/banner1.jpg' %}" alt="" class="pro-image-front">
-							<img src="{% static 'images/banner1.jpg' %}" alt="" class="pro-image-back">
-								<div class="men-cart-pro">
-									<div class="inner-men-cart-pro">
-										<a href="{% url 'single' %}" class="link-product-add-cart">Quick View</a>
-									</div>
-								</div>
-								<span class="product-new-top">New</span>
-
-						</div>
-						<div class="item-info-product ">
-							<h4><a href="{% url 'single' %}">Steering</a></h4>
-							<div class="info-product-price">
-								<span class="item_price">$160.99</span>
-								<del>$290.71</del>
-							</div>
-							<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart">
-														<input type="hidden" name="add" value="1">
-														<input type="hidden" name="business" value=" ">
-														<input type="hidden" name="item_name" value="Analog Watch">
-														<input type="hidden" name="amount" value="30.99">
-														<input type="hidden" name="discount_amount" value="1.00">
-														<input type="hidden" name="currency_code" value="USD">
-														<input type="hidden" name="return" value=" ">
-														<input type="hidden" name="cancel_return" value=" ">
-														<input type="submit" name="submit" value="Add to cart" class="button">
-													</fieldset>
-												</form>
-											</div>
-
-						</div>
-					</div>
-				</div>
-							<div class="clearfix"> </div>
-					<!--//slider_owl-->
-		         </div>
-	        </div>
+    <div class="w3_agile_latest_arrivals">
+        <h3 class="wthree_text_info">New <span>Arrivals</span></h3>
+            {% if new_arrivals %}
+                {% for item in new_arrivals %}
+                    <div class="col-md-3 product-men">
+                        <div class="men-pro-item simpleCart_shelfItem">
+                            <div class="men-thumb-item">
+                                <img src="{{ item.product_image_front.url }}" alt="" class="pro-image-front">
+                                <img src="{{ item.product_image_back.url }}" alt="" class="pro-image-back">
+                                    <div class="men-cart-pro">
+                                        <div class="inner-men-cart-pro">
+                                            <a href="{% url 'single' id=item.id %}" class="link-product-add-cart">Quick View</a>
+                                        </div>
+                                    </div>
+                                    <span class="product-new-top">New</span>
+                            </div>
+                            <div class="item-info-product ">
+                                <h4><a href="{% url 'single' id=item.id %}">{{ item.product_title }}</a></h4>
+                                {% if item.product_discounted_price != null %}
+                                    <div class="info-product-price">
+                                        <span class="item_price">Rs {{ item.product_discounted_price }}</span>
+                                        <del>Rs {{ item.product_price }}</del>
+                                    </div>
+                                {% else %}
+                                    <div class="info-product-price">
+                                        <span class="item_price">Rs {{ item.product_price }}</span>
+                                    </div>
+                                {% endif %}
+                                <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
+                                    <form action="#" method="post">
+                                        <fieldset>
+                                            <input type="hidden" name="cmd" value="_cart">
+                                            <input type="hidden" name="add" value="1">
+                                            <input type="hidden" name="business" value=" ">
+                                            <input type="hidden" name="item_name" value="Analog Watch">
+                                            <input type="hidden" name="amount" value="30.99">
+                                            <input type="hidden" name="discount_amount" value="1.00">
+                                            <input type="hidden" name="currency_code" value="USD">
+                                            <input type="hidden" name="return" value=" ">
+                                            <input type="hidden" name="cancel_return" value=" ">
+                                            <input type="submit" name="submit" value="Add to cart" class="button">
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+                <div class="clearfix"> </div>
+                <!--//slider_owl-->
+         </div>
+    </div>
  </div>
 <!--//single_page-->
 <!--/grids-->
@@ -810,6 +707,80 @@
 
 <!-- for bootstrap working -->
 <script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+    <script>
+    $('.btn-number').click(function(e){
+    e.preventDefault();
+
+    fieldName = $(this).attr('data-field');
+    type      = $(this).attr('data-type');
+    var input = $("input[name='"+fieldName+"']");
+    var currentVal = parseInt(input.val());
+    if (!isNaN(currentVal)) {
+        if(type == 'minus') {
+
+            if(currentVal > input.attr('min')) {
+                input.val(currentVal - 1).change();
+            }
+            if(parseInt(input.val()) == input.attr('min')) {
+                $(this).attr('disabled', true);
+            }
+
+        } else if(type == 'plus') {
+
+            if(currentVal < input.attr('max')) {
+                input.val(currentVal + 1).change();
+            }
+            if(parseInt(input.val()) == input.attr('max')) {
+                $(this).attr('disabled', true);
+            }
+
+        }
+    } else {
+        input.val(0);
+    }
+});
+$('.input-number').focusin(function(){
+   $(this).data('oldValue', $(this).val());
+});
+$('.input-number').change(function() {
+
+    minValue =  parseInt($(this).attr('min'));
+    maxValue =  parseInt($(this).attr('max'));
+    valueCurrent = parseInt($(this).val());
+
+    name = $(this).attr('name');
+    if(valueCurrent >= minValue) {
+        $(".btn-number[data-type='minus'][data-field='"+name+"']").removeAttr('disabled')
+    } else {
+        alert('Sorry, the minimum value was reached');
+        $(this).val($(this).data('oldValue'));
+    }
+    if(valueCurrent <= maxValue) {
+        $(".btn-number[data-type='plus'][data-field='"+name+"']").removeAttr('disabled')
+    } else {
+        alert('Sorry, the maximum value was reached');
+        $(this).val($(this).data('oldValue'));
+    }
+
+
+});
+$(".input-number").keydown(function (e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+             // Allow: Ctrl+A
+            (e.keyCode == 65 && e.ctrlKey === true) ||
+             // Allow: home, end, left, right
+            (e.keyCode >= 35 && e.keyCode <= 39)) {
+                 // let it happen, don't do anything
+                 return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+    </script>
+
 {% endblock %}
 </body>
 </html>

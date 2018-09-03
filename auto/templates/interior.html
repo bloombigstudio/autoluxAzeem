@@ -274,287 +274,121 @@
 				</div>
 				<div class="clearfix"></div>
 			</div>
-			<div class="col-md-4 product-men">
+
+{#            Starting here#}
+            {% if interior_first_row %}
+                {% for item in interior_first_row %}
+                    <div class="col-md-4 product-men">
 					<div class="men-pro-item simpleCart_shelfItem">
 						<div class="men-thumb-item">
-							<img src="{% static 'images/banner1.jpg' %}" alt="" class="pro-image-front">
-							<img src="{% static 'images/banner1.jpg' %}" alt="" class="pro-image-back">
+							<img src="{{ item.product_image_front.url }}" alt="" class="pro-image-front">
+							<img src="{{ item.product_image_back.url }}" alt="" class="pro-image-back">
 								<div class="men-cart-pro">
 									<div class="inner-men-cart-pro">
-										<a href="{% url 'single' %}" class="link-product-add-cart">Quick View</a>
+										<a href="{% url 'single' id=item.id %}" class="link-product-add-cart">Quick View</a>
 									</div>
 								</div>
 								<span class="product-new-top">New</span>
 
 						</div>
 						<div class="item-info-product ">
-							<h4><a href="{% url 'single' %}">Steering</a></h4>
-							<div class="info-product-price">
-								<span class="item_price">$160.99</span>
-								<del>$290.71</del>
-							</div>
+							<h4><a href="{% url 'single' id=item.id %}">{{ item.product_title }}</a></h4>
+                            {% if item.product_discounted_price != null %}
+                                <div class="info-product-price">
+                                    <span class="item_price">Rs {{ item.product_discounted_price }}</span>
+                                    <del>Rs {{ item.product_price }}</del>
+							    </div>
+                            {% else %}
+                                <div class="info-product-price">
+                                    <span class="item_price">Rs {{ item.product_price }}</span>
+{#                                    <del>Rs {{ item.product_discounted_price }}</del>#}
+							    </div>
+                            {% endif %}
+
 							<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart">
-														<input type="hidden" name="add" value="1">
-														<input type="hidden" name="business" value=" ">
-														<input type="hidden" name="item_name" value="Analog Watch">
-														<input type="hidden" name="amount" value="30.99">
-														<input type="hidden" name="discount_amount" value="1.00">
-														<input type="hidden" name="currency_code" value="USD">
-														<input type="hidden" name="return" value=" ">
-														<input type="hidden" name="cancel_return" value=" ">
-														<input type="submit" name="submit" value="Add to cart" class="button">
-													</fieldset>
-												</form>
-											</div>
+                                <form action="#" method="post">
+                                    <fieldset>
+                                        <input type="hidden" name="cmd" value="_cart">
+                                        <input type="hidden" name="add" value="1">
+                                        <input type="hidden" name="business" value=" ">
+                                        <input type="hidden" name="item_name" value="{{ item.product_title }}">
+                                        <input type="hidden" name="amount" value="{{ item.product_price }}">
+                                        <input type="hidden" name="discount_amount" value="1.00">
+                                        <input type="hidden" name="currency_code" value="PKR">
+                                        <input type="hidden" name="return" value=" ">
+                                        <input type="hidden" name="cancel_return" value=" ">
+                                        <input type="submit" name="submit" value="Add to cart" class="button">
+                                    </fieldset>
+                                </form>
+                            </div>
 
 						</div>
 					</div>
 				</div>
-				<div class="col-md-4 product-men">
-						<div class="men-pro-item simpleCart_shelfItem">
-							<div class="men-thumb-item">
-								<img src="{% static 'images/banner1.jpg' %}" alt="" class="pro-image-front">
-								<img src="{% static 'images/banner1.jpg' %}" alt="" class="pro-image-back">
-									<div class="men-cart-pro">
-										<div class="inner-men-cart-pro">
-											<a href="{% url 'single' %}" class="link-product-add-cart">Quick View</a>
-										</div>
-									</div>
-									<span class="product-new-top">New</span>
 
-							</div>
-							<div class="item-info-product ">
-								<h4><a href="{% url 'single' %}">Steering</a></h4>
-								<div class="info-product-price">
-									<span class="item_price">$160.99</span>
-									<del>$290.71</del>
-								</div>
-								<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-													<form action="#" method="post">
-														<fieldset>
-															<input type="hidden" name="cmd" value="_cart">
-															<input type="hidden" name="add" value="1">
-															<input type="hidden" name="business" value=" ">
-															<input type="hidden" name="item_name" value="Analog Watch">
-															<input type="hidden" name="amount" value="30.99">
-															<input type="hidden" name="discount_amount" value="1.00">
-															<input type="hidden" name="currency_code" value="USD">
-															<input type="hidden" name="return" value=" ">
-															<input type="hidden" name="cancel_return" value=" ">
-															<input type="submit" name="submit" value="Add to cart" class="button">
-														</fieldset>
-													</form>
-												</div>
+                {% endfor %}
 
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4 product-men">
-							<div class="men-pro-item simpleCart_shelfItem">
-								<div class="men-thumb-item">
-									<img src="{% static 'images/banner1.jpg' %}" alt="" class="pro-image-front">
-									<img src="{% static 'images/banner1.jpg' %}" alt="" class="pro-image-back">
-										<div class="men-cart-pro">
-											<div class="inner-men-cart-pro">
-												<a href="{% url 'single' %}" class="link-product-add-cart">Quick View</a>
-											</div>
-										</div>
-										<span class="product-new-top">New</span>
-
-								</div>
-								<div class="item-info-product ">
-									<h4><a href="{% url 'single' %}">Steering</a></h4>
-									<div class="info-product-price">
-										<span class="item_price">$160.99</span>
-										<del>$290.71</del>
-									</div>
-									<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-														<form action="#" method="post">
-															<fieldset>
-																<input type="hidden" name="cmd" value="_cart">
-																<input type="hidden" name="add" value="1">
-																<input type="hidden" name="business" value=" ">
-																<input type="hidden" name="item_name" value="Analog Watch">
-																<input type="hidden" name="amount" value="30.99">
-																<input type="hidden" name="discount_amount" value="1.00">
-																<input type="hidden" name="currency_code" value="USD">
-																<input type="hidden" name="return" value=" ">
-																<input type="hidden" name="cancel_return" value=" ">
-																<input type="submit" name="submit" value="Add to cart" class="button">
-															</fieldset>
-														</form>
-													</div>
-
-								</div>
-							</div>
-						</div>
-
-				<div class="clearfix"></div>
+            {% endif %}
+            <div class="clearfix"></div>
 		</div>
 		<div class="clearfix"></div>
 
 		<div class="single-pro">
-			<div class="col-md-3 product-men">
+{#           Here #}
+
+            {% if interior_else_rows %}
+                {% for item in interior_else_rows %}
+
+                    <div class="col-md-3 product-men">
 					<div class="men-pro-item simpleCart_shelfItem">
 						<div class="men-thumb-item">
-							<img src="{% static 'images/banner1.jpg' %}" alt="" class="pro-image-front">
-							<img src="{% static 'images/banner1.jpg' %}" alt="" class="pro-image-back">
+							<img src="{{ item.product_image_front.url }}" alt="" class="pro-image-front">
+							<img src="{{ item.product_image_back.url }}" alt="" class="pro-image-back">
 								<div class="men-cart-pro">
 									<div class="inner-men-cart-pro">
-										<a href="{% url 'single' %}" class="link-product-add-cart">Quick View</a>
+										<a href="{% url 'single' id=item.id %}" class="link-product-add-cart">Quick View</a>
 									</div>
 								</div>
 								<span class="product-new-top">New</span>
 
 						</div>
 						<div class="item-info-product ">
-							<h4><a href="{% url 'single' %}">Steering</a></h4>
-							<div class="info-product-price">
-								<span class="item_price">$160.99</span>
-								<del>$290.71</del>
-							</div>
+							<h4><a href="{% url 'single' id=item.id %}">{{ item.product_title }}</a></h4>
+                            {% if item.product_discounted_price != null %}
+                                <div class="info-product-price">
+                                    <span class="item_price">Rs {{ item.product_discounted_price }}</span>
+                                    <del>Rs {{ item.product_price }}</del>
+							    </div>
+                            {% else %}
+                                <div class="info-product-price">
+                                    <span class="item_price">Rs {{ item.product_price }}</span>
+{#                                    <del>Rs {{ item.product_discounted_price }}</del>#}
+							    </div>
+                            {% endif %}
 							<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart">
-														<input type="hidden" name="add" value="1">
-														<input type="hidden" name="business" value=" ">
-														<input type="hidden" name="item_name" value="Analog Watch">
-														<input type="hidden" name="amount" value="30.99">
-														<input type="hidden" name="discount_amount" value="1.00">
-														<input type="hidden" name="currency_code" value="USD">
-														<input type="hidden" name="return" value=" ">
-														<input type="hidden" name="cancel_return" value=" ">
-														<input type="submit" name="submit" value="Add to cart" class="button">
-													</fieldset>
-												</form>
-											</div>
+                                <form action="#" method="post">
+                                    <fieldset>
+                                        <input type="hidden" name="cmd" value="_cart">
+                                        <input type="hidden" name="add" value="1">
+                                        <input type="hidden" name="business" value=" ">
+                                        <input type="hidden" name="item_name" value="Analog Watch">
+                                        <input type="hidden" name="amount" value="30.99">
+                                        <input type="hidden" name="discount_amount" value="1.00">
+                                        <input type="hidden" name="currency_code" value="USD">
+                                        <input type="hidden" name="return" value=" ">
+                                        <input type="hidden" name="cancel_return" value=" ">
+                                        <input type="submit" name="submit" value="Add to cart" class="button">
+                                    </fieldset>
+                                </form>
+                            </div>
 
 						</div>
 					</div>
 				</div>
-							<div class="col-md-3 product-men">
-					<div class="men-pro-item simpleCart_shelfItem">
-						<div class="men-thumb-item">
-							<img src="{% static 'images/banner1.jpg' %}" alt="" class="pro-image-front">
-							<img src="{% static 'images/banner1.jpg' %}" alt="" class="pro-image-back">
-								<div class="men-cart-pro">
-									<div class="inner-men-cart-pro">
-										<a href="{% url 'single' %}" class="link-product-add-cart">Quick View</a>
-									</div>
-								</div>
-								<span class="product-new-top">New</span>
+                {% endfor %}
+            {% endif %}
 
-						</div>
-						<div class="item-info-product ">
-							<h4><a href="{% url 'single' %}">Steering</a></h4>
-							<div class="info-product-price">
-								<span class="item_price">$160.99</span>
-								<del>$290.71</del>
-							</div>
-							<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart">
-														<input type="hidden" name="add" value="1">
-														<input type="hidden" name="business" value=" ">
-														<input type="hidden" name="item_name" value="Analog Watch">
-														<input type="hidden" name="amount" value="30.99">
-														<input type="hidden" name="discount_amount" value="1.00">
-														<input type="hidden" name="currency_code" value="USD">
-														<input type="hidden" name="return" value=" ">
-														<input type="hidden" name="cancel_return" value=" ">
-														<input type="submit" name="submit" value="Add to cart" class="button">
-													</fieldset>
-												</form>
-											</div>
-
-						</div>
-					</div>
-				</div>
-                          <div class="col-md-3 product-men">
-					<div class="men-pro-item simpleCart_shelfItem">
-						<div class="men-thumb-item">
-							<img src="{% static 'images/banner1.jpg' %}" alt="" class="pro-image-front">
-							<img src="{% static 'images/banner1.jpg' %}" alt="" class="pro-image-back">
-								<div class="men-cart-pro">
-									<div class="inner-men-cart-pro">
-										<a href="{% url 'single' %}" class="link-product-add-cart">Quick View</a>
-									</div>
-								</div>
-								<span class="product-new-top">New</span>
-
-						</div>
-						<div class="item-info-product ">
-							<h4><a href="{% url 'single' %}">Steering</a></h4>
-							<div class="info-product-price">
-								<span class="item_price">$160.99</span>
-								<del>$290.71</del>
-							</div>
-							<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart">
-														<input type="hidden" name="add" value="1">
-														<input type="hidden" name="business" value=" ">
-														<input type="hidden" name="item_name" value="Analog Watch">
-														<input type="hidden" name="amount" value="30.99">
-														<input type="hidden" name="discount_amount" value="1.00">
-														<input type="hidden" name="currency_code" value="USD">
-														<input type="hidden" name="return" value=" ">
-														<input type="hidden" name="cancel_return" value=" ">
-														<input type="submit" name="submit" value="Add to cart" class="button">
-													</fieldset>
-												</form>
-											</div>
-
-						</div>
-					</div>
-				</div>
-							<div class="col-md-3 product-men">
-					<div class="men-pro-item simpleCart_shelfItem">
-						<div class="men-thumb-item">
-							<img src="{% static 'images/banner1.jpg' %}" alt="" class="pro-image-front">
-							<img src="{% static 'images/banner1.jpg' %}" alt="" class="pro-image-back">
-								<div class="men-cart-pro">
-									<div class="inner-men-cart-pro">
-										<a href="{% url 'single' %}" class="link-product-add-cart">Quick View</a>
-									</div>
-								</div>
-								<span class="product-new-top">New</span>
-
-						</div>
-						<div class="item-info-product ">
-							<h4><a href="{% url 'single' %}">Steering</a></h4>
-							<div class="info-product-price">
-								<span class="item_price">$160.99</span>
-								<del>$290.71</del>
-							</div>
-							<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart">
-														<input type="hidden" name="add" value="1">
-														<input type="hidden" name="business" value=" ">
-														<input type="hidden" name="item_name" value="Analog Watch">
-														<input type="hidden" name="amount" value="30.99">
-														<input type="hidden" name="discount_amount" value="1.00">
-														<input type="hidden" name="currency_code" value="USD">
-														<input type="hidden" name="return" value=" ">
-														<input type="hidden" name="cancel_return" value=" ">
-														<input type="submit" name="submit" value="Add to cart" class="button">
-													</fieldset>
-												</form>
-											</div>
-
-						</div>
-					</div>
-				</div>
-
-							<div class="clearfix"></div>
+        <div class="clearfix"></div>
 		</div>
 	</div>
 </div>
