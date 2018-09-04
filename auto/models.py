@@ -4,6 +4,16 @@ from django.contrib.auth.models import PermissionsMixin
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import BaseUserManager
 
+Category_CHOICES = (
+    ('Interior', 'INTERIOR'),
+    ('Exterior', 'EXTERIOR'),
+    ('Mats', 'MATS'),
+    ('Detailing', 'DETAILING'),
+    ('Leds', 'LEDS'),
+    ('Suvs', 'SUVS'),
+    ('Utilites', 'UTILITES'),
+    ('Others', 'OTHERS'),
+)
 
 class MyUserManager(BaseUserManager):
     """
@@ -66,7 +76,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 class Product(models.Model):
     product_title = models.CharField(max_length=30)
-    product_category = models.CharField(max_length=30)
+    product_category = models.CharField(max_length=9, choices=Category_CHOICES, default='EPIC')
     product_image_front = models.ImageField(upload_to='images')
     product_image_back = models.ImageField(upload_to='images')
     product_price = models.CharField(max_length=30)

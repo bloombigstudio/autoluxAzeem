@@ -1,0 +1,193 @@
+<header>
+    <!-- header -->
+<div class="header" id="home">
+	<div class="container">
+		<ul>
+		    <li> <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Sign In </a></li>
+			<li> <a href="#" data-toggle="modal" data-target="#myModal2"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Sign Up </a></li>
+			<li><i class="fa fa-phone" aria-hidden="true"></i> <a href="{% url 'contact' %}">Contact</a></li>
+			<li><i class="fa fa-question" aria-hidden="true"></i><a href="{% url 'about' %}">About</a></li>
+		</ul>
+	</div>
+</div>
+<!-- //header -->
+<!-- header-bot -->
+<div class="header-bot">
+	<div class="header-bot_inner_wthreeinfo_header_mid">
+
+		<!-- header-bot -->
+			<div class="col-md-4 logo_agile">
+				<h1><a href="{% url 'index' %}">AUTO<span>LUX</span> </a></h1>
+			</div>
+        <!-- header-bot -->
+				<div class="col-md-4 header-middle">
+					<form action="#" method="post">
+							<input type="search" name="search" placeholder="Search here..." required="">
+							<input type="submit" value=" ">
+						<div class="clearfix"></div>
+					</form>
+				</div>
+		<div class="col-md-1 col-md-offset-2  top_content">
+			<div class="wthreecartaits wthreecartaits2 cart cart box_1">
+				<form action="#" method="post" class="last">
+					<input type="hidden" name="cmd" value="_cart">
+					<input type="hidden" name="display" value="1">
+					<button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
+				</form>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+</div>
+<!-- //header-bot -->
+<!-- banner -->
+<div class="ban-top">
+	<div class="container">
+		<div class="top_nav_left">
+			<nav class="navbar navbar-default">
+			  <div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+				  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				  </button>
+				</div>
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse menu--shylock" id="bs-example-navbar-collapse-1">
+				  <ul class="nav navbar-nav menu__list">
+					<li class="active menu__item menu__item--current"><a class="menu__link" href="{% url 'index' %}"><i class="fa fa-home"></i> <span class="sr-only">(current)</span></a></li>
+					<li class=" menu__item"><a class="menu__link" href="{% url 'products' item_name='Interior' %}">Interior</a></li>
+					<li class=" menu__item"><a class="menu__link" href="{% url 'products' item_name='Exterior'%}">Exterior</a></li>
+					<li class=" menu__item"><a class="menu__link" href="{% url 'products' item_name='Mats'%}">Mats</a></li>
+					<li class=" menu__item"><a class="menu__link" href="{% url 'products' item_name='Detailing'%}">Car Detailing</a></li>
+					<li class=" menu__item"><a class="menu__link" href="{% url 'products' item_name='Leds'%}">LED lights</a></li>
+					<li class=" menu__item"><a class="menu__link" href="{% url 'products' item_name='Suvs'%}">4x4/SUV items</a></li>
+					<li class=" menu__item"><a class="menu__link" href="{% url 'products' item_name='Utilites'%}">Utilities</a></li>
+					<li class=" menu__item"><a class="menu__link" href="{% url 'products' item_name='Others'%}">Others </a></li>
+				  </ul>
+				</div>
+			  </div>
+			</nav>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+</div>
+<!-- //banner-top -->
+<!-- Modal1 -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+			<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+						<div class="modal-body modal-body-sub_agile">
+						<div class="col-md-8 modal_body_left modal_body_left1">
+						<h3 class="agileinfo_sign">Sign In <span>Now</span></h3>
+                        <form action="{% url 'login' %}" method="post">
+                            {% csrf_token %}
+							<div class="styled-input agile-styled-input-top">
+                                {{ signIn.email }}
+                                <label>{{ signIn.email.label }}</label>
+								<span></span>
+							</div>
+							<div class="styled-input">
+                                 {{ signIn.password }}
+                                <label>{{ signIn.password.label }}</label>
+								<span></span>
+							</div>
+							<input type="submit" value="Sign In">
+						</form>
+						  <ul class="social-nav model-3d-0 footer-social w3_agile_social top_agile_third">
+															<li><a href="#" class="facebook">
+																  <div class="front"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+																  <div class="back"><i class="fa fa-facebook" aria-hidden="true"></i></div></a></li>
+															<li><a href="#" class="instagram">
+																  <div class="front"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+																  <div class="back"><i class="fa fa-instagram" aria-hidden="true"></i></div></a></li>
+														</ul>
+														<div class="clearfix"></div>
+														<p><a href="#" data-toggle="modal" data-target="#myModal2" > Don't have an account?</a></p>
+
+						</div>
+
+						<div class="clearfix"></div>
+					</div>
+				</div>
+				<!-- //Modal content-->
+			</div>
+		</div>
+<!-- //Modal1 -->
+<!-- Modal2 -->
+		<div class="modal fade" id="myModal2" tabindex="-1" role="dialog">
+			<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+						<div class="modal-body modal-body-sub_agile">
+						<div class="col-md-8 modal_body_left modal_body_left1">
+						<h3 class="agileinfo_sign">Sign Up <span>Now</span></h3>
+						 <form action="{% url 'index' %}" method="post">
+                             {% csrf_token %}
+                            <div class="styled-input agile-styled-input-top">
+                                {{ signUp.full_Name }}
+                                <label>{{ signUp.full_Name.label }}</label>
+								<span></span>
+							</div>
+{#                            <div class="styled-input">#}
+{#                                {{ signUp.username }}#}
+{#                                <label>{{ signUp.username.label }}</label>#}
+{#								<span></span>#}
+{#							</div>#}
+                            <div class="styled-input">
+                                {{ signUp.email }}
+                                <label>{{ signUp.email.label }}</label>
+								<span></span>
+							</div>
+                            <div class="styled-input">
+                                {{ signUp.password1 }}
+                                <label>{{ signUp.password1.label }}</label>
+								<span></span>
+							</div>
+                             <span id='password_validation'></span>
+                            <div class="styled-input">
+                                {{ signUp.password2 }}
+                                <label>{{ signUp.password2.label }}</label>
+								<span></span>
+							</div>
+                             <span id='password_not_match'></span>
+                            <div class="styled-input">
+                                {{ signUp.address }}
+                                <label>{{ signUp.address.label }}</label>
+								<span></span>
+							</div>
+
+							<input type="submit" value="Sign Up">
+						</form>
+						  <ul class="social-nav model-3d-0 footer-social w3_agile_social top_agile_third">
+								<li><a href="#" class="facebook">
+									  <div class="front"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+									  <div class="back"><i class="fa fa-facebook" aria-hidden="true"></i></div></a></li>
+								<li><a href="#" class="instagram">
+									  <div class="front"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+									  <div class="back"><i class="fa fa-instagram" aria-hidden="true"></i></div></a></li>
+							</ul>
+							<div class="clearfix"></div>
+							<p><a href="#">By clicking register, I agree to your terms</a></p>
+
+						</div>
+
+						<div class="clearfix"></div>
+					</div>
+				</div>
+				<!-- //Modal content-->
+			</div>
+		</div>
+<!-- //Modal2 -->
+
+</header>

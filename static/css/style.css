@@ -5543,8 +5543,8 @@ width: 150px;
 .custom-buttons {
     border: none;
     background-color: white;
-    font-size: 18px;
-    padding: 20px 30px 20px 30px;
+    font-size: 20px;
+    padding: 12px 15px 12px 15px;
     font-weight: 600;
     margin-bottom: 20px;
 }
@@ -5552,5 +5552,7 @@ width: 150px;
 .live, .custom-buttons:hover {
     background-color: #bd081c;
     color: white;
+    border-radius: 6px;
+    padding: 10px 22px 10px 22px;
 }
 
