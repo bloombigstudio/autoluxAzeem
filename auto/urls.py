@@ -7,6 +7,7 @@ from autolux import settings
 urlpatterns = [
     path('', Index.as_view(), name='index'),
     path('interior', Interior.as_view(), name='interior'),
+    path('exterior', Exterior.as_view(), name='exterior'),
     path('single/<int:id>', Single.as_view(), name='single'),
     path('about', About.as_view(), name='about'),
     path('contact', Contact.as_view(), name='contact'),

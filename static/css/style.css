@@ -5540,4 +5540,17 @@ p.w3ls_para {
 width: 150px;
 
 }
+.custom-buttons {
+    border: none;
+    background-color: white;
+    font-size: 18px;
+    padding: 20px 30px 20px 30px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+/* Style the active class, and buttons on mouse-over */
+.live, .custom-buttons:hover {
+    background-color: #bd081c;
+    color: white;
+}
 

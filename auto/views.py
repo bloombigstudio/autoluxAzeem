@@ -34,6 +34,7 @@ class Interior(TemplateView):
 
     def get(self, request, *args, **kwargs):
         Interior = Product.objects.filter(product_category='Interior')
+        page_title = 'Interior'
 
         if Interior.count() > 3:
             interior_first_row = Interior[:3]
@@ -42,9 +43,29 @@ class Interior(TemplateView):
             interior_first_row = Interior
             interior_else_rows = None
 
-        args = {'interior_first_row': interior_first_row, 'interior_else_rows': interior_else_rows}
+        args = {'interior_first_row': interior_first_row, 'interior_else_rows': interior_else_rows, 'page_title': page_title}
 
         return render(request, self.template_name,args)
+
+
+class Exterior(TemplateView):
+    template_name = 'interior.html'
+
+    def get(self, request, *args, **kwargs):
+        Interior = Product.objects.filter(product_category='Exterior')
+        page_title = 'Exterior'
+
+        if Interior.count() > 3:
+            interior_first_row = Interior[:3]
+            interior_else_rows = Interior[3:]
+        else:
+            interior_first_row = Interior
+            interior_else_rows = None
+
+        args = {'interior_first_row': interior_first_row, 'interior_else_rows': interior_else_rows, 'page_title': page_title}
+
+        return render(request, self.template_name,args)
+
 
 
 class Single(TemplateView):

@@ -83,7 +83,7 @@
 				  <ul class="nav navbar-nav menu__list">
 					<li class="active menu__item menu__item--current"><a class="menu__link" href="{% url 'index' %}"><i class="fa fa-home"></i> <span class="sr-only">(current)</span></a></li>
 					<li class=" menu__item"><a class="menu__link" href="{% url 'interior' %}">Interior</a></li>
-					<li class=" menu__item"><a class="menu__link" href="{% url 'interior' %}">Exterior</a></li>
+					<li class=" menu__item"><a class="menu__link" href="{% url 'exterior' %}">Exterior</a></li>
 					<li class=" menu__item"><a class="menu__link" href="{% url 'interior' %}">Mats</a></li>
 					<li class=" menu__item"><a class="menu__link" href="{% url 'interior' %}">Car Detailing</a></li>
 					<li class=" menu__item"><a class="menu__link" href="{% url 'interior' %}">LED lights</a></li>
@@ -413,279 +413,67 @@
 	<div class="new_arrivals_agile_w3ls_info">
 		<div class="container">
 		    <h3 class="wthree_text_info">New <span>Arrivals</span></h3>
-				<div id="horizontalTab">
-						<ul class="resp-tabs-list">
-							<li> Interior</li>
-							<li> Exterior</li>
-							<li> Mats</li>
-							<li> Car Detailing</li>
-							<li> LED lights</li>
-							<li> SUV lights</li>
-							<li> Utilites</li>
-							<li> Others</li>
-						</ul>
-					<div class="resp-tabs-container">
-					<!--/tab_one-->
-						<div class="tab1">
-							<div class="col-md-3 product-men">
-								<div class="men-pro-item simpleCart_shelfItem">
-									<div class="men-thumb-item">
-										<img src="{% static 'images/banner1.jpg' %}" alt="" class="pro-image-front">
-										<img src="{% static 'images/banner1.jpg' %}" alt="" class="pro-image-back">
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-													<a href="{% url 'single' id=0 %}" class="link-product-add-cart">Quick View</a>
-												</div>
-											</div>
-											<span class="product-new-top">New</span>
-
-									</div>
-									<div class="item-info-product ">
-										<h4><a href="{% url 'single' id=0 %}">Interior1</a></h4>
-										<div class="info-product-price">
-											<span class="item_price">$45.99</span>
-											<del>$69.71</del>
-										</div>
-										<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-															<form action="#" method="post">
-																<fieldset>
-																	<input type="hidden" name="cmd" value="_cart" />
-																	<input type="hidden" name="add" value="1" />
-																	<input type="hidden" name="business" value=" " />
-																	<input type="hidden" name="item_name" value="Formal Blue Shirt" />
-																	<input type="hidden" name="amount" value="30.99" />
-																	<input type="hidden" name="discount_amount" value="1.00" />
-																	<input type="hidden" name="currency_code" value="USD" />
-																	<input type="hidden" name="return" value=" " />
-																	<input type="hidden" name="cancel_return" value=" " />
-																	<input type="submit" name="submit" value="Add to cart" class="button" />
-																</fieldset>
-															</form>
-														</div>
-
-									</div>
-								</div>
-							</div>
-							<div class="col-md-3 product-men">
-								<div class="men-pro-item simpleCart_shelfItem">
-									<div class="men-thumb-item">
-										<img src="{% static 'images/banner1.jpg' %}" alt="" class="pro-image-front">
-										<img src="{% static 'images/banner1.jpg' %}" alt="" class="pro-image-back">
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-													<a href="{% url 'single' id=0 %}" class="link-product-add-cart">Quick View</a>
-												</div>
-											</div>
-											<span class="product-new-top">New</span>
-
-									</div>
-									<div class="item-info-product ">
-										<h4><a href="{% url 'single' id=0 %}">Interior2</a></h4>
-										<div class="info-product-price">
-											<span class="item_price">$45.99</span>
-											<del>$69.71</del>
-										</div>
-										<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                            <form action="#" method="post">
-                                                <fieldset>
-                                                    <input type="hidden" name="cmd" value="_cart" />
-                                                    <input type="hidden" name="add" value="1" />
-                                                    <input type="hidden" name="business" value=" " />
-                                                    <input type="hidden" name="item_name" value="Sweatshirt" />
-                                                    <input type="hidden" name="amount" value="30.99" />
-                                                    <input type="hidden" name="discount_amount" value="1.00" />
-                                                    <input type="hidden" name="currency_code" value="USD" />
-                                                    <input type="hidden" name="return" value=" " />
-                                                    <input type="hidden" name="cancel_return" value=" " />
-                                                    <input type="submit" name="submit" value="Add to cart" class="button" />
-                                                </fieldset>
-                                            </form>
+                <div id="myDIV">
+                    <button class="filter-button custom-buttons live" data-filter="Interior">Interior</button>
+                    <button class="filter-button custom-buttons" data-filter="Exterior">Exterior</button>
+                    <button class="filter-button custom-buttons" data-filter="Mats">Mats</button>
+                    <button class="filter-button custom-buttons" data-filter="CarDetailing">Car Detailing</button>
+                    <button class="filter-button custom-buttons" data-filter="Ledlights">LED lights</button>
+                    <button class="filter-button custom-buttons" data-filter="Suv">SUV lights</button>
+                    <button class="filter-button custom-buttons" data-filter="Utilites">Utilites</button>
+                    <button class="filter-button custom-buttons" data-filter="Others">Others</button>
+                </div>
+                <div>
+                    {% if all_products %}
+                        {% for item in all_products  %}
+                        <div class="col-md-3 product-men filter {{ item.product_category|cut:" " }}">
+                        <div class="men-pro-item simpleCart_shelfItem">
+                            <div class="men-thumb-item">
+                                <img src="{{ item.product_image_front.url }}" alt="" class="pro-image-front">
+                                <img src="{{ item.product_image_back.url }}" alt="" class="pro-image-back">
+                                    <div class="men-cart-pro">
+                                        <div class="inner-men-cart-pro">
+                                            <a href="{% url 'single' id=item.id %}" class="link-product-add-cart">Quick View</a>
                                         </div>
-									</div>
-								</div>
-							</div>
+                                    </div>
+                                    <span class="product-new-top">New</span>
 
-							<div class="clearfix"></div>
-						</div>
-						<!--//tab_one-->
-						<!--/tab_two-->
-						<div class="tab2">
-							 <div class="col-md-3 product-men">
-								<div class="men-pro-item simpleCart_shelfItem">
-									<div class="men-thumb-item">
-										<img src="{% static 'images/banner1.jpg' %}" alt="" class="pro-image-front">
-										<img src="{% static 'images/banner1.jpg' %}" alt="" class="pro-image-back">
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-													<a href="{% url 'single' id=0 %}" class="link-product-add-cart">Quick View</a>
-												</div>
-											</div>
-											<span class="product-new-top">New</span>
-
-									</div>
-									<div class="item-info-product ">
-										<h4><a href="{% url 'single' id=0 %}">Exterior2</a></h4>
-										<div class="info-product-price">
-											<span class="item_price">$130.99</span>
-											<del>$189.71</del>
-										</div>
-										<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-															<form action="#" method="post">
-																<fieldset>
-																	<input type="hidden" name="cmd" value="_cart" />
-																	<input type="hidden" name="add" value="1" />
-																	<input type="hidden" name="business" value=" " />
-																	<input type="hidden" name="item_name" value="A-line Black Skirt" />
-																	<input type="hidden" name="amount" value="30.99" />
-																	<input type="hidden" name="discount_amount" value="1.00" />
-																	<input type="hidden" name="currency_code" value="USD" />
-																	<input type="hidden" name="return" value=" " />
-																	<input type="hidden" name="cancel_return" value=" " />
-																	<input type="submit" name="submit" value="Add to cart" class="button" />
-																</fieldset>
-															</form>
-														</div>
-
-									</div>
-								</div>
-							</div>
-
-							<div class="clearfix"></div>
-						</div>
-					 <!--//tab_two-->
-						<div class="tab3">
-
-						<div class="col-md-3 product-men">
-								<div class="men-pro-item simpleCart_shelfItem">
-									<div class="men-thumb-item">
-										<img src="{% static 'images/banner1.jpg' %}" alt="" class="pro-image-front">
-										<img src="{% static 'images/banner1.jpg' %}" alt="" class="pro-image-back">
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-													<a href="{% url 'single' id=0 %}" class="link-product-add-cart">Quick View</a>
-												</div>
-											</div>
-											<span class="product-new-top">New</span>
-
-									</div>
-									<div class="item-info-product ">
-										<h4><a href="{% url 'single' id=0 %}">ABC</a></h4>
-										<div class="info-product-price">
-											<span class="item_price">$140.99</span>
-											<del>$169.71</del>
-										</div>
-										<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-															<form action="#" method="post">
-																<fieldset>
-																	<input type="hidden" name="cmd" value="_cart" />
-																	<input type="hidden" name="add" value="1" />
-																	<input type="hidden" name="business" value=" " />
-																	<input type="hidden" name="item_name" value=" Laptop Messenger Bag" />
-																	<input type="hidden" name="amount" value="30.99" />
-																	<input type="hidden" name="discount_amount" value="1.00" />
-																	<input type="hidden" name="currency_code" value="USD" />
-																	<input type="hidden" name="return" value=" " />
-																	<input type="hidden" name="cancel_return" value=" " />
-																	<input type="submit" name="submit" value="Add to cart" class="button" />
-																</fieldset>
-															</form>
-														</div>
-
-									</div>
-								</div>
-							</div>
-
-							<div class="clearfix"></div>
-						</div>
-						<div class="tab4">
-
-							    <div class="col-md-3 product-men">
-								<div class="men-pro-item simpleCart_shelfItem">
-									<div class="men-thumb-item">
-										<img src="{% static 'images/banner1.jpg' %}" alt="" class="pro-image-front">
-										<img src="{% static 'images/banner1.jpg' %}" alt="" class="pro-image-back">
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-													<a href="{% url 'single' id=0 %}" class="link-product-add-cart">Quick View</a>
-												</div>
-											</div>
-											<span class="product-new-top">New</span>
-
-									</div>
-									<div class="item-info-product ">
-										<h4><a href="{% url 'single' id=0 %}">xyz</a></h4>
-										<div class="info-product-price">
-											<span class="item_price">$80.99</span>
-											<del>$89.71</del>
-										</div>
-										<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-															<form action="#" method="post">
-																<fieldset>
-																	<input type="hidden" name="cmd" value="_cart" />
-																	<input type="hidden" name="add" value="1" />
-																	<input type="hidden" name="business" value=" " />
-																	<input type="hidden" name="item_name" value="Running Shoes" />
-																	<input type="hidden" name="amount" value="30.99" />
-																	<input type="hidden" name="discount_amount" value="1.00" />
-																	<input type="hidden" name="currency_code" value="USD" />
-																	<input type="hidden" name="return" value=" " />
-																	<input type="hidden" name="cancel_return" value=" " />
-																	<input type="submit" name="submit" value="Add to cart" class="button" />
-																</fieldset>
-															</form>
-														</div>
-
-									</div>
-								</div>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-						<div class="tab5">
-
-							    <div class="col-md-3 product-men">
-								<div class="men-pro-item simpleCart_shelfItem">
-									<div class="men-thumb-item">
-										<img src="{% static 'images/banner1.jpg' %}" alt="" class="pro-image-front">
-										<img src="{% static 'images/banner1.jpg' %}" alt="" class="pro-image-back">
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-													<a href="{% url 'single' id=0 %}" class="link-product-add-cart">Quick View</a>
-												</div>
-											</div>
-											<span class="product-new-top">New</span>
-
-									</div>
-									<div class="item-info-product ">
-										<h4><a href="{% url 'single' id=0 %}">sdsd</a></h4>
-										<div class="info-product-price">
-											<span class="item_price">$80.99</span>
-											<del>$89.71</del>
-										</div>
-										<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-															<form action="#" method="post">
-																<fieldset>
-																	<input type="hidden" name="cmd" value="_cart" />
-																	<input type="hidden" name="add" value="1" />
-																	<input type="hidden" name="business" value=" " />
-																	<input type="hidden" name="item_name" value="Running Shoes" />
-																	<input type="hidden" name="amount" value="30.99" />
-																	<input type="hidden" name="discount_amount" value="1.00" />
-																	<input type="hidden" name="currency_code" value="USD" />
-																	<input type="hidden" name="return" value=" " />
-																	<input type="hidden" name="cancel_return" value=" " />
-																	<input type="submit" name="submit" value="Add to cart" class="button" />
-																</fieldset>
-															</form>
-														</div>
-
-									</div>
-								</div>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-					</div>
+                            </div>
+                            <div class="item-info-product ">
+                                <h4><a href="{% url 'single' id=item.id %}">{{ item.product_title }}</a></h4>
+                                {% if item.product_discounted_price != null %}
+                                    <div class="info-product-price">
+                                        <span class="item_price">Rs {{ item.product_discounted_price }}</span>
+                                        <del>Rs {{ item.product_price }}</del>
+                                    </div>
+                                {% else %}
+                                    <div class="info-product-price">
+                                        <span class="item_price">Rs {{ item.product_price }}</span>
+                                    </div>
+                                {% endif %}
+                                <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
+                                    <form action="#" method="post">
+                                        <fieldset>
+                                            <input type="hidden" name="cmd" value="_cart" />
+                                            <input type="hidden" name="add" value="1" />
+                                            <input type="hidden" name="business" value=" " />
+                                            <input type="hidden" name="item_name" value="Formal Blue Shirt" />
+                                            <input type="hidden" name="amount" value="30.99" />
+                                            <input type="hidden" name="discount_amount" value="1.00" />
+                                            <input type="hidden" name="currency_code" value="USD" />
+                                            <input type="hidden" name="return" value=" " />
+                                            <input type="hidden" name="cancel_return" value=" " />
+                                            <input type="submit" name="submit" value="Add to cart" class="button" />
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        {% endfor %}
+                    {% endif %}
+                            <div class="clearfix"></div>
 				</div>
-			</div>
 		</div>
 	<!-- //new_arrivals -->
 	<!-- /we-offer -->
@@ -989,6 +777,29 @@
 
 <!-- for bootstrap working -->
 <script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+
+    <script>
+            $(document).ready(function(){
+            $(".filter-button").click(function(){
+                var value = $(this).attr('data-filter');
+                $(".filter").not('.'+value).hide('3000');
+                $('.filter').filter('.'+value).show('3000');
+            });
+        });
+        </script>
+
+    <script>
+// Add active class to the current button (highlight it)
+        var header = document.getElementById("myDIV");
+        var btns = header.getElementsByClassName("custom-buttons");
+        for (var i = 0; i < btns.length; i++) {
+          btns[i].addEventListener("click", function() {
+            var current = document.getElementsByClassName("live");
+            current[0].className = current[0].className.replace("live", " ");
+            this.className += " live";
+          });
+}
+</script>
 
 {% endblock %}
 </body>
