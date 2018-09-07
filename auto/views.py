@@ -3,7 +3,9 @@ from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from auto.forms import *
 from auto.models import *
-
+from autolux import settings
+import stripe
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 class Index(TemplateView):
     template_name = 'index.html'
@@ -13,7 +15,7 @@ class Index(TemplateView):
         signInForm = SignInForm()
         all_products = Product.objects.all()
 
-        args = {'signUp': signUpForm, 'signIn': signInForm, 'all_products': all_products }
+        args = {'signUp': signUpForm, 'signIn': signInForm, 'all_products': all_products, "stripe_key": settings.STRIPE_PUBLIC_KEY }
         return render(request, self.template_name,args)
 
     def post(self, request, **kwargs):
@@ -106,5 +108,38 @@ class Login(TemplateView):
             return redirect('index')
 
         return render(request,self.template_name)
+
+
+def checkout(self,request):
+    global token
+    new_car = Car(
+        product = "1",
+        car_make="Honda",
+        car_model="Civic",
+        car_year="2017-2018"
+    )
+    if request.method == "POST":
+        token = request.POST.get("stripeToken")
+    try:
+        charge = stripe.Charge.create(
+            amount=2000,
+            currency="usd",
+            source=token,
+            description="The product charged to the user"
+        )
+
+        new_car.charge_id = charge.id
+
+    except stripe.error.CardError as ce:
+        return False, ce
+
+    else:
+        new_car.save()
+        return redirect("thank_you_page")
+        # The payment was successfully processed, the user's card was charged.
+        # You can now redirect the user to another page or whatever you want
+
+
+
 
 

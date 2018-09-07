@@ -107,17 +107,18 @@
                 {% for item in interior_first_row %}
                     <div class="col-md-4 product-men">
 					<div class="men-pro-item simpleCart_shelfItem">
+                    <a href="{% url 'single' id=item.id %}">
 						<div class="men-thumb-item">
 							<img src="{{ item.product_image_front.url }}" alt="" class="pro-image-front">
 							<img src="{{ item.product_image_back.url }}" alt="" class="pro-image-back">
-								<div class="men-cart-pro">
-									<div class="inner-men-cart-pro">
-										<a href="{% url 'single' id=item.id %}" class="link-product-add-cart">Quick View</a>
-									</div>
-								</div>
-								<span class="product-new-top">New</span>
-
+{#								<div class="men-cart-pro">#}
+{#									<div class="inner-men-cart-pro">#}
+{#										<a href="{% url 'single' id=item.id %}" class="link-product-add-cart">Quick View</a>#}
+{#									</div>#}
+{#								</div>#}
+{#								<span class="product-new-top">New</span>#}
 						</div>
+                    </a>
 						<div class="item-info-product ">
 							<h4><a href="{% url 'single' id=item.id %}">{{ item.product_title }}</a></h4>
                             {% if item.product_discounted_price != null %}
@@ -128,24 +129,27 @@
                             {% else %}
                                 <div class="info-product-price">
                                     <span class="item_price">Rs {{ item.product_price }}</span>
-{#                                    <del>Rs {{ item.product_discounted_price }}</del>#}
 							    </div>
                             {% endif %}
 
 							<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
                                 <form action="#" method="post">
                                     <fieldset>
-                                        <input type="hidden" name="cmd" value="_cart">
-                                        <input type="hidden" name="add" value="1">
-                                        <input type="hidden" name="business" value=" ">
-                                        <input type="hidden" name="item_name" value="{{ item.product_title }}">
-                                        <input type="hidden" name="amount" value="{{ item.product_price }}">
-                                        <input type="hidden" name="discount_amount" value="1.00">
-                                        <input type="hidden" name="currency_code" value="PKR">
-                                        <input type="hidden" name="return" value=" ">
-                                        <input type="hidden" name="cancel_return" value=" ">
-                                        <input type="submit" name="submit" value="Add to cart" class="button">
-                                    </fieldset>
+                                            <input type="hidden" name="cmd" value="_cart" />
+                                            <input type="hidden" name="add" value="1" />
+                                            <input type="hidden" name="business" value=" " />
+                                            <input type="hidden" name="item_name" value="{{ item.product_title }}" />
+                                            {% if item.product_discounted_price != null %}
+                                                <input type="hidden" name="amount" value="{{ item.product_discounted_price }}" />
+                                             {% else %}
+                                                <input type="hidden" name="amount" value="{{ item.product_price }}" />
+                                            {% endif %}
+{#                                            <input type="hidden" name="discount_amount" value="1.00" />#}
+                                            <input type="hidden" name="currency_code" value="USD" />
+                                            <input type="hidden" name="return" value=" " />
+                                            <input type="hidden" name="cancel_return" value=" " />
+                                            <input type="submit" name="submit" value="Add to cart" class="button" />
+                                        </fieldset>
                                 </form>
                             </div>
 
@@ -168,17 +172,19 @@
 
                     <div class="col-md-3 product-men">
 					<div class="men-pro-item simpleCart_shelfItem">
+                    <a href="{% url 'single' id=item.id %}">
 						<div class="men-thumb-item">
 							<img src="{{ item.product_image_front.url }}" alt="" class="pro-image-front">
 							<img src="{{ item.product_image_back.url }}" alt="" class="pro-image-back">
-								<div class="men-cart-pro">
-									<div class="inner-men-cart-pro">
-										<a href="{% url 'single' id=item.id %}" class="link-product-add-cart">Quick View</a>
-									</div>
-								</div>
-								<span class="product-new-top">New</span>
+{#								<div class="men-cart-pro">#}
+{#									<div class="inner-men-cart-pro">#}
+{#										<a href="{% url 'single' id=item.id %}" class="link-product-add-cart">Quick View</a>#}
+{#									</div>#}
+{#								</div>#}
+{#								<span class="product-new-top">New</span>#}
 
 						</div>
+                    </a>
 						<div class="item-info-product ">
 							<h4><a href="{% url 'single' id=item.id %}">{{ item.product_title }}</a></h4>
                             {% if item.product_discounted_price != null %}
@@ -189,23 +195,26 @@
                             {% else %}
                                 <div class="info-product-price">
                                     <span class="item_price">Rs {{ item.product_price }}</span>
-{#                                    <del>Rs {{ item.product_discounted_price }}</del>#}
 							    </div>
                             {% endif %}
 							<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
                                 <form action="#" method="post">
                                     <fieldset>
-                                        <input type="hidden" name="cmd" value="_cart">
-                                        <input type="hidden" name="add" value="1">
-                                        <input type="hidden" name="business" value=" ">
-                                        <input type="hidden" name="item_name" value="Analog Watch">
-                                        <input type="hidden" name="amount" value="30.99">
-                                        <input type="hidden" name="discount_amount" value="1.00">
-                                        <input type="hidden" name="currency_code" value="USD">
-                                        <input type="hidden" name="return" value=" ">
-                                        <input type="hidden" name="cancel_return" value=" ">
-                                        <input type="submit" name="submit" value="Add to cart" class="button">
-                                    </fieldset>
+                                            <input type="hidden" name="cmd" value="_cart" />
+                                            <input type="hidden" name="add" value="1" />
+                                            <input type="hidden" name="business" value=" " />
+                                            <input type="hidden" name="item_name" value="{{ item.product_title }}" />
+                                            {% if item.product_discounted_price != null %}
+                                                <input type="hidden" name="amount" value="{{ item.product_discounted_price }}" />
+                                             {% else %}
+                                                <input type="hidden" name="amount" value="{{ item.product_price }}" />
+                                            {% endif %}
+{#                                            <input type="hidden" name="discount_amount" value="1.00" />#}
+                                            <input type="hidden" name="currency_code" value="PKR" />
+                                            <input type="hidden" name="return" value=" " />
+                                            <input type="hidden" name="cancel_return" value=" " />
+                                            <input type="submit" name="submit" value="Add to cart" class="button" />
+                                        </fieldset>
                                 </form>
                             </div>
 

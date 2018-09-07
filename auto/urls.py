@@ -10,6 +10,7 @@ urlpatterns = [
     path('single/<int:id>', ProductDescription.as_view(), name='single'),
     path('about', About.as_view(), name='about'),
     path('contact', Contact.as_view(), name='contact'),
+    path('checkout', checkout, name='checkout'),
 
     # Chaipiiii
     path('login', Login.as_view(), name='login'),

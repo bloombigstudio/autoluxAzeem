@@ -234,22 +234,17 @@
                         <button class="filter-button custom-buttons" data-filter="Others">Others</button>
                     </div>
                 </div>
-                <div>
+                <div class="new-arrival-products">
                     {% if all_products %}
                         {% for item in all_products  %}
                         <div class="col-md-3 product-men filter {{ item.product_category|cut:" " }}">
                         <div class="men-pro-item simpleCart_shelfItem">
+                        <a href="{% url 'single' id=item.id %}">
                             <div class="men-thumb-item">
                                 <img src="{{ item.product_image_front.url }}" alt="" class="pro-image-front">
                                 <img src="{{ item.product_image_back.url }}" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="{% url 'single' id=item.id %}" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-
                             </div>
+                        </a>
                             <div class="item-info-product ">
                                 <h4><a href="{% url 'single' id=item.id %}">{{ item.product_title }}</a></h4>
                                 {% if item.product_discounted_price != null %}
@@ -263,17 +258,19 @@
                                     </div>
                                 {% endif %}
                                 <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                    <form action="#" method="post">
+                                    <form action="#" method="post" id="add_to_cart{{ item.id }}">
+                                    {% csrf_token %}
                                         <fieldset>
-                                            <input type="hidden" name="cmd" value="_cart" />
-                                            <input type="hidden" name="add" value="1" />
-                                            <input type="hidden" name="business" value=" " />
-                                            <input type="hidden" name="item_name" value="Formal Blue Shirt" />
-                                            <input type="hidden" name="amount" value="30.99" />
-                                            <input type="hidden" name="discount_amount" value="1.00" />
-                                            <input type="hidden" name="currency_code" value="USD" />
-                                            <input type="hidden" name="return" value=" " />
-                                            <input type="hidden" name="cancel_return" value=" " />
+                                            <input type="hidden" name="item_id" value="{{ item.id}}" />
+                                            <input type="hidden" name="item_name" value="{{ item.product_title }}" />
+                                            <input type="hidden" name="item_description" value="{{ item.product_related_name.first.product_description }}" />
+                                            <input type="hidden" name="item_image" value="{{ item.product_image_front }}" />
+                                            {% if item.product_discounted_price != null %}
+                                                <input type="hidden" name="amount" value="{{ item.product_discounted_price }}" />
+                                             {% else %}
+                                                <input type="hidden" name="amount" value="{{ item.product_price }}" />
+                                            {% endif %}
+{#                                            <input type="hidden" name="currency_code" value="PKR" />#}
                                             <input type="submit" name="submit" value="Add to cart" class="button" />
                                         </fieldset>
                                     </form>
@@ -283,18 +280,19 @@
                     </div>
                         {% endfor %}
                     {% endif %}
-                            <div class="clearfix"></div>
+{#                            <div class="clearfix"></div>#}
 				</div>
 		</div>
 	<!-- //new_arrivals -->
 	<!-- /we-offer -->
-		<div class="sale-w3ls">
+		<div class="sale-w3ls deliver-across">
 			<div class="container">
 				<h6>Delivery across all Pakistan</h6>
 
 				<a class="hvr-outline-out button2" href="{% url 'single' id=0%}">Shop Now </a>
 			</div>
 		</div>
+
     {% include "footer.html" %}
 
 <a href="#home" class="scroll" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
@@ -305,17 +303,123 @@
 <script src="{% static 'js/modernizr.custom.js' %}"></script>
 	<!-- Custom-JavaScript-File-Links -->
 	<!-- cart-js -->
-	<script src="{% static 'js/minicart.min.js' %}"></script>
 <script>
-	// Mini Cart
-	paypal.minicart.render({
-		action: '#'
-	});
+    var cart = {};
+    cart.products = [];
+    localStorage.setItem('cart', JSON.stringify(cart));
 
-	if (~window.location.search.indexOf('reset=true')) {
-		paypal.minicart.reset();
-	}
+    {% for item in  all_products%}
+        $(document).on('submit', '#add_to_cart{{ item.id }}', function(e) {
+            e.preventDefault();
+            var product = {};
+            product.id = e.target.item_id.value;
+            product.name = e.target.item_name.value;
+            product.price = e.target.amount.value;
+            product.image = 'media/' + e.target.item_image.value;
+            saveToSession(product);
+            //});
+
+            myData = localStorage.getItem('cart');
+            parsedData = JSON.parse(myData);
+
+            var cart_item = $('<div class="product product-id-' + e.target.item_id.value + '">\n' +
+                '<div class="product-image">\n' +
+                '<img id="cart-product-image" src="media/' + e.target.item_image.value + '">\n' +
+                '</div>\n' +
+                '<div class="product-details">\n' +
+                '<div class="product-title" id="cart-product-title">' + e.target.item_name.value + '</div>\n' +
+                '<p class="product-description" id="cart-product-description">' + e.target.item_description.value + '</p>\n' +
+                '</div>\n' +
+                '<div class="product-price" id="cart-product-price-' + e.target.item_id.value + '">' + e.target.amount.value + '</div>\n' +
+                '<div class="product-quantity cart-product-quantity-' + e.target.item_id.value + '">\n' +
+                '<input id="cart-product-quantity-' + e.target.item_id.value + '" type="number" value="1" min="1" />\n' +
+                '</div>\n' +
+                '<div class="product-removal-' + e.target.item_id.value + '">\n' +
+                '<button class="remove-product">\n' + 'Remove\n' + '</button>\n' +
+                '</div>\n' +
+                '<div class="product-line-price total_price" id="cart-line-price-' + e.target.item_id.value + '">' + e.target.amount.value + '</div>\n' +
+                '</div>');
+
+            $('#add-items-here').append(cart_item);
+        });
+    {% endfor %}
+
+    function saveToSession(product) {
+    // Retrieve the cart object from local storage
+    if (localStorage && localStorage.getItem('cart')) {
+        var cart = JSON.parse(localStorage.getItem('cart'));
+
+        cart.products.push(product);
+
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+}
+
+
 </script>
+
+    <script>
+        {#  Remove product from cart  #}
+        {% for item in all_products %}
+            $('#add-items-here').on('click', '.product-removal-{{ item.id }}', function () {
+                $(".product-id-{{ item.id }}").slideUp(300, function() {
+                $(".product-id-{{ item.id }}").remove();
+                {#localStorage.removeItem("cart");#}
+                calculateTotal()
+            });
+        });
+        {% endfor %}
+    </script>
+
+    <script>
+        {% for item in all_products %}
+            $('#add-items-here').on('change', '.cart-product-quantity-{{ item.id }}', function () {
+            var productRow = $(this).parent().parent();
+            var price = parseFloat($('#cart-product-price-{{ item.id }}').text());
+            var quantity = parseFloat($('#cart-product-quantity-{{ item.id }}').val());
+            var linePrice = price * quantity;
+            $('#cart-line-price-{{ item.id }}').html(linePrice);
+            $('#cart-line-price-{{ item.id }}').fadeOut(300, function() {
+                  $('#cart-line-price-{{ item.id }}').html(linePrice);
+                  $(this).fadeIn(300);
+                  calculateTotal();
+                });
+        });
+        {% endfor %}
+    </script>
+
+    <script>
+        {#      Calculate Total           #}
+
+        $('#checkout-modal-button').on('click', function () {
+
+            calculateTotal();
+        });
+
+        function calculateTotal() {
+            var sum = 0;
+            $('.total_price').each(function () {
+                {#console.log(parseFloat($(this).text()))#}
+                sum = sum + parseFloat($(this).text());
+            });
+            $('#cart-total').fadeOut(300, function() {
+                $('#cart-total').html(sum);
+                 $(this).fadeIn(300);
+            });
+        }
+    </script>
+
+{#	<script src="{% static 'js/minicart.min.js' %}"></script>#}
+{#<script>#}
+{#	// Mini Cart#}
+{#	paypal.minicart.render({#}
+{#		action: '#'#}
+{#	});#}
+{##}
+{#	if (~window.location.search.indexOf('reset=true')) {#}
+{#		paypal.minicart.reset();#}
+{#	}#}
+{#</script>#}
 
 	<!-- //cart-js -->
 <!-- script for responsive tabs -->
