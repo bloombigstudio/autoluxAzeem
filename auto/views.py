@@ -4,6 +4,7 @@ from django.views.generic import TemplateView
 from auto.forms import *
 from auto.models import *
 from autolux import settings
+import json
 import stripe
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -110,7 +111,7 @@ class Login(TemplateView):
         return render(request,self.template_name)
 
 
-def checkout(self,request):
+def online_payment(request):
     global token
     new_car = Car(
         product = "1",
@@ -123,7 +124,7 @@ def checkout(self,request):
     try:
         charge = stripe.Charge.create(
             amount=2000,
-            currency="usd",
+            currency="pkr",
             source=token,
             description="The product charged to the user"
         )
@@ -138,6 +139,39 @@ def checkout(self,request):
         return redirect("thank_you_page")
         # The payment was successfully processed, the user's card was charged.
         # You can now redirect the user to another page or whatever you want
+
+
+class PlaceOrder(TemplateView):
+    template_name = 'place_order.html'
+
+    def get(self, request, *args, **kwargs):
+        orderForm = UserOrderForm()
+
+        args = {'orderForm': orderForm }
+
+        return render(request,self.template_name,args)
+
+    def post(self, request, **kwargs):
+        orderForm = UserOrderForm(request.POST)
+        # user_order = Order
+
+        if orderForm.is_valid():
+            first_name = orderForm.cleaned_data['first_name']
+            last_name = orderForm.cleaned_data['last_name']
+            email = orderForm.cleaned_data['email']
+            address = orderForm.cleaned_data['address']
+            contact_number = orderForm.cleaned_data['contact_number']
+            json_order = request.POST['cart_info']
+            cart_object = json.loads(json_order)
+
+            user = orderForm.save()
+
+            for order in cart_object["products"]:
+                user_order = Order(user=user,item_id=order['id'],item_name=order['name'],item_price=order['price'])
+                user_order.save()
+
+            return render(request, self.template_name)
+
 
 
 

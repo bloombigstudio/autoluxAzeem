@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 
+from auto.models import UserWithoutAccount
+
 
 class SignUpForm(UserCreationForm):
     full_Name = forms.CharField(max_length=50, required=True)
@@ -22,3 +24,9 @@ class SignUpForm(UserCreationForm):
 class SignInForm(forms.Form):
     email = forms.EmailField(max_length=254, required=True)
     password = forms.CharField(widget=forms.PasswordInput(), required=True)
+
+
+class UserOrderForm(forms.ModelForm):
+    class Meta:
+        model = UserWithoutAccount
+        fields = ['first_name', 'last_name','email','contact_number','address']

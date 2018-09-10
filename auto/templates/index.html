@@ -302,12 +302,13 @@
 <!-- //js -->
 <script src="{% static 'js/modernizr.custom.js' %}"></script>
 	<!-- Custom-JavaScript-File-Links -->
-	<!-- cart-js -->
+<!-- cart-js -->
 <script>
     var cart = {};
     cart.products = [];
-    localStorage.setItem('cart', JSON.stringify(cart));
-
+    if(!localStorage.getItem('cart')){
+    window.localStorage.setItem('cart', JSON.stringify(cart));
+    }
     {% for item in  all_products%}
         $(document).on('submit', '#add_to_cart{{ item.id }}', function(e) {
             e.preventDefault();
@@ -318,29 +319,6 @@
             product.image = 'media/' + e.target.item_image.value;
             saveToSession(product);
             //});
-
-            myData = localStorage.getItem('cart');
-            parsedData = JSON.parse(myData);
-
-            var cart_item = $('<div class="product product-id-' + e.target.item_id.value + '">\n' +
-                '<div class="product-image">\n' +
-                '<img id="cart-product-image" src="media/' + e.target.item_image.value + '">\n' +
-                '</div>\n' +
-                '<div class="product-details">\n' +
-                '<div class="product-title" id="cart-product-title">' + e.target.item_name.value + '</div>\n' +
-                '<p class="product-description" id="cart-product-description">' + e.target.item_description.value + '</p>\n' +
-                '</div>\n' +
-                '<div class="product-price" id="cart-product-price-' + e.target.item_id.value + '">' + e.target.amount.value + '</div>\n' +
-                '<div class="product-quantity cart-product-quantity-' + e.target.item_id.value + '">\n' +
-                '<input id="cart-product-quantity-' + e.target.item_id.value + '" type="number" value="1" min="1" />\n' +
-                '</div>\n' +
-                '<div class="product-removal-' + e.target.item_id.value + '">\n' +
-                '<button class="remove-product">\n' + 'Remove\n' + '</button>\n' +
-                '</div>\n' +
-                '<div class="product-line-price total_price" id="cart-line-price-' + e.target.item_id.value + '">' + e.target.amount.value + '</div>\n' +
-                '</div>');
-
-            $('#add-items-here').append(cart_item);
         });
     {% endfor %}
 
@@ -364,7 +342,17 @@
             $('#add-items-here').on('click', '.product-removal-{{ item.id }}', function () {
                 $(".product-id-{{ item.id }}").slideUp(300, function() {
                 $(".product-id-{{ item.id }}").remove();
-                {#localStorage.removeItem("cart");#}
+                console.log({{ item.id }});
+                    var items = JSON.parse(localStorage["cart"]);
+                      for (var i = 0; i < items.products.length; i++) {
+                         if(items.products[i].id == {{ item.id }}){
+                             {#debugger;#}
+                           items.products.splice(i,1);
+                           break;
+                         }
+                      }
+                      item = JSON.stringify(items);
+                      localStorage.setItem("cart", item);
                 calculateTotal()
             });
         });
@@ -392,7 +380,7 @@
         {#      Calculate Total           #}
 
         $('#checkout-modal-button').on('click', function () {
-
+            getDataFromLocalStorage();
             calculateTotal();
         });
 
@@ -407,19 +395,34 @@
                  $(this).fadeIn(300);
             });
         }
-    </script>
+        // get data from local storage and populate cart
+        function getDataFromLocalStorage() {
 
-{#	<script src="{% static 'js/minicart.min.js' %}"></script>#}
-{#<script>#}
-{#	// Mini Cart#}
-{#	paypal.minicart.render({#}
-{#		action: '#'#}
-{#	});#}
-{##}
-{#	if (~window.location.search.indexOf('reset=true')) {#}
-{#		paypal.minicart.reset();#}
-{#	}#}
-{#</script>#}
+            myData = localStorage.getItem('cart');
+            parsedData = JSON.parse(myData);
+            for ( i = 0; i < parsedData.products.length; i++) {
+                var cart_item = $('<div class="product product-id-' + parsedData.products[i].id + '">\n' +
+                '<div class="product-image">\n' +
+                '<img id="cart-product-image" src="' +parsedData.products[i].image + '">\n' +
+                '</div>\n' +
+                '<div class="product-details">\n' +
+                '<div class="product-title" id="cart-product-title">' + parsedData.products[i].name + '</div>\n' +
+                '<p class="product-description" id="cart-product-description">' + parsedData.products[i].description + '</p>\n' +
+                '</div>\n' +
+                '<div class="product-price" id="cart-product-price-' + parsedData.products[i].id + '">' + parsedData.products[i].price + '</div>\n' +
+                '<div class="product-quantity cart-product-quantity-' + parsedData.products[i].id + '">\n' +
+                '<input id="cart-product-quantity-' + parsedData.products[i].id + '" type="number" value="1" min="1" />\n' +
+                '</div>\n' +
+                '<div class="product-removal-' + parsedData.products[i].id + '">\n' +
+                '<button class="remove-product">\n' + 'Remove\n' + '</button>\n' +
+                '</div>\n' +
+                '<div class="product-line-price total_price" id="cart-line-price-' + parsedData.products[i].id + '">' + parsedData.products[i].price + '</div>\n' +
+                '</div>');
+
+                $('#add-items-here').append(cart_item);
+                }
+        }
+    </script>
 
 	<!-- //cart-js -->
 <!-- script for responsive tabs -->

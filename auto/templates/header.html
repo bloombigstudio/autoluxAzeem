@@ -257,11 +257,22 @@
 {#                                    </div>#}
                                     <div class="totals-item totals-item-total">
                                       <label>Grand Total</label>
-                                      <div class="totals-value" id="cart-total">90.57</div>
+                                      <div class="totals-value" id="cart-total">0.00</div>
                                     </div>
                                   </div>
-
-                                      <button class="checkout">Checkout</button>
+{#                                      <button class="checkout">Online Payment</button>#}
+                                    <form action="{% url 'online_payment' %}" method="POST">
+                                        {% csrf_token %}
+                                        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                            data-key="{{ stripe_key }}"
+                                            data-amount="2000"
+                                            data-name="AutoLux"
+                                            data-description="Your Product"
+                                            data-image="{% static 'images/logo.png' %}"
+                                            data-currency="pkr">
+                                        </script>
+                                    </form>
+                                      <button class="checkout-delivery" onclick="location.href='{% url 'place_order' %}'">Pay on delivery</button>
 
                                 </div>
 					</div>
