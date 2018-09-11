@@ -138,9 +138,13 @@ class Order(models.Model):
     item_id = models.CharField(max_length=20)
     item_name = models.CharField(max_length=200)
     item_price = models.CharField(max_length=20)
+    payment_status = models.BooleanField(default=False)
+    charge_id = models.CharField(max_length=234, default="None")
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+
 
     def __str__(self):
         return self.item_name

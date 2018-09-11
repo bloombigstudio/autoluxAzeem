@@ -111,32 +111,32 @@ class Login(TemplateView):
         return render(request,self.template_name)
 
 
-def online_payment(request):
-    global token
-    new_car = Car(
-        product = "1",
-        car_make="Honda",
-        car_model="Civic",
-        car_year="2017-2018"
-    )
-    if request.method == "POST":
-        token = request.POST.get("stripeToken")
-    try:
-        charge = stripe.Charge.create(
-            amount=2000,
-            currency="pkr",
-            source=token,
-            description="The product charged to the user"
-        )
-
-        new_car.charge_id = charge.id
-
-    except stripe.error.CardError as ce:
-        return False, ce
-
-    else:
-        new_car.save()
-        return redirect("thank_you_page")
+# def online_payment(request):
+#     global token
+#     new_car = Car(
+#         product = "1",
+#         car_make="Honda",
+#         car_model="Civic",
+#         car_year="2017-2018"
+#     )
+#     if request.method == "POST":
+#         token = request.POST.get("stripeToken")
+#     try:
+#         charge = stripe.Charge.create(
+#             amount=2000,
+#             currency="pkr",
+#             source=token,
+#             description="The product charged to the user"
+#         )
+#
+#         new_car.charge_id = charge.id
+#
+#     except stripe.error.CardError as ce:
+#         return False, ce
+#
+#     else:
+#         new_car.save()
+#         return redirect("thank_you_page")
         # The payment was successfully processed, the user's card was charged.
         # You can now redirect the user to another page or whatever you want
 
@@ -146,14 +146,20 @@ class PlaceOrder(TemplateView):
 
     def get(self, request, *args, **kwargs):
         orderForm = UserOrderForm()
+        payment_method = "Cash On Delivery"
+        token = ""
 
-        args = {'orderForm': orderForm }
+        if "stripeToken" in request.GET:
+            token = request.GET['stripeToken']
+            payment_method = "Online Payment"
+
+        args = {'orderForm': orderForm, 'payment_method': payment_method,'token':token }
 
         return render(request,self.template_name,args)
 
     def post(self, request, **kwargs):
         orderForm = UserOrderForm(request.POST)
-        # user_order = Order
+        user_order = Order
 
         if orderForm.is_valid():
             first_name = orderForm.cleaned_data['first_name']
@@ -161,16 +167,57 @@ class PlaceOrder(TemplateView):
             email = orderForm.cleaned_data['email']
             address = orderForm.cleaned_data['address']
             contact_number = orderForm.cleaned_data['contact_number']
+            payment_method = request.POST['payment_method']
+            token = request.POST['token']
+            user = orderForm.save()
+
+            # if payment_method == "Online Payment":
+            #     user = UserWithoutAccount(first_name = first_name, last_name = last_name, contact_number=contact_number,address=address, email=email)
+
             json_order = request.POST['cart_info']
             cart_object = json.loads(json_order)
 
-            user = orderForm.save()
-
+            total_bill = 0
             for order in cart_object["products"]:
-                user_order = Order(user=user,item_id=order['id'],item_name=order['name'],item_price=order['price'])
-                user_order.save()
+                total_bill = total_bill + float(order['price'])
+                if payment_method == "Online Payment":
+                    user_order = Order(user=user,item_id=order['id'],item_name=order['name'],item_price=order['price'], payment_status=True)
+                    try:
+                        charge = stripe.Charge.create(
+                            amount=int(total_bill),
+                            currency="usd",
+                            source=token,
+                            description="The product charged to the user"
+                        )
+                        user_order.charge_id = charge.id
+                    except stripe.error.CardError as ce:
+                        return False, ce
+                    else:
+                        user_order.save()
+                else:
+                    direct_order = Order(user=user, item_id=order['id'], item_name=order['name'],item_price=order['price'], payment_status=False)
+                    direct_order.save()
+            # if payment_method == "Online Payment":
+            #     try:
+            #         charge = stripe.Charge.create(
+            #             amount=total_bill,
+            #             currency="pkr",
+            #             source=settings.STRIPE_PUBLIC_KEY,
+            #             description="The product charged to the user"
+            #         )
+            #
+            #         user_order.charge_id = charge.id
+            #
+            #     except stripe.error.CardError as ce:
+            #         return False, ce
+            #
+            #     else:
+            #         user_order.save()
+            #         return redirect("index")
+            # The payment was successfully processed, the user's card was charged.
+            # You can now redirect the user to another page or whatever you want
 
-            return render(request, self.template_name)
+        return render(request, self.template_name)
 
 
 

@@ -261,7 +261,7 @@
                                     </div>
                                   </div>
 {#                                      <button class="checkout">Online Payment</button>#}
-                                    <form action="{% url 'online_payment' %}" method="POST">
+                                    <form action="{% url 'place_order' %}" method="GET">
                                         {% csrf_token %}
                                         <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                                             data-key="{{ stripe_key }}"
@@ -269,10 +269,10 @@
                                             data-name="AutoLux"
                                             data-description="Your Product"
                                             data-image="{% static 'images/logo.png' %}"
-                                            data-currency="pkr">
+                                            data-currency="usd">
                                         </script>
                                     </form>
-                                      <button class="checkout-delivery" onclick="location.href='{% url 'place_order' %}'">Pay on delivery</button>
+                                      <button class="checkout" onclick="location.href='{% url 'place_order' %}'">Pay on delivery</button>
 
                                 </div>
 					</div>

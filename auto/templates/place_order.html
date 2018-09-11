@@ -116,6 +116,8 @@
                     contact_no: $("#id_contact_number").val(),
                     address: $("#id_address").val(),
                     cart_info: cart_info,
+                    payment_method: '{{payment_method}}',
+                    token: '{{token}}',
                     'csrfmiddlewaretoken': '{{ csrf_token }}'
                 },
                 success:function(result) {
