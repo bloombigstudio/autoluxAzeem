@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
+from django.views import View
 from django.views.generic import TemplateView
 from auto.forms import *
 from auto.models import *
@@ -7,6 +8,7 @@ from autolux import settings
 import json
 import stripe
 stripe.api_key = settings.STRIPE_SECRET_KEY
+from django.http import JsonResponse
 
 class Index(TemplateView):
     template_name = 'index.html'
@@ -15,8 +17,9 @@ class Index(TemplateView):
         signUpForm = SignUpForm()
         signInForm = SignInForm()
         all_products = Product.objects.all()
+        all_cars = CarCompany.objects.all()
 
-        args = {'signUp': signUpForm, 'signIn': signInForm, 'all_products': all_products, "stripe_key": settings.STRIPE_PUBLIC_KEY }
+        args = {'signUp': signUpForm, 'signIn': signInForm, 'all_products': all_products, "stripe_key": settings.STRIPE_PUBLIC_KEY, 'all_cars': all_cars }
         return render(request, self.template_name,args)
 
     def post(self, request, **kwargs):
@@ -111,36 +114,6 @@ class Login(TemplateView):
         return render(request,self.template_name)
 
 
-# def online_payment(request):
-#     global token
-#     new_car = Car(
-#         product = "1",
-#         car_make="Honda",
-#         car_model="Civic",
-#         car_year="2017-2018"
-#     )
-#     if request.method == "POST":
-#         token = request.POST.get("stripeToken")
-#     try:
-#         charge = stripe.Charge.create(
-#             amount=2000,
-#             currency="pkr",
-#             source=token,
-#             description="The product charged to the user"
-#         )
-#
-#         new_car.charge_id = charge.id
-#
-#     except stripe.error.CardError as ce:
-#         return False, ce
-#
-#     else:
-#         new_car.save()
-#         return redirect("thank_you_page")
-        # The payment was successfully processed, the user's card was charged.
-        # You can now redirect the user to another page or whatever you want
-
-
 class PlaceOrder(TemplateView):
     template_name = 'place_order.html'
 
@@ -159,7 +132,8 @@ class PlaceOrder(TemplateView):
 
     def post(self, request, **kwargs):
         orderForm = UserOrderForm(request.POST)
-        user_order = Order
+        simple = SimpleOrderForm()
+        user_order = SimpleOrderForm()
 
         if orderForm.is_valid():
             first_name = orderForm.cleaned_data['first_name']
@@ -181,46 +155,37 @@ class PlaceOrder(TemplateView):
             for order in cart_object["products"]:
                 total_bill = total_bill + float(order['price'])
                 if payment_method == "Online Payment":
-                    user_order = Order(user=user,item_id=order['id'],item_name=order['name'],item_price=order['price'], payment_status=True)
-                    try:
-                        charge = stripe.Charge.create(
-                            amount=int(total_bill),
-                            currency="usd",
-                            source=token,
-                            description="The product charged to the user"
-                        )
-                        user_order.charge_id = charge.id
-                    except stripe.error.CardError as ce:
-                        return False, ce
-                    else:
-                        user_order.save()
+                    user_order = Order(user=user, item_id=order['id'], item_name=order['name'],item_price=order['price'], payment_status=True)
+                    user_order.save()
+
                 else:
                     direct_order = Order(user=user, item_id=order['id'], item_name=order['name'],item_price=order['price'], payment_status=False)
                     direct_order.save()
-            # if payment_method == "Online Payment":
-            #     try:
-            #         charge = stripe.Charge.create(
-            #             amount=total_bill,
-            #             currency="pkr",
-            #             source=settings.STRIPE_PUBLIC_KEY,
-            #             description="The product charged to the user"
-            #         )
-            #
-            #         user_order.charge_id = charge.id
-            #
-            #     except stripe.error.CardError as ce:
-            #         return False, ce
-            #
-            #     else:
-            #         user_order.save()
-            #         return redirect("index")
-            # The payment was successfully processed, the user's card was charged.
-            # You can now redirect the user to another page or whatever you want
+
+            try:
+                charge = stripe.Charge.create(
+                    amount=int(total_bill),
+                    currency="usd",
+                    source=token,
+                    description="The product charged to the user"
+                )
+                # simple.charge_id = charge.id
+            except stripe.error.CardError as ce:
+                return False, ce
+            # else:
+            #     simple.save()
 
         return render(request, self.template_name)
 
 
+class CarInformation(View):
+    greeting = "Good Day"
 
+    def post(self, request):
+        car_make_id = request.POST.get('car_make_id', None)
+        car_model_array = CarModel.objects.filter(company_id=car_make_id).values()
+        list_data = list(car_model_array)
+        # args = {'json_data': json_data}
 
-
+        return JsonResponse(list_data, safe=False)
 

@@ -2,7 +2,9 @@ from django.contrib import admin
 
 from auto.models import *
 
-admin.site.register(Car)
+admin.site.register(CarCompany)
+admin.site.register(CarModel)
+admin.site.register(CarYear)
 admin.site.register(Product)
 admin.site.register(ProductSpecification)
 

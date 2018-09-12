@@ -104,17 +104,37 @@ class ProductSpecification(models.Model):
         return self.product_id.product_title
 
 
-class Car(models.Model):
+class CarCompany(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='cars_related_name')
     car_make = models.CharField(max_length=30)
-    car_model = models.CharField(max_length=30)
-    car_year = models.CharField(max_length=30)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.car_make
+
+
+class CarModel(models.Model):
+    company = models.ForeignKey(CarCompany, on_delete=models.CASCADE, related_name='company_related_name')
+    car_model = models.CharField(max_length=30)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.car_model
+
+
+class CarYear(models.Model):
+    model = models.ForeignKey(CarModel, on_delete=models.CASCADE, related_name='model_related_name')
+    car_year = models.CharField(max_length=30)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.car_year
 
 
 class UserWithoutAccount(models.Model):

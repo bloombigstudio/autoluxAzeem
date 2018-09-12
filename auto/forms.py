@@ -30,3 +30,9 @@ class UserOrderForm(forms.ModelForm):
     class Meta:
         model = UserWithoutAccount
         fields = ['first_name', 'last_name','email','contact_number','address']
+
+
+class SimpleOrderForm(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = ['user', 'item_id', 'item_name', 'item_price', 'payment_status', 'charge_id']

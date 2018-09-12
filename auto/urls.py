@@ -12,6 +12,7 @@ urlpatterns = [
     path('contact', Contact.as_view(), name='contact'),
     # path('online_payment', online_payment, name='online_payment'),
     path('place_order', PlaceOrder.as_view(), name='place_order'),
+    path('car_information', CarInformation.as_view(), name='car_information'),
 
     # Chaipiiii
     path('login', Login.as_view(), name='login'),

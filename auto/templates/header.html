@@ -78,6 +78,7 @@
 					<li class=" menu__item"><a class="menu__link" href="{% url 'products' item_name='Suvs'%}">4x4/SUV items</a></li>
 					<li class=" menu__item"><a class="menu__link" href="{% url 'products' item_name='Utilites'%}">Utilities</a></li>
 					<li class=" menu__item"><a class="menu__link" href="{% url 'products' item_name='Others'%}">Others </a></li>
+                    <li class=" menu__item"><a class="menu__link" href="#filter-by-car" role="button" data-toggle="modal">Filter By Car </a></li>
 				  </ul>
 				</div>
 			  </div>
@@ -113,15 +114,15 @@
 							<input type="submit" value="Sign In">
 						</form>
 						  <ul class="social-nav model-3d-0 footer-social w3_agile_social top_agile_third">
-															<li><a href="#" class="facebook">
-																  <div class="front"><i class="fa fa-facebook" aria-hidden="true"></i></div>
-																  <div class="back"><i class="fa fa-facebook" aria-hidden="true"></i></div></a></li>
-															<li><a href="#" class="instagram">
-																  <div class="front"><i class="fa fa-instagram" aria-hidden="true"></i></div>
-																  <div class="back"><i class="fa fa-instagram" aria-hidden="true"></i></div></a></li>
-														</ul>
-														<div class="clearfix"></div>
-														<p><a href="#" data-toggle="modal" data-target="#myModal2" > Don't have an account?</a></p>
+                            <li><a href="#" class="facebook">
+                                  <div class="front"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                                  <div class="back"><i class="fa fa-facebook" aria-hidden="true"></i></div></a></li>
+                            <li><a href="#" class="instagram">
+                                  <div class="front"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                                  <div class="back"><i class="fa fa-instagram" aria-hidden="true"></i></div></a></li>
+                            </ul>
+                            <div class="clearfix"></div>
+                            <p><a href="#" data-toggle="modal" data-target="#myModal2" > Don't have an account?</a></p>
 
 						</div>
 
@@ -222,52 +223,19 @@
 
                                   </div>
 
-{#                                  <div class="product">#}
-{#                                    <div class="product-image">#}
-{#                                      <img id="cart-product-image" src="{% static 'images/inner1.jpg' %}">#}
-{#                                    </div>#}
-{#                                    <div class="product-details">#}
-{#                                      <div class="product-title" id="cart-product-title">Dingo Dog Bones</div>#}
-{#                                      <p class="product-description" id="cart-product-description">The best dog bones of all time. Holy crap. Your dog will be begging for these things! I got curious once and ate one myself. I'm a fan.</p>#}
-{#                                    </div>#}
-{#                                    <div class="product-price" id="cart-product-price">12.99</div>#}
-{#                                    <div class="product-quantity">#}
-{#                                      <input type="number" value="1" min="1" />#}
-{#                                    </div>#}
-{#                                    <div class="product-removal">#}
-{#                                      <button class="remove-product">#}
-{#                                        Remove#}
-{#                                      </button>#}
-{#                                    </div>#}
-{#                                    <div class="product-line-price" id="cart-product-price">12.99</div>#}
-{#                                  </div>#}
-
                                   <div class="totals">
-{#                                    <div class="totals-item">#}
-{#                                      <label>Subtotal</label>#}
-{#                                      <div class="totals-value" id="cart-subtotal">71.97</div>#}
-{#                                    </div>#}
-{#                                    <div class="totals-item">#}
-{#                                      <label>Tax (5%)</label>#}
-{#                                      <div class="totals-value" id="cart-tax">3.60</div>#}
-{#                                    </div>#}
-{#                                    <div class="totals-item">#}
-{#                                      <label>Shipping</label>#}
-{#                                      <div class="totals-value" id="cart-shipping">15.00</div>#}
-{#                                    </div>#}
                                     <div class="totals-item totals-item-total">
                                       <label>Grand Total</label>
                                       <div class="totals-value" id="cart-total">0.00</div>
                                     </div>
                                   </div>
 {#                                      <button class="checkout">Online Payment</button>#}
-                                    <form action="{% url 'place_order' %}" method="GET">
+                                    <form action="{% url 'place_order' %}" method="GET" class="custom-stripe-button">
                                         {% csrf_token %}
                                         <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                                             data-key="{{ stripe_key }}"
-                                            data-amount="2000"
                                             data-name="AutoLux"
-                                            data-description="Your Product"
+                                            data-description="Best accessories in town"
                                             data-image="{% static 'images/logo.png' %}"
                                             data-currency="usd">
                                         </script>
@@ -281,4 +249,118 @@
 			</div>
 		</div>
 
+{#    Filter by Car Modal #}
+
+<div class="modal fade" id="filter-by-car" tabindex="-1" role="dialog">
+      <div class="modal-dialog filter-by-car-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="row">
+                <div class="col-md-4">
+                  Make
+                </div>
+                <div class="col-md-4">
+                  Model
+                </div>
+                <div class="col-md-4">
+                  Year
+                </div>
+            </div>
+          </div>
+            <div class="modal-body modal-body-sub_agile">
+            <!-- <div class="col-md-8 modal_body_left modal_body_left1"> -->
+
+              <div class="row">
+                <div class="col-md-4 remove-space">
+                  <div class="car-make ">
+                    <ul class="filter-by-car-ul">
+                        {% for item in all_cars %}
+                            <li id="filter-by-car-id-{{ item.id }}" class="filter-by-car-li make" ><a class="car-filter-title">{{ item.car_make }} <i class="fa fa-angle-right"></i></a></li>
+                        {% endfor %}
+                    </ul>
+                  </div>
+                </div>
+                <div class="col-md-4 remove-space">
+                  <div class="car-model ">
+                      <div id="add-filtered-data">
+
+                      </div>
+{#                    <ul class="filter-by-car-ul">#}
+{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Baleno <i class="fa fa-angle-right"></i></a></li>#}
+{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Cultus <i class="fa fa-angle-right"></i></a></li>#}
+{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Mehran <i class="fa fa-angle-right"></i></a></li>#}
+{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Khayber <i class="fa fa-angle-right"></i></a></li>#}
+{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Baleno <i class="fa fa-angle-right"></i></a></li>#}
+{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Cultus <i class="fa fa-angle-right"></i></a></li>#}
+{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Mehran <i class="fa fa-angle-right"></i></a></li>#}
+{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Khayber <i class="fa fa-angle-right"></i></a></li>#}
+{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Baleno <i class="fa fa-angle-right"></i></a></li>#}
+{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Cultus <i class="fa fa-angle-right"></i></a></li>#}
+{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Mehran <i class="fa fa-angle-right"></i></a></li>#}
+{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Khayber <i class="fa fa-angle-right"></i></a></li>#}
+{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Baleno <i class="fa fa-angle-right"></i></a></li>#}
+{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Cultus <i class="fa fa-angle-right"></i></a></li>#}
+{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Mehran <i class="fa fa-angle-right"></i></a></li>#}
+{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Khayber <i class="fa fa-angle-right"></i></a></li>#}
+{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Baleno <i class="fa fa-angle-right"></i></a></li>#}
+{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Cultus <i class="fa fa-angle-right"></i></a></li>#}
+{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Mehran <i class="fa fa-angle-right"></i></a></li>#}
+{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Khayber <i class="fa fa-angle-right"></i></a></li>#}
+{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Baleno <i class="fa fa-angle-right"></i></a></li>#}
+{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Cultus <i class="fa fa-angle-right"></i></a></li>#}
+{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Mehran <i class="fa fa-angle-right"></i></a></li>#}
+{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Khayber <i class="fa fa-angle-right"></i></a></li>#}
+{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Baleno <i class="fa fa-angle-right"></i></a></li>#}
+{##}
+{##}
+{#                    </ul>#}
+                  </div>
+                </div>
+                <div class="col-md-4 remove-space">
+                  <div class="car-year ">
+                    <ul class="filter-by-car-ul">
+                      <li class="filter-by-car-li year" ><a class="car-filter-title">2005-2008 </a></li>
+                      <li class="filter-by-car-li year" ><a class="car-filter-title">2005-2008 </a></li>
+                      <li class="filter-by-car-li year" ><a class="car-filter-title">2005-2008 </a></li>
+                      <li class="filter-by-car-li year" ><a class="car-filter-title">2005-2008 </a></li>
+                      <li class="filter-by-car-li year" ><a class="car-filter-title">2005-2008 </a></li>
+                      <li class="filter-by-car-li year" ><a class="car-filter-title">2005-2008 </a></li>
+                      <li class="filter-by-car-li year" ><a class="car-filter-title">2005-2008 </a></li>
+                      <li class="filter-by-car-li year" ><a class="car-filter-title">2005-2008 </a></li>
+                      <li class="filter-by-car-li year" ><a class="car-filter-title">2005-2008 </a></li>
+                      <li class="filter-by-car-li year" ><a class="car-filter-title">2005-2008 </a></li>
+                      <li class="filter-by-car-li year" ><a class="car-filter-title">2005-2008 </a></li>
+                      <li class="filter-by-car-li year" ><a class="car-filter-title">2005-2008 </a></li>
+                      <li class="filter-by-car-li year" ><a class="car-filter-title">2005-2008 </a></li>
+                      <li class="filter-by-car-li year" ><a class="car-filter-title">2005-2008 </a></li>
+                      <li class="filter-by-car-li year" ><a class="car-filter-title">2005-2008 </a></li>
+                      <li class="filter-by-car-li year" ><a class="car-filter-title">2005-2008 </a></li>
+                      <li class="filter-by-car-li year" ><a class="car-filter-title">2005-2008 </a></li>
+                      <li class="filter-by-car-li year" ><a class="car-filter-title">2005-2008 </a></li>
+                      <li class="filter-by-car-li year" ><a class="car-filter-title">2005-2008 </a></li>
+
+                      </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="filter-by-car-buttons">
+                <center>
+                  <div class="modal-footer">
+                    <button class="done-button">Done</button>
+                    <button class="cancel-button">Cancel</button>
+                  </div>
+
+                </center>
+                </div>
+              </div>
+             <!-- </div> -->
+
+            <div class="clearfix"></div>
+          </div>
+        </div>
+        <!-- //Modal content-->
+      </div>
+    </div>
 </header>

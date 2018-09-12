@@ -367,7 +367,7 @@ i.fa.fa-shopping-bag.top_logo_agile_bag {
     background: none;
 }
 .navbar-nav > li {
-    margin: 0 15px 0 0;
+    margin: 0 4px 0 0;
 }
 .navbar-nav > li > a {
     padding: 26px 16px;
@@ -5687,14 +5687,16 @@ label {
   font-family: 'HelveticaNeue-Medium', 'Helvetica Neue Medium';
 }
 .checkout {
-  float: right;
-  border: 0;
-  margin-top: 20px;
-  padding: 6px 12px;
-  background-color: #6b6;
-  color: #fff;
-  font-size: 20px;
-  border-radius: 3px;
+    float: right;
+    border: 0;
+    margin-top: 27px;
+    margin-right: 8px;
+    padding: 6px 10px;
+    background-color: #6b6;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 5px;
 }
 .checkout:hover {
   background-color: #494;
@@ -5766,18 +5768,94 @@ label {
 .custom-modal{
     width: 66%;
 }
-
-.checkout-delivery {
-  float: right;
-  border: 0;
-  margin-top: 20px;
-  padding: 6px 12px;
-  background-color: dodgerblue;
-  color: #fff;
-  font-size: 20px;
-  border-radius: 3px;
-    margin-right: 8px;
+.custom-stripe-button {
+    position: relative;
+    float: right;
+    margin-top: 28px;
 }
-.checkout-delivery:hover {
+
+/* Filter by car Modal */
+.filter-by-car-ul {
+  list-style: none;
+  font-size: 14px;
+  padding: 0px 8px 0px 8px;
+}
+.car-make{
+      background-color: white;
+      min-height: 250px;
+      max-height: 250px;
+      overflow-y: scroll;
+}
+.car-model{
+      background-color: #e0e0e0;
+      min-height: 250px;
+      max-height: 250px;
+      overflow-y: scroll;
+}
+.car-model:focus{
+      background-color: white;
+}
+.car-year{
+      background-color: #e0e0e0;
+      min-height: 250px;
+      max-height: 250px;
+      overflow-y: scroll;
+}
+.car-year:focus{
+      background-color: white;
+}
+.filter-by-car-dialog{
+  width: 65%;
+}
+.done-button{
+    background-color: #337ab7;
+    color: white;
+    padding: 5px 22px 5px 22px;
+    font-size: 18px;
+    border: 1px solid #337ab7;
+    border-radius: 4px;
+    margin-right: 5px;
+}
+.cancel-button{
+    background-color: #6b0909;
+    color: white;
+    padding: 5px 22px 5px 22px;
+    font-size: 18px;
+    border: 1px solid #6b0909;
+    border-radius: 4px;
+    margin-right: 5px;
+}
+.filter-by-car-buttons{
+    margin-top: 22px;
+}
+.remove-space{
+  padding-right: 0px !important;
+  padding-left: 0px !important;
+}
+.car-filter-title{
+  text-decoration: none;
+}
+.car-filter-title:hover{
+  text-decoration: none;
+  color: #223c7a;
+}
+.filter-by-car-li:hover{
   background-color: lightblue;
+  color: #223c7a;
+}
+.car-filter-title {
+    cursor: pointer;
+    display: block;
+    color: #666;
+    padding: 6px 8px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: transparent;
+    text-decoration: none;
+    border-image: initial;
+}
+.fa-angle-right{
+  float: right;
+  font-size: 18px;
+  color: #223c7a;
 }
