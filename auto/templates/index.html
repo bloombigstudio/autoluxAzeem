@@ -527,9 +527,11 @@
 <script>
     $(document).ready(function(){
         {% for item in all_cars %}
-        $("#filter-by-car-id-{{ item.id }}").click(function(e){
-
+        $("#filter-by-make-id-{{ item.id }}").click(function(e){
             e.preventDefault();
+            $('.make').removeClass('search-class');
+            $(this).addClass('search-class');
+
             item_id = e.currentTarget.id.replace(/\D/g,'');
              $.ajax({
                 type: "POST",
@@ -539,16 +541,11 @@
                     'csrfmiddlewaretoken': '{{ csrf_token }}'
                 },
                 success:function(response) {
-                    {#var obj = JSON.parse(response);#}
-                    {# console.log(response.length);#}
-
-                    var dynamic = $('<ul class="filter-by-car-ul">' +
-                        '<li class="filter-by-car-li model" ><a class="car-filter-title">' + response[i].car_model + ' <i class="fa fa-angle-right"></i></a></li>' +
-                        '</ul>');
-                $('#add-filtered-data').html(dynamic);
-
-                    {#for ( i=0; i<response.length; i++){#}
-                //}
+                     $('#add-filtered-model-data').html(" ");
+                     for ( i=0; i<response.length; i++) {
+                         var dynamic = $('<li onclick="getYearByModelId(this.id,$(this).text())" id="filter-by-model-'+response[i].id +' " class="filter-by-car-li model" ><a class="car-filter-title">' + response[i].car_model + ' <i class="fa fa-angle-right"></i></a></li>');
+                         $('#add-filtered-model-data').append(dynamic);
+                     }
                 },
                 error:function(result) {
                   alert('error');
@@ -556,9 +553,57 @@
             });
           });
         {% endfor %}
+
 });
+    //Ading active class for search purpose
+    $(document).ready(function(){
+        $('#add-filtered-model-data').on('click', '.model', function () {
+            {#debugger;#}
+            $('.model').removeClass('search-class');
+            $(this).addClass('search-class');
+        });
+    });
+    $(document).ready(function(){
+        $('#add-filtered-year-data').on('click', '.year', function () {
+            {#debugger;#}
+            $('.year').removeClass('search-class');
+            $(this).addClass('search-class');
+        });
+    });
 
+    function getYearByModelId(id,name) {
+            selected_model_id = id.replace(/\D/g,'');
+            $.ajax({
+                type: "POST",
+                url: '{% url 'car_information' %}',
+                data: {
+                    car_model_id: selected_model_id,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                success:function(response) {
+                     $('#add-filtered-year-data').html(" ");
+                     for ( i=0; i<response.length; i++) {
+                         var dynamic = $('<li id="filter-by-year-' + response[i].id + ' " class="filter-by-car-li year" ><a class="car-filter-title">' + response[i].car_year + '</a></li>');
+                         $('#add-filtered-year-data').append(dynamic);
+                     }
+                },
+                error:function(result) {
+                  alert('error');
+                }
+            });
+        }
+        // Search button Implementation
 
+    function searchByCarFunc(){
+        data = [];
+        $('.search-class').each(function(){
+            data.push($(this).text());
+        });
+        $('#selected-car-make').val(data[0]);
+        $('#selected-car-model').val(data[1]);
+        $('#selected-car-year').val(data[2]);
+        $( "#car-selection-form" ).submit();
+    }
 
 </script>
 

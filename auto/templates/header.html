@@ -269,90 +269,45 @@
             </div>
           </div>
             <div class="modal-body modal-body-sub_agile">
-            <!-- <div class="col-md-8 modal_body_left modal_body_left1"> -->
-
               <div class="row">
                 <div class="col-md-4 remove-space">
                   <div class="car-make ">
                     <ul class="filter-by-car-ul">
                         {% for item in all_cars %}
-                            <li id="filter-by-car-id-{{ item.id }}" class="filter-by-car-li make" ><a class="car-filter-title">{{ item.car_make }} <i class="fa fa-angle-right"></i></a></li>
+                            <li id="filter-by-make-id-{{ item.id }}" class="filter-by-car-li make" ><a class="car-filter-title">{{ item.car_make }} <i class="fa fa-angle-right"></i></a></li>
                         {% endfor %}
                     </ul>
                   </div>
                 </div>
                 <div class="col-md-4 remove-space">
                   <div class="car-model ">
-                      <div id="add-filtered-data">
-
-                      </div>
-{#                    <ul class="filter-by-car-ul">#}
-{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Baleno <i class="fa fa-angle-right"></i></a></li>#}
-{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Cultus <i class="fa fa-angle-right"></i></a></li>#}
-{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Mehran <i class="fa fa-angle-right"></i></a></li>#}
-{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Khayber <i class="fa fa-angle-right"></i></a></li>#}
-{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Baleno <i class="fa fa-angle-right"></i></a></li>#}
-{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Cultus <i class="fa fa-angle-right"></i></a></li>#}
-{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Mehran <i class="fa fa-angle-right"></i></a></li>#}
-{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Khayber <i class="fa fa-angle-right"></i></a></li>#}
-{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Baleno <i class="fa fa-angle-right"></i></a></li>#}
-{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Cultus <i class="fa fa-angle-right"></i></a></li>#}
-{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Mehran <i class="fa fa-angle-right"></i></a></li>#}
-{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Khayber <i class="fa fa-angle-right"></i></a></li>#}
-{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Baleno <i class="fa fa-angle-right"></i></a></li>#}
-{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Cultus <i class="fa fa-angle-right"></i></a></li>#}
-{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Mehran <i class="fa fa-angle-right"></i></a></li>#}
-{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Khayber <i class="fa fa-angle-right"></i></a></li>#}
-{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Baleno <i class="fa fa-angle-right"></i></a></li>#}
-{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Cultus <i class="fa fa-angle-right"></i></a></li>#}
-{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Mehran <i class="fa fa-angle-right"></i></a></li>#}
-{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Khayber <i class="fa fa-angle-right"></i></a></li>#}
-{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Baleno <i class="fa fa-angle-right"></i></a></li>#}
-{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Cultus <i class="fa fa-angle-right"></i></a></li>#}
-{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Mehran <i class="fa fa-angle-right"></i></a></li>#}
-{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Khayber <i class="fa fa-angle-right"></i></a></li>#}
-{#                      <li class="filter-by-car-li model" ><a class="car-filter-title">Baleno <i class="fa fa-angle-right"></i></a></li>#}
-{##}
-{##}
-{#                    </ul>#}
+                      <ul class="filter-by-car-ul">
+                          <li id="add-filtered-model-data"></li>
+                      </ul>
                   </div>
                 </div>
                 <div class="col-md-4 remove-space">
                   <div class="car-year ">
                     <ul class="filter-by-car-ul">
-                      <li class="filter-by-car-li year" ><a class="car-filter-title">2005-2008 </a></li>
-                      <li class="filter-by-car-li year" ><a class="car-filter-title">2005-2008 </a></li>
-                      <li class="filter-by-car-li year" ><a class="car-filter-title">2005-2008 </a></li>
-                      <li class="filter-by-car-li year" ><a class="car-filter-title">2005-2008 </a></li>
-                      <li class="filter-by-car-li year" ><a class="car-filter-title">2005-2008 </a></li>
-                      <li class="filter-by-car-li year" ><a class="car-filter-title">2005-2008 </a></li>
-                      <li class="filter-by-car-li year" ><a class="car-filter-title">2005-2008 </a></li>
-                      <li class="filter-by-car-li year" ><a class="car-filter-title">2005-2008 </a></li>
-                      <li class="filter-by-car-li year" ><a class="car-filter-title">2005-2008 </a></li>
-                      <li class="filter-by-car-li year" ><a class="car-filter-title">2005-2008 </a></li>
-                      <li class="filter-by-car-li year" ><a class="car-filter-title">2005-2008 </a></li>
-                      <li class="filter-by-car-li year" ><a class="car-filter-title">2005-2008 </a></li>
-                      <li class="filter-by-car-li year" ><a class="car-filter-title">2005-2008 </a></li>
-                      <li class="filter-by-car-li year" ><a class="car-filter-title">2005-2008 </a></li>
-                      <li class="filter-by-car-li year" ><a class="car-filter-title">2005-2008 </a></li>
-                      <li class="filter-by-car-li year" ><a class="car-filter-title">2005-2008 </a></li>
-                      <li class="filter-by-car-li year" ><a class="car-filter-title">2005-2008 </a></li>
-                      <li class="filter-by-car-li year" ><a class="car-filter-title">2005-2008 </a></li>
-                      <li class="filter-by-car-li year" ><a class="car-filter-title">2005-2008 </a></li>
-
+                      <li id="add-filtered-year-data" ></li>
                       </ul>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="filter-by-car-buttons">
-                <center>
-                  <div class="modal-footer">
-                    <button class="done-button">Done</button>
-                    <button class="cancel-button">Cancel</button>
-                  </div>
-
-                </center>
+                    <form action="{% url 'products' item_name="Search" %}" method="post" id="car-selection-form">
+                        {% csrf_token %}
+                       <fieldset>
+                           <input id="selected-car-make" type="hidden" name="selected_car_make" value="" />
+                           <input id="selected-car-model" type="hidden" name="selected_car_model" value="" />
+                           <input id="selected-car-year" type="hidden" name="selected_car_year" value="" />
+                       </fieldset>
+                      <div class="modal-footer">
+                        <button id="filter-done-button" class="done-button" onclick="searchByCarFunc()">Done</button>
+                        <button class="cancel-button">Cancel</button>
+                      </div>
+                    </form>
                 </div>
               </div>
              <!-- </div> -->

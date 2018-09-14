@@ -5843,6 +5843,10 @@ label {
   background-color: lightblue;
   color: #223c7a;
 }
+/*.filter-by-car-li:active{*/
+  /*background-color: lightblue;*/
+  /*color: #223c7a;*/
+/*}*/
 .car-filter-title {
     cursor: pointer;
     display: block;

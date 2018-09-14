@@ -134,7 +134,7 @@ class CarYear(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.car_year
+        return self.model.car_model + " " + self.car_year
 
 
 class UserWithoutAccount(models.Model):

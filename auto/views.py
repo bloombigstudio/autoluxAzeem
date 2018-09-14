@@ -37,12 +37,12 @@ class Index(TemplateView):
 
 class Products(TemplateView):
     template_name = 'products.html'
+    signUpForm = SignUpForm()
+    signInForm = SignInForm()
 
     def get(self, request, *args, **kwargs):
         item_name = kwargs.get('item_name')
         Interior = Product.objects.filter(product_category=item_name)
-        signUpForm = SignUpForm()
-        signInForm = SignInForm()
         page_title = item_name
 
         if Interior.count() > 3:
@@ -52,7 +52,26 @@ class Products(TemplateView):
             interior_first_row = Interior
             interior_else_rows = None
 
-        args = {'signUp': signUpForm, 'signIn': signInForm,'interior_first_row': interior_first_row, 'interior_else_rows': interior_else_rows, 'page_title': page_title}
+        args = {'signUp': self.signUpForm, 'signIn': self.signInForm,'interior_first_row': interior_first_row, 'interior_else_rows': interior_else_rows, 'page_title': page_title}
+
+        return render(request, self.template_name,args)
+
+    def post(self, request, **kwargs):
+        page_title = kwargs.get('item_name')
+
+        car_make = request.POST['selected_car_make']
+        car_model = request.POST['selected_car_model']
+        car_year = request.POST['selected_car_year']
+
+        query = Product.objects.filter(cars_related_name__car_make=car_make.strip(),cars_related_name__company_related_name__car_model=car_model.strip(),cars_related_name__company_related_name__model_related_name__car_year=car_year.strip())
+        if query.count() > 3:
+            interior_first_row = query[:3]
+            interior_else_rows = query[3:]
+        else:
+            interior_first_row = query
+            interior_else_rows = None
+
+        args = {'signUp': self.signUpForm, 'signIn': self.signInForm, 'interior_first_row': interior_first_row,'interior_else_rows': interior_else_rows, 'page_title': page_title}
 
         return render(request, self.template_name,args)
 
@@ -61,6 +80,7 @@ class ProductDescription(TemplateView):
     template_name = 'product_description.html'
 
     def get(self, request, *args, **kwargs):
+
         signUpForm = SignUpForm()
         signInForm = SignInForm()
         item_id = kwargs.get('id')
@@ -132,8 +152,6 @@ class PlaceOrder(TemplateView):
 
     def post(self, request, **kwargs):
         orderForm = UserOrderForm(request.POST)
-        simple = SimpleOrderForm()
-        user_order = SimpleOrderForm()
 
         if orderForm.is_valid():
             first_name = orderForm.cleaned_data['first_name']
@@ -144,9 +162,6 @@ class PlaceOrder(TemplateView):
             payment_method = request.POST['payment_method']
             token = request.POST['token']
             user = orderForm.save()
-
-            # if payment_method == "Online Payment":
-            #     user = UserWithoutAccount(first_name = first_name, last_name = last_name, contact_number=contact_number,address=address, email=email)
 
             json_order = request.POST['cart_info']
             cart_object = json.loads(json_order)
@@ -179,13 +194,16 @@ class PlaceOrder(TemplateView):
 
 
 class CarInformation(View):
-    greeting = "Good Day"
 
     def post(self, request):
-        car_make_id = request.POST.get('car_make_id', None)
-        car_model_array = CarModel.objects.filter(company_id=car_make_id).values()
-        list_data = list(car_model_array)
-        # args = {'json_data': json_data}
-
-        return JsonResponse(list_data, safe=False)
+        if 'car_make_id' in request.POST:
+            car_make_id = request.POST.get('car_make_id', None)
+            car_model_array = CarModel.objects.filter(company_id=car_make_id).values()
+            list_data = list(car_model_array)
+            return JsonResponse(list_data, safe=False)
+        elif 'car_model_id' in request.POST:
+            car_model_id = request.POST.get('car_model_id', None)
+            car_year_array = CarYear.objects.filter(model_id=car_model_id).values()
+            list_data = list(car_year_array)
+            return JsonResponse(list_data, safe=False)
 
