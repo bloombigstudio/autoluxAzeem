@@ -10,17 +10,21 @@ import stripe
 stripe.api_key = settings.STRIPE_SECRET_KEY
 from django.http import JsonResponse
 
+signUpForm = SignUpForm()
+signInForm = SignInForm()
+all_cars = CarCompany.objects.all()
+params = {'signUp': signUpForm, 'signIn': signInForm, "all_cars": all_cars}
+
+
 class Index(TemplateView):
-    template_name = 'index.html'
+    template_name = 'home.html'
 
     def get(self, request, *args, **kwargs):
-        signUpForm = SignUpForm()
-        signInForm = SignInForm()
-        all_products = Product.objects.all()
-        all_cars = CarCompany.objects.all()
 
-        args = {'signUp': signUpForm, 'signIn': signInForm, 'all_products': all_products, "stripe_key": settings.STRIPE_PUBLIC_KEY, 'all_cars': all_cars }
-        return render(request, self.template_name,args)
+        all_products = Product.objects.all()
+        params['all_products'] = all_products
+        params['stripe_key'] = settings.STRIPE_PUBLIC_KEY
+        return render(request, self.template_name,params)
 
     def post(self, request, **kwargs):
         signUpForm = SignUpForm(request.POST)
@@ -37,8 +41,6 @@ class Index(TemplateView):
 
 class Products(TemplateView):
     template_name = 'products.html'
-    signUpForm = SignUpForm()
-    signInForm = SignInForm()
 
     def get(self, request, *args, **kwargs):
         item_name = kwargs.get('item_name')
@@ -52,9 +54,11 @@ class Products(TemplateView):
             interior_first_row = Interior
             interior_else_rows = None
 
-        args = {'signUp': self.signUpForm, 'signIn': self.signInForm,'interior_first_row': interior_first_row, 'interior_else_rows': interior_else_rows, 'page_title': page_title}
+        params['interior_first_row'] = interior_first_row
+        params['interior_else_rows'] = interior_else_rows
+        params['page_title'] = page_title
 
-        return render(request, self.template_name,args)
+        return render(request, self.template_name,params)
 
     def post(self, request, **kwargs):
         page_title = kwargs.get('item_name')
@@ -71,34 +75,32 @@ class Products(TemplateView):
             interior_first_row = query
             interior_else_rows = None
 
-        args = {'signUp': self.signUpForm, 'signIn': self.signInForm, 'interior_first_row': interior_first_row,'interior_else_rows': interior_else_rows, 'page_title': page_title}
+        params['interior_first_row'] = interior_first_row
+        params['interior_else_rows'] = interior_else_rows
+        params['page_title'] = page_title
 
-        return render(request, self.template_name,args)
+        return render(request, self.template_name,params)
 
 
 class ProductDescription(TemplateView):
     template_name = 'product_description.html'
 
     def get(self, request, *args, **kwargs):
-
-        signUpForm = SignUpForm()
-        signInForm = SignInForm()
         item_id = kwargs.get('id')
         selected_item = ProductSpecification.objects.filter(product_id_id=item_id)
         new_arrivals = Product.objects.all().order_by('-id')[:4]
-        args = {'signUp': signUpForm, 'signIn': signInForm,'selected_item': selected_item, 'new_arrivals': new_arrivals}
-        return render(request, self.template_name,args)
+
+
+        params['selected_item'] = selected_item
+        params['new_arrivals'] = new_arrivals
+        return render(request, self.template_name,params)
 
 
 class Contact(TemplateView):
     template_name = 'contact.html'
 
     def get(self, request, *args, **kwargs):
-        signUpForm = SignUpForm()
-        signInForm = SignInForm()
-
-        args = {'signUp': signUpForm, 'signIn': signInForm }
-        return render(request, self.template_name,args)
+        return render(request, self.template_name,params)
 
 
 
@@ -106,11 +108,7 @@ class About(TemplateView):
     template_name = 'about.html'
 
     def get(self, request, *args, **kwargs):
-        signUpForm = SignUpForm()
-        signInForm = SignInForm()
-
-        args = {'signUp': signUpForm, 'signIn': signInForm }
-        return render(request, self.template_name,args)
+        return render(request, self.template_name,params)
 
 
 
@@ -167,15 +165,9 @@ class PlaceOrder(TemplateView):
             cart_object = json.loads(json_order)
 
             total_bill = 0
+            charge = "Stripe Payment id"
             for order in cart_object["products"]:
                 total_bill = total_bill + float(order['price'])
-                if payment_method == "Online Payment":
-                    user_order = Order(user=user, item_id=order['id'], item_name=order['name'],item_price=order['price'], payment_status=True)
-                    user_order.save()
-
-                else:
-                    direct_order = Order(user=user, item_id=order['id'], item_name=order['name'],item_price=order['price'], payment_status=False)
-                    direct_order.save()
 
             if payment_method == "Online Payment":
                 try:
@@ -188,6 +180,18 @@ class PlaceOrder(TemplateView):
                     # simple.charge_id = charge.id
                 except stripe.error.CardError as ce:
                     return False, ce
+
+            for order in cart_object["products"]:
+                if payment_method == "Online Payment":
+                    user.user_without_account = Order(user=user, item_id=order['id'], item_name=order['name'],item_price=order['price'], payment_status=True, charge_id = charge.id)
+                    # user_order.save()
+                    user.user_without_account.save()
+
+                else:
+                    user.user_without_account = Order(user=user, item_id=order['id'], item_name=order['name'],item_price=order['price'], payment_status=False)
+                    # direct_order.save()
+                    user.user_without_account.save()
+
 
 
         return render(request, self.template_name)

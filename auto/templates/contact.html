@@ -1,15 +1,5 @@
+{% extends "index.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-<title>Autolux</title>
-<!--/tags -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-		function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!--//tags -->
     {% block css %}
         <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all" />
         <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" media="all" />
@@ -19,25 +9,20 @@
         <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
         <link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic' rel='stylesheet' type='text/css'>
     {% endblock %}
-</head>
-<body>
 {% block content %}
-
-    {% include 'header.html' %}
-
 <div class="page-head_agile_info_w3l">
-		<div class="container">
-			<h3>C<span>ontact Us </span></h3>
-			<!--/w3_short-->
-				 <div class="services-breadcrumb">
-						<div class="agile_inner_breadcrumb">
+    <div class="container">
+        <h3>C<span>ontact Us </span></h3>
+        <!--/w3_short-->
+             <div class="services-breadcrumb">
+                <div class="agile_inner_breadcrumb">
 
-						   <ul class="w3_short">
-								<li><a href="{% url 'index' %}">Home</a><i>|</i></li>
-								<li>Contact</li>
-							</ul>
-						 </div>
-				</div>
+                   <ul class="w3_short">
+                        <li><a href="{% url 'index' %}">Home</a><i>|</i></li>
+                        <li>Contact</li>
+                    </ul>
+                 </div>
+            </div>
 	   <!--//w3_short-->
 	</div>
 </div>
@@ -145,66 +130,4 @@
        </div>
 	</div>
  <!--//contact-->
-
-    {% include 'footer.html' %}
-
-<a href="#home" class="scroll" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
-<!-- js -->
-<script type="text/javascript" src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
-<!-- //js -->
-	<!-- cart-js -->
-	<script src="{% static 'js/minicart.min.js' %}"></script>
-<script>
-	// Mini Cart
-	paypal.minicart.render({
-		action: '#'
-	});
-
-	if (~window.location.search.indexOf('reset=true')) {
-		paypal.minicart.reset();
-	}
-</script>
-
-	<!-- //cart-js -->
-
-<!-- stats -->
-	<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
-	<script src="{% static 'js/jquery.countup.js' %}"></script>
-	<script>
-		$('.counter').countUp();
-	</script>
-<!-- //stats -->
-<!-- start-smoth-scrolling -->
-<script type="text/javascript" src="{% static 'js/move-top.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/jquery.easing.min.js' %}"></script>
-<script type="text/javascript">
-	jQuery(document).ready(function($) {
-		$(".scroll").click(function(event){
-			event.preventDefault();
-			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
-		});
-	});
-</script>
-<!-- here stars scrolling icon -->
-	<script type="text/javascript">
-		$(document).ready(function() {
-			/*
-				var defaults = {
-				containerID: 'toTop', // fading element id
-				containerHoverID: 'toTopHover', // fading element hover id
-				scrollSpeed: 1200,
-				easingType: 'linear'
-				};
-			*/
-
-			$().UItoTop({ easingType: 'easeOutQuart' });
-
-			});
-	</script>
-<!-- //here ends scrolling icon -->
-
-<!-- for bootstrap working -->
-<script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
 {% endblock %}
-</body>
-</html>
