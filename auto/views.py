@@ -177,18 +177,18 @@ class PlaceOrder(TemplateView):
                     direct_order = Order(user=user, item_id=order['id'], item_name=order['name'],item_price=order['price'], payment_status=False)
                     direct_order.save()
 
-            try:
-                charge = stripe.Charge.create(
-                    amount=int(total_bill),
-                    currency="usd",
-                    source=token,
-                    description="The product charged to the user"
-                )
-                # simple.charge_id = charge.id
-            except stripe.error.CardError as ce:
-                return False, ce
-            # else:
-            #     simple.save()
+            if payment_method == "Online Payment":
+                try:
+                    charge = stripe.Charge.create(
+                        amount=int(total_bill),
+                        currency="usd",
+                        source=token,
+                        description="The product charged to the user"
+                    )
+                    # simple.charge_id = charge.id
+                except stripe.error.CardError as ce:
+                    return False, ce
+
 
         return render(request, self.template_name)
 
