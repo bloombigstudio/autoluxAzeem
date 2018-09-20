@@ -1,7 +1,11 @@
 from django.contrib.auth import authenticate, login
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import TemplateView
+from urllib.parse import urlparse
+
+from auto.filters import ProductFilter
 from auto.forms import *
 from auto.models import *
 from autolux import settings
@@ -13,17 +17,20 @@ from django.http import JsonResponse
 signUpForm = SignUpForm()
 signInForm = SignInForm()
 all_cars = CarCompany.objects.all()
+product_list = Product.objects.all()
 params = {'signUp': signUpForm, 'signIn': signInForm, "all_cars": all_cars}
 
 
 class Index(TemplateView):
-    template_name = 'home.html'
+    template_name = 'index.html'
 
     def get(self, request, *args, **kwargs):
+        product_filter = ProductFilter(request.GET, queryset=product_list)
 
-        all_products = Product.objects.all()
+        all_products = Product.objects.all().order_by('-id')[:20]
         params['all_products'] = all_products
         params['stripe_key'] = settings.STRIPE_PUBLIC_KEY
+        params['filter'] = product_filter
         return render(request, self.template_name,params)
 
     def post(self, request, **kwargs):
@@ -44,40 +51,130 @@ class Products(TemplateView):
 
     def get(self, request, *args, **kwargs):
         item_name = kwargs.get('item_name')
-        Interior = Product.objects.filter(product_category=item_name)
-        page_title = item_name
 
-        if Interior.count() > 3:
-            interior_first_row = Interior[:3]
-            interior_else_rows = Interior[3:]
+        search_results = request.GET['product_title'] if "product_title" in request.GET else ""
+        product_filter = ProductFilter(request.GET, queryset=product_list)
+        if item_name == "SearchResults":
+
+            page_data = product_filter.qs;
+            # page = request.GET.get('page', 1)
+            # paginator = Paginator(product_filter.qs, 10)
+            # try:
+            #     page_data = paginator.page(page)
+            # except PageNotAnInteger:
+            #     page_data = paginator.page(1)
+            # except EmptyPage:
+            #     page_data = paginator.page(paginator.num_pages)
+
+            params['page_data'] = page_data
+            params['page_title'] = "Search Results"
+            params['item_category'] = item_name
+            params['searched_item'] = search_results
+
+
+            return render(request, self.template_name, params)
+
         else:
-            interior_first_row = Interior
-            interior_else_rows = None
+            Interior = Product.objects.filter(product_category__iexact=item_name)
+            page_title = item_name
 
-        params['interior_first_row'] = interior_first_row
-        params['interior_else_rows'] = interior_else_rows
-        params['page_title'] = page_title
+            page = request.GET.get('page', 1)
+            paginator = Paginator(Interior, 10)
+            try:
+                page_data = paginator.page(page)
+            except PageNotAnInteger:
+                page_data = paginator.page(1)
+            except EmptyPage:
+                page_data = paginator.page(paginator.num_pages)
 
-        return render(request, self.template_name,params)
+            params['page_data'] = page_data
+            params['page_title'] = page_title
+            params['filter'] = product_filter
+            params['item_category'] = item_name
+            params['searched_item'] = search_results
+
+            return render(request, self.template_name,params)
 
     def post(self, request, **kwargs):
         page_title = kwargs.get('item_name')
+        product_filter = ProductFilter(request.GET, queryset=product_list)
 
-        car_make = request.POST['selected_car_make']
-        car_model = request.POST['selected_car_model']
-        car_year = request.POST['selected_car_year']
+        if page_title == "Search":
+            if 'sorting-price' not in request.POST:
+                car_make = request.POST['selected_car_make']
+                car_model = request.POST['selected_car_model']
+                car_year = request.POST['selected_car_year']
 
-        query = Product.objects.filter(cars_related_name__car_make=car_make.strip(),cars_related_name__company_related_name__car_model=car_model.strip(),cars_related_name__company_related_name__model_related_name__car_year=car_year.strip())
-        if query.count() > 3:
-            interior_first_row = query[:3]
-            interior_else_rows = query[3:]
+                query = Product.objects.filter(cars_related_name__car_make=car_make.strip(),cars_related_name__company_related_name__car_model=car_model.strip(),cars_related_name__company_related_name__model_related_name__car_year=car_year.strip())
+
+                params['selected_car_make'] = request.POST['selected_car_make']
+                params['selected_car_model'] = request.POST['selected_car_model']
+                params['selected_car_year'] = request.POST['selected_car_year']
+
+            # elif 'sorting-price' in request.POST and request.POST['sorting-price'] != "":
+            else:
+                make = request.POST['searched-car-make']
+                model = request.POST['searched-car-model']
+                year = request.POST['searched-car-year']
+                price = request.POST['sorting-price']
+                order = request.POST['sorting-order']
+                items = request.POST['sorting-items']
+                new_price = [x.strip() for x in price.split('-')]
+                min_price = new_price[0].split('s')[1]
+                max_price = new_price[1].split('s')[1]
+                query = ""
+                sorting_order = "product_price"
+                if order == "High to low":
+                    sorting_order = "-product_price"
+                query = Product.objects.filter(product_price__range=(min_price,max_price) ,
+                                               cars_related_name__car_make=make.strip(),
+                                               cars_related_name__company_related_name__car_model=model.strip(),
+                                               cars_related_name__company_related_name__model_related_name__car_year=year.strip()).\
+                                               order_by(sorting_order)
+                if items != "All":
+                    query = query[:int(items)]
+
+                params['page_title'] = "Search By Car"
+                params['selected_car_make'] = request.POST['searched-car-make']
+                params['selected_car_model'] = request.POST['searched-car-model']
+                params['selected_car_year'] = request.POST['searched-car-year']
+
         else:
-            interior_first_row = query
-            interior_else_rows = None
+            price = request.POST['sorting-price']
+            order = request.POST['sorting-order']
+            items = request.POST['sorting-items']
+            searched_item = request.POST['searched-item']
+            new_price = [x.strip() for x in price.split('-')]
+            min_price = new_price[0].split('s')[1]
+            max_price = new_price[1].split('s')[1]
+            query = ""
+            sorting_order = "product_price"
+            if order == "High to low":
+                sorting_order = "-product_price"
 
-        params['interior_first_row'] = interior_first_row
-        params['interior_else_rows'] = interior_else_rows
-        params['page_title'] = page_title
+            if page_title == "SearchResults":
+                query = Product.objects.filter(product_title__icontains=searched_item ,product_price__range=(min_price, max_price)).order_by(sorting_order)
+                if items != "All":
+                    query = query[:int(items)]
+            else:
+                query = Product.objects.filter(product_category=page_title, product_price__range=(min_price, max_price)).order_by(sorting_order)
+                if items != "All":
+                    query = query[:int(items)]
+            params['searched_item'] = searched_item
+            params['page_title'] = "Filtered Data"
+
+        page = request.GET.get('page', 1)
+        paginator = Paginator(query, 10)
+        try:
+            page_data = paginator.page(page)
+        except PageNotAnInteger:
+            page_data = paginator.page(1)
+        except EmptyPage:
+            page_data = paginator.page(paginator.num_pages)
+
+        params['page_data'] = page_data
+        params['filter'] = product_filter
+        params['item_category'] = page_title
 
         return render(request, self.template_name,params)
 
@@ -89,7 +186,6 @@ class ProductDescription(TemplateView):
         item_id = kwargs.get('id')
         selected_item = ProductSpecification.objects.filter(product_id_id=item_id)
         new_arrivals = Product.objects.all().order_by('-id')[:4]
-
 
         params['selected_item'] = selected_item
         params['new_arrivals'] = new_arrivals
@@ -114,7 +210,7 @@ class About(TemplateView):
 
 # Chaipiiiiiiii :P
 class Login(TemplateView):
-    template_name = 'index.html'
+    template_name = 'base.html'
 
     def get(self, request, *args, **kwargs):
 
@@ -167,7 +263,8 @@ class PlaceOrder(TemplateView):
             total_bill = 0
             charge = "Stripe Payment id"
             for order in cart_object["products"]:
-                total_bill = total_bill + float(order['price'])
+                item_count = float(order['price']) * float(order['quantity'])
+                total_bill = total_bill + item_count
 
             if payment_method == "Online Payment":
                 try:
@@ -182,16 +279,16 @@ class PlaceOrder(TemplateView):
                     return False, ce
 
             for order in cart_object["products"]:
+                item_count = float(order['price']) * float(order['quantity'])
                 if payment_method == "Online Payment":
-                    user.user_without_account = Order(user=user, item_id=order['id'], item_name=order['name'],item_price=order['price'], payment_status=True, charge_id = charge.id)
+                    user.user_without_account = Order(user=user, item_id=order['id'], item_name=order['name'],item_quantity=order['quantity'],item_price=order['price'],total_price=item_count, payment_status=True, charge_id = charge.id)
                     # user_order.save()
                     user.user_without_account.save()
 
                 else:
-                    user.user_without_account = Order(user=user, item_id=order['id'], item_name=order['name'],item_price=order['price'], payment_status=False)
+                    user.user_without_account = Order(user=user, item_id=order['id'], item_name=order['name'],item_quantity=order['quantity'],item_price=order['price'],total_price=item_count, payment_status=False)
                     # direct_order.save()
                     user.user_without_account.save()
-
 
 
         return render(request, self.template_name)
@@ -210,4 +307,3 @@ class CarInformation(View):
             car_year_array = CarYear.objects.filter(model_id=car_model_id).values()
             list_data = list(car_year_array)
             return JsonResponse(list_data, safe=False)
-

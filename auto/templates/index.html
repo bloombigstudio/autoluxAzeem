@@ -1,394 +1,240 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-<title>Autolux</title>
-<!--/tags -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-		function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!--//tags -->
-    {% block css %}
-        <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all" />
-        <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" media="all" />
-        <link href="{% static 'css/font-awesome.css' %}" rel="stylesheet">
-        <link href="{% static 'css/easy-responsive-tabs.css' %}" rel='stylesheet' type='text/css'/>
-        <!-- //for bootstrap working -->
-        <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
-        <link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic' rel='stylesheet' type='text/css'>
-    {% endblock %}
-</head>
-<body>
-{% include "header.html" %}
 {% block content %}
 
-{% endblock %}
-<a href="#home" class="scroll" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+<!-- banner -->
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+		<!-- Indicators -->
+		<ol class="carousel-indicators">
+			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+			<li data-target="#myCarousel" data-slide-to="1" class=""></li>
+			<li data-target="#myCarousel" data-slide-to="2" class=""></li>
+			<li data-target="#myCarousel" data-slide-to="3" class=""></li>
+		</ol>
+		<div class="carousel-inner" role="listbox">
+			<div class="item active">
+                <div>
+                    <img class="carousel-image-setting" src="{% static 'images/Slider 1.JPG' %}">
+                </div>
+				<div class="container">
+					<div class="carousel-caption">
+						<h3>The Biggest <span>Collection of Car Auto Parts</span></h3>
+						<p>Available 24/7</p>
+						<a class="hvr-outline-out button2" href="{% url 'products' item_name='Interior'%}">Shop Now </a>
+					</div>
+				</div>
+			</div>
+			<div class="item item2">
+                <div>
+                    <img class="carousel-image-setting" src="{% static 'images/Slider 2.jpg' %}">
+                </div>
+				<div class="container">
+					<div class="carousel-caption">
+						<h3>Huge <span>Collection</span></h3>
+						<a class="hvr-outline-out button2" href="{% url 'products' item_name='Interior' %}">Shop Now </a>
+					</div>
+				</div>
+			</div>
+			<div class="item item3">
+                <div>
+                    <img class="carousel-image-setting" src="{% static 'images/Slider 3.JPG' %}">
+                </div>
+				<div class="container">
+					<div class="carousel-caption">
+						<h3>The Biggest <span>Sale</span></h3>
+						<a class="hvr-outline-out button2" href="{% url 'products' item_name='Interior'%}">Shop Now </a>
+					</div>
+				</div>
+			</div>
+			<div class="item item4">
+                <div>
+                    <img class="carousel-image-setting" src="{% static 'images/Slider 4.JPG' %}">
+                </div>
+				<div class="container">
+					<div class="carousel-caption">
+						<h3>Imported and Local <span>Collection</span></h3>
+						<a class="hvr-outline-out button2" href="{% url 'products' item_name='Interior'%}">Shop Now </a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+			<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+			<span class="sr-only">Previous</span>
+		</a>
+		<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+			<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+			<span class="sr-only">Next</span>
+		</a>
+		<!-- The Modal -->
+    </div>
+  <!-- banner-bootom-w3-agileits -->
+	<div class="banner-bootom-w3-agileits">
+	<div class="container">
+		<h3 class="wthree_text_info"><span>Car</span> Accessories <span>and</span> Auto Parts</h3>
 
-{% include "footer.html" %}
-<!-- cart-js -->
-<script type="text/javascript" src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
-<script src="{% static 'js/responsiveslides.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/jquery-ui.js' %}"></script>
-<script src="{% static 'js/modernizr.custom.js' %}"></script>
-<script src="{% static 'js/jquery.flexslider.js' %}"></script>
+		<div class="col-md-6 bb-grids bb-middle-agileits-w3layouts">
+					<a href="{% url 'products' item_name='Leds' %}">
+					 <div class="bb-middle-agileits-w3layouts grid">
+								 <figure class="effect-roxy">
+							<img src="{% static 'images/BG LED Lights .JPG' %}" alt=" " class="img-responsive" />
+							<figcaption>
+								<h3><span>LED</span>lights </h3>
+								<p>Upto 55%</p>
+							</figcaption>
+						</figure>
+						</div>
+				</a>
+				<a href="{% url 'products' item_name='Suvs'%}">
+					<div class="bb-middle-agileits-w3layouts forth grid">
+						<figure class="effect-roxy">
+							<img src="{% static 'images/BG SUV Items.jpg' %}" alt=" " class="img-responsive">
+							<figcaption>
+								<h3><span>4x4/</span>SUV items </h3>
+								<p>Upto 65%</p>
+							</figcaption>
+						</figure>
+					</div>
+					</a>
 
+					<a href="{% url 'products' item_name='Detailing'%}">
+						<div class="bb-middle-agileits-w3layouts forth grid">
+							<figure class="effect-roxy">
+								<img src="{% static 'images/BG Car detailing.png' %}" alt=" " class="img-responsive">
+								<figcaption>
+									<h3><span>Car</span> Detailing</h3>
+									<p>Upto 65%</p>
+								</figcaption>
+							</figure>
+						</div>
+						</a>
+		<div class="clearfix"></div>
+	</div>
 
+		<div class="col-md-6 bb-grids bb-middle-agileits-w3layouts">
+		      <a href="{% url 'products' item_name='Interior'%}">
+		       <div class="bb-middle-agileits-w3layouts grid">
+			           <figure class="effect-roxy">
+							<img src="{% static 'images/BG Interior Tab.JPG' %}" alt=" " class="img-responsive" />
+							<figcaption>
+								<h3><span>I</span>nterior </h3>
+								<p>Upto 55%</p>
+							</figcaption>
+						</figure>
+		        </div>
+				</a>
+				<a href="{% url 'products' item_name='Exterior'%}">
+		      <div class="bb-middle-agileits-w3layouts forth grid">
+						<figure class="effect-roxy">
+							<img src="{% static 'images/BG Exterior.JPG' %}" alt=" " class="img-responsive">
+							<figcaption>
+								<h3><span>E</span>xterior </h3>
+								<p>Upto 65%</p>
+							</figcaption>
+						</figure>
+					</div>
+					</a>
+
+					<a href="{% url 'products' item_name='Utilites'%}">
+						<div class="bb-middle-agileits-w3layouts forth grid">
+							<figure class="effect-roxy">
+								<img src="{% static 'images/BG Utilities.JPG' %}" alt=" " class="img-responsive">
+								<figcaption>
+									<h3><span>U</span>tilites </h3>
+									<p>Upto 65%</p>
+								</figcaption>
+							</figure>
+						</div>
+						</a>
+		<div class="clearfix"></div>
+	</div>
+	</div>
+    </div>
+<!-- /new_arrivals -->
+	<div class="new_arrivals_agile_w3ls_info">
+		<div class="container">
+		    <h3 class="wthree_text_info">New <span>Arrivals</span></h3>
+                <div class="row">
+                    <div id="myDIV" class=" col-md-12 text-center">
+                        <button class="filter-button custom-buttons live" data-filter="Interior">Interior</button>
+                        <button class="filter-button custom-buttons" data-filter="Exterior">Exterior</button>
+                        <button class="filter-button custom-buttons" data-filter="Mats">Mats</button>
+                        <button class="filter-button custom-buttons" data-filter="Detailing">Car Detailing</button>
+                        <button class="filter-button custom-buttons" data-filter="Leds">LED lights</button>
+                        <button class="filter-button custom-buttons" data-filter="Suvs">SUV lights</button>
+                        <button class="filter-button custom-buttons" data-filter="Utilites">Utilites</button>
+                        <button class="filter-button custom-buttons" data-filter="Others">Others</button>
+                    </div>
+                </div>
+                <div class="new-arrival-products">
+                    {% if all_products %}
+                        {% for item in all_products  %}
+                        <div class="col-md-3 product-men filter {{ item.product_category|cut:" " }}">
+                        <div class="men-pro-item simpleCart_shelfItem">
+                        <a href="{% url 'single' id=item.id %}">
+                            <div class="men-thumb-item">
+                                <img src="{{ item.product_image_front.url }}" alt="" class="pro-image-front">
+                                <img src="{{ item.product_image_back.url }}" alt="" class="pro-image-back">
+                            </div>
+                        </a>
+                            <div class="item-info-product ">
+                                <h4><a href="{% url 'single' id=item.id %}">{{ item.product_title }}</a></h4>
+                                {% if item.product_discounted_price != null %}
+                                    <div class="info-product-price">
+                                        <span class="item_price">Rs {{ item.product_discounted_price }}</span>
+                                        <del>Rs {{ item.product_price }}</del>
+                                    </div>
+                                {% else %}
+                                    <div class="info-product-price">
+                                        <span class="item_price">Rs {{ item.product_price }}</span>
+                                    </div>
+                                {% endif %}
+                                <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
+                                    <form action="#" method="post" id="add_to_cart{{ item.id }}">
+                                    {% csrf_token %}
+                                        <fieldset>
+                                            <input type="hidden" name="item_id" value="{{ item.id}}" />
+                                            <input type="hidden" name="item_name" value="{{ item.product_title }}" />
+                                            <input type="hidden" name="item_description" value="{{ item.product_related_name.first.product_description }}" />
+                                            <input type="hidden" name="item_image" value="{{ item.product_image_front }}" />
+                                            {% if item.product_discounted_price != null %}
+                                                <input type="hidden" name="amount" value="{{ item.product_discounted_price }}" />
+                                             {% else %}
+                                                <input type="hidden" name="amount" value="{{ item.product_price }}" />
+                                            {% endif %}
+{#                                            <input type="hidden" name="currency_code" value="PKR" />#}
+                                            <input type="submit" name="submit" value="Add to cart" class="button" />
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        {% endfor %}
+                    {% endif %}
+				</div>
+		</div>
+    </div>
+	<!-- //new_arrivals -->
+	<!-- /we-offer -->
+		<div class="sale-w3ls deliver-across">
+			<div class="container">
+				<h6>Delivery across all Pakistan</h6>
+
+				<a class="hvr-outline-out button2" href="{% url 'single' id=0%}">Shop Now </a>
+			</div>
+		</div>
 
 <script>
-{#         disable buttons if cart is empty     #}
-    $('#checkout-modal-button').on('click', function () {
-            myData = localStorage.getItem('cart');
-            parsedData = JSON.parse(myData);
-            if (parsedData.products.length === 0){
-                $('.stripe-button-el').prop('disabled', true);
-                $('.checkout').prop('disabled', true);
-            } else {
-                $('.stripe-button-el').prop('disabled', false);
-                $('.checkout').prop('disabled', false);
-            }
-        });
-</script>
-
-<script>
-    var cart = {};
-    cart.products = [];
-    cart.total = 0;
-    if(!localStorage.getItem('cart')){
-    window.localStorage.setItem('cart', JSON.stringify(cart));
-    }
-    {% for item in  all_products%}
-        $(document).on('submit', '#add_to_cart{{ item.id }}', function(e) {
-            e.preventDefault();
-            var product = {};
-            product.id = e.target.item_id.value;
-            product.name = e.target.item_name.value;
-            product.price = e.target.amount.value;
-            product.image = 'media/' + e.target.item_image.value;
-            saveToSession(product);
-            //});
-        });
-    {% endfor %}
-
-    function saveToSession(product) {
-    // Retrieve the cart object from local storage
-    if (localStorage && localStorage.getItem('cart')) {
-        var cart = JSON.parse(localStorage.getItem('cart'));
-
-        cart.products.push(product);
-        cart.total += parseInt(product.price);
-
-        localStorage.setItem('cart', JSON.stringify(cart));
-    }
+// Add active class to the current button (highlight it)
+    var header = document.getElementById("myDIV");
+    var btns = header.getElementsByClassName("custom-buttons");
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].addEventListener("click", function() {
+        var current = document.getElementsByClassName("live");
+        current[0].className = current[0].className.replace("live", " ");
+        this.className += " live";
+      });
 }
-
-
-</script>
-
-    <script>
-        {#  Remove product from cart  #}
-        {% for item in all_products %}
-            $('#add-items-here').on('click', '.product-removal-{{ item.id }}', function () {
-                $(".product-id-{{ item.id }}").slideUp(300, function() {
-                $(".product-id-{{ item.id }}").remove();
-                console.log({{ item.id }});
-                    var items = JSON.parse(localStorage["cart"]);
-                      for (var i = 0; i < items.products.length; i++) {
-                         if(items.products[i].id == {{ item.id }}){
-                             {#debugger;#}
-                           items.products.splice(i,1);
-                           break;
-                         }
-                      }
-                      item = JSON.stringify(items);
-                      localStorage.setItem("cart", item);
-                calculateTotal()
-            });
-        });
-        {% endfor %}
-    </script>
-
-    <script>
-        {% for item in all_products %}
-            $('#add-items-here').on('change', '.cart-product-quantity-{{ item.id }}', function () {
-            var productRow = $(this).parent().parent();
-            var price = parseFloat($('#cart-product-price-{{ item.id }}').text());
-            var quantity = parseFloat($('#cart-product-quantity-{{ item.id }}').val());
-            var linePrice = price * quantity;
-            $('#cart-line-price-{{ item.id }}').html(linePrice);
-            $('#cart-line-price-{{ item.id }}').fadeOut(300, function() {
-                  $('#cart-line-price-{{ item.id }}').html(linePrice);
-                  $(this).fadeIn(300);
-                  calculateTotal();
-                });
-        });
-        {% endfor %}
-    </script>
-
-    <script>
-        {#      Calculate Total           #}
-
-        $('#checkout-modal-button').on('click', function () {
-            getDataFromLocalStorage();
-            calculateTotal();
-        });
-
-        function calculateTotal() {
-            var sum = 0;
-            $('.total_price').each(function () {
-                {#console.log(parseFloat($(this).text()))#}
-                sum = sum + parseFloat($(this).text());
-            });
-            $('#cart-total').fadeOut(300, function() {
-                $('#cart-total').html(sum);
-                 $(this).fadeIn(300);
-            });
-
-            return sum;
-        }
-        // get data from local storage and populate cart
-        function getDataFromLocalStorage() {
-
-            myData = localStorage.getItem('cart');
-            parsedData = JSON.parse(myData);
-            for ( i = 0; i < parsedData.products.length; i++) {
-                var cart_item = $('<div class="product product-id-' + parsedData.products[i].id + '">\n' +
-                '<div class="product-image">\n' +
-                '<img id="cart-product-image" src="' +parsedData.products[i].image + '">\n' +
-                '</div>\n' +
-                '<div class="product-details">\n' +
-                '<div class="product-title" id="cart-product-title">' + parsedData.products[i].name + '</div>\n' +
-                '<p class="product-description" id="cart-product-description">' + parsedData.products[i].description + '</p>\n' +
-                '</div>\n' +
-                '<div class="product-price" id="cart-product-price-' + parsedData.products[i].id + '">' + parsedData.products[i].price + '</div>\n' +
-                '<div class="product-quantity cart-product-quantity-' + parsedData.products[i].id + '">\n' +
-                '<input id="cart-product-quantity-' + parsedData.products[i].id + '" type="number" value="1" min="1" />\n' +
-                '</div>\n' +
-                '<div class="product-removal-' + parsedData.products[i].id + '">\n' +
-                '<button class="remove-product">\n' + 'Remove\n' + '</button>\n' +
-                '</div>\n' +
-                '<div class="product-line-price total_price" id="cart-line-price-' + parsedData.products[i].id + '">' + parsedData.products[i].price + '</div>\n' +
-                '</div>');
-
-                $('#add-items-here').append(cart_item);
-                }
-        }
-    </script>
-
-	<!-- //cart-js -->
-<!-- script for responsive tabs -->
-<script src="{% static 'js/easy-responsive-tabs.js' %}"></script>
-<script>
-	$(document).ready(function () {
-	$('#horizontalTab').easyResponsiveTabs({
-	type: 'default', //Types: default, vertical, accordion
-	width: 'auto', //auto or any width like 600px
-	fit: true,   // 100% fit in a container
-	closed: 'accordion', // Start closed if in accordion view
-	activate: function(event) { // Callback function if tab is switched
-	var $tab = $(this);
-	var $info = $('#tabInfo');
-	var $name = $('span', $info);
-	$name.text($tab.text());
-	$info.show();
-	}
-	});
-	$('#verticalTab').easyResponsiveTabs({
-	type: 'vertical',
-	width: 'auto',
-	fit: true
-	});
-	});
-</script>
-<!-- //script for responsive tabs -->
-<!-- stats -->
-	<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
-	<script src="{% static 'js/jquery.countup.js' %}"></script>
-	<script>
-		$('.counter').countUp();
-	</script>
-<!-- //stats -->
-<!-- start-smoth-scrolling -->
-<script type="text/javascript" src="{% static 'js/move-top.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/jquery.easing.min.js' %}"></script>
-<script type="text/javascript">
-	jQuery(document).ready(function($) {
-		$(".scroll").click(function(event){
-			event.preventDefault();
-			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
-		});
-	});
-</script>
-<!-- here stars scrolling icon -->
-	<script type="text/javascript">
-		$(document).ready(function() {
-			/*
-				var defaults = {
-				containerID: 'toTop', // fading element id
-				containerHoverID: 'toTopHover', // fading element hover id
-				scrollSpeed: 1200,
-				easingType: 'linear'
-				};
-			*/
-
-			$().UItoTop({ easingType: 'easeOutQuart' });
-
-			});
-	</script>
-<!-- //here ends scrolling icon -->
-{#    my scripts (Header Script)#}
-    <script>
-        $('#id_password1').on('keyup', function () {
-
-          var p = jQuery('#id_password1').val();
-            if(p.length <=7 || p.length >= 33 || !p.match(/\d/) || !p.match(/[a-z]/i))
-                $('#password_validation').html('Must contains min 8 characters including at least 1 digit.').css('color', 'red');
-            else
-                $('#password_validation').hide();
-        });
-
-
-        $('#id_password2').on('keyup', function () {
-
-          if ($('#id_password1').val() == $('#id_password2').val()) {
-            $('#password_not_match').html('Perfect').css('color', 'green');
-          } else
-            $('#password_not_match').html('*Password does not match').css('color', 'red');
-        });
-
-    </script>
-
-<!-- for bootstrap working -->
-<script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
-
-    <script>
-            $(document).ready(function(){
-                {% for foo in all_products %}
-                    $('.{{ foo.product_category  }}').hide();
-                {% endfor %}
-                $('.Interior').show();
-
-            $(".filter-button").click(function(){
-                var value = $(this).attr('data-filter');
-                $(".filter").not('.'+value).hide('3000');
-                $('.filter').filter('.'+value).show('3000');
-            });
-        });
-        </script>
-
-
-{#    Filter by car      #}
-      <script>
-    $(function () {
-        $(".car-make").click(function () {
-            $(".model").show();
-            if ($(".year").is(':visible')) {
-                 $(".model").hide();
-                 $(".year").hide();
-              }
-        });
-        $(".car-model").click(function () {
-            $(this).css('background-color', 'white');
-            $(".year").show();
-
-
-        });
-        $(".car-year").click(function () {
-            $(this).css('background-color', 'white');
-        });
-    });
-
-    $(document).ready(function(){
-      $(".model").hide();
-      $(".year").hide();
-});
-</script>
-<script>
-    $(document).ready(function(){
-        {% for item in all_cars %}
-        $("#filter-by-make-id-{{ item.id }}").click(function(e){
-            e.preventDefault();
-            $('.make').removeClass('search-class');
-            $(this).addClass('search-class');
-
-            item_id = e.currentTarget.id.replace(/\D/g,'');
-             $.ajax({
-                type: "POST",
-                url: '{% url 'car_information' %}',
-                data: {
-                    car_make_id: item_id,
-                    'csrfmiddlewaretoken': '{{ csrf_token }}'
-                },
-                success:function(response) {
-                     $('#add-filtered-model-data').html(" ");
-                     for ( i=0; i<response.length; i++) {
-                         var dynamic = $('<li onclick="getYearByModelId(this.id,$(this).text())" id="filter-by-model-'+response[i].id +' " class="filter-by-car-li model" ><a class="car-filter-title">' + response[i].car_model + ' <i class="fa fa-angle-right"></i></a></li>');
-                         $('#add-filtered-model-data').append(dynamic);
-                     }
-                },
-                error:function(result) {
-                  alert('error');
-                }
-            });
-          });
-        {% endfor %}
-
-});
-    //Ading active class for search purpose
-    $(document).ready(function(){
-        $('#add-filtered-model-data').on('click', '.model', function () {
-            {#debugger;#}
-            $('.model').removeClass('search-class');
-            $(this).addClass('search-class');
-        });
-    });
-    $(document).ready(function(){
-        $('#add-filtered-year-data').on('click', '.year', function () {
-            {#debugger;#}
-            $('.year').removeClass('search-class');
-            $(this).addClass('search-class');
-        });
-    });
-
-    function getYearByModelId(id,name) {
-            selected_model_id = id.replace(/\D/g,'');
-            $.ajax({
-                type: "POST",
-                url: '{% url 'car_information' %}',
-                data: {
-                    car_model_id: selected_model_id,
-                    'csrfmiddlewaretoken': '{{ csrf_token }}'
-                },
-                success:function(response) {
-                     $('#add-filtered-year-data').html(" ");
-                     for ( i=0; i<response.length; i++) {
-                         var dynamic = $('<li id="filter-by-year-' + response[i].id + ' " class="filter-by-car-li year" ><a class="car-filter-title">' + response[i].car_year + '</a></li>');
-                         $('#add-filtered-year-data').append(dynamic);
-                     }
-                },
-                error:function(result) {
-                  alert('error');
-                }
-            });
-        }
-        // Search button Implementation
-
-    function searchByCarFunc(){
-        data = [];
-        $('.search-class').each(function(){
-            data.push($(this).text());
-        });
-        $('#selected-car-make').val(data[0]);
-        $('#selected-car-model').val(data[1]);
-        $('#selected-car-year').val(data[2]);
-        $( "#car-selection-form" ).submit();
-    }
-
-</script>
-
-
-
-</body>
-</html>
+</script>>
+{% endblock %}

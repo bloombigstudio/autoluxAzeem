@@ -47,7 +47,8 @@ label{
 }
 /*-- header --*/
 .header {
-    background: #000;
+    /*background: #000;*/
+    background-color: white;
 }
 .header ul li {
     display: inline-block;
@@ -60,7 +61,7 @@ label{
     border-right: 1px solid #464444;
 }
 .header ul li a {
-     color: #fff;
+     color: #000;
     text-decoration: none;
 }
 .header ul li i {
@@ -82,8 +83,8 @@ label{
 .social-nav {
     padding: 0;
     list-style: none;
-    display: inline-block;
-    margin: 1em 0 0;
+    display: inline-flex;
+    margin: 6px 0 0 6px;
     float: right;
 }
 .social-nav li {
@@ -251,11 +252,11 @@ i.fa.fa-shopping-bag.top_logo_agile_bag {
     width: 73%;
 }
 .header-bot {
+    background-color: black;
     padding: 25px 0;
 }
 .header-middle form input[type="search"] {
     outline: none;
-    border: none;
     width: 87%;
     padding: 12px 10px;
     color: #848484;
@@ -341,7 +342,7 @@ i.fa.fa-shopping-bag.top_logo_agile_bag {
 /*-- //header-bot --*/
 /*-- banner-top --*/
 .ban-top{
-	background:#000;
+	background:white;
     padding: 0px 0;
 }
 .dropdown-menu.columns-3 {
@@ -517,6 +518,7 @@ letter-spacing: 2px;
 .box_1 {
     padding: 5px;
     text-align: center;
+    display: inline-flex;
 }
 .box_1 h3 {
     color: #fff;
@@ -547,46 +549,46 @@ a.simpleCart_empty {
 }
 /*-- //banner-top --*/
 .carousel-caption {
-    position: inherit;
+    /*position: inherit;*/
     min-height:500px!important;
-    padding-top:10em;
+    padding-top:6em;
 }
 /*-- banner --*/
-.carousel .item{
-	background:-webkit-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(../images/banner1.jpg) no-repeat;
-	background:-moz-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(../images/banner1.jpg) no-repeat;
-	background:-ms-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(../images/banner1.jpg) no-repeat;
-	background:linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(../images/banner1.jpg) no-repeat;
-	background-size:cover;
-}
-.carousel .item.item2{
-	background:-webkit-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(../images/banner2.jpg) no-repeat;
-	background:-moz-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(../images/banner2.jpg) no-repeat;
-	background:-ms-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(../images/banner2.jpg) no-repeat;
-	background:linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(../images/banner2.jpg) no-repeat;
-	background-size:cover;
-}
-.carousel .item.item3{
-	background:-webkit-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(../images/banner3.jpg) no-repeat;
-	background:-moz-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(../images/banner3.jpg) no-repeat;
-	background:-ms-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(../images/banner3.jpg) no-repeat;
-	background:linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(../images/banner3.jpg) no-repeat;
-	background-size:cover;
-}
-.carousel .item.item4{
-	background:-webkit-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(../images/banner4.jpg) no-repeat;
-	background:-moz-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(../images/banner4.jpg) no-repeat;
-	background:-ms-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(../images/banner4.jpg) no-repeat;
-	background:linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(../images/banner4.jpg) no-repeat;
-	background-size:cover;
-}
-.carousel .item.item5{
-	background:-webkit-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(../images/banner5.jpg) no-repeat;
-	background:-moz-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(../images/banner5.jpg) no-repeat;
-	background:-ms-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(../images/banner5.jpg) no-repeat;
-	background:linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(../images/banner5.jpg) no-repeat;
-	background-size:cover;
-}
+/*.carousel .item{*/
+	/*background:-webkit-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(../images/banner1.jpg) no-repeat;*/
+	/*background:-moz-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(../images/banner1.jpg) no-repeat;*/
+	/*background:-ms-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(../images/banner1.jpg) no-repeat;*/
+	/*background:linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(../images/banner1.jpg) no-repeat;*/
+	/*background-size:cover;*/
+/*}*/
+/*.carousel .item.item2{*/
+	/*background:-webkit-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(../images/banner2.jpg) no-repeat;*/
+	/*background:-moz-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(../images/banner2.jpg) no-repeat;*/
+	/*background:-ms-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(../images/banner2.jpg) no-repeat;*/
+	/*background:linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(../images/banner2.jpg) no-repeat;*/
+	/*background-size:cover;*/
+/*}*/
+/*.carousel .item.item3{*/
+	/*background:-webkit-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(../images/banner3.jpg) no-repeat;*/
+	/*background:-moz-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(../images/banner3.jpg) no-repeat;*/
+	/*background:-ms-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(../images/banner3.jpg) no-repeat;*/
+	/*background:linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(../images/banner3.jpg) no-repeat;*/
+	/*background-size:cover;*/
+/*}*/
+/*.carousel .item.item4{*/
+	/*background:-webkit-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(../images/banner4.jpg) no-repeat;*/
+	/*background:-moz-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(../images/banner4.jpg) no-repeat;*/
+	/*background:-ms-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(../images/banner4.jpg) no-repeat;*/
+	/*background:linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(../images/banner4.jpg) no-repeat;*/
+	/*background-size:cover;*/
+/*}*/
+/*.carousel .item.item5{*/
+	/*background:-webkit-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(../images/banner5.jpg) no-repeat;*/
+	/*background:-moz-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(../images/banner5.jpg) no-repeat;*/
+	/*background:-ms-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(../images/banner5.jpg) no-repeat;*/
+	/*background:linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(../images/banner5.jpg) no-repeat;*/
+	/*background-size:cover;*/
+/*}*/
 
 .carousel-caption h2, .carousel-caption h3 {
     font-size: 3em;
@@ -1455,7 +1457,7 @@ button.w3view-cart {
     width: 48px;
     height: 43px;
     font-size: 24px;
-    color: #000;
+    color: whitesmoke;
 }
 /*-- //cart --*/
 /*-- effect --*/
@@ -1500,6 +1502,8 @@ button.w3view-cart {
 }
 .men-thumb-item img {
     transition: all 0.5s ease-out 0s;
+    max-height: 250px;
+    overflow: hidden;
 }
 .men-cart-pro {
     bottom: 0;
@@ -1900,7 +1904,7 @@ color: #545454;
 /*-- //coupons --*/
 /*-- /about --*/
 .page-head_agile_info_w3l {
-    background: url(../images/inner1.jpg) no-repeat center;
+    /*background: url(../images/inner1.jpg) no-repeat center;*/
     background-size: cover;
     -webkit-background-size: cover;
     -o-background-size: cover;
@@ -3117,7 +3121,7 @@ font-weight: 300;
 }
 .sorting {
     float: left;
-    width: 46%;
+    width: 33%;
 }
 .sorting h6 {
     float: left;
@@ -5628,7 +5632,7 @@ label {
   border-bottom: 1px solid #eee;
 }
 .column-labels .product-image, .column-labels .product-details, .column-labels .product-removal {
-  text-indent: -9999px;
+  text-indent: 6px;
 }
 /* Product entries */
 .product {
@@ -5862,4 +5866,55 @@ label {
   float: right;
   font-size: 18px;
   color: #223c7a;
+}
+.product-removal-styling{
+    float: left;
+}
+#item-added-to-cart {
+    /*position: relative;*/
+    text-align: center;
+}
+.shopping-cart-heading{
+    margin: 0px 0px 10px 0px;
+}
+.apply-filters-button{
+    float: right;
+    padding: 3px;
+    margin-right: 10px;
+}
+.apply-filters-button button{
+    border: 1px solid #da2f2f;
+    color: white;
+    border-radius: 5px;
+    background-color: #da2f2f;
+    padding: 2px 5px 2px 5px;
+}
+.car-logo{
+    width: 132%;
+}
+.text-logo{
+
+}
+.logo-main-div{
+    display: inline-flex;
+    padding: 5px 30px 0px 0px;
+}
+#bs-example-navbar-collapse-1 > ul > li > a {
+    color: black !important;
+}
+.carousel-image-setting{
+    width: 100%;
+}
+.contact-us-image{
+
+}
+.myclass {
+    position: absolute;
+    bottom: 0px;
+    text-align: center;
+}
+.contact-us-title-setting{
+    color: white;
+    font-size: 40px;
+    margin-bottom: 38px;
 }

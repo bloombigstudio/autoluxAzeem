@@ -80,8 +80,8 @@ class Product(models.Model):
     product_category = models.CharField(max_length=9, choices=Category_CHOICES, default='EPIC')
     product_image_front = models.ImageField(upload_to='images')
     product_image_back = models.ImageField(upload_to='images')
-    product_price = models.CharField(max_length=30)
-    product_discounted_price = models.CharField(max_length=30,default=None, blank=True, null=True)
+    product_price = models.FloatField(null=False,default=0)
+    product_discounted_price = models.FloatField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -157,7 +157,9 @@ class Order(models.Model):
     user = models.ForeignKey(UserWithoutAccount, on_delete=models.CASCADE, related_name='users_without_account')
     item_id = models.CharField(max_length=20)
     item_name = models.CharField(max_length=200)
+    item_quantity = models.CharField(max_length=20, default=1)
     item_price = models.CharField(max_length=20)
+    total_price = models.CharField(max_length=20, default=0)
     payment_status = models.BooleanField(default=False)
     charge_id = models.CharField(max_length=234, default="None")
 

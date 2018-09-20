@@ -1,0 +1,438 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Autolux</title>
+<!--/tags -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+		function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--//tags -->
+    {% block css %}
+        <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all" />
+        <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" media="all" />
+        <link href="{% static 'css/font-awesome.css' %}" rel="stylesheet">
+        <link href="{% static 'css/easy-responsive-tabs.css' %}" rel='stylesheet' type='text/css'/>
+        <!-- //for bootstrap working -->
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
+        <link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic' rel='stylesheet' type='text/css'>
+    {% endblock %}
+</head>
+<body>
+{% include "header.html" %}
+{% block content %}
+
+{% endblock %}
+<a href="#home" class="scroll" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+
+{% include "footer.html" %}
+<!-- cart-js -->
+<script type="text/javascript" src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
+<script src="{% static 'js/responsiveslides.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery-ui.js' %}"></script>
+<script src="{% static 'js/modernizr.custom.js' %}"></script>
+<script src="{% static 'js/jquery.flexslider.js' %}"></script>
+
+
+
+<script>
+{#         disable buttons if cart is empty     #}
+    $('#checkout-modal-button').on('click', function () {
+            myData = localStorage.getItem('cart');
+            parsedData = JSON.parse(myData);
+            if (parsedData.products.length === 0){
+                $('.stripe-button-el').prop('disabled', true);
+                $('.checkout').prop('disabled', true);
+            } else {
+                $('.stripe-button-el').prop('disabled', false);
+                $('.checkout').prop('disabled', false);
+            }
+        });
+</script>
+
+<script>
+
+    var cart = {};
+    cart.products = [];
+    if(!localStorage.getItem('cart')){
+        window.localStorage.setItem('cart', JSON.stringify(cart));
+    }
+    {% for item in  all_products%}
+        $(document).on('submit', '#add_to_cart{{ item.id }}', function(e) {
+            e.preventDefault();
+            $('#item-added-to-cart').modal('show');
+            setTimeout(function() {$('#item-added-to-cart').modal('hide');}, 1000);
+            var status_code = true;
+            var items = JSON.parse(localStorage["cart"]);
+            for (var i = 0; i < items.products.length; i++) {
+                 if(items.products[i].id == {{ item.id }}){
+                     counter = parseInt(items.products[i].quantity) + 1;
+                     items.products[i].quantity = counter.toString();
+                     item = JSON.stringify(items);
+                     localStorage.setItem("cart", item);
+                     status_code = false;
+                   break;
+                 }
+            }
+          if (status_code === true) {
+            var product = {};
+            product.id = e.target.item_id.value;
+            product.name = e.target.item_name.value;
+            product.price = e.target.amount.value;
+            product.description = e.target.item_description.value;
+            product.quantity = 1;
+            product.image = e.target.item_image.value;
+            saveToSession(product);
+          }
+        });
+    {% endfor %}
+
+    function saveToSession(product) {
+    // Retrieve the cart object from local storage
+    if (localStorage && localStorage.getItem('cart')) {
+        var cart = JSON.parse(localStorage.getItem('cart'));
+
+        cart.products.push(product);
+
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+}
+
+</script>
+
+    <script>
+        {#  Remove product from cart  #}
+        {% for item in all_products %}
+            $('#add-items-here').on('click', '.product-removal-{{ item.id }}', function () {
+                $(".product-id-{{ item.id }}").slideUp(300, function() {
+                $(".product-id-{{ item.id }}").remove();
+                    var items = JSON.parse(localStorage["cart"]);
+                      for (var i = 0; i < items.products.length; i++) {
+                         if(items.products[i].id == {{ item.id }}){
+                             {#debugger;#}
+                           items.products.splice(i,1);
+                           break;
+                         }
+                      }
+                      item = JSON.stringify(items);
+                      localStorage.setItem("cart", item);
+                calculateTotal()
+            });
+        });
+        {% endfor %}
+    </script>
+
+    <script>
+        {% for item in all_products %}
+            $('#add-items-here').on('change', '.cart-product-quantity-{{ item.id }}', function () {
+            var productRow = $(this).parent().parent();
+            {#var price;#}
+            var get_cart = JSON.parse(localStorage["cart"]);
+              {#for (var i = 0; i < get_cart.products.length; i++) {#}
+              {#    if(get_cart.products[i].id == {{ item.id }}){#}
+              {#        price = parseFloat($('#cart-product-price-{{ item.id }}').text());#}
+              {#        break;#}
+              {#    }#}
+              //}
+            var price = parseFloat($('#cart-product-price-{{ item.id }}').text());
+            var quantity = parseFloat($('#cart-product-quantity-{{ item.id }}').val());
+            var linePrice = price * quantity;
+            $('#cart-line-price-{{ item.id }}').html(linePrice);
+            $('#cart-line-price-{{ item.id }}').fadeOut(300, function() {
+                  $('#cart-line-price-{{ item.id }}').html(linePrice);
+                  $(this).fadeIn(300);
+                  calculateTotal();
+                });
+              var cart_items = JSON.parse(localStorage["cart"]);
+              for (var i = 0; i < cart_items.products.length; i++) {
+                 if(cart_items.products[i].id == {{ item.id }}){
+                     cart_items.products[i].quantity = quantity.toString();
+                     break;
+                 }
+              }
+              item = JSON.stringify(cart_items);
+              localStorage.setItem("cart", item);
+        });
+        {% endfor %}
+    </script>
+
+    <script>
+        {#      Calculate Total           #}
+
+        $('#checkout-modal-button').on('click', function () {
+            getDataFromLocalStorage();
+            calculateTotal();
+        });
+
+        function calculateTotal() {
+            sum = 0;
+            var cart_items = JSON.parse(localStorage["cart"]);
+              for (var i = 0; i < cart_items.products.length; i++) {
+                var price = parseFloat($('#cart-product-price-'+ cart_items.products[i].id ).text());
+                var quantity = parseFloat($('#cart-product-quantity-'+ cart_items.products[i].id).val());
+                var linePrice = price * quantity;
+                $('#cart-line-price-'+ cart_items.products[i].id).html(linePrice);
+            }
+
+            $('.total_price').each(function () {
+                sum = sum + parseFloat($(this).text());
+            });
+            $('#cart-total').fadeOut(300, function() {
+                $('#cart-total').html(sum);
+                 $(this).fadeIn(300);
+            });
+
+            return sum;
+        }
+        // get data from local storage and populate cart
+        function getDataFromLocalStorage() {
+
+            myData = localStorage.getItem('cart');
+            parsedData = JSON.parse(myData);
+            for ( i = 0; i < parsedData.products.length; i++) {
+
+                var cart_item = $('<div class="product product-id-' + parsedData.products[i].id + '">\n' +
+                '<div class="product-image">\n' +
+                '<img id="cart-product-image" src="' +{{ MEDIA_URL }} + parsedData.products[i].image + '">\n' +
+                '</div>\n' +
+                '<div class="product-details">\n' +
+                '<div class="product-title" id="cart-product-title">' + parsedData.products[i].name + '</div>\n' +
+                '<p class="product-description" id="cart-product-description">' + parsedData.products[i].description + '</p>\n' +
+                '</div>\n' +
+                '<div class="product-price" id="cart-product-price-' + parsedData.products[i].id + '">' + parsedData.products[i].price + '</div>\n' +
+                '<div class="product-quantity cart-product-quantity-' + parsedData.products[i].id + '">\n' +
+                '<input id="cart-product-quantity-' + parsedData.products[i].id + '" type="number" value="'+parsedData.products[i].quantity+'" min="1" />\n' +
+                '</div>\n' +
+                '<div class="product-removal-styling product-removal-' + parsedData.products[i].id + '">\n' +
+                '<button class="remove-product">\n' + 'Remove\n' + '</button>\n' +
+                '</div>\n' +
+                '<div class="product-line-price total_price" id="cart-line-price-' + parsedData.products[i].id + '">' + parsedData.products[i].price + '</div>\n' +
+                '</div>');
+
+                if ($('#add-items-here').find('.product-id-'+parsedData.products[i].id).length !==0){
+                    $('#add-items-here').html(cart_item);
+                } else {
+                    $('#add-items-here').append(cart_item);
+                }
+            }
+        }
+    </script>
+
+	<!-- //cart-js -->
+<!-- script for responsive tabs -->
+<script src="{% static 'js/easy-responsive-tabs.js' %}"></script>
+<script>
+	$(document).ready(function () {
+	$('#horizontalTab').easyResponsiveTabs({
+	type: 'default', //Types: default, vertical, accordion
+	width: 'auto', //auto or any width like 600px
+	fit: true,   // 100% fit in a container
+	closed: 'accordion', // Start closed if in accordion view
+	activate: function(event) { // Callback function if tab is switched
+	var $tab = $(this);
+	var $info = $('#tabInfo');
+	var $name = $('span', $info);
+	$name.text($tab.text());
+	$info.show();
+	}
+	});
+	$('#verticalTab').easyResponsiveTabs({
+	type: 'vertical',
+	width: 'auto',
+	fit: true
+	});
+	});
+</script>
+<!-- //script for responsive tabs -->
+<!-- stats -->
+	<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+	<script src="{% static 'js/jquery.countup.js' %}"></script>
+	<script>
+		$('.counter').countUp();
+	</script>
+<!-- //stats -->
+<!-- start-smoth-scrolling -->
+<script type="text/javascript" src="{% static 'js/move-top.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.easing.min.js' %}"></script>
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$(".scroll").click(function(event){
+			event.preventDefault();
+			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+		});
+	});
+</script>
+<!-- here stars scrolling icon -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			/*
+				var defaults = {
+				containerID: 'toTop', // fading element id
+				containerHoverID: 'toTopHover', // fading element hover id
+				scrollSpeed: 1200,
+				easingType: 'linear'
+				};
+			*/
+
+			$().UItoTop({ easingType: 'easeOutQuart' });
+
+			});
+	</script>
+<!-- //here ends scrolling icon -->
+{#    my scripts (Header Script)#}
+    <script>
+        $('#id_password1').on('keyup', function () {
+
+          var p = jQuery('#id_password1').val();
+            if(p.length <=7 || p.length >= 33 || !p.match(/\d/) || !p.match(/[a-z]/i))
+                $('#password_validation').html('Must contains min 8 characters including at least 1 digit.').css('color', 'red');
+            else
+                $('#password_validation').hide();
+        });
+
+
+        $('#id_password2').on('keyup', function () {
+
+          if ($('#id_password1').val() == $('#id_password2').val()) {
+            $('#password_not_match').html('Perfect').css('color', 'green');
+          } else
+            $('#password_not_match').html('*Password does not match').css('color', 'red');
+        });
+
+    </script>
+
+<!-- for bootstrap working -->
+<script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+
+    <script>
+            $(document).ready(function(){
+                {% for foo in all_products %}
+                    $('.{{ foo.product_category  }}').hide();
+                {% endfor %}
+                $('.Interior').show();
+
+            $(".filter-button").click(function(){
+                var value = $(this).attr('data-filter');
+                $(".filter").not('.'+value).hide('3000');
+                $('.filter').filter('.'+value).show('3000');
+            });
+        });
+        </script>
+
+
+{#    Filter by car      #}
+      <script>
+    $(function () {
+        $(".car-make").click(function () {
+            $(".model").show();
+            if ($(".year").is(':visible')) {
+                 $(".model").hide();
+                 $(".year").hide();
+              }
+        });
+        $(".car-model").click(function () {
+            $(this).css('background-color', 'white');
+            $(".year").show();
+
+
+        });
+        $(".car-year").click(function () {
+            $(this).css('background-color', 'white');
+        });
+    });
+
+    $(document).ready(function(){
+      $(".model").hide();
+      $(".year").hide();
+});
+</script>
+<script>
+    $(document).ready(function(){
+        {% for item in all_cars %}
+        $("#filter-by-make-id-{{ item.id }}").click(function(e){
+            e.preventDefault();
+            $('.make').removeClass('search-class');
+            $(this).addClass('search-class');
+
+            item_id = e.currentTarget.id.replace(/\D/g,'');
+             $.ajax({
+                type: "POST",
+                url: '{% url 'car_information' %}',
+                data: {
+                    car_make_id: item_id,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                success:function(response) {
+                     $('#add-filtered-model-data').html(" ");
+                     for ( i=0; i<response.length; i++) {
+                         var dynamic = $('<li onclick="getYearByModelId(this.id,$(this).text())" id="filter-by-model-'+response[i].id +' " class="filter-by-car-li model" ><a class="car-filter-title">' + response[i].car_model + ' <i class="fa fa-angle-right"></i></a></li>');
+                         $('#add-filtered-model-data').append(dynamic);
+                     }
+                },
+                error:function(result) {
+                  alert('error');
+                }
+            });
+          });
+        {% endfor %}
+
+});
+    //Ading active class for search purpose
+    $(document).ready(function(){
+        $('#add-filtered-model-data').on('click', '.model', function () {
+            {#debugger;#}
+            $('.model').removeClass('search-class');
+            $(this).addClass('search-class');
+        });
+    });
+    $(document).ready(function(){
+        $('#add-filtered-year-data').on('click', '.year', function () {
+            {#debugger;#}
+            $('.year').removeClass('search-class');
+            $(this).addClass('search-class');
+        });
+    });
+
+    function getYearByModelId(id,name) {
+            selected_model_id = id.replace(/\D/g,'');
+            $.ajax({
+                type: "POST",
+                url: '{% url 'car_information' %}',
+                data: {
+                    car_model_id: selected_model_id,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                success:function(response) {
+                     $('#add-filtered-year-data').html(" ");
+                     for ( i=0; i<response.length; i++) {
+                         var dynamic = $('<li id="filter-by-year-' + response[i].id + ' " class="filter-by-car-li year" ><a class="car-filter-title">' + response[i].car_year + '</a></li>');
+                         $('#add-filtered-year-data').append(dynamic);
+                     }
+                },
+                error:function(result) {
+                  alert('error');
+                }
+            });
+        }
+        // Search button Implementation
+
+    function searchByCarFunc(){
+        data = [];
+        $('.search-class').each(function(){
+            data.push($(this).text());
+        });
+        $('#selected-car-make').val(data[0]);
+        $('#selected-car-model').val(data[1]);
+        $('#selected-car-year').val(data[2]);
+        $( "#car-selection-form" ).submit();
+    }
+
+</script>
+
+
+
+</body>
+</html>

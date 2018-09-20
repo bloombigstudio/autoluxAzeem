@@ -1,4 +1,5 @@
 {% load static %}
+{% load widget_tweaks %}
 <header>
     <!-- header -->
 <div class="header" id="home">
@@ -17,33 +18,39 @@
 	<div class="header-bot_inner_wthreeinfo_header_mid">
 
 		<!-- header-bot -->
-			<div class="col-md-4 logo_agile">
-				<h1><a href="{% url 'index' %}">AUTO<span>LUX</span> </a></h1>
+        <div class="col-md-4 logo-main-div">
+            <div>
+{#				<h1><a href="{% url 'index' %}">AUTO<span>LUX</span> </a></h1>#}
+                <a href="{% url 'index' %}"><img class="car-logo" src="{% static 'images/4000x860.png' %}"></a>
 			</div>
+            <div>
+            <a href="{% url 'index' %}"><img class="text-logo" src="{% static 'images/Auto Lux for about us.png' %}"></a>
+            </div>
+        </div>
+
         <!-- header-bot -->
-				<div class="col-md-4 header-middle">
-					<form action="#" method="post">
-							<input type="search" name="search" placeholder="Search here..." required="">
-							<input type="submit" value=" ">
-						<div class="clearfix"></div>
-					</form>
-				</div>
+            <div class="col-md-4 header-middle">
+                <form action="{% url 'products' item_name="SearchResults" %}" method="GET">
+                    {% render_field filter.form.product_title type="search" placeholder="Search here..." required=""%}
+                    <input type="submit" value=" ">
+                    <div class="clearfix"></div>
+                </form>
+            </div>
 		<div class="col-md-1 col-md-offset-2  top_content">
 			<div class="wthreecartaits wthreecartaits2 cart cart box_1">
-{#				<form action="#" method="post" class="last">#}
-{#					<input type="hidden" name="cmd" value="_cart">#}
-{#					<input type="hidden" name="display" value="1">#}
-{#					<button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>#}
-{#				</form>#}
-{#                <button href="#" class="btn btn-info btn-lg">#}
-{#                  <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart#}
-{#                </button>#}
 
-
-                <a href="#checkoutModal" role="button" id="checkout-modal-button" class="btn" data-toggle="modal"><span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</a>
-
-
-
+{#              <a href="#checkoutModal" role="button" id="checkout-modal-button" class="btn" data-toggle="modal"><span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</a>#}
+                <a href="#checkoutModal" id="checkout-modal-button" data-toggle="modal">
+                    <button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
+                </a>
+                <ul class="social-nav model-3d-0 w3_agile_social two">
+                    <li><a href="#" class="facebook">
+                          <div class="front"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                          <div class="back"><i class="fa fa-facebook" aria-hidden="true"></i></div></a></li>
+                    <li><a href="#" class="instagram">
+                          <div class="front"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                          <div class="back"><i class="fa fa-instagram" aria-hidden="true"></i></div></a></li>
+                </ul>
 
 			</div>
 		</div>
@@ -206,7 +213,7 @@
 					</div>
 						<div class="modal-body modal-body-sub_agile">
 {#						<h1>Hello this is my modal</h1>#}
-                            <h1>Shopping Cart</h1>
+                            <h1 class="shopping-cart-heading">Shopping Cart</h1>
 
                                 <div class="shopping-cart">
 
@@ -318,4 +325,22 @@
         <!-- //Modal content-->
       </div>
     </div>
+
+    <div class="modal fade" id="item-added-to-cart" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+
+            <div class="modal-body modal-body-sub_agile">
+
+                <p>Item Added to your cart</p>
+             <!-- </div> -->
+
+            <div class="clearfix"></div>
+          </div>
+        </div>
+        <!-- //Modal content-->
+      </div>
+    </div>
+
 </header>

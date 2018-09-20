@@ -10,7 +10,6 @@ urlpatterns = [
     path('single/<int:id>', ProductDescription.as_view(), name='single'),
     path('about', About.as_view(), name='about'),
     path('contact', Contact.as_view(), name='contact'),
-    # path('online_payment', online_payment, name='online_payment'),
     path('place_order', PlaceOrder.as_view(), name='place_order'),
     path('car_information', CarInformation.as_view(), name='car_information'),
 
