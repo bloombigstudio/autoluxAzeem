@@ -3,13 +3,15 @@
 <header>
     <!-- header -->
 <div class="header" id="home">
-	<div class="container">
-		<ul>
-		    <li> <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Sign In </a></li>
-			<li> <a href="#" data-toggle="modal" data-target="#myModal2"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Sign Up </a></li>
-			<li><i class="fa fa-phone" aria-hidden="true"></i> <a href="{% url 'contact' %}">Contact</a></li>
-			<li><i class="fa fa-question" aria-hidden="true"></i><a href="{% url 'about' %}">About</a></li>
-		</ul>
+	<div class="container-fluid">
+        <div class="col-md-12" align="center">
+            <ul>
+    {#		    <li> <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Sign In </a></li>#}
+    {#			<li> <a href="#" data-toggle="modal" data-target="#myModal2"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Sign Up </a></li>#}
+                <li class="header-line"><i class="fa fa-phone" aria-hidden="true"></i> <a href="{% url 'contact' %}">Contact</a></li>
+                <li><i class="fa fa-question" aria-hidden="true"></i><a href="{% url 'about' %}">About</a></li>
+            </ul>
+        </div>
 	</div>
 </div>
 <!-- //header -->
@@ -20,7 +22,6 @@
 		<!-- header-bot -->
         <div class="col-md-4 logo-main-div">
             <div>
-{#				<h1><a href="{% url 'index' %}">AUTO<span>LUX</span> </a></h1>#}
                 <a href="{% url 'index' %}"><img class="car-logo" src="{% static 'images/4000x860.png' %}"></a>
 			</div>
             <div>

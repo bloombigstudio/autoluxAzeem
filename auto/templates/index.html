@@ -181,12 +181,12 @@
                                 <h4><a href="{% url 'single' id=item.id %}">{{ item.product_title }}</a></h4>
                                 {% if item.product_discounted_price != null %}
                                     <div class="info-product-price">
-                                        <span class="item_price">Rs {{ item.product_discounted_price }}</span>
-                                        <del>Rs {{ item.product_price }}</del>
+                                        <span class="item_price">Rs {{ item.product_discounted_price|floatformat }}</span>
+                                        <del>Rs {{ item.product_price|floatformat }}</del>
                                     </div>
                                 {% else %}
                                     <div class="info-product-price">
-                                        <span class="item_price">Rs {{ item.product_price }}</span>
+                                        <span class="item_price">Rs {{ item.product_price|floatformat }}</span>
                                     </div>
                                 {% endif %}
                                 <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">

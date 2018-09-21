@@ -13,24 +13,45 @@
 {% endblock %}
 {% block content %}
 
-<div class="page-head_agile_info_w3l">
-    <div class="container">
-        <h3>{{ page_title }}</h3>
-        <!--/w3_short-->
-             <div class="services-breadcrumb">
-                <div class="agile_inner_breadcrumb">
-                   <ul class="w3_short">
-                        <li><a href="{% url 'index' %}">Home</a><i>|</i></li>
-                        <li>{{ page_title }}</li>
-                    </ul>
-                 </div>
-            </div>
-   <!--//w3_short-->
+<div class="contact-us-image">
+    {% if page_title == "Interior" %}
+        <img class="category-header-img" src="{% static 'images/interior_header.jpg' %}">
+    {% elif  page_title == "Exterior" %}
+        <img class="category-header-img" src="{% static 'images/exterior_header.jpg' %}">
+    {% elif  page_title == "Mats" %}
+        <img class="category-header-img" src="{% static 'images/mats_header.jpg' %}">
+    {% elif  page_title == "Detailing" %}
+        <img class="category-header-img" src="{% static 'images/detailing_header.jpg'%}">
+    {% elif  page_title == "Leds" %}
+        <img class="category-header-img" src="{% static 'images/led_lights_header.jpg' %}">
+    {% elif  page_title == "Suvs" %}
+        <img class="category-header-img" src="{% static 'images/suv_items_header.jpg' %}">
+    {% elif  page_title == "Utilites" %}
+        <img class="category-header-img" src="{% static 'images/utilites_header.jpg' %}">
+    {% elif  page_title == "Others" %}
+        <img class="category-header-img" src="{% static 'images/interior_header.jpg' %}">
+    {% else %}
+        <img class="category-header-img" src="{% static 'images/interior_header.jpg' %}">
+    {% endif %}
+
+    <div class="container myclass">
+    <h3 class="contact-us-title-setting">{{ page_title }}</h3>
+    <!--/w3_short-->
+         <div class="services-breadcrumb">
+            <div class="agile_inner_breadcrumb">
+
+               <ul class="w3_short">
+                    <li><a href="{% url 'index' %}">Home</a><i>|</i></li>
+                    <li>{{ page_title }}</li>
+                </ul>
+             </div>
+        </div>
+    <!--//w3_short-->
     </div>
 </div>
 
   <!-- banner-bootom-w3-agileits -->
-	<div class="banner-bootom-w3-agileits">
+	<div>
 	<div class="container">
          <!-- mens -->
 		<div class="col-md-3 products-left">
@@ -51,7 +72,7 @@
 					<li><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <a href="{% url 'products' item_name='Mats'%}">Mats</a></label></li>
 					<li><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <a href="{% url 'products' item_name='Detailing'%}">Car Detailing</a></label></li>
 					<li><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <a href="{% url 'products' item_name='Leds'%}">LED lights</a></label></li>
-					<li><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <a href="{% url 'products' item_name='Suvs'%}">SUV lights</a></label></li>
+					<li><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <a href="{% url 'products' item_name='Suvs'%}">SUV Items</a></label></li>
 					<li><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <a href="{% url 'products' item_name='Utilities'%}">Utilities</a></label></li>
 					<li><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <a href="{% url 'products' item_name='Others'%}">Others</a></label></li>
 				</ul>
@@ -124,12 +145,12 @@
 							<h4><a href="{% url 'single' id=item.id %}">{{ item.product_title }}</a></h4>
                             {% if item.product_discounted_price != null %}
                                 <div class="info-product-price">
-                                    <span class="item_price">Rs {{ item.product_discounted_price }}</span>
-                                    <del>Rs {{ item.product_price }}</del>
+                                    <span class="item_price">Rs {{ item.product_discounted_price|floatformat }}</span>
+                                    <del>Rs {{ item.product_price|floatformat }}</del>
 							    </div>
                             {% else %}
                                 <div class="info-product-price">
-                                    <span class="item_price">Rs {{ item.product_price }}</span>
+                                    <span class="item_price">Rs {{ item.product_price|floatformat }}</span>
 							    </div>
                             {% endif %}
 							<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">

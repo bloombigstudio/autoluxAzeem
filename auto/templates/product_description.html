@@ -14,25 +14,27 @@
 {% block content %}
 <!--/single_page-->
        <!-- /banner_bottom_agile_info -->
-<div class="page-head_agile_info_w3l">
-		<div class="container">
-{#			<h3>Interior Product</h3>#}
-			<h3>{{ selected_item.first.product_id.product_category }} Product</h3>
-			<!--/w3_short-->
-				 <div class="services-breadcrumb">
-						<div class="agile_inner_breadcrumb">
-						   <ul class="w3_short">
-								<li><a href="{% url 'index' %}">Home</a><i>|</i></li>
-								<li>{{ selected_item.first.product_id.product_title }}</li>
-							</ul>
-						 </div>
-				</div>
-	   <!--//w3_short-->
-	</div>
+
+<div class="contact-us-image">
+    <img class="category-header-img" src="{% static 'images/suv_items_header.jpg' %}">
+    <div class="container myclass">
+    <h3 class="contact-us-title-setting">{{ page_title }}</h3>
+    <!--/w3_short-->
+         <div class="services-breadcrumb">
+            <div class="agile_inner_breadcrumb">
+
+               <ul class="w3_short">
+                    <li><a href="{% url 'index' %}">Home</a><i>|</i></li>
+                    <li>{{ page_title }}</li>
+                </ul>
+             </div>
+        </div>
+    <!--//w3_short-->
+    </div>
 </div>
 
   <!-- banner-bootom-w3-agileits -->
-<div class="banner-bootom-w3-agileits">
+<div>
 	<div class="container">
 	     <div class="col-md-4 single-right-left ">
 			<div class="grid images_3_of_2">
@@ -57,12 +59,12 @@
 					<h3>{{ selected_item.first.product_id.product_title }}</h3>
                         {% if selected_item.first.product_id.product_discounted_price != null %}
                             <p>
-                                <span class="item_price">Rs {{ selected_item.first.product_id.product_discounted_price }}</span>
-                                <del>Rs {{ selected_item.first.product_id.product_price }}</del>
+                                <span class="item_price">Rs {{ selected_item.first.product_id.product_discounted_price|floatformat }}</span>
+                                <del>Rs {{ selected_item.first.product_id.product_price|floatformat }}</del>
                             </p>
                         {% else %}
                             <p>
-                                <span class="item_price">Rs {{ selected_item.first.product_id.product_price }}</span>
+                                <span class="item_price">Rs {{ selected_item.first.product_id.product_price|floatformat }}</span>
                             </p>
                         {% endif %}
                     <h5>{{ selected_item.first.product_description }}</h5>
