@@ -12,51 +12,35 @@
 			<li data-target="#myCarousel" data-slide-to="3" class=""></li>
 		</ol>
 		<div class="carousel-inner" role="listbox">
-			<div class="item active">
-                <div>
-                    <img class="carousel-image-setting" src="{% static 'images/Slider 1.JPG' %}">
+            <div class="item active custom-carousel-class">
+                <img src="{% static 'images/Slider 1.JPG' %}">
+                <div class="col-md-offset-2 col-md-8 carousel-caption-custom" align="center">
+                    <h3>The Biggest <span>Collection of Car Auto Parts</span></h3>
+                    <p>Available 24/7</p>
+                    <a class="hvr-outline-out button2" href="{% url 'products' item_name='Interior'%}">Shop Now </a>
                 </div>
-				<div class="container">
-					<div class="carousel-caption">
-						<h3>The Biggest <span>Collection of Car Auto Parts</span></h3>
-						<p>Available 24/7</p>
-						<a class="hvr-outline-out button2" href="{% url 'products' item_name='Interior'%}">Shop Now </a>
-					</div>
-				</div>
-			</div>
-			<div class="item item2">
-                <div>
-                    <img class="carousel-image-setting" src="{% static 'images/Slider 2.jpg' %}">
+            </div>
+            <div class="item custom-carousel-class">
+                <img src="{% static 'images/Slider 2.jpg' %}">
+                <div class="col-md-offset-2 col-md-8 carousel-caption-custom" align="center">
+                    <h3>Huge <span>Collection</span></h3>
+                    <a class="hvr-outline-out button2" href="{% url 'products' item_name='Interior' %}">Shop Now </a>
                 </div>
-				<div class="container">
-					<div class="carousel-caption">
-						<h3>Huge <span>Collection</span></h3>
-						<a class="hvr-outline-out button2" href="{% url 'products' item_name='Interior' %}">Shop Now </a>
-					</div>
-				</div>
-			</div>
-			<div class="item item3">
-                <div>
-                    <img class="carousel-image-setting" src="{% static 'images/Slider 3.JPG' %}">
+            </div>
+            <div class="item custom-carousel-class">
+                <img src="{% static 'images/Slider 3.JPG' %}">
+                <div class="col-md-offset-2 col-md-8 carousel-caption-custom" align="center">
+                    <h3>The Biggest <span>Sale</span></h3>
+                    <a class="hvr-outline-out button2" href="{% url 'products' item_name='Interior'%}">Shop Now </a>
                 </div>
-				<div class="container">
-					<div class="carousel-caption">
-						<h3>The Biggest <span>Sale</span></h3>
-						<a class="hvr-outline-out button2" href="{% url 'products' item_name='Interior'%}">Shop Now </a>
-					</div>
-				</div>
-			</div>
-			<div class="item item4">
-                <div>
-                    <img class="carousel-image-setting" src="{% static 'images/Slider 4.JPG' %}">
+            </div>
+            <div class="item custom-carousel-class">
+                <img src="{% static 'images/Slider 4.JPG' %}">
+                <div class="col-md-offset-2 col-md-8 carousel-caption-custom" align="center">
+                    <h3>Imported and Local <span>Collection</span></h3>
+                    <a class="hvr-outline-out button2" href="{% url 'products' item_name='Interior'%}">Shop Now </a>
                 </div>
-				<div class="container">
-					<div class="carousel-caption">
-						<h3>Imported and Local <span>Collection</span></h3>
-						<a class="hvr-outline-out button2" href="{% url 'products' item_name='Interior'%}">Shop Now </a>
-					</div>
-				</div>
-			</div>
+            </div>
 		</div>
 		<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
 			<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -172,7 +156,7 @@
                         <div class="col-md-3 product-men filter {{ item.product_category|cut:" " }}">
                         <div class="men-pro-item simpleCart_shelfItem">
                         <a href="{% url 'single' id=item.id %}">
-                            <div class="men-thumb-item">
+                            <div class="men-thumb-item men-thumb-item-custom">
                                 <img src="{{ item.product_image_front.url }}" alt="" class="pro-image-front">
                                 <img src="{{ item.product_image_back.url }}" alt="" class="pro-image-back">
                             </div>
@@ -189,24 +173,8 @@
                                         <span class="item_price">Rs {{ item.product_price|floatformat }}</span>
                                     </div>
                                 {% endif %}
-                                <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                    <form action="#" method="post" id="add_to_cart{{ item.id }}">
-                                    {% csrf_token %}
-                                        <fieldset>
-                                            <input type="hidden" name="item_id" value="{{ item.id}}" />
-                                            <input type="hidden" name="item_name" value="{{ item.product_title }}" />
-                                            <input type="hidden" name="item_description" value="{{ item.product_related_name.first.product_description }}" />
-                                            <input type="hidden" name="item_image" value="{{ item.product_image_front }}" />
-                                            {% if item.product_discounted_price != null %}
-                                                <input type="hidden" name="amount" value="{{ item.product_discounted_price }}" />
-                                             {% else %}
-                                                <input type="hidden" name="amount" value="{{ item.product_price }}" />
-                                            {% endif %}
-{#                                            <input type="hidden" name="currency_code" value="PKR" />#}
-                                            <input type="submit" name="submit" value="Add to cart" class="button" />
-                                        </fieldset>
-                                    </form>
-                                </div>
+                            {#  Add to cart form    #}
+                            {% include 'add-to-cart-partial.html' %}
                             </div>
                         </div>
                     </div>
@@ -221,7 +189,7 @@
 			<div class="container">
 				<h6>Delivery across all Pakistan</h6>
 
-				<a class="hvr-outline-out button2" href="{% url 'single' id=0%}">Shop Now </a>
+				<a class="hvr-outline-out button2" href="{% url 'products' item_name="Exterior" %}">Shop Now </a>
 			</div>
 		</div>
 

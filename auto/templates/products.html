@@ -34,27 +34,27 @@
         <img class="category-header-img" src="{% static 'images/interior_header.jpg' %}">
     {% endif %}
 
-    <div class="container myclass">
-    <h3 class="contact-us-title-setting">{{ page_title }}</h3>
-    <!--/w3_short-->
-         <div class="services-breadcrumb">
-            <div class="agile_inner_breadcrumb">
+    <div class="col-md-12 myclass">
+        <h3 class="contact-us-title-setting">{{ page_title }}</h3>
+        <!--/w3_short-->
+             <div class="services-breadcrumb">
+                <div class="agile_inner_breadcrumb">
 
-               <ul class="w3_short">
-                    <li><a href="{% url 'index' %}">Home</a><i>|</i></li>
-                    <li>{{ page_title }}</li>
-                </ul>
-             </div>
-        </div>
+                   <ul class="w3_short">
+                        <li><a href="{% url 'index' %}">Home</a><i>|</i></li>
+                        <li>{{ page_title }}</li>
+                    </ul>
+                 </div>
+            </div>
     <!--//w3_short-->
     </div>
 </div>
 
   <!-- banner-bootom-w3-agileits -->
-	<div>
+	<div class="banner-bootom-w3-agileits">
 	<div class="container">
          <!-- mens -->
-		<div class="col-md-3 products-left">
+		<div class="col-md-4 products-left">
 			<div class="filter-price">
 				<h3>Filter By <span>Price</span></h3>
 					<ul class="dropdown-menu6">
@@ -79,7 +79,7 @@
 			</div>
 			<div class="clearfix"></div>
 		</div>
-		<div class="col-md-9 products-right">
+		<div class="col-md-8 products-right">
 {#			<h5>Product <span>Compare(0)</span></h5>#}
 			<h5>Products</h5>
 			<div class="sort-grid">
@@ -126,10 +126,10 @@
             {% if page_data %}
                 {% for item in page_data %}
 
-                    <div class="col-md-3 product-men">
+                    <div class="col-md-4 product-men">
 					<div class="men-pro-item simpleCart_shelfItem">
                     <a href="{% url 'single' id=item.id %}">
-						<div class="men-thumb-item">
+						<div class="men-thumb-item men-thumb-item-custom-products">
 							<img src="{{ item.product_image_front.url }}" alt="" class="pro-image-front">
 							<img src="{{ item.product_image_back.url }}" alt="" class="pro-image-back">
 {#								<div class="men-cart-pro">#}

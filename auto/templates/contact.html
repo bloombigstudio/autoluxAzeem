@@ -42,7 +42,8 @@
 						<div class="contact-grid-agile-w32">
 							<i class="fa fa-phone" aria-hidden="true"></i>
 							<h4>Call Us</h4>
-							<p>+1234 758 839<span>+1273 748 730</span></p>
+{#							<p>+1234 758 839<span>+1273 748 730</span></p>#}
+                            <a href="tel:+1800229933"><p>+1800229933<span>+1273 748 730</span></p></a>
 						</div>
 					</div>
 					<div class="col-md-4 contact-grid-agile-w3">
@@ -57,12 +58,30 @@
 	   </div>
 	 </div>
 	   <div class="contact-w3-agile1 map" data-aos="flip-right">
-
 		   <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d100949.24429313939!2d-122.44206553967531!3d37.75102885910819!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80859a6d00690021%3A0x4a501367f076adff!2sSan+Francisco%2C+CA%2C+USA!5e0!3m2!1sen!2sin!4v1472190196783" class="map" style="border:0" allowfullscreen=""></iframe>
 	   </div>
+{#    <div id="map" style="width:100%;max-height:500px"> </div>#}
+{#    <script>#}
+{#        // Initialize and add the map#}
+{#        $(document).ready(function () {#}
+{#            function initMap() {#}
+{#                // The location of Uluru#}
+{#                var uluru = {lat: -25.344, lng: 131.036};#}
+{#                // The map, centered at Uluru#}
+{#                var map = new google.maps.Map(#}
+{#                    document.getElementById('map'), {zoom: 4, center: uluru});#}
+{#                // The marker, positioned at Uluru#}
+{#                var marker = new google.maps.Marker({position: uluru, map: map});#}
+{#            }#}
+{#        });#}
+{#    </script>#}
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjYDeuC5el355k15AS89_6eevDWIRmCac&callback=initMap">
+    </script>
+
    <div class="banner_bottom_agile_info">
 	<div class="container">
-	   <div class="agile-contact-grids">
+	   <div class="agile-contact-grids map-distance">
 				<div class="agile-contact-left">
 					<div class="col-md-6 address-grid">
 						<h4>For More <span>Information</span></h4>
@@ -130,5 +149,12 @@
 			</div>
        </div>
 	</div>
+    </div>
+{#        <script src="https://maps.googleapis.com/maps/api/js?callback=myMap"></script>#}
+{#    AIzaSyBjYDeuC5el355k15AS89_6eevDWIRmCac#}
+
+{#<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjYDeuC5el355k15AS89_6eevDWIRmCac?callback=myMap"></script>#}
+
+
  <!--//contact-->
 {% endblock %}

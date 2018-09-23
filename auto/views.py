@@ -187,7 +187,7 @@ class ProductDescription(TemplateView):
         selected_item = ProductSpecification.objects.filter(product_id_id=item_id)
         new_arrivals = Product.objects.all().order_by('-id')[:4]
 
-        params['selected_item'] = selected_item
+        params['item'] = selected_item.first()
         params['new_arrivals'] = new_arrivals
         return render(request, self.template_name,params)
 

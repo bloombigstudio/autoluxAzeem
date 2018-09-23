@@ -2275,6 +2275,9 @@ h3.agileits-icons-title {
 	.icon-box {
 		margin: 0;
 	}
+    .contact-us-title-setting{
+        font-size: 40px !important;
+    }
 }
 @media (max-width: 640px){
 	.icon-box {
@@ -4263,7 +4266,7 @@ p.w3ls_para {
 		background-color: #da2f2f;
 	}
 	.navbar-default .navbar-toggle .icon-bar {
-		background-color: #FFF;
+		background-color: black;
 	}
 	.navbar-nav > li {
 		margin: 0 0px 0 0;
@@ -5906,17 +5909,18 @@ label {
     width: 100%;
 }
 .contact-us-image{
-    max-height: 300px;
+    position: relative;
+    /*max-height: 300px;*/
 }
 .myclass {
-    position: relative;
-    bottom: 160px !important;
+    position: absolute;
+    bottom: 10%;
     text-align: center;
 }
 .contact-us-title-setting{
     color: white;
-    font-size: 40px;
-    margin-bottom: 38px;
+    font-size: 60px;
+    /*margin-bottom: 38px;*/
 }
 .about-us-content{
     padding-top: 20px;
@@ -5926,4 +5930,267 @@ label {
 }
 .header-line{
     border-right: 1px solid #464444;
+}
+.map-distance {
+    padding-top: 5em;
+}
+.men-thumb-item-custom {
+    height: 255px;
+    max-width: 255px;
+    position: relative;
+}
+.men-thumb-item-custom img{
+    max-height: 100%;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+.men-thumb-item-custom-products {
+    height: 255px;
+    max-width: 255px;
+    position: relative;
+    margin: 0 auto;
+}
+.men-thumb-item-custom-products img {
+    max-height: 100%;
+    max-width: 255px;
+    height: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    padding: 30px;
+}
+.logo-custom{
+    padding: 10px;
+}
+.logo-custom img{
+    max-width: 70%;
+}
+.top_content_custom{
+    text-align: center;
+}
+.insta-btn-custom{
+
+}
+.fb-btn-custom{
+    background: #3b5998;
+}
+.fa {
+  padding: 15px;
+  font-size: 30px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+}
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+.fa-cart-arrow-down{
+    background: #17c3a2;
+    color: white;
+}
+.fa-instagram{
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+  box-shadow: 0px 3px 10px rgba(0,0,0,.25);
+    color: white;
+}
+.custom-header-social-links{}
+.custom-header-social-links a{
+    margin: 0px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+@media (max-width:320px){
+    .header ul li{
+        border: none !important;
+    }
+}
+@media (max-width:991px){
+    .logo-custom{
+        text-align: center;
+    }
+    .header-middle-custom{
+        margin: 0 auto;
+        text-align: center;
+    }
+    .input_search_header_custom{
+        max-width: 50%;
+    }
+    .input_submit_header_custom{
+        max-width: 20%;
+    }
+}
+.top-header-custom{}
+.top-header-custom ul{}
+.top-header-custom ul li i{
+    padding: 0px;
+}
+.menu_list_custom{
+    padding: 12px 0 0;
+}
+.menu_list_custom li{
+    margin: auto 0;
+}
+.menu_list_custom li a{
+    padding: 15px;
+}
+@media (max-width:1200px){
+    .menu_list_custom li a{
+        padding: 12px 10px;
+        font-size: 12px;
+    }
+}
+@media (max-width:992px){
+    .menu_list_custom li {
+        /*margin-bottom: 15px;*/
+    }
+    .carousel-caption-custom h3 {
+        font-size: 2em !important;
+        margin: auto 13% !important;
+    }
+    .myclass{
+        width: 100%;
+    }
+}
+.new_fa {
+  padding: 0;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+  margin: 3px 2px;
+}
+.new_fa {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.navbar-default .navbar-toggle {
+    border-color: #da2f2f;
+}
+.custom-carousel-class{
+    position: relative;
+}
+.carousel-caption-custom {
+    position: absolute;
+    top: 15%;
+    text-align: center;
+}
+.carousel-caption-custom h2, .carousel-caption-custom h3 {
+    font-size: 3em;
+    font-weight: 300;
+    letter-spacing: 14px;
+    text-transform: uppercase;
+    color: white;
+}
+.carousel-caption-custom h2 span, .carousel-caption-custom h3 span{
+    font-weight: 800;
+    color: #da2f2f;
+}
+.carousel-caption-custom p {
+    letter-spacing: 12px;
+    font-size: 1.2em;
+    font-weight: 600;
+    color: #ffb900;
+    margin-top: 1em;
+}
+.carousel-caption-custom a {
+    color: #fff;
+    letter-spacing: 3px;
+    padding: 8px 20px;
+    margin-top: 2em;
+}
+@media (max-width:910px){
+    .carousel-caption-custom h3 {
+        font-size: 28px !important;
+        margin: auto 15% !important;
+        color: white;
+    }
+}
+@media (max-width:850px){
+    .carousel-caption-custom h3 {
+        font-size: 24px !important;
+        color: white;
+    }
+    .carousel-caption-custom p {
+        font-size: 1em !important;
+    }
+    .carousel-caption-custom a {
+        letter-spacing: 3px;
+        padding: 6px 15px;
+        margin-top: 2em;
+    }
+}
+@media (max-width:780px){
+    .carousel-caption-custom h3 {
+        font-size: 18px !important;
+        letter-spacing: 8px;
+    }
+    .carousel-caption-custom p {
+        font-size: 0.8em !important;
+    }
+    .carousel-caption-custom a {
+        letter-spacing: 3px;
+        padding: 4px 12px;
+        margin-top: 2em;
+    }
+}
+@media (max-width:632px){
+    .carousel-caption-custom h3 {
+        font-size: 15px !important;
+        letter-spacing: 6px;
+    }
+    .carousel-caption-custom p {
+        font-size: 0.6em !important;
+    }
+    .carousel-caption-custom a {
+        letter-spacing: 2px;
+        padding: 4px 8px;
+        margin-top: 1em;
+    }
+}
+@media (max-width:510px){
+    .carousel-caption-custom h3 {
+        /*font-size: 15px !important;*/
+        letter-spacing: 3px;
+    }
+    .carousel-caption-custom p {
+        font-size: 0.5em !important;
+        letter-spacing: 3px;
+    }
+    .carousel-caption-custom a {
+        letter-spacing: 1.5px;
+        padding: 4px 6px;
+        margin-top: 0.8em;
+    }
+}
+@media (max-width:825px){
+    .myclass{
+        bottom: 0%;
+        width: 100%;
+        font-size: 12px;
+    }
+}
+@media (max-width:530px){
+    .contact-us-title-setting{
+        font-size: 30px !important;
+    }
+}
+@media (max-width:386px){
+    .contact-us-title-setting{
+        font-size: 15px !important;
+    }
 }

@@ -17,12 +17,11 @@
 
 <div class="contact-us-image">
     <img class="category-header-img" src="{% static 'images/suv_items_header.jpg' %}">
-    <div class="container myclass">
+    <div class="col-md-12 myclass">
     <h3 class="contact-us-title-setting">{{ page_title }}</h3>
     <!--/w3_short-->
          <div class="services-breadcrumb">
             <div class="agile_inner_breadcrumb">
-
                <ul class="w3_short">
                     <li><a href="{% url 'index' %}">Home</a><i>|</i></li>
                     <li>{{ page_title }}</li>
@@ -41,14 +40,14 @@
 				<div class="flexslider">
 
 					<ul class="slides">
-						<li data-thumb="{{ selected_item.first.first_image.url }}">
-							<div class="thumb-image"> <img src="{{ selected_item.first.first_image.url }}" data-imagezoom="true" class="img-responsive"> </div>
+						<li data-thumb="{{ item.first_image.url }}">
+							<div class="thumb-image"> <img src="{{ item.first_image.url }}" data-imagezoom="true" class="img-responsive"> </div>
 						</li>
-						<li data-thumb="{{ selected_item.first.second_image.url }}">
-							<div class="thumb-image"> <img src="{{ selected_item.first.second_image.url }}" data-imagezoom="true" class="img-responsive"> </div>
+						<li data-thumb="{{ item.second_image.url }}">
+							<div class="thumb-image"> <img src="{{ item.second_image.url }}" data-imagezoom="true" class="img-responsive"> </div>
 						</li>
-						<li data-thumb="{{ selected_item.first.third_image.url }}">
-							<div class="thumb-image"> <img src="{{ selected_item.first.third_image.url }}" data-imagezoom="true" class="img-responsive"> </div>
+						<li data-thumb="{{ item.third_image.url }}">
+							<div class="thumb-image"> <img src="{{ item.third_image.url }}" data-imagezoom="true" class="img-responsive"> </div>
 						</li>
 					</ul>
 					<div class="clearfix"></div>
@@ -56,18 +55,18 @@
 			</div>
 		</div>
 		<div class="col-md-8 single-right-left simpleCart_shelfItem">
-					<h3>{{ selected_item.first.product_id.product_title }}</h3>
-                        {% if selected_item.first.product_id.product_discounted_price != null %}
-                            <p>
-                                <span class="item_price">Rs {{ selected_item.first.product_id.product_discounted_price|floatformat }}</span>
-                                <del>Rs {{ selected_item.first.product_id.product_price|floatformat }}</del>
-                            </p>
-                        {% else %}
-                            <p>
-                                <span class="item_price">Rs {{ selected_item.first.product_id.product_price|floatformat }}</span>
-                            </p>
-                        {% endif %}
-                    <h5>{{ selected_item.first.product_description }}</h5>
+            <h3>{{ item.product_id.product_title }}</h3>
+                {% if item.product_id.product_discounted_price != null %}
+                    <p>
+                        <span class="item_price">Rs {{ item.product_id.product_discounted_price|floatformat }}</span>
+                        <del>Rs {{ item.product_id.product_price|floatformat }}</del>
+                    </p>
+                {% else %}
+                    <p>
+                        <span class="item_price">Rs {{ item.product_id.product_price|floatformat }}</span>
+                    </p>
+                {% endif %}
+            <h5>{{ item.product_description }}</h5>
 {#					<div class="rating1">#}
 {#						<span class="starRating">#}
 {#							<input id="rating5" type="radio" name="rating" value="5">#}
@@ -83,57 +82,55 @@
 {#						</span>#}
 {#					</div>#}
 
-                    <div class="center">
-                        <p>
-                          </p><div class="input-group">
-                              <span class="input-group-btn">
-                                  <button type="button" class="btn btn-danger btn-number"  data-type="minus" data-field="quant[2]">
-                                    <span class="glyphicon glyphicon-minus"></span>
-                                  </button>
-                              </span>
-                              <input type="text" name="quant[2]" class="form-control input-number" value="1" min="1" max="100">
-                              <span class="input-group-btn">
-                                  <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[2]">
-                                      <span class="glyphicon glyphicon-plus"></span>
-                                  </button>
-                              </span>
-                          </div>
-                        <p></p>
-                    </div>
-					<div class="occasion-cart">
-						<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                            <form action="#" method="post">
-                                <fieldset>
-                                    <input type="hidden" name="cmd" value="_cart" />
-                                    <input type="hidden" name="add" value="1" />
-                                    <input type="hidden" name="business" value=" " />
-                                    <input type="hidden" name="item_name" value="{{ selected_item.first.product_id.product_title }}" />
-                                    {% if selected_item.first.product_id.product_discounted_price != null %}
-                                        <input type="hidden" name="amount" value="{{ selected_item.first.product_id.product_discounted_price }}" />
-                                     {% else %}
-                                        <input type="hidden" name="amount" value="{{ selected_item.first.product_id.product_price }}" />
-                                    {% endif %}
-{#                                            <input type="hidden" name="discount_amount" value="1.00" />#}
-                                    <input type="hidden" name="currency_code" value="PKR" />
-                                    <input type="hidden" name="return" value=" " />
-                                    <input type="hidden" name="cancel_return" value=" " />
-                                    <input type="submit" name="submit" value="Add to cart" class="button" />
-                                </fieldset>
-                            </form>
-                        </div>
+            <div class="center">
+                <p>
+                  </p><div class="input-group">
+                      <span class="input-group-btn">
+                          <button type="button" class="btn btn-danger btn-number"  data-type="minus" data-field="quant[2]">
+                            <span class="glyphicon glyphicon-minus"></span>
+                          </button>
+                      </span>
+                      <input type="text" name="quant[2]" class="form-control input-number" value="1" min="1" max="100">
+                      <span class="input-group-btn">
+                          <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[2]">
+                              <span class="glyphicon glyphicon-plus"></span>
+                          </button>
+                      </span>
+                  </div>
+                <p></p>
+            </div>
+            <div class="occasion-cart">
+            {#  Add to cart form    #}
+            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
+                <form action="#" method="post" id="add_to_cart{{ item.product_id.id }}">
+                {% csrf_token %}
+                    <fieldset>
+                        <input type="hidden" name="item_id" value="{{ item.product_id.id}}" />
+                        <input type="hidden" name="item_name" value="{{ item.product_id.product_title }}" />
+                        <input type="hidden" name="item_description" value="{{ item.product_id.product_related_name.first.product_description }}" />
+                        <input type="hidden" name="item_image" value="{{ item.product_id.product_image_front }}" />
+                        {% if item.product_id.product_discounted_price != null %}
+                            <input type="hidden" name="amount" value="{{ item.product_id.product_discounted_price }}" />
+                         {% else %}
+                            <input type="hidden" name="amount" value="{{ item.product_id.product_price }}" />
+                        {% endif %}
+                        <input type="submit" name="submit" value="Add to cart" class="button" />
+                    </fieldset>
+                </form>
+            </div>
 
-					</div>
-					<ul class="social-nav model-3d-0 footer-social w3_agile_social single_page_w3ls">
-                        <li class="share">Share On : </li>
-							<li><a href="#" class="facebook">
-								  <div class="front"><i class="fa fa-facebook" aria-hidden="true"></i></div>
-								  <div class="back"><i class="fa fa-facebook" aria-hidden="true"></i></div></a></li>
-							<li><a href="#" class="instagram">
-								  <div class="front"><i class="fa fa-instagram" aria-hidden="true"></i></div>
-								  <div class="back"><i class="fa fa-instagram" aria-hidden="true"></i></div></a></li>
-                    </ul>
-		      </div>
-	 			<div class="clearfix"> </div>
+            </div>
+            <ul class="social-nav model-3d-0 footer-social w3_agile_social single_page_w3ls">
+                <li class="share">Share On : </li>
+                    <li><a href="#" class="facebook">
+                          <div class="front"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                          <div class="back"><i class="fa fa-facebook" aria-hidden="true"></i></div></a></li>
+                    <li><a href="#" class="instagram">
+                          <div class="front"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                          <div class="back"><i class="fa fa-instagram" aria-hidden="true"></i></div></a></li>
+            </ul>
+        </div>
+        <div class="clearfix"> </div>
 				<!-- /new_arrivals -->
 	<div class="responsive_tabs_agileits">
         <div id="horizontalTab">
@@ -148,7 +145,7 @@
 
                     <div class="single_page_agile_its_w3ls">
 {#							  <h6>Lorem ipsum dolor sit amet</h6>#}
-                       <p>{{ selected_item.first.product_description }}</p>
+                       <p>{{ item.product_description }}</p>
                     </div>
                 </div>
                 <!--//tab_one-->
@@ -187,8 +184,8 @@
                    <div class="tab3">
 
                     <div class="single_page_agile_its_w3ls">
-                      <h6>{{ selected_item.first.product_id.product_title }}</h6>
-                       <p>{{ selected_item.first.product_information }}</p>
+                      <h6>{{ item.product_id.product_title }}</h6>
+                       <p>{{ item.product_information }}</p>
                     </div>
                 </div>
             </div>
@@ -225,22 +222,8 @@
                                         <span class="item_price">Rs {{ item.product_price }}</span>
                                     </div>
                                 {% endif %}
-                                <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                    <form action="#" method="post">
-                                        <fieldset>
-                                            <input type="hidden" name="cmd" value="_cart">
-                                            <input type="hidden" name="add" value="1">
-                                            <input type="hidden" name="business" value=" ">
-                                            <input type="hidden" name="item_name" value="Analog Watch">
-                                            <input type="hidden" name="amount" value="30.99">
-                                            <input type="hidden" name="discount_amount" value="1.00">
-                                            <input type="hidden" name="currency_code" value="USD">
-                                            <input type="hidden" name="return" value=" ">
-                                            <input type="hidden" name="cancel_return" value=" ">
-                                            <input type="submit" name="submit" value="Add to cart" class="button">
-                                        </fieldset>
-                                    </form>
-                                </div>
+                            {#  Add to cart form    #}
+                            {% include 'add-to-cart-partial.html' %}
                             </div>
                         </div>
                     </div>
