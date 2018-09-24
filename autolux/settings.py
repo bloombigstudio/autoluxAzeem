@@ -28,7 +28,7 @@ SECRET_KEY = 'x^3r#bp%mymkted67mne3p42+-2&zx4_&xu@stchk9hw3vw8rq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -139,4 +139,4 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 # MEDIA_ROOT = '/home/media/'
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'autolux/')
-
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
