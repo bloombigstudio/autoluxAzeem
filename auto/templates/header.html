@@ -35,7 +35,7 @@
         <!-- header-bot -->
             <div class="col-md-4 header-middle header-middle-custom">
                 <form action="{% url 'products' item_name="SearchResults" %}" method="GET">
-                    {% render_field filter.form.product_title type="search" class="input_search_header_custom" placeholder="Search here..." required=""%}
+                    {% render_field filter.form.product_title type="search" id="my-id-yoo" class="input_search_header_custom" placeholder="Search here..." required=""%}
                     <input class="input_submit_header_custom" type="submit" value=" ">
                     <div class="clearfix"></div>
                 </form>
@@ -115,7 +115,8 @@
                         <form action="{% url 'login' %}" method="post">
                             {% csrf_token %}
 							<div class="styled-input agile-styled-input-top">
-                                {{ signIn.email }}
+{#                                {{ signIn.email }}#}
+                                {% render_field signIn.email id="email-1" %}
                                 <label>{{ signIn.email.label }}</label>
 								<span></span>
 							</div>
@@ -287,7 +288,7 @@
                   <div class="car-make ">
                     <ul class="filter-by-car-ul">
                         {% for item in all_cars %}
-                            <li id="filter-by-make-id-{{ item.id }}" class="filter-by-car-li make" ><a class="car-filter-title">{{ item.car_make }} <i class="fa fa-angle-right"></i></a></li>
+                            <li id="filter-by-make-id-{{ item.id }}" class="filter-by-car-li make" ><a class="car-filter-title">{{ item.car_make }} <i class="custom-fa fa-angle-right"></i></a></li>
                         {% endfor %}
                     </ul>
                   </div>
@@ -318,7 +319,7 @@
                        </fieldset>
                       <div class="modal-footer">
                         <button id="filter-done-button" class="done-button" onclick="searchByCarFunc()">Done</button>
-                        <button class="cancel-button">Cancel</button>
+                        <button type="button" class="cancel-button" onclick="close_modal()">Cancel</button>
                       </div>
                     </form>
                 </div>

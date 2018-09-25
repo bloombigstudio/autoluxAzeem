@@ -368,7 +368,7 @@
                 success:function(response) {
                      $('#add-filtered-model-data').html(" ");
                      for ( i=0; i<response.length; i++) {
-                         var dynamic = $('<li onclick="getYearByModelId(this.id,$(this).text())" id="filter-by-model-'+response[i].id +' " class="filter-by-car-li model" ><a class="car-filter-title">' + response[i].car_model + ' <i class="fa fa-angle-right"></i></a></li>');
+                         var dynamic = $('<li onclick="getYearByModelId(this.id,$(this).text())" id="filter-by-model-'+response[i].id +' " class="filter-by-car-li model" ><a class="car-filter-title">' + response[i].car_model + ' <i class="custom-fa fa-angle-right"></i></a></li>');
                          $('#add-filtered-model-data').append(dynamic);
                      }
                 },
@@ -428,6 +428,23 @@
         $('#selected-car-model').val(data[1]);
         $('#selected-car-year').val(data[2]);
         $( "#car-selection-form" ).submit();
+    }
+
+</script>
+<script>
+    $(".car-make ul li").click(function(){
+
+    $(".car-make ul li").removeClass("active");
+    $(this).addClass("active");
+
+});
+$(".car-year ul li li").click(function(){
+    $(".car-year ul li li").removeClass("active");
+    $(this).addClass("active");
+});
+
+    function close_modal() {
+        $('#filter-by-car').modal('hide');
     }
 
 </script>

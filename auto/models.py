@@ -149,8 +149,12 @@ class UserWithoutAccount(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        verbose_name = 'Online User Order'
+        verbose_name_plural = 'Online User Order'
+
     def __str__(self):
-        return self.first_name
+        return self.first_name + " " + self.last_name
 
 
 class Order(models.Model):

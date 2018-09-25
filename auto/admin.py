@@ -2,18 +2,40 @@ from django.contrib import admin
 
 from auto.models import *
 
-admin.site.register(CarCompany)
-admin.site.register(CarModel)
-admin.site.register(CarYear)
-admin.site.register(Product)
-admin.site.register(ProductSpecification)
 
-# class CarInline(admin.StackedInline):
-#     model = Car
-#
-#
-# class ProductClass(admin.ModelAdmin):
-#     inlines = [CarInline]
-#
-#
-# admin.site.register(Product, ProductClass)
+class ProductSpecificationInline(admin.TabularInline):
+    model = ProductSpecification
+    max_num = 1
+
+
+class ProductAdmin(admin.ModelAdmin):
+    inlines = [ProductSpecificationInline]
+
+
+admin.site.register(Product, ProductAdmin)
+
+
+class OrdersInline(admin.TabularInline):
+    model = Order
+
+
+class UsersAdmin(admin.ModelAdmin):
+    inlines = [OrdersInline]
+
+
+admin.site.register(UserWithoutAccount, UsersAdmin)
+
+
+class CarModelline(admin.TabularInline):
+    model = CarModel
+
+
+class CarCompanyAdmin(admin.ModelAdmin):
+    inlines = [CarModelline]
+
+
+admin.site.register(CarCompany, CarCompanyAdmin)
+
+admin.site.register(CarYear)
+
+

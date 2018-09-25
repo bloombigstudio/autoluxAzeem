@@ -779,7 +779,7 @@ figure.effect-roxy:hover p,.agileinfo_banner_bottom_grid_three_left:hover figcap
     float: left;
 }
 .banner_bottom_agile_info {
-    padding: 0 0 5em 0;
+    padding: 4em 0;
 }
 .banner_bottom_agile_info.team {
     background: #f5f5f5;
@@ -888,7 +888,7 @@ ul.social-nav.model-3d-0.footer-social.w3_agile_social.two {
     letter-spacing: 1px;
 }
 .w3-address-right p{
-    margin: 1em 0 0 0;
+    margin: 1.6em 0 0 0;
     font-size: .9em;
     color: #565656;
 }
@@ -1827,7 +1827,8 @@ ul.multi-column-dropdown li a:hover{
 .w3layouts_mail_grid_left1 i{
 	font-size: 1.3em;
     color: #fff;
-    line-height: 3.2em;
+    line-height: 30px;
+    /*line-height: 3.2em;*/
 }
 .w3layouts_mail_grid_left2{
 	float:right;
@@ -1985,6 +1986,8 @@ h3.tittle {
     border: none;
 }
 .map {
+    width: 100%;
+    max-height: 400px;
     -webkit-filter: grayscale(100%);
     -moz-filter: grayscale(100%);
     -ms-filter: grayscale(100%);
@@ -2032,7 +2035,8 @@ h3.tittle {
     height: 70px;
     border: 2px solid #ddd;
     text-align: center;
-    line-height: 67px;
+    /*line-height: 67px;*/
+    line-height: 28px;
 }
 .mail-agileits-w3layouts {
     margin-top: 3em;
@@ -5430,7 +5434,8 @@ p.w3ls_para {
 	}
 	.w3layouts_mail_grid_left1 i {
 		font-size: 1.3em;
-		line-height: 3em;
+		line-height: 20px;
+		/*line-height: 3em;*/
 	}
 	.sign-gd, .sign-gd-two {
 		float: left;
@@ -5550,9 +5555,9 @@ width: 150px;
 .custom-buttons {
     border: none;
     background-color: white;
-    font-size: 20px;
+    font-size: 18px;
     padding: 12px 15px 12px 15px;
-    font-weight: 600;
+    /*font-weight: 600;*/
     margin-bottom: 20px;
 }
 /* Style the active class, and buttons on mouse-over */
@@ -5560,7 +5565,7 @@ width: 150px;
     background-color: #bd081c;
     color: white;
     border-radius: 6px;
-    padding: 10px 22px 10px 22px;
+    padding: 12px 15px 12px 15px;
 }
 .new-arrival-products{
 
@@ -5784,8 +5789,8 @@ label {
 /* Filter by car Modal */
 .filter-by-car-ul {
   list-style: none;
-  font-size: 14px;
-  padding: 0px 8px 0px 8px;
+  /*font-size: 14px;*/
+  /*padding: 0px 8px 0px 8px;*/
 }
 .car-make{
       background-color: white;
@@ -5932,7 +5937,7 @@ label {
     border-right: 1px solid #464444;
 }
 .map-distance {
-    padding-top: 5em;
+    /*padding-top: 5em;*/
 }
 .men-thumb-item-custom {
     height: 255px;
@@ -6007,9 +6012,10 @@ label {
 }
 .custom-header-social-links{}
 .custom-header-social-links a{
-    margin: 0px 10px;
+    margin: 0px 6px;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 20px;
 }
 @media (max-width:320px){
     .header ul li{
@@ -6193,4 +6199,47 @@ label {
     .contact-us-title-setting{
         font-size: 15px !important;
     }
+}
+.footer-left a {
+    cursor: pointer;
+    font-size: 18px;
+}
+.custom-fa{
+  /*padding: 15px;*/
+  /*font-size: 30px;*/
+  /*width: 50px;*/
+  /*text-align: center;*/
+  /*text-decoration: none;*/
+  /*margin: 5px 2px;*/
+}
+.custom-fa {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.car-make ul li.active
+{
+    background: lightblue;
+    color: white;
+}
+.car-model ul li.active
+{
+    background: lightblue;
+    color: white;
+}
+.car-year ul li.active
+{
+    background: lightblue;
+    color: white;
+}
+#add-filtered-model-data .search-class{
+    background: lightblue;
+    color: white;
+}
+#add-filtered-year-data .search-class{
+    background: lightblue;
+    color: white;
 }

@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login
+from django.core.mail import send_mail
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, redirect
 from django.views import View
@@ -12,7 +13,7 @@ from autolux import settings
 import json
 import stripe
 stripe.api_key = settings.STRIPE_SECRET_KEY
-from django.http import JsonResponse
+from django.http import JsonResponse, BadHeaderError, HttpResponse
 
 signUpForm = SignUpForm()
 signInForm = SignInForm()
@@ -194,8 +195,21 @@ class ProductDescription(TemplateView):
 
 class Contact(TemplateView):
     template_name = 'contact.html'
-
     def get(self, request, *args, **kwargs):
+        product_filter = ProductFilter(request.GET, queryset=product_list)
+        params['filter'] = product_filter
+
+        if 'Email' in request.GET:
+            subject = request.GET['Subject']
+            from_email = request.GET['Email']
+            message = request.GET['Message']
+            name = request.GET['Name']
+            message = "Sender Name: " + name +"\n" + message + "\n" + "From :" + from_email
+            try:
+                send_mail(subject, message, 'azeem.esketchers@gmail.com', ['mazeemarif0@gmail.com'],
+                          fail_silently=False)
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
         return render(request, self.template_name,params)
 
 
@@ -204,6 +218,9 @@ class About(TemplateView):
     template_name = 'about.html'
 
     def get(self, request, *args, **kwargs):
+        product_filter = ProductFilter(request.GET, queryset=product_list)
+
+        params['filter'] = product_filter
         return render(request, self.template_name,params)
 
 

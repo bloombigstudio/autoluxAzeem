@@ -240,7 +240,11 @@ function load_data() {
     $('#sorting-form-id').submit();
 }
 
-
+{% if searched_item %}
+    $(document).ready(function(){
+        $('#my-id-yoo').val('{{ searched_item }}');
+    });
+{% endif %}
 
 </script>
 
