@@ -38,4 +38,3 @@ admin.site.register(CarCompany, CarCompanyAdmin)
 
 admin.site.register(CarYear)
 
-

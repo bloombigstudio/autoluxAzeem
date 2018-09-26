@@ -324,3 +324,8 @@ class CarInformation(View):
             car_year_array = CarYear.objects.filter(model_id=car_model_id).values()
             list_data = list(car_year_array)
             return JsonResponse(list_data, safe=False)
+
+
+
+class ZohoView(TemplateView):
+    template_name = 'verifyforzoho.html'

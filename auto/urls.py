@@ -1,3 +1,4 @@
+from django.conf.urls import url
 from django.urls import path
 from django.conf.urls.static import static
 
@@ -12,6 +13,7 @@ urlpatterns = [
     path('contact', Contact.as_view(), name='contact'),
     path('place_order', PlaceOrder.as_view(), name='place_order'),
     path('car_information', CarInformation.as_view(), name='car_information'),
+    url(r'verifyforzoho.html/$', ZohoView.as_view(), name='zoho'),
 
     # Chaipiiii
     path('login', Login.as_view(), name='login'),
