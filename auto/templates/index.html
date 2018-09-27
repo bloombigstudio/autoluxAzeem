@@ -12,35 +12,25 @@
 			<li data-target="#myCarousel" data-slide-to="3" class=""></li>
 		</ol>
 		<div class="carousel-inner" role="listbox">
-            <div class="item active custom-carousel-class">
-                <img src="{% static 'images/Slider 1.JPG' %}">
-                <div class="col-md-offset-2 col-md-8 carousel-caption-custom" align="center">
-                    <h3>The Biggest <span>Collection of Car Auto Parts</span></h3>
-                    <p>Available 24/7</p>
-                    <a class="hvr-outline-out button2" href="{% url 'products' item_name='Interior'%}">Shop Now </a>
-                </div>
-            </div>
-            <div class="item custom-carousel-class">
-                <img src="{% static 'images/Slider 2.jpg' %}">
-                <div class="col-md-offset-2 col-md-8 carousel-caption-custom" align="center">
-                    <h3>Huge <span>Collection</span></h3>
-                    <a class="hvr-outline-out button2" href="{% url 'products' item_name='Interior' %}">Shop Now </a>
-                </div>
-            </div>
-            <div class="item custom-carousel-class">
-                <img src="{% static 'images/Slider 3.JPG' %}">
-                <div class="col-md-offset-2 col-md-8 carousel-caption-custom" align="center">
-                    <h3>The Biggest <span>Sale</span></h3>
-                    <a class="hvr-outline-out button2" href="{% url 'products' item_name='Interior'%}">Shop Now </a>
-                </div>
-            </div>
-            <div class="item custom-carousel-class">
-                <img src="{% static 'images/Slider 4.JPG' %}">
-                <div class="col-md-offset-2 col-md-8 carousel-caption-custom" align="center">
-                    <h3>Imported and Local <span>Collection</span></h3>
-                    <a class="hvr-outline-out button2" href="{% url 'products' item_name='Interior'%}">Shop Now </a>
-                </div>
-            </div>
+            {% if slider_images %}
+                {% for image in slider_images %}
+                    {% if forloop.counter == 1 %}
+                        <div class="item active custom-carousel-class">
+                            <img src="{{ image.slider_image_thumbnail.url }}">
+{#                            <div class="col-md-offset-2 col-md-8 carousel-caption-custom" align="center">#}
+{#                                <a class="hvr-outline-out button2" href="{% url 'products' item_name='Interior'%}">Shop Now </a>#}
+{#                            </div>#}
+                        </div>
+                    {% else %}
+                        <div class="item custom-carousel-class">
+                            <img src="{{ image.slider_image_thumbnail.url }}">
+{#                            <div class="col-md-offset-2 col-md-8 carousel-caption-custom" align="center">#}
+{#                                <a class="hvr-outline-out button2" href="{% url 'products' item_name='Interior'%}">Shop Now </a>#}
+{#                            </div>#}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
 		</div>
 		<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
 			<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -145,7 +135,7 @@
                         <button class="btn filter-button custom-buttons" data-filter="Mats">Mats</button>
                         <button class="btn filter-button custom-buttons" data-filter="Detailing">Car Detailing</button>
                         <button class="btn filter-button custom-buttons" data-filter="Leds">LED lights</button>
-                        <button class="btn filter-button custom-buttons" data-filter="Suvs">SUV lights</button>
+                        <button class="btn filter-button custom-buttons" data-filter="Suvs">SUV Items</button>
                         <button class="btn filter-button custom-buttons" data-filter="Utilites">Utilites</button>
                         <button class="btn filter-button custom-buttons" data-filter="Others">Others</button>
                     </div>
@@ -157,8 +147,8 @@
                         <div class="men-pro-item simpleCart_shelfItem">
                         <a href="{% url 'single' id=item.id %}">
                             <div class="men-thumb-item men-thumb-item-custom">
-                                <img src="{{ item.product_image_front.url }}" alt="" class="pro-image-front">
-                                <img src="{{ item.product_image_back.url }}" alt="" class="pro-image-back">
+                                <img src="{{ item.front_image_thumbnail.url }}" alt="" class="pro-image-front">
+                                <img src="{{ item.back_image_thumbnail.url }}" alt="" class="pro-image-back">
                             </div>
                         </a>
                             <div class="item-info-product ">

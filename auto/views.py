@@ -27,11 +27,13 @@ class Index(TemplateView):
 
     def get(self, request, *args, **kwargs):
         product_filter = ProductFilter(request.GET, queryset=product_list)
+        silder_images = SliderImage.objects.all()
 
         all_products = Product.objects.all().order_by('-id')[:20]
         params['all_products'] = all_products
         params['stripe_key'] = settings.STRIPE_PUBLIC_KEY
         params['filter'] = product_filter
+        params['slider_images'] = silder_images
         return render(request, self.template_name,params)
 
     def post(self, request, **kwargs):
@@ -327,5 +329,5 @@ class CarInformation(View):
 
 
 
-class ZohoView(TemplateView):
-    template_name = 'verifyforzoho.html'
+# class ZohoView(TemplateView):
+#     template_name = 'verifyforzoho.html'

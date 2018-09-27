@@ -37,4 +37,5 @@ class CarCompanyAdmin(admin.ModelAdmin):
 admin.site.register(CarCompany, CarCompanyAdmin)
 
 admin.site.register(CarYear)
+admin.site.register(SliderImage)
 

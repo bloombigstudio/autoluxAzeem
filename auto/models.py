@@ -4,6 +4,8 @@ from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import BaseUserManager
+from imagekit.models import ImageSpecField
+from pilkit.processors import ResizeToFill
 
 Category_CHOICES = (
     ('Interior', 'INTERIOR'),
@@ -79,7 +81,15 @@ class Product(models.Model):
     product_title = models.CharField(max_length=30)
     product_category = models.CharField(max_length=9, choices=Category_CHOICES, default='EPIC')
     product_image_front = models.ImageField(upload_to='images')
+    front_image_thumbnail = ImageSpecField(source='product_image_front',
+                                      processors=[ResizeToFill(200, 150)],
+                                      format='JPEG',
+                                      options={'quality': 50})
     product_image_back = models.ImageField(upload_to='images')
+    back_image_thumbnail = ImageSpecField(source='product_image_back',
+                                           processors=[ResizeToFill(200, 150)],
+                                           format='JPEG',
+                                           options={'quality': 50})
     product_price = models.FloatField(null=False,default=0)
     product_discounted_price = models.FloatField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -95,8 +105,20 @@ class ProductSpecification(models.Model):
     product_information = models.CharField(max_length=200)
     product_review = models.CharField(max_length=200)
     first_image = models.ImageField(upload_to='images')
+    first_image_thumbnail = ImageSpecField(source='first_image',
+                                          processors=[ResizeToFill(200, 150)],
+                                          format='JPEG',
+                                          options={'quality': 50})
     second_image = models.ImageField(upload_to='images')
+    second_image_thumbnail = ImageSpecField(source='second_image',
+                                           processors=[ResizeToFill(200, 150)],
+                                           format='JPEG',
+                                           options={'quality': 50})
     third_image = models.ImageField(upload_to='images')
+    third_image_thumbnail = ImageSpecField(source='third_image',
+                                           processors=[ResizeToFill(200, 150)],
+                                           format='JPEG',
+                                           options={'quality': 50})
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -170,7 +192,16 @@ class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-
-
     def __str__(self):
         return self.item_name
+
+
+class SliderImage(models.Model):
+    main_slider_image = models.ImageField(upload_to='images')
+    slider_image_thumbnail = ImageSpecField(source='main_slider_image',
+                                           processors=[ResizeToFill(1400, 600)],
+                                           format='JPEG',
+                                           options={'quality': 50})
+
+    def __str__(self):
+        return "Sliding-image-" + str(self.id)
