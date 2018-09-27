@@ -5975,10 +5975,10 @@ label {
     padding: 30px;
 }
 .logo-custom{
-    padding: 10px;
+    padding: 3px;
 }
 .logo-custom img{
-    max-width: 70%;
+    max-width: 78%;
 }
 .top_content_custom{
     text-align: center;
@@ -6242,4 +6242,29 @@ label {
 #add-filtered-year-data .search-class{
     background: lightblue;
     color: white;
+}
+.whatsapp-logo{
+    background-color: forestgreen;
+    border-radius: 5px;
+    margin: 0 3px;
+}
+.whatsapp-logo a{
+    color: white;
+}
+.whatsapp-fa {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.whatsapp-fa {
+    padding: 14px;
+    width: 42px;
+    text-align: center;
+    text-decoration: none;
+}
+.footer-whatsapp-custom-class{
+    background-color: forestgreen; width: 50px; color: white; padding: 15px;margin-left: 3px;
 }
