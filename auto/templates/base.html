@@ -83,7 +83,7 @@
             product.name = e.target.item_name.value;
             product.price = e.target.amount.value;
             product.description = e.target.item_description.value;
-            product.quantity = 1;
+            product.quantity = e.target.item_quantity.value;
             product.image = e.target.item_image.value;
             saveToSession(product);
           }

@@ -11,6 +11,7 @@
              {% else %}
                 <input type="hidden" name="amount" value="{{ item.product_price }}" />
             {% endif %}
+            <input type="hidden" name="item_quantity" value="1" />
             <input type="submit" name="submit" value="Add to cart" class="button" />
         </fieldset>
     </form>

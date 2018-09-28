@@ -90,7 +90,7 @@
                             <span class="glyphicon glyphicon-minus"></span>
                           </button>
                       </span>
-                      <input type="text" name="quant[2]" class="form-control input-number" value="1" min="1" max="100">
+                      <input id="pd_quantity_value" type="text" name="quant[2]" class="form-control input-number" value="1" min="1" max="100">
                       <span class="input-group-btn">
                           <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[2]">
                               <span class="glyphicon glyphicon-plus"></span>
@@ -102,7 +102,7 @@
             <div class="occasion-cart">
             {#  Add to cart form    #}
             <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                <form action="#" method="post" id="add_to_cart{{ item.product_id.id }}">
+                <form action="#" method="post" id="add_to_cart_{{ item.product_id.id }}">
                 {% csrf_token %}
                     <fieldset>
                         <input type="hidden" name="item_id" value="{{ item.product_id.id}}" />
@@ -114,7 +114,8 @@
                          {% else %}
                             <input type="hidden" name="amount" value="{{ item.product_id.product_price }}" />
                         {% endif %}
-                        <input type="submit" name="submit" value="Add to cart" class="button" />
+                         <input id="item_quantity_pd" type="hidden" name="item_quantity" value="1" />
+                        <input type="submit" name="submit" value="Add to cart" class="button" onclick="setQuantity()"/>
                     </fieldset>
                 </form>
             </div>
@@ -322,5 +323,64 @@ $(".input-number").keydown(function (e) {
             e.preventDefault();
         }
     });
+    </script>
+
+    <script>
+
+    var cart = {};
+    cart.products = [];
+    if(!localStorage.getItem('cart')){
+        window.localStorage.setItem('cart', JSON.stringify(cart));
+    }
+    {% for item in  all_products%}
+        $(document).on('submit', '#add_to_cart_{{ item.id }}', function(e) {
+            e.preventDefault();
+            $('#item-added-to-cart').modal('show');
+            setTimeout(function() {$('#item-added-to-cart').modal('hide');}, 1000);
+            var status_code = true;
+            var items = JSON.parse(localStorage["cart"]);
+            for (var i = 0; i < items.products.length; i++) {
+                 if(items.products[i].id == {{ item.id }}){
+                     {#counter = parseInt(items.products[i].quantity) + 1;#}
+                     items.products[i].quantity = e.target.item_quantity.value;
+                     item = JSON.stringify(items);
+                     localStorage.setItem("cart", item);
+                     status_code = false;
+                   break;
+                 }
+            }
+          if (status_code === true) {
+            var product = {};
+            product.id = e.target.item_id.value;
+            product.name = e.target.item_name.value;
+            product.price = e.target.amount.value;
+            product.description = e.target.item_description.value;
+            product.quantity = e.target.item_quantity.value;
+            product.image = e.target.item_image.value;
+            saveToSession(product);
+          }
+        });
+    {% endfor %}
+
+    function saveToSession(product) {
+    // Retrieve the cart object from local storage
+    if (localStorage && localStorage.getItem('cart')) {
+        var cart = JSON.parse(localStorage.getItem('cart'));
+
+        cart.products.push(product);
+
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+}
+
+</script>
+
+
+
+
+    <script>
+        function setQuantity() {
+            $('#item_quantity_pd').val($('#pd_quantity_value').val());
+        }
     </script>
 {% endblock %}

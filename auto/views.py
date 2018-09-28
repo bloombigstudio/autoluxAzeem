@@ -29,7 +29,7 @@ class Index(TemplateView):
         product_filter = ProductFilter(request.GET, queryset=product_list)
         silder_images = SliderImage.objects.all()
 
-        all_products = Product.objects.all().order_by('-id')[:20]
+        all_products = Product.objects.all().order_by('-id')
         params['all_products'] = all_products
         params['stripe_key'] = settings.STRIPE_PUBLIC_KEY
         params['filter'] = product_filter
@@ -91,7 +91,12 @@ class Products(TemplateView):
                 page_data = paginator.page(paginator.num_pages)
 
             params['page_data'] = page_data
-            params['page_title'] = page_title
+            if page_title == "Suvs":
+                params['page_title'] = "4x4/SUV items"
+
+            else:
+                params['page_title'] = page_title
+
             params['filter'] = product_filter
             params['item_category'] = item_name
             params['searched_item'] = search_results
