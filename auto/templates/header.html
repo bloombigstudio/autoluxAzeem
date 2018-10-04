@@ -6,8 +6,6 @@
 	<div class="container-fluid">
         <div class="col-md-12 top-header-custom" align="center">
             <ul>
-    {#		    <li> <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Sign In </a></li>#}
-    {#			<li> <a href="#" data-toggle="modal" data-target="#myModal2"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Sign Up </a></li>#}
                 <li class="header-line"><i class="fa fa-phone" aria-hidden="true"></i> <a href="{% url 'contact' %}">Contact</a></li>
                 <li><i class="fa fa-question" aria-hidden="true"></i><a href="{% url 'about' %}">About</a></li>
             </ul>
@@ -23,13 +21,9 @@
         <div class="col-md-4">
             <div class="logo-custom">
                 <a href="{% url 'index' %}">
-{#                    <img src="{% static 'images/4000x860.png' %}">#}
                     <img src="{% static 'images/main_logo.png' %}">
                 </a>
 			</div>
-{#            <div>#}
-{#            <a href="{% url 'index' %}"><img class="text-logo" src="{% static 'images/Auto Lux for about us.png' %}"></a>#}
-{#            </div>#}
         </div>
 
         <!-- header-bot -->
@@ -43,21 +37,11 @@
 		<div class="col-md-4 top_content top_content_custom">
 			<div class="wthreecartaits wthreecartaits2 cart cart box_1 custom-header-social-links">
 
-{#              <a href="#checkoutModal" role="button" id="checkout-modal-button" class="btn" data-toggle="modal"><span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</a>#}
                 <a href="#checkoutModal" id="checkout-modal-button" class="fa fa-cart-arrow-down" data-toggle="modal">
-{#                    <button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>#}
                 </a>
-                <a class="fa fa-facebook" data-toggle="modal"></a>
-                <a class="fa fa-instagram" data-toggle="modal"></a>
-                <span class="whatsapp-logo"><a class="whatsapp-fa fa-whatsapp" data-toggle="modal"></a></span>
-{#                <ul class="social-nav model-3d-0 w3_agile_social two">#}
-{#                    <li><a href="#" class="facebook">#}
-{#                          <div class="front"><i class="fa fa-facebook" aria-hidden="true"></i></div>#}
-{#                          <div class="back"><i class="fa fa-facebook" aria-hidden="true"></i></div></a></li>#}
-{#                    <li><a href="#" class="instagram">#}
-{#                          <div class="front"><i class="fa fa-instagram" aria-hidden="true"></i></div>#}
-{#                          <div class="back"><i class="fa fa-instagram" aria-hidden="true"></i></div></a></li>#}
-{#                </ul>#}
+                <a href="https://www.facebook.com/autolux.pk/" class="fa fa-facebook" data-toggle="modal"></a>
+                <a href="https://www.instagram.com/autolux.pk/" class="fa fa-instagram" data-toggle="modal"></a>
+                <span class="whatsapp-logo"><a href="https://wa.me/923018430678" class="whatsapp-fa fa-whatsapp" data-toggle="modal"></a></span>
 
 			</div>
 		</div>
@@ -90,7 +74,7 @@
 					<li class=" menu__item"><a class="menu__link" href="{% url 'products' item_name='Detailing'%}">Car Detailing</a></li>
 					<li class=" menu__item"><a class="menu__link" href="{% url 'products' item_name='Leds'%}">LED lights</a></li>
 					<li class=" menu__item"><a class="menu__link" href="{% url 'products' item_name='Suvs'%}">4x4/SUV items</a></li>
-					<li class=" menu__item"><a class="menu__link" href="{% url 'products' item_name='Utilites'%}">Utilities</a></li>
+					<li class=" menu__item"><a class="menu__link" href="{% url 'products' item_name='Utilites'%}">Outdoor Utilities</a></li>
 					<li class=" menu__item"><a class="menu__link" href="{% url 'products' item_name='Others'%}">Others </a></li>
                     <li class=" menu__item"><a class="menu__link" href="#filter-by-car" role="button" data-toggle="modal">Filter By Car </a></li>
 				  </ul>
@@ -244,19 +228,18 @@
                                       <div class="totals-value" id="cart-total">0.00</div>
                                     </div>
                                   </div>
-{#                                      <button class="checkout">Online Payment</button>#}
-                                    <form action="{% url 'place_order' %}" method="GET" class="custom-stripe-button">
-                                        {% csrf_token %}
-                                        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                                            data-key="{{ stripe_key }}"
-                                            data-name="AutoLux"
-                                            data-description="Best accessories in town"
-                                            data-image="{% static 'images/logo.png' %}"
-                                            data-currency="usd">
-                                        </script>
-                                    </form>
-                                      <button class="checkout" onclick="location.href='{% url 'place_order' %}'">Pay on delivery</button>
-
+                                    <button type="button" class="btn btn-info btn-lg account-details" data-toggle="modal" data-target="#account-details-modal">Account Details</button>
+{#                                    <form action="{% url 'place_order' %}" method="GET" class="custom-stripe-button">#}
+{#                                        {% csrf_token %}#}
+{#                                        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"#}
+{#                                            data-key="{{ stripe_key }}"#}
+{#                                            data-name="AutoLux"#}
+{#                                            data-description="Best accessories in town"#}
+{#                                            data-image="{% static 'images/logo.png' %}"#}
+{#                                            data-currency="usd">#}
+{#                                        </script>#}
+{#                                    </form>#}
+                                      <button class="btn btn-lg checkout" onclick="location.href='{% url 'place_order' %}'">Cash on delivery</button>
                                 </div>
 					</div>
 				</div>
@@ -319,8 +302,8 @@
                            <input id="selected-car-year" type="hidden" name="selected_car_year" value="" />
                        </fieldset>
                       <div class="modal-footer">
-                        <button id="filter-done-button" class="done-button" onclick="searchByCarFunc()">Done</button>
-                        <button type="button" class="cancel-button" onclick="close_modal()">Cancel</button>
+                        <button id="filter-done-button" class="btn done-button" onclick="searchByCarFunc()">Done</button>
+                        <button type="button" class="btn cancel-button" onclick="close_modal()">Cancel</button>
                       </div>
                     </form>
                 </div>
@@ -344,6 +327,62 @@
                 <p>Item Added to your cart</p>
              <!-- </div> -->
 
+            <div class="clearfix"></div>
+          </div>
+        </div>
+        <!-- //Modal content-->
+      </div>
+    </div>
+
+    <div class="modal fade" id="account-details-modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="bank-accounts-details">
+                <div align="center">
+                    <img src="{% static 'images/Auto Lux for about us.png' %}">
+                </div>
+             <h3 class="bank-details-heading">Our bank details are </h3>
+            <div class="custom-clearfix"></div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 class="bank-title">Meezan bank</h4>
+                    <h5><span>Acc title:</span> Muhammad Yousuf</h5>
+                    <h5><span>Acc #:</span> 0207-0101227672</h5>
+                    <h5><span>Branch code:</span> 0207</h5>
+                </div>
+                <div class="col-md-6">
+                    <h4 class="bank-title">Bank Al-Falah</h4>
+                    <h5><span>Acc title:</span> Muhammad Yousuf</h5>
+                    <h5><span>Acc #:</span> 0093001006364270</h5>
+                    <h5><span>Branch code:</span> 0093</h5>
+                </div>
+            </div>
+            <div class="custom-clearfix"></div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 class="bank-title">Easypaisa details:</h4>
+                    <h5>Muhammad Yousuf</h5>
+                    <h5>03018430678</h5>
+                    <h5>35202-41685203</h5>
+                </div>
+                <div class="col-md-6">
+                    <h4 class="bank-title">JazzCash detail:</h4>
+                    <h5>Muhammad Yousuf</h5>
+                    <h5>03018430678</h5>
+                    <h5>35202-41685203</h5>
+                </div>
+            </div>
+            <div class="custom-clearfix"></div>
+{#            <p>Note: Please transfer funds into our account and email us the screen shot with all details.</p>#}
+                <div class="alert alert-warning alert-dismissible" role="alert" style="font-size: 12px; margin-top: 20px">
+                    <button type="button" class="close close-button-custom" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <strong>Note:</strong> Please transfer funds into our account and email us the screen shot with all details
+                </div>
             <div class="clearfix"></div>
           </div>
         </div>

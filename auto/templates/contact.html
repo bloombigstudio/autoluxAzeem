@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
     {% block css %}
+        <link rel="shortcut icon" href="{% static 'images/logo.png' %}" type="image/gif" sizes="16x16">
         <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all" />
         <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" media="all" />
         <link href="{% static 'css/font-awesome.css' %}" rel="stylesheet">
@@ -35,22 +36,25 @@
 						<div class="contact-grid-agile-w31">
 							<i class="fa fa-map-marker" aria-hidden="true"></i>
 							<h4>Address</h4>
-							<p>12K Street, 45 Building Road <span>California, USA.</span></p>
+							<p>301-CC Street 5 Phase 4 DHA Lahore,<span>Punjab 54000</span></p>
 						</div>
 					</div>
-					<div class="col-md-4 contact-grid-agile-w3">
+					<div class="col-md-4 contact-grid-agile-w3 remove-phone-custom-class">
 						<div class="contact-grid-agile-w32">
 							<i class="fa fa-phone" aria-hidden="true"></i>
 							<h4>Call Us</h4>
 {#							<p>+1234 758 839<span>+1273 748 730</span></p>#}
-                            <a href="tel:+1800229933"><p>+1800229933<span>+1273 748 730</span></p></a>
+                            <a href="tel:+1800229933"><p><span>+92 301 8430678</span></p></a>
 						</div>
 					</div>
-					<div class="col-md-4 contact-grid-agile-w3">
+					<div class="col-md-4 contact-grid-agile-w3 remove-phone-custom-class">
 						<div class="contact-grid-agile-w33">
 							<i class="fa fa-envelope-o" aria-hidden="true"></i>
 							<h4>Email</h4>
-							<p><a href="mailto:info@example.com">info@example1.com</a><span><a href="mailto:info@example.com">info@example2.com</a></span></p>
+							<p>
+{#                                <a href="mailto:autoluxpk@gmail.com">autoluxpk@gmail.com</a>#}
+                                <span><a href="mailto:autoluxpk@gmail.com">autoluxpk@gmail.com</a></span>
+                            </p>
 						</div>
 					</div>
 					<div class="clearfix"> </div>
@@ -62,6 +66,60 @@
 {#		   <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d100949.24429313939!2d-122.44206553967531!3d37.75102885910819!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80859a6d00690021%3A0x4a501367f076adff!2sSan+Francisco%2C+CA%2C+USA!5e0!3m2!1sen!2sin!4v1472190196783" class="map" style="border:0" allowfullscreen=""></iframe>#}
 {#	   </div>#}
 
+    <div class="container faq-body">
+    <br />
+    <br />
+    <br />
+
+    <div class="alert alert-warning alert-dismissible" role="alert" style="text-align: center; font-size: 15px;">
+        <button type="button" class="close close-button-custom" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+        This section contains a wealth of information, related to <strong>Autolux</strong> and its store. If you cannot find an answer to your question,
+        make sure to contact us.
+    </div>
+
+    <br />
+    <div class="row site_content" style="margin: 0px auto">
+
+        <div class="col-md-1 faq_num">1</div>
+        <div class="col-md-10 faq">
+            <h4 class="faq_question">What is the delivery time of my order?</h4>
+             <div class="faq_answer">
+             <p>
+                 After the successful completion of order and confirmation from our representative,
+                    on average it will take 2-3 working days for our package to be delivered.
+             </p>
+             </div>
+        </div>
+        <div class="clearfix"></div>
+        <br>
+
+       	<div class="col-md-1 faq_num">2</div>
+        <div class="col-md-10 faq">
+            <h4 class="faq_question">My Product is faulty/broken, how to get it replaced?</h4>
+             <div class="faq_answer">
+             <p>Please leave an email at autoluxpk@gmail.com or contact us at 0301-8430678.
+                Our representative will sort things out for you.
+             </p>
+             </div>
+        </div>
+        <div class="clearfix"></div>
+        <br>
+
+        <div class="col-md-1 faq_num">3</div>
+        <div class="col-md-10 faq">
+            <h4 class="faq_question">What is the duration of my product’s warranty?</h4>
+             <div class="faq_answer">
+             <p>Electronics have no warranty unless mentioned otherwise by the manufacturer. For
+                other products like body parts etc., we provide a 7-day money back guarantee.
+             </p>
+             </div>
+        </div>
+        <div class="clearfix"></div>
+        <br>
+
+    </div>
+</div>
+
    <div class="banner_bottom_agile_info">
 	<div class="container">
 	   <div class="agile-contact-grids map-distance">
@@ -71,35 +129,24 @@
 							<div class="mail-agileits-w3layouts">
 								<i class="fa fa-volume-control-phone" aria-hidden="true"></i>
 								<div class="contact-right">
-									<p>Telephone </p><span>+1 (100)222-23-33</span>
+									<p>Telephone </p><span>+92 301 8430678</span>
 								</div>
 								<div class="clearfix"> </div>
 							</div>
 							<div class="mail-agileits-w3layouts">
 								<i class="fa fa-envelope-o" aria-hidden="true"></i>
 								<div class="contact-right">
-									<p>Mail </p><a href="mailto:info@example.com">info@example.com</a>
+									<p>Mail </p><a href="mailto:autoluxpk@gmail.com">autoluxpk@gmail.com</a>
 								</div>
 								<div class="clearfix"> </div>
 							</div>
 							<div class="mail-agileits-w3layouts">
 								<i class="fa fa-map-marker" aria-hidden="true"></i>
 								<div class="contact-right">
-									<p>Location</p><span>7784 Diamonds street, California, US.</span>
+									<p>Location</p><span>301-CC Street 5 Phase 4 DHA Lahore, Punjab 54000</span>
 								</div>
 								<div class="clearfix"> </div>
 							</div>
-{#							<ul class="social-nav model-3d-0 footer-social w3_agile_social two contact">#}
-{#                            <li class="share">SHARE ON : </li>#}
-{#							<li><a href="#" class="facebook">#}
-{#								  <div class="front"><i class="fa fa-facebook" aria-hidden="true"></i></div>#}
-{#								  <div class="back"><i class="fa fa-facebook" aria-hidden="true"></i></div></a></li>#}
-{##}
-{#							<li><a href="#" class="instagram">#}
-{#								  <div class="front"><i class="fa fa-instagram" aria-hidden="true"></i></div>#}
-{#								  <div class="back"><i class="fa fa-instagram" aria-hidden="true"></i></div></a></li>#}
-{##}
-{#						</ul>#}
 					</div>
 					<div class="col-md-6 contact-form">
 						<h4 class="white-w3ls">Contact <span>Form</span></h4>

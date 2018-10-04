@@ -159,6 +159,8 @@ class Products(TemplateView):
             sorting_order = "product_price"
             if order == "High to low":
                 sorting_order = "-product_price"
+            elif order == "Z to A":
+                sorting_order = "-product_title"
 
             if page_title == "SearchResults":
                 query = Product.objects.filter(product_title__icontains=searched_item ,product_price__range=(min_price, max_price)).order_by(sorting_order)

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block css %}
+    <link rel="shortcut icon" href="{% static 'images/logo.png' %}" type="image/gif" sizes="16x16">
     <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all" />
     <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" media="all" />
     <link href="{% static 'css/font-awesome.css' %}" rel="stylesheet">
@@ -35,7 +36,7 @@
     {% endif %}
 
     <div class="col-md-12 myclass">
-        <h3 class="contact-us-title-setting">{{ page_title }}</h3>
+        <h3 class="contact-us-title-setting" style="color: white;">{{ page_title }}</h3>
         <!--/w3_short-->
              <div class="services-breadcrumb">
                 <div class="agile_inner_breadcrumb">
@@ -73,7 +74,7 @@
 					<li><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <a href="{% url 'products' item_name='Detailing'%}">Car Detailing</a></label></li>
 					<li><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <a href="{% url 'products' item_name='Leds'%}">LED lights</a></label></li>
 					<li><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <a href="{% url 'products' item_name='Suvs'%}">SUV Items</a></label></li>
-					<li><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <a href="{% url 'products' item_name='Utilities'%}">Utilities</a></label></li>
+					<li><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <a href="{% url 'products' item_name='Utilities'%}">Outdoor Utilities</a></label></li>
 					<li><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <a href="{% url 'products' item_name='Others'%}">Others</a></label></li>
 				</ul>
 			</div>
@@ -89,6 +90,8 @@
                             <option value="null">Default</option>
                             <option value="LowToHigh">Low to high</option>
                             <option value="HighToLow">High to low</option>
+                            <option value="AToZ">A to Z</option>
+                            <option value="ZToA">Z to A</option>
                         </select>
                         <div class="clearfix"></div>
                     </div>

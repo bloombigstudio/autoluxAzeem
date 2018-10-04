@@ -1928,7 +1928,7 @@ color: #545454;
 ul.w3_short li {
     display: inline-block;
     text-transform: uppercase;
-    color: #fff;
+    /*color: #fff;*/
 	font-size:0.9em;
 	font-weight:600;
 	letter-spacing:1px;
@@ -1967,7 +1967,8 @@ ul.w3_short {
 .agile_ab_w3ls_info p{
     margin: 1em 0 2em;
     color: #545454;
-    line-height: 2em;
+    line-height: 1.8em;
+    font-size: 20px;
 }
 /*--//about--*/
 /*-- /contact --*/
@@ -2576,7 +2577,7 @@ h2.typoh2{
 		font-size: 13px;
 	}
 	.alert {
-		padding: 10px;
+		/*padding: 10px;*/
 		margin-bottom: 10px;
 	}
 	ul.pagination li a {
@@ -6046,7 +6047,7 @@ label {
     padding: 12px 0 0;
 }
 .menu_list_custom li{
-    margin: auto 0;
+    margin: auto -3px;
 }
 .menu_list_custom li a{
     padding: 15px;
@@ -6267,4 +6268,151 @@ label {
 }
 .footer-whatsapp-custom-class{
     background-color: forestgreen; width: 50px; color: white; padding: 15px;margin-left: 3px;
+}
+
+.faqHeader {
+    font-size: 27px;
+    margin: 20px;
+}
+
+.panel-heading [data-toggle="collapse"]:after {
+    font-family: 'FontAwesome';
+    content: "\f078"; /* "play" icon */
+    float: right;
+    color: #F58723;
+    font-size: 18px;
+    line-height: 22px;
+}
+
+.panel-heading [data-toggle="collapse"].collapsed:after {
+    color: #454444;
+}
+
+.faq_num {
+    background: black;
+    text-align: center;
+    width: 50px;
+    color: #FFFFFF;
+    font-size: 32px;
+}
+.faq_question{
+    margin-top: 0px;
+    margin-top: 0px;
+    font-weight: 600;
+}
+.faq-body{
+    font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif,  Open Sans;
+    font-size: 14px;
+    line-height: 1.42857;
+    height: 350px;
+    padding: 0;
+    margin: 0 auto;
+}
+.remove-phone-custom-class{
+    padding: 46px;
+}
+@media (max-width:650px){
+    .custom-header-social-links a{
+        font-size: 18px;
+        padding: 15px;
+    }
+}
+@media (max-width:480px){
+    .custom-header-social-links a{
+        font-size: 15px;
+        padding: 12px;
+        width: 42px;
+    }
+    .whatsapp-fa {
+        width: 34px !important;
+    }
+}
+@media (max-width:340px){
+    .custom-header-social-links a{
+        padding: 9px;
+        width: 36px;
+    }
+    .whatsapp-fa {
+        width: 28px !important;
+    }
+}
+.footer-whatsapp-fa {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.footer-whatsapp-fa {
+    padding: 14px;
+    width: 50px;
+    text-align: center;
+    text-decoration: none;
+}
+@media (max-width:500px){
+    .footer-left a {
+        padding: 12px;
+        width: 45px;
+    }
+}
+@media (max-width:350px){
+    .footer-left a {
+        padding: 10px;
+        width: 40px;
+    }
+}
+.account-details {
+    float: right;
+    border: 0;
+    margin-top: 27px;
+    margin-right: 8px;
+    padding: 6px 10px;
+    background-color: dodgerblue;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 5px;
+}
+.account-details:hover {
+  background-color: blue;
+}
+.custom-clearfix{
+    margin: 8px;
+}
+.bank-title{
+    font-weight: 600;
+}
+.bank-accounts-details {
+    padding: 25px;
+}
+.bank-accounts-details h5{
+    padding: 1px;
+}
+.bank-details-heading {
+    margin-top: 22px;
+}
+.bank-accounts-details h5 span{
+    font-weight: bold;
+}
+
+@media (max-width: 600px){
+    .filter-by-car-dialog {
+        width: 95%;
+    }
+}
+@media  (max-width: 1030px) {
+    .custom-modal {
+        width: 74%;
+    }
+}
+@media  (max-width: 880px) {
+    .custom-modal {
+        width: 85%;
+    }
+}
+@media  (max-width: 750px) {
+    .custom-modal {
+        width: 95%;
+    }
 }
