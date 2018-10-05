@@ -217,7 +217,7 @@ class Contact(TemplateView):
             name = request.GET['Name']
             message = "Sender Name: " + name +"\n" + message + "\n" + "From :" + from_email
             try:
-                send_mail(subject, message, 'azeem.esketchers@gmail.com', ['mazeemarif0@gmail.com'],
+                send_mail(subject, message, 'henrywilliam2020@gmail.com', ['autoluxpk@gmail.com'],
                           fail_silently=False)
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')

@@ -36,7 +36,7 @@
     {% endif %}
     <div class="col-md-12 myclass">
         <div class="col-md-offset-5 col-md-3">
-            <h3 class="contact-us-title-setting" style="color: white;">{{ page_title }}</h3>
+            <h3 class="contact-us-title-setting" style="color: ghostwhite;">{{ page_title }}</h3>
         </div>
         <!--/w3_short-->
              <div class="services-breadcrumb">
@@ -157,26 +157,7 @@
                                     <span class="item_price">Rs {{ item.product_price|floatformat }}</span>
 							    </div>
                             {% endif %}
-							<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                <form action="#" method="post">
-                                    <fieldset>
-                                            <input type="hidden" name="cmd" value="_cart" />
-                                            <input type="hidden" name="add" value="1" />
-                                            <input type="hidden" name="business" value=" " />
-                                            <input type="hidden" name="item_name" value="{{ item.product_title }}" />
-                                            {% if item.product_discounted_price != null %}
-                                                <input type="hidden" name="amount" value="{{ item.product_discounted_price }}" />
-                                             {% else %}
-                                                <input type="hidden" name="amount" value="{{ item.product_price }}" />
-                                            {% endif %}
-{#                                            <input type="hidden" name="discount_amount" value="1.00" />#}
-                                            <input type="hidden" name="currency_code" value="PKR" />
-                                            <input type="hidden" name="return" value=" " />
-                                            <input type="hidden" name="cancel_return" value=" " />
-                                            <input type="submit" name="submit" value="Add to cart" class="button" />
-                                        </fieldset>
-                                </form>
-                            </div>
+                            {% include 'add-to-cart-partial.html' %}
 
 						</div>
 					</div>
