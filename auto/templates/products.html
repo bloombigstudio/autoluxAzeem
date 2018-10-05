@@ -34,9 +34,10 @@
     {% else %}
         <img class="category-header-img" src="{% static 'images/interior_header.jpg' %}">
     {% endif %}
-
     <div class="col-md-12 myclass">
-        <h3 class="contact-us-title-setting" style="color: white;">{{ page_title }}</h3>
+        <div class="col-md-offset-5 col-md-3">
+            <h3 class="contact-us-title-setting" style="color: white;">{{ page_title }}</h3>
+        </div>
         <!--/w3_short-->
              <div class="services-breadcrumb">
                 <div class="agile_inner_breadcrumb">
@@ -227,8 +228,8 @@ $(window).load(function(){
  $( "#slider-range" ).slider({
             range: true,
             min: 0,
-            max: 20000,
-            values: [ 1000, 10000 ],
+            max: 1000000,
+            values: [ 15000, 500000 ],
             slide: function( event, ui ) {  $( "#amount" ).val( "Rs" + ui.values[ 0 ] + " - Rs" + ui.values[ 1 ] );
             }
  });

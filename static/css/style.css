@@ -2282,6 +2282,7 @@ h3.agileits-icons-title {
 	}
     .contact-us-title-setting{
         font-size: 40px !important;
+        left: 37%;
     }
 }
 @media (max-width: 640px){
@@ -5662,6 +5663,7 @@ label {
 .product .product-details .product-description {
   margin: 5px 20px 5px 0;
   line-height: 1.4em;
+  word-wrap: break-word;
 }
 .product .product-quantity input {
   width: 40px;
@@ -5923,10 +5925,12 @@ label {
     bottom: 10%;
     text-align: center;
 }
-.contact-us-title-setting{
-    color: white;
-    font-size: 60px;
-    /*margin-bottom: 38px;*/
+.contact-us-title-setting {
+    position: absolute;
+    font-size: 50px;
+    bottom: 12px;
+    background-color: #da2f2f;
+    opacity: 0.7;
 }
 .about-us-content{
     padding-top: 20px;
@@ -6193,12 +6197,16 @@ label {
 }
 @media (max-width:530px){
     .contact-us-title-setting{
-        font-size: 30px !important;
+        font-size: 26px !important;
+        bottom: -3px;
+        left: 127px;
     }
 }
 @media (max-width:386px){
     .contact-us-title-setting{
-        font-size: 15px !important;
+        font-size: 22px !important;
+        bottom: -14px;
+        left: 114px;
     }
 }
 .footer-left a {
@@ -6414,5 +6422,27 @@ label {
 @media  (max-width: 750px) {
     .custom-modal {
         width: 95%;
+    }
+}
+@media  (max-width: 485px) {
+    .product .product-image img {
+    width: 70px;
+    }
+    .product .remove-product {
+        padding: 0px 3px;
+    }
+    .product .product-quantity input {
+        width: 20px;
+        margin-left: 2px;
+    }
+    .checkout{
+        padding: 5px 5px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+    .account-details {
+        padding: 5px 5px;
+        font-size: 12px;
+        font-weight: 600;
     }
 }
