@@ -112,9 +112,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static")
-]
+#STATICFILES_DIRS = [
+ #   os.path.join(BASE_DIR, "static")
+#]
 
 
 
@@ -137,8 +137,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-# MEDIA_ROOT = '/home/media/'
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'autolux/')
+MEDIA_ROOT = '/home/media/'
+#MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'autolux/')
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
