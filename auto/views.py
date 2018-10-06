@@ -195,6 +195,9 @@ class ProductDescription(TemplateView):
     template_name = 'product_description.html'
 
     def get(self, request, *args, **kwargs):
+        product_filter = ProductFilter(request.GET, queryset=product_list)
+        params['filter'] = product_filter
+
         item_id = kwargs.get('id')
         selected_item = ProductSpecification.objects.filter(product_id_id=item_id)
         new_arrivals = Product.objects.all().order_by('-id')[:4]
