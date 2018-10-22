@@ -674,18 +674,24 @@ a.social_vimeo:hover {
     margin-top: 7%;
 }
 
-@media screen and (max-width: 492px) {
+@media screen and (max-width: 768px) {
     .coming-soon-settings {
         margin-top: 10%;
+    }
+}
+
+@media screen and (max-width: 492px) {
+    .coming-soon-settings {
+        margin-top: 15%;
     }
     h2.txt-w3_agile {
         font-size: 20px;
     }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 415px) {
     .coming-soon-settings {
-        margin-top: 12%;
+        margin-top: 30%;
     }
     h2.txt-w3_agile {
         font-size: 15px;
