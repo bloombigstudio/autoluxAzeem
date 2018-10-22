@@ -234,10 +234,12 @@ img {
 /*--- end reset code ---*/
 
 body {
-    font-family: 'Work Sans', sans-serif;
-    background: url(../images/coming-soon.jpg) no-repeat center;
-    background-size: cover;
-    background-attachment: fixed;
+  background: url(../images/coming_soon_1.png) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  /*background-size: cover;*/
+    background-size: 100% 100%;
 }
 
 p {
@@ -300,7 +302,7 @@ h2.txt-w3_agile {
 }
 
 span.bar {
-    background: #88adf1;
+    background: #da2f2f;
     display: block;
     position: relative;
     width: 65%;
@@ -666,4 +668,26 @@ a.social_vimeo:hover {
 }
 .social_whatsapp{
  background-color: #89c529;
+}
+.coming-soon-settings {
+    position: relative;
+    margin-top: 7%;
+}
+
+@media screen and (max-width: 492px) {
+    .coming-soon-settings {
+        margin-top: 10%;
+    }
+    h2.txt-w3_agile {
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .coming-soon-settings {
+        margin-top: 12%;
+    }
+    h2.txt-w3_agile {
+        font-size: 15px;
+    }
 }
