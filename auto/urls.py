@@ -13,6 +13,7 @@ urlpatterns = [
     path('contact', Contact.as_view(), name='contact'),
     path('place_order', PlaceOrder.as_view(), name='place_order'),
     path('car_information', CarInformation.as_view(), name='car_information'),
+    # path('comingSoon/', TemplateView.as_view(template_name='coming-soon.html')),
     # url(r'verifyforzoho.html/$', ZohoView.as_view(), name='zoho'),
 
     # Chaipiiii
