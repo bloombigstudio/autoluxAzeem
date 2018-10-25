@@ -91,8 +91,8 @@ video {
     margin: 0;
     padding: 0;
     border: 0;
-    font-size: 100%;
-    font: inherit;
+    /*font-size: 100%;*/
+    /*font: inherit;*/
     vertical-align: baseline;
 }
 
@@ -234,7 +234,7 @@ img {
 /*--- end reset code ---*/
 
 body {
-  background: url(../images/coming_soon_1.png) no-repeat center center fixed;
+  background: url(../images/coming-soon.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -669,31 +669,68 @@ a.social_vimeo:hover {
 .social_whatsapp{
  background-color: #89c529;
 }
-.coming-soon-settings {
-    position: relative;
-    margin-top: 7%;
-}
+/*.coming-soon-settings {*/
+    /*position: relative;*/
+    /*margin-top: 7%;*/
+/*}*/
 
-@media screen and (max-width: 768px) {
-    .coming-soon-settings {
-        margin-top: 10%;
+@media screen and (max-width: 750px) {
+    .coming-soon-title{
+        font-size: 25px;
+    }
+    .stay-tuned h2 {
+        font-size: 40px;
     }
 }
 
-@media screen and (max-width: 492px) {
-    .coming-soon-settings {
-        margin-top: 15%;
+@media screen and (max-width: 750px) {
+    .stay-tuned h2 {
+        font-size: 30px;
     }
-    h2.txt-w3_agile {
+}
+@media screen and (max-width: 450px) {
+    .coming-soon-title{
         font-size: 20px;
     }
+    .stay-tuned h2 {
+        font-size: 25px;
+    }
 }
 
-@media screen and (max-width: 415px) {
-    .coming-soon-settings {
-        margin-top: 30%;
+@media screen and (max-width: 325px) {
+    .coming-soon-title{
+        font-size: 17px;
     }
-    h2.txt-w3_agile {
-        font-size: 15px;
+    .stay-tuned h2 {
+        font-size: 22px;
     }
+}
+
+/*@media screen and (max-width: 492px) {*/
+    /*.coming-soon-settings {*/
+        /*margin-top: 15%;*/
+    /*}*/
+    /*h2.txt-w3_agile {*/
+        /*font-size: 20px;*/
+    /*}*/
+/*}*/
+
+/*@media screen and (max-width: 415px) {*/
+    /*.coming-soon-settings {*/
+        /*margin-top: 30%;*/
+    /*}*/
+    /*h2.txt-w3_agile {*/
+        /*font-size: 15px;*/
+    /*}*/
+/*}*/
+.coming-soon-img {
+    background-color: black;
+    border-radius: 7px;
+    padding-left: 10px;
+}
+.coming-soon-title {
+    color: #da2f2f;
+}
+.stay-tuned {
+    margin-top: 10%;
 }
