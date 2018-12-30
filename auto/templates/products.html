@@ -134,8 +134,8 @@
 					<div class="men-pro-item simpleCart_shelfItem">
                     <a href="{% url 'single' id=item.id %}">
 						<div class="men-thumb-item men-thumb-item-custom-products">
-							<img src="{{ item.front_image_thumbnail.url }}" alt="" class="pro-image-front">
-							<img src="{{ item.back_image_thumbnail.url }}" alt="" class="pro-image-back">
+							<img src="{{ item.product_image_front.url }}" alt="" class="pro-image-front">
+							<img src="{{ item.product_image_back.url }}" alt="" class="pro-image-back">
 {#								<div class="men-cart-pro">#}
 {#									<div class="inner-men-cart-pro">#}
 {#										<a href="{% url 'single' id=item.id %}" class="link-product-add-cart">Quick View</a>#}

@@ -47,14 +47,14 @@
 				<div class="flexslider">
 
 					<ul class="slides">
-						<li data-thumb="{{ item.first_image_thumbnail.url }}">
-							<div class="thumb-image"> <img src="{{ item.first_image_thumbnail.url }}" data-imagezoom="true" class="img-responsive"> </div>
+						<li data-thumb="{{ item.first_image.url }}">
+							<div class="thumb-image"> <img src="{{ item.first_image.url }}" data-imagezoom="true" class="img-responsive"> </div>
 						</li>
-						<li data-thumb="{{ item.second_image_thumbnail.url }}">
-							<div class="thumb-image"> <img src="{{ item.second_image_thumbnail.url }}" data-imagezoom="true" class="img-responsive"> </div>
+						<li data-thumb="{{ item.second_image.url }}">
+							<div class="thumb-image"> <img src="{{ item.second_image.url }}" data-imagezoom="true" class="img-responsive"> </div>
 						</li>
-						<li data-thumb="{{ item.third_image_thumbnail.url }}">
-							<div class="thumb-image"> <img src="{{ item.third_image_thumbnail.url }}" data-imagezoom="true" class="img-responsive"> </div>
+						<li data-thumb="{{ item.third_image.url }}">
+							<div class="thumb-image"> <img src="{{ item.third_image.url }}" data-imagezoom="true" class="img-responsive"> </div>
 						</li>
 					</ul>
 					<div class="clearfix"></div>
@@ -209,8 +209,8 @@
                     <div class="col-md-3 product-men">
                         <div class="men-pro-item simpleCart_shelfItem">
                             <div class="men-thumb-item">
-                                <img src="{{ item.front_image_thumbnail.url }}" alt="" class="pro-image-front">
-                                <img src="{{ item.back_image_thumbnail.url }}" alt="" class="pro-image-back">
+                                <img src="{{ item.product_image_front.url }}" alt="" class="pro-image-front">
+                                <img src="{{ item.product_image_back.url }}" alt="" class="pro-image-back">
                                     <div class="men-cart-pro">
                                         <div class="inner-men-cart-pro">
                                             <a href="{% url 'single' id=item.id %}" class="link-product-add-cart">Quick View</a>

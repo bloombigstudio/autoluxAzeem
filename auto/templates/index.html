@@ -16,14 +16,14 @@
                 {% for image in slider_images %}
                     {% if forloop.counter == 1 %}
                         <div class="item active custom-carousel-class">
-                            <img src="{{ image.slider_image_thumbnail.url }}">
+                            <img src="{{ image.main_slider_image.url }}">
 {#                            <div class="col-md-offset-2 col-md-8 carousel-caption-custom" align="center">#}
 {#                                <a class="hvr-outline-out button2" href="{% url 'products' item_name='Interior'%}">Shop Now </a>#}
 {#                            </div>#}
                         </div>
                     {% else %}
                         <div class="item custom-carousel-class">
-                            <img src="{{ image.slider_image_thumbnail.url }}">
+                            <img src="{{ image.main_slider_image.url }}">
 {#                            <div class="col-md-offset-2 col-md-8 carousel-caption-custom" align="center">#}
 {#                                <a class="hvr-outline-out button2" href="{% url 'products' item_name='Interior'%}">Shop Now </a>#}
 {#                            </div>#}
@@ -147,8 +147,8 @@
                         <div class="men-pro-item simpleCart_shelfItem">
                         <a href="{% url 'single' id=item.id %}">
                             <div class="men-thumb-item men-thumb-item-custom">
-                                <img src="{{ item.front_image_thumbnail.url }}" alt="" class="pro-image-front">
-                                <img src="{{ item.back_image_thumbnail.url }}" alt="" class="pro-image-back">
+                                <img src="{{ item.product_image_front.url }}" alt="" class="pro-image-front">
+                                <img src="{{ item.product_image_back.url }}" alt="" class="pro-image-back">
                             </div>
                         </a>
                             <div class="item-info-product ">
