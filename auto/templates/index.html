@@ -142,11 +142,11 @@
                 </div>
                 <div class="new-arrival-products">
                     {% if all_products %}
-                        {% for item in all_products|slice:":20"  %}
+                        {% for item in all_products|slice:":30"  %}
                         <div class="col-md-3 product-men filter {{ item.product_category|cut:" " }}">
                         <div class="men-pro-item simpleCart_shelfItem">
                         <a href="{% url 'single' id=item.id %}">
-                            <div class="men-thumb-item men-thumb-item-custom">
+                            <div class="men-thumb-item men-thumb-item-custom-products">
                                 <img src="{{ item.product_image_front.url }}" alt="" class="pro-image-front">
                                 <img src="{{ item.product_image_back.url }}" alt="" class="pro-image-back">
                             </div>

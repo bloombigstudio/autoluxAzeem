@@ -127,7 +127,7 @@ class ProductSpecification(models.Model):
 
 
 class CarCompany(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='cars_related_name')
+    # product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='cars_related_name')
     car_make = models.CharField(max_length=30)
 
     created_at = models.DateTimeField(auto_now_add=True)
@@ -149,6 +149,7 @@ class CarModel(models.Model):
 
 
 class CarYear(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='cars_related_name',blank=True,null=True)
     model = models.ForeignKey(CarModel, on_delete=models.CASCADE, related_name='model_related_name')
     car_year = models.CharField(max_length=30)
 

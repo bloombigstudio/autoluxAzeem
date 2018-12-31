@@ -271,7 +271,7 @@
                 <div class="col-md-4 remove-space">
                   <div class="car-make ">
                     <ul class="filter-by-car-ul">
-                        {% for item in all_cars %}
+                        {% for item in all_cars.all %}
                             <li id="filter-by-make-id-{{ item.id }}" class="filter-by-car-li make" ><a class="car-filter-title">{{ item.car_make }} <i class="custom-fa fa-angle-right"></i></a></li>
                         {% endfor %}
                     </ul>

@@ -59,16 +59,7 @@ class Products(TemplateView):
         product_filter = ProductFilter(request.GET, queryset=product_list)
         if item_name == "SearchResults":
 
-            page_data = product_filter.qs;
-            # page = request.GET.get('page', 1)
-            # paginator = Paginator(product_filter.qs, 10)
-            # try:
-            #     page_data = paginator.page(page)
-            # except PageNotAnInteger:
-            #     page_data = paginator.page(1)
-            # except EmptyPage:
-            #     page_data = paginator.page(paginator.num_pages)
-
+            page_data = product_filter.qs
             params['page_data'] = page_data
             params['page_title'] = "Search Results"
             params['item_category'] = item_name
@@ -82,7 +73,7 @@ class Products(TemplateView):
             page_title = item_name
 
             page = request.GET.get('page', 1)
-            paginator = Paginator(Interior, 10)
+            paginator = Paginator(Interior, 12)
             try:
                 page_data = paginator.page(page)
             except PageNotAnInteger:
@@ -113,7 +104,8 @@ class Products(TemplateView):
                 car_model = request.POST['selected_car_model']
                 car_year = request.POST['selected_car_year']
 
-                query = Product.objects.filter(cars_related_name__car_make=car_make.strip(),cars_related_name__company_related_name__car_model=car_model.strip(),cars_related_name__company_related_name__model_related_name__car_year=car_year.strip())
+                query = Product.objects.filter(cars_related_name__car_year=car_year.strip(),cars_related_name__model__car_model= car_model.strip(),cars_related_name__model__company__car_make=car_make.strip())
+                # query = Product.objects.filter(cars_related_name__car_make=car_make.strip(),cars_related_name__company_related_name__car_model=car_model.strip(),cars_related_name__company_related_name__model_related_name__car_year=car_year.strip())
 
                 params['selected_car_make'] = request.POST['selected_car_make']
                 params['selected_car_model'] = request.POST['selected_car_model']
@@ -135,10 +127,9 @@ class Products(TemplateView):
                 if order == "High to low":
                     sorting_order = "-product_price"
                 query = Product.objects.filter(product_price__range=(min_price,max_price) ,
-                                               cars_related_name__car_make=make.strip(),
-                                               cars_related_name__company_related_name__car_model=model.strip(),
-                                               cars_related_name__company_related_name__model_related_name__car_year=year.strip()).\
-                                               order_by(sorting_order)
+                                               cars_related_name__model__company__car_make=make.strip(),
+                                               cars_related_name__model__car_model=model.strip(),
+                                               cars_related_name__car_year=year.strip()).order_by(sorting_order)
                 if items != "All":
                     query = query[:int(items)]
 
@@ -176,7 +167,7 @@ class Products(TemplateView):
             params['page_title'] = "Filtered Data"
 
         page = request.GET.get('page', 1)
-        paginator = Paginator(query, 10)
+        paginator = Paginator(query, 12)
         try:
             page_data = paginator.page(page)
         except PageNotAnInteger:
@@ -220,7 +211,7 @@ class Contact(TemplateView):
             name = request.GET['Name']
             message = "Sender Name: " + name +"\n" + message + "\n" + "From :" + from_email
             try:
-                send_mail(subject, message, 'henrywilliam2020@gmail.com', ['autoluxpk@gmail.com'],
+                send_mail(subject, message, 'henrywilliam202CarCompany0@gmail.com', ['autoluxpk@gmail.com'],
                           fail_silently=False)
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')

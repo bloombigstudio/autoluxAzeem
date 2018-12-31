@@ -352,7 +352,7 @@
 </script>
 <script>
     $(document).ready(function(){
-        {% for item in all_cars %}
+        {% for item in all_cars.all %}
         $("#filter-by-make-id-{{ item.id }}").click(function(e){
             e.preventDefault();
             $('.make').removeClass('search-class');
