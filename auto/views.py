@@ -326,7 +326,7 @@ class CarInformation(View):
             return JsonResponse(list_data, safe=False)
         elif 'car_model_id' in request.POST:
             car_model_id = request.POST.get('car_model_id', None)
-            car_year_array = CarYear.objects.filter(model_id=car_model_id).values()
+            car_year_array = CarYear.objects.filter(model_id=car_model_id).distinct('car_year').values()
             list_data = list(car_year_array)
             return JsonResponse(list_data, safe=False)
 
