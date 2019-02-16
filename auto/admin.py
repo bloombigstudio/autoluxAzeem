@@ -12,18 +12,12 @@ class ProductAdmin(admin.ModelAdmin):
     inlines = [ProductSpecificationInline]
 
 
-admin.site.register(Product, ProductAdmin)
-
-
 class OrdersInline(admin.TabularInline):
     model = Order
 
 
 class UsersAdmin(admin.ModelAdmin):
     inlines = [OrdersInline]
-
-
-admin.site.register(UserWithoutAccount, UsersAdmin)
 
 
 class CarModelline(admin.TabularInline):
@@ -34,8 +28,12 @@ class CarCompanyAdmin(admin.ModelAdmin):
     inlines = [CarModelline]
 
 
+class CarYearAdmin(admin.ModelAdmin):
+    list_display = ('product', 'model', 'car_year')
+
+
 admin.site.register(CarCompany, CarCompanyAdmin)
-
-admin.site.register(CarYear)
+admin.site.register(Product, ProductAdmin)
+admin.site.register(CarYear, CarYearAdmin)
 admin.site.register(SliderImage)
-
+admin.site.register(UserWithoutAccount, UsersAdmin)
