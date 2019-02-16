@@ -1471,8 +1471,8 @@ button.w3view-cart {
 }
 .item-info-product {
     text-align: center;
-    margin: 20px 0 0;
-    height: 120px;
+    /*margin: 20px 0 0;*/
+    /*height: 120px;*/
 }
 .men-thumb-item::before {
     width: 100%;
@@ -5966,24 +5966,17 @@ label {
     margin: auto;
 }
 .men-thumb-item-custom-products {
-    height: 226px;
-    max-width: 255px;
+    /*height: 226px;*/
+    /*max-width: 255px;*/
     /*position: relative;*/
     /*margin: 0 auto;*/
+    height: 25vh;
 }
 .men-thumb-item-custom-products img {
     max-height: 100%;
     max-width: 100%;
     object-fit: contain;
-    /*max-width: 255px;*/
-    /*height: auto;*/
-    /*position: absolute;*/
-    /*top: 0;*/
-    /*bottom: 0;*/
-    /*left: 0;*/
-    /*right: 0;*/
-    /*margin: auto;*/
-    padding: 30px;
+    padding: 20px;
 }
 .logo-custom{
     padding: 3px;

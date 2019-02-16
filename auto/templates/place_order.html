@@ -26,6 +26,19 @@
         <link href="{% static 'css/font-awesome.css' %}" rel="stylesheet">
         <link href="{% static 'css/easy-responsive-tabs.css' %}" rel='stylesheet' type='text/css'/>
 
+        <style>
+            body {
+                background: url("{{ orderBackgroundImage }}");
+                background-size: cover;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                -ms-background-size: cover;
+                background-attachment: fixed;
+                font-family: 'Abhaya Libre', serif;
+                text-align: center;
+            }
+        </style>
     {% endblock %}
   <!-- body -->
   <!--//fonts-->
@@ -41,18 +54,16 @@
     <form action="#" method="post" id="submit_form">
         {% csrf_token %}
       <div class="agile-field-txt">
-        <label>
-          Name :</label>
         <div class="mr_agilemain">
           <div class="left-wthree">
-              {{ orderForm.first_name }}
-            <label class="bot_w3">
+              <label class="bot_w3">
               {{ orderForm.first_name.label }}</label>
+              {{ orderForm.first_name }}
           </div>
           <div class="left-wthree">
-              {{ orderForm.last_name }}
-            <label class="bot_w3">
+              <label class="bot_w3">
               {{ orderForm.last_name.label }}</label>
+              {{ orderForm.last_name }}
           </div>
         </div>
       </div>

@@ -32,11 +32,14 @@ class Index(TemplateView):
         silder_images = SliderImage.objects.all()
 
         all_products = Product.objects.all().order_by('-id')
+        home_categories_images = HomePageCategoriesImages.objects.latest();
+
         params['all_products'] = all_products
         params['stripe_key'] = settings.STRIPE_PUBLIC_KEY
         params['filter'] = product_filter
         params['slider_images'] = silder_images
-        return render(request, self.template_name,params)
+        params['home_categories_images'] = home_categories_images
+        return render(request, self.template_name, params)
 
     def post(self, request, **kwargs):
         signUpForm = SignUpForm(request.POST)
@@ -213,7 +216,7 @@ class Contact(TemplateView):
             name = request.GET['Name']
             message = "Sender Name: " + name +"\n" + message + "\n" + "From :" + from_email
             try:
-                send_mail(subject, message, 'henrywilliam202CarCompany0@gmail.com', ['autoluxpk@gmail.com'],
+                send_mail(subject, message, 'henrywilliam202CarCompany0@gmail.com', ['autoluxpk@mailinator.com'],
                           fail_silently=False)
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
@@ -264,7 +267,15 @@ class PlaceOrder(TemplateView):
             token = request.GET['stripeToken']
             payment_method = "Online Payment"
 
-        args = {'orderForm': orderForm, 'payment_method': payment_method,'token':token }
+
+        orderBackgroundImage = OrderPageBackground.objects.latest()
+
+        args = {
+            'orderForm': orderForm,
+            'payment_method': payment_method,
+            'token':token,
+            'orderBackgroundImage': orderBackgroundImage.background_image.url
+        }
 
         return render(request,self.template_name,args)
 
@@ -337,7 +348,7 @@ class PlaceOrder(TemplateView):
                       last_name + "\nEmail: " + email + "\nAddress: " + address + \
                       "\nContact Number: " + contact_number + "\nOrder Number: " + order_number
 
-            send_mail(subject, message, 'henrywilliam202CarCompany0@gmail.com', ['autoluxpk@gmail.com'],
+            send_mail(subject, message, 'henrywilliam202CarCompany0@gmail.com', ['autoluxpk@mailinator.com'],
                       fail_silently=False)
 
             # return render(request, self.template_name, context={'test': 'testing'})

@@ -221,17 +221,17 @@ body a:hover {
     text-decoration: none;
 }
 
-body {
-    background: url("/static/images/1.jpg");
-    background-size: cover;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    -ms-background-size: cover;
-    background-attachment: fixed;
-    font-family: 'Abhaya Libre', serif;
-    text-align: center;
-}
+/*body {*/
+    /*background: url("/static/images/1.jpg");*/
+    /*background-size: cover;*/
+    /*-webkit-background-size: cover;*/
+    /*-moz-background-size: cover;*/
+    /*-o-background-size: cover;*/
+    /*-ms-background-size: cover;*/
+    /*background-attachment: fixed;*/
+    /*font-family: 'Abhaya Libre', serif;*/
+    /*text-align: center;*/
+/*}*/
 
 .clearfix {
     clear: both;

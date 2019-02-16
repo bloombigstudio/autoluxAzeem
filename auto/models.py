@@ -207,3 +207,31 @@ class SliderImage(models.Model):
 
     def __str__(self):
         return "Sliding-image-" + str(self.id)
+
+
+class OrderPageBackground(models.Model):
+    background_image = models.ImageField(upload_to="images", blank=True, null=True, verbose_name='Order Page Background')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        get_latest_by = 'created_at'
+
+    def __str__(self):
+        return str(self.background_image)
+
+
+class HomePageCategoriesImages(models.Model):
+    led_lights = models.ImageField(upload_to="images", blank=True, null=True, verbose_name='LED LIGHTS')
+    interior = models.ImageField(upload_to="images", blank=True, null=True, verbose_name='INTERIOR')
+    suv_items = models.ImageField(upload_to="images", blank=True, null=True, verbose_name='SUV ITEMS 4X4')
+    exterior = models.ImageField(upload_to="images", blank=True, null=True, verbose_name='EXTERIOR')
+    car_detailing = models.ImageField(upload_to="images", blank=True, null=True, verbose_name='CAR DETAILING')
+    outdoor_utilities = models.ImageField(upload_to="images", blank=True, null=True, verbose_name='OUTDOOR UTILITIES')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        get_latest_by = 'created_at'
+
+

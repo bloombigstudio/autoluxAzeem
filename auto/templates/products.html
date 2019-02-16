@@ -2,91 +2,101 @@
 {% load static %}
 {% block css %}
     <link rel="shortcut icon" href="{% static 'images/logo.png' %}" type="image/gif" sizes="16x16">
-    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all" />
-    <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all"/>
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" media="all"/>
     <link href="{% static 'css/font-awesome.css' %}" rel="stylesheet">
     <link href="{% static 'css/easy-responsive-tabs.css' %}" rel='stylesheet' type='text/css'/>
     <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.css' %}">
 
     <!-- //for bootstrap working -->
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
-    <link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic'
+          rel='stylesheet' type='text/css'>
 {% endblock %}
 {% block content %}
 
-<div class="contact-us-image">
-    {% if page_title == "Interior" %}
-        <img class="category-header-img" src="{% static 'images/interior_header.jpg' %}">
-    {% elif  page_title == "Exterior" %}
-        <img class="category-header-img" src="{% static 'images/exterior_header.jpg' %}">
-    {% elif  page_title == "Mats" %}
-        <img class="category-header-img" src="{% static 'images/mats_header.jpg' %}">
-    {% elif  page_title == "Detailing" %}
-        <img class="category-header-img" src="{% static 'images/detailing_header.jpg'%}">
-    {% elif  page_title == "Leds" %}
-        <img class="category-header-img" src="{% static 'images/led_lights_header.jpg' %}">
-    {% elif  page_title == "Suvs" %}
-        <img class="category-header-img" src="{% static 'images/suv_items_header.jpg' %}">
-    {% elif  page_title == "Utilites" %}
-        <img class="category-header-img" src="{% static 'images/utilites_header.jpg' %}">
-    {% elif  page_title == "Others" %}
-        <img class="category-header-img" src="{% static 'images/interior_header.jpg' %}">
-    {% else %}
-        <img class="category-header-img" src="{% static 'images/interior_header.jpg' %}">
-    {% endif %}
-    <div class="col-md-12 myclass">
-        <div class="col-md-offset-5 col-md-3">
-            <h3 class="contact-us-title-setting" style="color: ghostwhite; text-transform: uppercase">
-                {{ page_title }}
-            </h3>
-        </div>
-        <!--/w3_short-->
-             <div class="services-breadcrumb">
+    <div class="contact-us-image">
+        {% if page_title == "Interior" %}
+            <img class="category-header-img" src="{% static 'images/interior_header.jpg' %}">
+        {% elif  page_title == "Exterior" %}
+            <img class="category-header-img" src="{% static 'images/exterior_header.jpg' %}">
+        {% elif  page_title == "Mats" %}
+            <img class="category-header-img" src="{% static 'images/mats_header.jpg' %}">
+        {% elif  page_title == "Detailing" %}
+            <img class="category-header-img" src="{% static 'images/detailing_header.jpg' %}">
+        {% elif  page_title == "Leds" %}
+            <img class="category-header-img" src="{% static 'images/led_lights_header.jpg' %}">
+        {% elif  page_title == "Suvs" %}
+            <img class="category-header-img" src="{% static 'images/suv_items_header.jpg' %}">
+        {% elif  page_title == "Utilites" %}
+            <img class="category-header-img" src="{% static 'images/utilites_header.jpg' %}">
+        {% elif  page_title == "Others" %}
+            <img class="category-header-img" src="{% static 'images/interior_header.jpg' %}">
+        {% else %}
+            <img class="category-header-img" src="{% static 'images/interior_header.jpg' %}">
+        {% endif %}
+        <div class="col-md-12 myclass">
+            <div class="col-md-offset-5 col-md-3">
+                <h3 class="contact-us-title-setting" style="color: ghostwhite; text-transform: uppercase">
+                    {{ page_title }}
+                </h3>
+            </div>
+            <!--/w3_short-->
+            <div class="services-breadcrumb">
                 <div class="agile_inner_breadcrumb">
 
-                   <ul class="w3_short">
+                    <ul class="w3_short">
                         <li><a href="{% url 'index' %}">Home</a><i>|</i></li>
                         <li>{{ page_title }}</li>
                     </ul>
-                 </div>
+                </div>
             </div>
-    <!--//w3_short-->
+            <!--//w3_short-->
+        </div>
     </div>
-</div>
 
-  <!-- banner-bootom-w3-agileits -->
-	<div class="banner-bootom-w3-agileits">
-	<div class="container">
-         <!-- mens -->
-		<div class="col-md-4 products-left">
-			<div class="filter-price">
-				<h3>Filter By <span>Price</span></h3>
-					<ul class="dropdown-menu6">
-						<li>
-							<div id="slider-range"></div>
-                             <input name="price" type="text" id="amount" style="border: 0; color: #ffffff; font-weight: normal;" />
-						</li>
-					</ul>
-			</div>
-			<div class="css-treeview">
-				<h4>Categories</h4>
-				<ul class="tree-list-pad">
-					<li><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <a href="{% url 'products' item_name='Interior' %}">Interior</a></label></li>
-					<li><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <a href="{% url 'products' item_name='Exterior'%}">Exterior</a></label></li>
-					<li><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <a href="{% url 'products' item_name='Mats'%}">Mats</a></label></li>
-					<li><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <a href="{% url 'products' item_name='Detailing'%}">Car Detailing</a></label></li>
-					<li><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <a href="{% url 'products' item_name='Leds'%}">LED lights</a></label></li>
-					<li><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <a href="{% url 'products' item_name='Suvs'%}">SUV Items</a></label></li>
-					<li><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <a href="{% url 'products' item_name='Utilities'%}">Outdoor Utilities</a></label></li>
-					<li><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <a href="{% url 'products' item_name='Others'%}">Others</a></label></li>
-				</ul>
-			</div>
-			<div class="clearfix"></div>
-		</div>
-		<div class="col-md-8 products-right">
-{#			<h5>Product <span>Compare(0)</span></h5>#}
-			<h5>Products</h5>
-			<div class="sort-grid">
+    <!-- banner-bootom-w3-agileits -->
+    <div class="banner-bootom-w3-agileits">
+        <div class="container">
+            <!-- mens -->
+            <div class="col-md-4 products-left">
+                <div class="filter-price">
+                    <h3>Filter By <span>Price</span></h3>
+                    <ul class="dropdown-menu6">
+                        <li>
+                            <div id="slider-range"></div>
+                            <input name="price" type="text" id="amount"
+                                   style="border: 0; color: #ffffff; font-weight: normal;"/>
+                        </li>
+                    </ul>
+                </div>
+                <div class="css-treeview">
+                    <h4>Categories</h4>
+                    <ul class="tree-list-pad">
+                        <li><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <a
+                                href="{% url 'products' item_name='Interior' %}">Interior</a></label></li>
+                        <li><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <a
+                                href="{% url 'products' item_name='Exterior' %}">Exterior</a></label></li>
+                        <li><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <a
+                                href="{% url 'products' item_name='Mats' %}">Mats</a></label></li>
+                        <li><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <a
+                                href="{% url 'products' item_name='Detailing' %}">Car Detailing</a></label></li>
+                        <li><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <a
+                                href="{% url 'products' item_name='Leds' %}">LED lights</a></label></li>
+                        <li><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <a
+                                href="{% url 'products' item_name='Suvs' %}">SUV Items</a></label></li>
+                        <li><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <a
+                                href="{% url 'products' item_name='Utilities' %}">Outdoor Utilities</a></label></li>
+                        <li><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <a
+                                href="{% url 'products' item_name='Others' %}">Others</a></label></li>
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="col-md-8 products-right">
+                {#			<h5>Product <span>Compare(0)</span></h5>#}
+                <h5>Products</h5>
+                <div class="sort-grid">
                     <div class="sorting">
                         <h6>Sort By</h6>
                         <select id="country1" class="frm-field required sect">
@@ -109,130 +119,126 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="sorting">
-                      <div class="apply-filters-button">
-                        <form action="{% url 'products' item_name=item_category %}" id="sorting-form-id" method="POST">
-                            {% csrf_token %}
-                            <input type="hidden" name="sorting-price" id="price_value" value="">
-                            <input type="hidden" name="sorting-order" id="order_value" value="">
-                            <input type="hidden" name="sorting-items" id="items_value" value="">
-{#                            <input type="hidden" name="sorting-category" id="category_value" value="">#}
-                            <input type="hidden" name="searched-item" value="{{ searched_item }}">
-                            <input type="hidden" name="searched-car-make" value="{{ selected_car_make }}">
-                            <input type="hidden" name="searched-car-model" value="{{ selected_car_model }}">
-                            <input type="hidden" name="searched-car-year" value="{{ selected_car_year }}">
-                            <button type="button" onclick="load_data()">Apply Filters</button>
-                        </form>
-                       </div>
+                        <div class="apply-filters-button">
+                            <form action="{% url 'products' item_name=item_category %}" id="sorting-form-id"
+                                  method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="sorting-price" id="price_value" value="">
+                                <input type="hidden" name="sorting-order" id="order_value" value="">
+                                <input type="hidden" name="sorting-items" id="items_value" value="">
+                                {#                            <input type="hidden" name="sorting-category" id="category_value" value="">#}
+                                <input type="hidden" name="searched-item" value="{{ searched_item }}">
+                                <input type="hidden" name="searched-car-make" value="{{ selected_car_make }}">
+                                <input type="hidden" name="searched-car-model" value="{{ selected_car_model }}">
+                                <input type="hidden" name="searched-car-year" value="{{ selected_car_year }}">
+                                <button type="button" onclick="load_data()">Apply Filters</button>
+                            </form>
+                        </div>
                     </div>
                     <div class="clearfix"></div>
 
-			</div>
+                </div>
 
-		<div class="single-pro">
-            {% if page_data %}
-                {% for item in page_data %}
+                <div class="single-pro">
+                    {% if page_data %}
+                        {% for item in page_data %}
 
-                    <div class="col-md-4 product-men">
-					<div class="men-pro-item simpleCart_shelfItem">
-                    <a href="{% url 'single' id=item.id %}">
-						<div class="men-thumb-item men-thumb-item-custom-products">
-							<img src="{{ item.product_image_front.url }}" alt="" class="pro-image-front">
-							<img src="{{ item.product_image_back.url }}" alt="" class="pro-image-back">
-{#								<div class="men-cart-pro">#}
-{#									<div class="inner-men-cart-pro">#}
-{#										<a href="{% url 'single' id=item.id %}" class="link-product-add-cart">Quick View</a>#}
-{#									</div>#}
-{#								</div>#}
-{#								<span class="product-new-top">New</span>#}
+                            <div class="col-md-4 product-men">
+                                <div class="men-pro-item simpleCart_shelfItem">
+                                    <a href="{% url 'single' id=item.id %}">
+                                        <div class="men-thumb-item men-thumb-item-custom-products">
+                                            <img src="{{ item.product_image_front.url }}" alt=""
+                                                 class="pro-image-front">
+                                            <img src="{{ item.product_image_back.url }}" alt="" class="pro-image-back">
+                                        </div>
+                                    </a>
+                                    <div class="item-info-product ">
+                                        <h4><a href="{% url 'single' id=item.id %}">{{ item.product_title }}</a></h4>
+                                        {% if item.product_discounted_price != null %}
+                                            <div class="info-product-price">
+                                                <span class="item_price">Rs {{ item.product_discounted_price|floatformat }}</span>
+                                                <del>Rs {{ item.product_price|floatformat }}</del>
+                                            </div>
+                                        {% else %}
+                                            <div class="info-product-price">
+                                                <span class="item_price">Rs {{ item.product_price|floatformat }}</span>
+                                            </div>
+                                        {% endif %}
+                                        {% include 'add-to-cart-partial.html' %}
 
-						</div>
-                    </a>
-						<div class="item-info-product ">
-							<h4><a href="{% url 'single' id=item.id %}">{{ item.product_title }}</a></h4>
-                            {% if item.product_discounted_price != null %}
-                                <div class="info-product-price">
-                                    <span class="item_price">Rs {{ item.product_discounted_price|floatformat }}</span>
-                                    <del>Rs {{ item.product_price|floatformat }}</del>
-							    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+            {% if page_data.has_other_pages %}
+                <div align="center">
+                    <ul class="pagination">
+                        {% if page_data.has_previous %}
+                            <li><a href="?page={{ page_data.previous_page_number }}">&laquo;</a></li>
+                        {% else %}
+                            <li class="disabled"><span>&laquo;</span></li>
+                        {% endif %}
+                        {% for i in page_data.paginator.page_range %}
+                            {% if users.number == i %}
+                                <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
                             {% else %}
-                                <div class="info-product-price">
-                                    <span class="item_price">Rs {{ item.product_price|floatformat }}</span>
-							    </div>
+                                <li><a href="?page={{ i }}">{{ i }}</a></li>
                             {% endif %}
-                            {% include 'add-to-cart-partial.html' %}
-
-						</div>
-					</div>
-				</div>
-                {% endfor %}
+                        {% endfor %}
+                        {% if page_data.has_next %}
+                            <li><a href="?page={{ page_data.next_page_number }}">&raquo;</a></li>
+                        {% else %}
+                            <li class="disabled"><span>&raquo;</span></li>
+                        {% endif %}
+                    </ul>
+                </div>
             {% endif %}
 
-        <div class="clearfix"></div>
-		</div>
-    </div>
 
-    {% if page_data.has_other_pages %}
-        <div align="center">
-            <ul class="pagination">
-                {% if page_data.has_previous %}
-                  <li><a href="?page={{ page_data.previous_page_number }}">&laquo;</a></li>
-                {% else %}
-                  <li class="disabled"><span>&laquo;</span></li>
-                {% endif %}
-                {% for i in page_data.paginator.page_range %}
-                  {% if users.number == i %}
-                    <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-                  {% else %}
-                    <li><a href="?page={{ i }}">{{ i }}</a></li>
-                  {% endif %}
-                {% endfor %}
-                {% if page_data.has_next %}
-                  <li><a href="?page={{ page_data.next_page_number }}">&raquo;</a></li>
-                {% else %}
-                  <li class="disabled"><span>&raquo;</span></li>
-                {% endif %}
-              </ul>
         </div>
-{% endif %}
+    </div>
+    <!-- //mens -->
 
+    <!-- js -->
+    <script type="text/javascript" src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
+    <!-- //js -->
 
-	</div>
-</div>
-<!-- //mens -->
-
-<!-- js -->
-<script type="text/javascript" src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
-<!-- //js -->
-
-	<!-- Custom-JavaScript-File-Links -->
-	<!---->
-<script type='text/javascript'>//<![CDATA[
-$(window).load(function(){
- $( "#slider-range" ).slider({
+    <!-- Custom-JavaScript-File-Links -->
+    <!---->
+    <script type='text/javascript'>//<![CDATA[
+    $(window).load(function () {
+        $("#slider-range").slider({
             range: true,
             min: 0,
             max: 1000000,
-            values: [ 15000, 500000 ],
-            slide: function( event, ui ) {  $( "#amount" ).val( "Rs" + ui.values[ 0 ] + " - Rs" + ui.values[ 1 ] );
+            values: [15000, 500000],
+            slide: function (event, ui) {
+                $("#amount").val("Rs" + ui.values[0] + " - Rs" + ui.values[1]);
             }
- });
-$( "#amount" ).val( "Rs" + $( "#slider-range" ).slider( "values", 0 ) + " - Rs" + $( "#slider-range" ).slider( "values", 1 ) );
+        });
+        $("#amount").val("Rs" + $("#slider-range").slider("values", 0) + " - Rs" + $("#slider-range").slider("values", 1));
 
-});//]]>
+    });//]]>
 
-function load_data() {
-    $('#order_value').val($('#country1').find(':selected').text());
-    $('#price_value').val($('#amount').val());
-    $('#items_value').val($('#country2').find(':selected').text());
-    $('#sorting-form-id').submit();
-}
+    function load_data() {
+        $('#order_value').val($('#country1').find(':selected').text());
+        $('#price_value').val($('#amount').val());
+        $('#items_value').val($('#country2').find(':selected').text());
+        $('#sorting-form-id').submit();
+    }
 
-{% if searched_item %}
-    $(document).ready(function(){
-        $('#my-id-yoo').val('{{ searched_item }}');
-    });
-{% endif %}
+    {% if searched_item %}
+        $(document).ready(function () {
+            $('#my-id-yoo').val('{{ searched_item }}');
+        });
+    {% endif %}
 
-</script>
+    </script>
 
 {% endblock %}

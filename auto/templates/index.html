@@ -51,7 +51,7 @@
 					<a href="{% url 'products' item_name='Leds' %}">
 					 <div class="bb-middle-agileits-w3layouts grid">
 								 <figure class="effect-roxy">
-							<img src="{% static 'images/BG LED Lights .JPG' %}" alt=" " class="img-responsive" />
+							<img src="{{ home_categories_images.led_lights.url }}" alt=" " class="img-responsive" />
 							<figcaption>
 								<h3><span>LED</span>lights </h3>
 {#								<p>Upto 55%</p>#}
@@ -62,7 +62,7 @@
 				<a href="{% url 'products' item_name='Suvs'%}">
 					<div class="bb-middle-agileits-w3layouts forth grid">
 						<figure class="effect-roxy">
-							<img src="{% static 'images/BG SUV Items.jpg' %}" alt=" " class="img-responsive">
+							<img src="{{ home_categories_images.suv_items.url }}" alt=" " class="img-responsive">
 							<figcaption>
 								<h3><span>4x4/</span>SUV items </h3>
 {#								<p>Upto 65%</p>#}
@@ -74,7 +74,7 @@
 					<a href="{% url 'products' item_name='Detailing'%}">
 						<div class="bb-middle-agileits-w3layouts forth grid" style="margin-bottom: 15px;">
 							<figure class="effect-roxy">
-								<img src="{% static 'images/BG Car detailing.png' %}" alt=" " class="img-responsive">
+								<img src="{{ home_categories_images.car_detailing.url }}" alt=" " class="img-responsive">
 								<figcaption>
 									<h3><span>Car</span> Detailing</h3>
 {#									<p>Upto 65%</p>#}
@@ -89,7 +89,7 @@
 		      <a href="{% url 'products' item_name='Interior'%}">
 		       <div class="bb-middle-agileits-w3layouts grid">
 			           <figure class="effect-roxy">
-							<img src="{% static 'images/BG Interior Tab.JPG' %}" alt=" " class="img-responsive" />
+							<img src="{{ home_categories_images.interior.url }}" alt=" " class="img-responsive" />
 							<figcaption>
 								<h3><span>I</span>nterior </h3>
 {#								<p>Upto 55%</p>#}
@@ -100,7 +100,7 @@
 				<a href="{% url 'products' item_name='Exterior'%}">
 		      <div class="bb-middle-agileits-w3layouts forth grid">
 						<figure class="effect-roxy">
-							<img src="{% static 'images/BG Exterior.JPG' %}" alt=" " class="img-responsive">
+							<img src="{{ home_categories_images.exterior.url }}" alt=" " class="img-responsive">
 							<figcaption>
 								<h3><span>E</span>xterior </h3>
 {#								<p>Upto 65%</p>#}
@@ -112,7 +112,7 @@
 					<a href="{% url 'products' item_name='Utilites'%}">
 						<div class="bb-middle-agileits-w3layouts forth grid">
 							<figure class="effect-roxy">
-								<img src="{% static 'images/BG Utilities.JPG' %}" alt=" " class="img-responsive">
+								<img src="{{ home_categories_images.outdoor_utilities.url }}" alt=" " class="img-responsive">
 								<figcaption>
 									<h3><span>Outdoor </span>Utilites </h3>
 {#									<p>Upto 65%</p>#}

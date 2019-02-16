@@ -32,8 +32,15 @@ class CarYearAdmin(admin.ModelAdmin):
     list_display = ('product', 'model', 'car_year')
 
 
+class HomePageCategoriesImagesAdmin(admin.ModelAdmin):
+    list_display = ('id', 'led_lights', 'interior', 'suv_items', 'exterior', 'car_detailing', 'outdoor_utilities')
+
+
 admin.site.register(CarCompany, CarCompanyAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(CarYear, CarYearAdmin)
 admin.site.register(SliderImage)
 admin.site.register(UserWithoutAccount, UsersAdmin)
+admin.site.register(OrderPageBackground)
+admin.site.register(HomePageCategoriesImages, HomePageCategoriesImagesAdmin)
+
