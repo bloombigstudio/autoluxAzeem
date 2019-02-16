@@ -89,7 +89,8 @@
 					</div>
 						<div class="modal-body modal-body-sub_agile">
 
-                            <h2>Thank you.</h2>
+                            <h2>Thank you</h2>
+                            <p>Your order Number is: <b id="order_number"></b></p>
                             <button class="checkout-delivery" onclick="location.href='{% url 'index' %}'">Shop More</button>
 
 					</div>
@@ -113,7 +114,7 @@
                     first_name: $("#id_first_name").val(),
                     last_name: $("#id_last_name").val(),
                     email: $("#id_email").val(),
-                    contact_no: $("#id_contact_number").val(),
+                    contact_number: $("#id_contact_number").val(),
                     address: $("#id_address").val(),
                     cart_info: cart_info,
                     payment_method: '{{payment_method}}',
@@ -121,8 +122,9 @@
                     'csrfmiddlewaretoken': '{{ csrf_token }}'
                 },
                 success:function(result) {
-                  $('#thanksModal').modal('toggle');
-                  window.localStorage.removeItem("cart");
+                    $('#order_number').html(result.orderNumber)
+                    $('#thanksModal').modal('toggle');
+                    window.localStorage.removeItem("cart");
                 },
                 error:function(result) {
                   alert('error');

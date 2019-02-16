@@ -1,3 +1,5 @@
+import uuid
+
 from django.contrib.auth import authenticate, login
 from django.core.mail import send_mail
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
@@ -279,6 +281,7 @@ class PlaceOrder(TemplateView):
             token = request.POST['token']
             user = orderForm.save()
 
+            order_number = uuid.uuid4().hex[:6].upper()
             json_order = request.POST['cart_info']
             cart_object = json.loads(json_order)
 
@@ -303,15 +306,45 @@ class PlaceOrder(TemplateView):
             for order in cart_object["products"]:
                 item_count = float(order['price']) * float(order['quantity'])
                 if payment_method == "Online Payment":
-                    user.user_without_account = Order(user=user, item_id=order['id'], item_name=order['name'],item_quantity=order['quantity'],item_price=order['price'],total_price=item_count, payment_status=True, charge_id = charge.id)
+                    user.user_without_account = Order(user=user,
+                                                      item_id=order['id'],
+                                                      item_name=order['name'],
+                                                      item_quantity=order['quantity'],
+                                                      item_price=order['price'],
+                                                      total_price=item_count,
+                                                      payment_status=True,
+                                                      charge_id = charge.id,
+                                                      order_number=order_number)
                     # user_order.save()
                     user.user_without_account.save()
 
                 else:
-                    user.user_without_account = Order(user=user, item_id=order['id'], item_name=order['name'],item_quantity=order['quantity'],item_price=order['price'],total_price=item_count, payment_status=False)
+                    user.user_without_account = Order(user=user,
+                                                      item_id=order['id'],
+                                                      item_name=order['name'],
+                                                      item_quantity=order['quantity'],
+                                                      item_price=order['price'],
+                                                      total_price=item_count,
+                                                      payment_status=False,
+                                                      order_number=order_number)
                     # direct_order.save()
                     user.user_without_account.save()
 
+            subject = 'New Order Placed'
+            message = "Congratulations! New order has been placed " \
+                      "with following details. \n\n" \
+                      "First Name: " + first_name + " \nLast Name: " + \
+                      last_name + "\nEmail: " + email + "\nAddress: " + address + \
+                      "\nContact Number: " + contact_number + "\nOrder Number: " + order_number
+
+            send_mail(subject, message, 'henrywilliam202CarCompany0@gmail.com', ['autoluxpk@gmail.com'],
+                      fail_silently=False)
+
+            # return render(request, self.template_name, context={'test': 'testing'})
+            orderData = {
+                'orderNumber': order_number
+            }
+            return JsonResponse(orderData)
 
         return render(request, self.template_name)
 

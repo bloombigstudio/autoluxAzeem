@@ -189,6 +189,7 @@ class Order(models.Model):
     total_price = models.CharField(max_length=20, default=0)
     payment_status = models.BooleanField(default=False)
     charge_id = models.CharField(max_length=234, default="None")
+    order_number = models.CharField(blank=True, null=True, max_length=6)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
