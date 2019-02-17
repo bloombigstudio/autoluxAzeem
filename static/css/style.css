@@ -3132,12 +3132,14 @@ font-weight: 300;
 }
 .sorting {
     float: left;
-    width: 33%;
 }
 .sorting h6 {
-    float: left;
-    font-size: 16px;
-    margin:7px 40px 0 0;
+    margin-right: 8em;
+    margin-bottom: 1em;
+    font-size: 15px;
+}
+.apply_filters {
+    margin-top: 30px;
 }
 .sorting select {
     float: left;
@@ -4932,8 +4934,9 @@ p.w3ls_para {
 	}
 	.sorting {
 		float: left;
-		width: 100%;
+		/*width: 100%;*/
 		margin-top: 0.5em;
+        margin-right: 0.5em;
 	}
 	.sorting select {
 		padding: 4px 2px;

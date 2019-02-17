@@ -124,6 +124,7 @@ class Products(TemplateView):
                 price = request.POST['sorting-price']
                 order = request.POST['sorting-order']
                 items = request.POST['sorting-items']
+                category = request.POST['categories_search']
                 new_price = [x.strip() for x in price.split('-')]
                 min_price = new_price[0].split('s')[1]
                 max_price = new_price[1].split('s')[1]
@@ -131,10 +132,18 @@ class Products(TemplateView):
                 sorting_order = "product_price"
                 if order == "High to low":
                     sorting_order = "-product_price"
-                query = Product.objects.filter(product_price__range=(min_price,max_price) ,
-                                               cars_related_name__model__company__car_make=make.strip(),
-                                               cars_related_name__model__car_model=model.strip(),
-                                               cars_related_name__car_year=year.strip()).order_by(sorting_order)
+
+                if category == 'All':
+                    query = Product.objects.filter(product_price__range=(min_price, max_price),
+                                                   cars_related_name__model__company__car_make=make.strip(),
+                                                   cars_related_name__model__car_model=model.strip(),
+                                                   cars_related_name__car_year=year.strip()).order_by(sorting_order)
+                else:
+                    query = Product.objects.filter(product_price__range=(min_price, max_price),
+                                                   cars_related_name__model__company__car_make=make.strip(),
+                                                   cars_related_name__model__car_model=model.strip(),
+                                                   cars_related_name__car_year=year.strip()).filter(product_category=category).order_by(sorting_order)
+
                 if items != "All":
                     query = query[:int(items)]
 

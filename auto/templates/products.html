@@ -118,7 +118,23 @@
                         </select>
                         <div class="clearfix"></div>
                     </div>
+
                     <div class="sorting">
+                        <h6>Categories</h6>
+                        <select id="categories_search" class="frm-field required sect">
+                            <option value="all">All</option>
+                            <option value="interior">Interior</option>
+                            <option value="exterior">Exterior</option>
+                            <option value="mats">Mats</option>
+                            <option value="car_detailing">Car Detailing</option>
+                            <option value="car_detailing">LED Lights</option>
+                            <option value="car_detailing">SUV Items</option>
+                            <option value="car_detailing">Outdoor Utilities</option>
+                        </select>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="sorting apply_filters">
                         <div class="apply-filters-button">
                             <form action="{% url 'products' item_name=item_category %}" id="sorting-form-id"
                                   method="POST">
@@ -126,6 +142,7 @@
                                 <input type="hidden" name="sorting-price" id="price_value" value="">
                                 <input type="hidden" name="sorting-order" id="order_value" value="">
                                 <input type="hidden" name="sorting-items" id="items_value" value="">
+                                <input type="hidden" name="categories_search" id="items_categories" value="">
                                 {#                            <input type="hidden" name="sorting-category" id="category_value" value="">#}
                                 <input type="hidden" name="searched-item" value="{{ searched_item }}">
                                 <input type="hidden" name="searched-car-make" value="{{ selected_car_make }}">
@@ -230,6 +247,7 @@
         $('#order_value').val($('#country1').find(':selected').text());
         $('#price_value').val($('#amount').val());
         $('#items_value').val($('#country2').find(':selected').text());
+        $('#items_categories').val($('#categories_search').find(':selected').text());
         $('#sorting-form-id').submit();
     }
 
