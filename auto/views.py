@@ -216,7 +216,7 @@ class Contact(TemplateView):
             name = request.GET['Name']
             message = "Sender Name: " + name +"\n" + message + "\n" + "From :" + from_email
             try:
-                send_mail(subject, message, 'henrywilliam202CarCompany0@gmail.com', ['autoluxpk@mailinator.com'],
+                send_mail(subject, message, 'autoluxpk@gmail.com', ['autoluxpk@gmail.com'],
                           fail_silently=False)
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
@@ -348,7 +348,7 @@ class PlaceOrder(TemplateView):
                       last_name + "\nEmail: " + email + "\nAddress: " + address + \
                       "\nContact Number: " + contact_number + "\nOrder Number: " + order_number
 
-            send_mail(subject, message, 'henrywilliam202CarCompany0@gmail.com', ['autoluxpk@mailinator.com'],
+            send_mail(subject, message, 'autoluxpk@gmail.com', ['autoluxpk@gmail.com'],
                       fail_silently=False)
 
             # return render(request, self.template_name, context={'test': 'testing'})
