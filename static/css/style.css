@@ -1613,7 +1613,7 @@ button.w3view-cart {
     transition: all 0.5s ease-out 0s;
 }
 .men-thumb-item:hover .inner-men-cart-pro .link-product-add-cart {
-    top: 83.5%;
+    top: 75%;
 }
 .link-product-add-cart:hover {
     background: #da2f2f none repeat scroll 0 0;
@@ -4299,7 +4299,7 @@ p.w3ls_para {
 		    margin-top: 10px;
 	}
 	.navbar-default {
-		width: 77%;
+		/*width: 77%;*/
 	}
 	.navbar-default .navbar-collapse, .navbar-default .navbar-form {
 		border: none;
@@ -4681,7 +4681,7 @@ p.w3ls_para {
 		width: 30%;
 	}
 	.navbar-default {
-		width: 69%;
+		/*width: 69%;*/
 	}
 	.page-head_agile_info_w3l h3 {
 		font-size: 1.6em;
@@ -4990,7 +4990,7 @@ p.w3ls_para {
 		width: 79%;
 	}
 	.navbar-default {
-		width: 65%;
+		/*width: 65%;*/
 	}
 	.dropdown-menu.columns-3 {
 		min-width: 300px;

@@ -56,6 +56,7 @@ class Index(TemplateView):
 
 class Products(TemplateView):
     template_name = 'products.html'
+    paginator = None;
 
     def get(self, request, *args, **kwargs):
         item_name = kwargs.get('item_name')
@@ -73,18 +74,29 @@ class Products(TemplateView):
 
             return render(request, self.template_name, params)
 
+        elif item_name == "Search" and Products.paginator:
+            page = request.GET.get('page', 1)
+            try:
+                page_data = Products.paginator.page(page)
+            except PageNotAnInteger:
+                page_data = Products.paginator.page(1)
+            except EmptyPage:
+                page_data = Products.paginator.page(Products.paginator.num_pages)
+
+            params['page_data'] = page_data
+            return render(request, self.template_name, params)
         else:
             Interior = Product.objects.filter(product_category__iexact=item_name)
             page_title = item_name
 
             page = request.GET.get('page', 1)
-            paginator = Paginator(Interior, 12)
+            Products.paginator = Paginator(Interior, 12)
             try:
-                page_data = paginator.page(page)
+                page_data = Products.paginator.page(page)
             except PageNotAnInteger:
-                page_data = paginator.page(1)
+                page_data = Products.paginator.page(1)
             except EmptyPage:
-                page_data = paginator.page(paginator.num_pages)
+                page_data = Products.paginator.page(Products.paginator.num_pages)
 
             params['page_data'] = page_data
             if page_title == "Suvs":
@@ -181,13 +193,13 @@ class Products(TemplateView):
             params['page_title'] = "Filtered Data"
 
         page = request.GET.get('page', 1)
-        paginator = Paginator(query, 12)
+        Products.paginator = Paginator(query, 12)
         try:
-            page_data = paginator.page(page)
+            page_data = Products.paginator.page(page)
         except PageNotAnInteger:
-            page_data = paginator.page(1)
+            page_data = Products.paginator.page(1)
         except EmptyPage:
-            page_data = paginator.page(paginator.num_pages)
+            page_data = Products.paginator.page(Products.paginator.num_pages)
 
         params['page_data'] = page_data
         params['filter'] = product_filter
