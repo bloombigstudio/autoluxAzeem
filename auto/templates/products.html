@@ -120,7 +120,7 @@
                     </div>
 
                     <div class="sorting">
-                        <h6>Categories</h6>
+                        <h6>Specific Categories</h6>
                         <select id="categories_search" class="frm-field required sect">
                             <option value="all">All</option>
                             <option value="interior">Interior</option>
@@ -234,7 +234,7 @@
             range: true,
             min: 0,
             max: 1000000,
-            values: [1000, 500000],
+            values: [100, 500000],
             slide: function (event, ui) {
                 $("#amount").val("Rs" + ui.values[0] + " - Rs" + ui.values[1]);
             }
