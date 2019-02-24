@@ -32,7 +32,7 @@ class Index(TemplateView):
         silder_images = SliderImage.objects.all()
 
         all_products = Product.objects.all().order_by('-id')
-        home_categories_images = HomePageCategoriesImages.objects.latest();
+        home_categories_images = HomePageCategoriesImages.objects.latest()
 
         params['all_products'] = all_products
         params['stripe_key'] = settings.STRIPE_PUBLIC_KEY
@@ -56,11 +56,12 @@ class Index(TemplateView):
 
 class Products(TemplateView):
     template_name = 'products.html'
-    paginator = None;
+    paginator = None
 
     def get(self, request, *args, **kwargs):
         item_name = kwargs.get('item_name')
 
+        category_wise_images = CategoryWiseImageBackground.objects.latest()
         search_results = request.GET['product_title'] if "product_title" in request.GET else ""
         product_filter = ProductFilter(request.GET, queryset=product_list)
         if item_name == "SearchResults":
@@ -70,7 +71,7 @@ class Products(TemplateView):
             params['page_title'] = "Search Results"
             params['item_category'] = item_name
             params['searched_item'] = search_results
-
+            params['category_wise_images'] = category_wise_images
 
             return render(request, self.template_name, params)
 
@@ -84,6 +85,8 @@ class Products(TemplateView):
                 page_data = Products.paginator.page(Products.paginator.num_pages)
 
             params['page_data'] = page_data
+            params['category_wise_images'] = category_wise_images
+
             return render(request, self.template_name, params)
         else:
             Interior = Product.objects.filter(product_category__iexact=item_name)
@@ -98,6 +101,7 @@ class Products(TemplateView):
             except EmptyPage:
                 page_data = Products.paginator.page(Products.paginator.num_pages)
 
+
             params['page_data'] = page_data
             if page_title == "Suvs":
                 params['page_title'] = "4x4/SUV items"
@@ -108,6 +112,7 @@ class Products(TemplateView):
             params['filter'] = product_filter
             params['item_category'] = item_name
             params['searched_item'] = search_results
+            params['category_wise_images'] = category_wise_images
 
             return render(request, self.template_name,params)
 

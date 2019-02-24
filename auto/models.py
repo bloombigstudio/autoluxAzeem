@@ -228,6 +228,7 @@ class HomePageCategoriesImages(models.Model):
     exterior = models.ImageField(upload_to="images", blank=True, null=True, verbose_name='EXTERIOR')
     car_detailing = models.ImageField(upload_to="images", blank=True, null=True, verbose_name='CAR DETAILING')
     outdoor_utilities = models.ImageField(upload_to="images", blank=True, null=True, verbose_name='OUTDOOR UTILITIES')
+    shop_now = models.ImageField(upload_to="images", blank=True, null=True, verbose_name='SHOP NOW')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -235,3 +236,17 @@ class HomePageCategoriesImages(models.Model):
         get_latest_by = 'created_at'
 
 
+class CategoryWiseImageBackground(models.Model):
+    interior = models.ImageField(upload_to="images", blank=True, null=True, verbose_name='INTERIOR')
+    exterior = models.ImageField(upload_to="images", blank=True, null=True, verbose_name='EXTERIOR')
+    mats = models.ImageField(upload_to="images", blank=True, null=True, verbose_name='MATS')
+    car_detailing = models.ImageField(upload_to="images", blank=True, null=True, verbose_name='CAR DETAILING')
+    led_lights = models.ImageField(upload_to="images", blank=True, null=True, verbose_name='LED LIGHTS')
+    suv_items = models.ImageField(upload_to="images", blank=True, null=True, verbose_name='SUV ITEMS 4X4')
+    outdoor_utilities = models.ImageField(upload_to="images", blank=True, null=True, verbose_name='OUTDOOR UTILITIES')
+    others= models.ImageField(upload_to="images", blank=True, null=True, verbose_name='OTHERS')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        get_latest_by = 'created_at'

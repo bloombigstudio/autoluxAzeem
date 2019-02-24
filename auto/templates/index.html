@@ -1,7 +1,18 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-
+<style>
+    .sale-w3ls {
+        background: url("{{ home_categories_images.shop_now.url }}")no-repeat 0px 0px;
+        background-attachment: fixed;
+        background-size: cover;
+        -webkit-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -ms-background-size: cover;
+        min-height:380px;
+    }
+</style>
 <!-- banner -->
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
 		<!-- Indicators -->
@@ -178,7 +189,6 @@
 		<div class="sale-w3ls deliver-across">
 			<div class="container">
 				<h6>Delivery across all Pakistan</h6>
-
 				<a class="hvr-outline-out button2" href="{% url 'products' item_name="Exterior" %}">Shop Now </a>
 			</div>
 		</div>

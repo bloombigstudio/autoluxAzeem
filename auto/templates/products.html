@@ -17,23 +17,23 @@
 
     <div class="contact-us-image">
         {% if page_title == "Interior" %}
-            <img class="category-header-img" src="{% static 'images/interior_header.jpg' %}">
+            <img class="category-header-img" src="{{ category_wise_images.interior.url }}">
         {% elif  page_title == "Exterior" %}
-            <img class="category-header-img" src="{% static 'images/exterior_header.jpg' %}">
+            <img class="category-header-img" src="{{ category_wise_images.exterior.url }}">
         {% elif  page_title == "Mats" %}
-            <img class="category-header-img" src="{% static 'images/mats_header.jpg' %}">
+            <img class="category-header-img" src="{{ category_wise_images.mats.url }}">
         {% elif  page_title == "Detailing" %}
-            <img class="category-header-img" src="{% static 'images/detailing_header.jpg' %}">
+            <img class="category-header-img" src="{{ category_wise_images.car_detailing.url }}">
         {% elif  page_title == "Leds" %}
-            <img class="category-header-img" src="{% static 'images/led_lights_header.jpg' %}">
+            <img class="category-header-img" src="{{ category_wise_images.led_lights.url }}">
         {% elif  page_title == "Suvs" %}
-            <img class="category-header-img" src="{% static 'images/suv_items_header.jpg' %}">
+            <img class="category-header-img" src="{{ category_wise_images.suv_items.url }}">
         {% elif  page_title == "Utilites" %}
-            <img class="category-header-img" src="{% static 'images/utilites_header.jpg' %}">
+            <img class="category-header-img" src="{{ category_wise_images.outdoor_utilities.url }}">
         {% elif  page_title == "Others" %}
-            <img class="category-header-img" src="{% static 'images/interior_header.jpg' %}">
+            <img class="category-header-img" src="{{ category_wise_images.others.url }}">
         {% else %}
-            <img class="category-header-img" src="{% static 'images/interior_header.jpg' %}">
+            <img class="category-header-img" src="{{ category_wise_images.interior.url }}">
         {% endif %}
         <div class="col-md-12 myclass">
             <div class="col-md-offset-5 col-md-3">

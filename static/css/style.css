@@ -1653,16 +1653,7 @@ a.single-item{
     width: 30%;
 }
 /*-- /sale --*/
-   .sale-w3ls {
-    background: url(../images/banner3.jpg)no-repeat 0px 0px;
-    background-attachment: fixed;
-    background-size: cover;
-	-webkit-background-size: cover;
-	-o-background-size: cover;
-	-moz-background-size: cover;
-	-ms-background-size: cover;
-	min-height:380px;
-}
+
 .sale-w3ls h6 {
     font-size: 3em;
     text-align: center;

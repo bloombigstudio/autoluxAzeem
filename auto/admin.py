@@ -36,6 +36,10 @@ class HomePageCategoriesImagesAdmin(admin.ModelAdmin):
     list_display = ('id', 'led_lights', 'interior', 'suv_items', 'exterior', 'car_detailing', 'outdoor_utilities')
 
 
+class CategoryWiseImagesAdmin(admin.ModelAdmin):
+    list_display = ('id', 'interior', 'exterior', 'mats', 'car_detailing', 'led_lights', 'suv_items' , 'outdoor_utilities', 'others')
+
+
 admin.site.register(CarCompany, CarCompanyAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(CarYear, CarYearAdmin)
@@ -43,4 +47,6 @@ admin.site.register(SliderImage)
 admin.site.register(UserWithoutAccount, UsersAdmin)
 admin.site.register(OrderPageBackground)
 admin.site.register(HomePageCategoriesImages, HomePageCategoriesImagesAdmin)
+admin.site.register(CategoryWiseImageBackground, CategoryWiseImagesAdmin)
+
 
