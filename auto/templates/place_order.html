@@ -82,12 +82,15 @@
           {{ orderForm.address.label }}</label>
           {{ orderForm.address }}
       </div>
+        <div id="form_errors" class="alert alert-danger" style="display: none; width: 100%">
+        </div>
       <div class="w3ls-contact  w3l-sub">
 
         <input type="submit" value="Place Order">
 
       </div>
     </form>
+
   </div>
   <!-- //form ends here -->
 
@@ -133,12 +136,24 @@
                     'csrfmiddlewaretoken': '{{ csrf_token }}'
                 },
                 success:function(result) {
-                    $('#order_number').html(result.orderNumber)
-                    $('#thanksModal').modal('toggle');
-                    window.localStorage.removeItem("cart");
+                    if(result.success) {
+                        $('#order_number').html(result.orderNumber)
+                        $('#thanksModal').modal('toggle');
+                        $('#form_errors').hide();
+                        window.localStorage.removeItem("cart");
+                    } else {
+                        if(result.errors && result.errors.contact_number) {
+                            $('#form_errors').text(result.errors.contact_number.toString());
+                            $('#form_errors').show();
+                        } else {
+                            $('#form_errors').text(result.errors);
+                            $('#form_errors').show();
+                        }
+                    }
                 },
                 error:function(result) {
-                  alert('error');
+                    console.log(result);
+                    alert('error');
                 }
             });
         });

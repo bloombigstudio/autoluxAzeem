@@ -304,81 +304,98 @@ class PlaceOrder(TemplateView):
         orderForm = UserOrderForm(request.POST)
 
         if orderForm.is_valid():
-            first_name = orderForm.cleaned_data['first_name']
-            last_name = orderForm.cleaned_data['last_name']
-            email = orderForm.cleaned_data['email']
-            address = orderForm.cleaned_data['address']
-            contact_number = orderForm.cleaned_data['contact_number']
-            payment_method = request.POST['payment_method']
-            token = request.POST['token']
-            user = orderForm.save()
+            try:
+                first_name = orderForm.cleaned_data['first_name']
+                last_name = orderForm.cleaned_data['last_name']
+                email = orderForm.cleaned_data['email']
+                address = orderForm.cleaned_data['address']
+                contact_number = orderForm.cleaned_data['contact_number']
+                payment_method = request.POST['payment_method']
+                token = request.POST['token']
 
-            order_number = uuid.uuid4().hex[:6].upper()
-            json_order = request.POST['cart_info']
-            cart_object = json.loads(json_order)
+                if(request.POST.get('cart_info') == None):
+                    orderData = {
+                        'errors': 'You do not have any items in your cart',
+                        'success': False
+                    }
+                    return JsonResponse(orderData)
 
-            total_bill = 0
-            charge = "Stripe Payment id"
-            for order in cart_object["products"]:
-                item_count = float(order['price']) * float(order['quantity'])
-                total_bill = total_bill + item_count
+                user = orderForm.save()
 
-            if payment_method == "Online Payment":
-                try:
-                    charge = stripe.Charge.create(
-                        amount=int(total_bill),
-                        currency="usd",
-                        source=token,
-                        description="The product charged to the user"
-                    )
-                    # simple.charge_id = charge.id
-                except stripe.error.CardError as ce:
-                    return False, ce
+                order_number = uuid.uuid4().hex[:6].upper()
+                json_order = request.POST['cart_info']
+                cart_object = json.loads(json_order)
 
-            for order in cart_object["products"]:
-                item_count = float(order['price']) * float(order['quantity'])
+                total_bill = 0
+                charge = "Stripe Payment id"
+                for order in cart_object["products"]:
+                    item_count = float(order['price']) * float(order['quantity'])
+                    total_bill = total_bill + item_count
+
                 if payment_method == "Online Payment":
-                    user.user_without_account = Order(user=user,
-                                                      item_id=order['id'],
-                                                      item_name=order['name'],
-                                                      item_quantity=order['quantity'],
-                                                      item_price=order['price'],
-                                                      total_price=item_count,
-                                                      payment_status=True,
-                                                      charge_id = charge.id,
-                                                      order_number=order_number)
-                    # user_order.save()
-                    user.user_without_account.save()
+                    try:
+                        charge = stripe.Charge.create(
+                            amount=int(total_bill),
+                            currency="usd",
+                            source=token,
+                            description="The product charged to the user"
+                        )
+                        # simple.charge_id = charge.id
+                    except stripe.error.CardError as ce:
+                        return False, ce
 
-                else:
-                    user.user_without_account = Order(user=user,
-                                                      item_id=order['id'],
-                                                      item_name=order['name'],
-                                                      item_quantity=order['quantity'],
-                                                      item_price=order['price'],
-                                                      total_price=item_count,
-                                                      payment_status=False,
-                                                      order_number=order_number)
-                    # direct_order.save()
-                    user.user_without_account.save()
+                for order in cart_object["products"]:
+                    item_count = float(order['price']) * float(order['quantity'])
+                    if payment_method == "Online Payment":
+                        user.user_without_account = Order(user=user,
+                                                          item_id=order['id'],
+                                                          item_name=order['name'],
+                                                          item_quantity=order['quantity'],
+                                                          item_price=order['price'],
+                                                          total_price=item_count,
+                                                          payment_status=True,
+                                                          charge_id = charge.id,
+                                                          order_number=order_number)
+                        # user_order.save()
+                        user.user_without_account.save()
 
-            subject = 'New Order Placed'
-            message = "Congratulations! New order has been placed " \
-                      "with following details. \n\n" \
-                      "First Name: " + first_name + " \nLast Name: " + \
-                      last_name + "\nEmail: " + email + "\nAddress: " + address + \
-                      "\nContact Number: " + contact_number + "\nOrder Number: " + order_number
+                    else:
+                        user.user_without_account = Order(user=user,
+                                                          item_id=order['id'],
+                                                          item_name=order['name'],
+                                                          item_quantity=order['quantity'],
+                                                          item_price=order['price'],
+                                                          total_price=item_count,
+                                                          payment_status=False,
+                                                          order_number=order_number)
+                        # direct_order.save()
+                        user.user_without_account.save()
 
-            send_mail(subject, message, 'autoluxpk@gmail.com', ['autoluxpk@gmail.com'],
-                      fail_silently=False)
+                subject = 'New Order Placed'
+                message = "Congratulations! New order has been placed " \
+                          "with following details. \n\n" \
+                          "First Name: " + first_name + " \nLast Name: " + \
+                          last_name + "\nEmail: " + email + "\nAddress: " + address + \
+                          "\nContact Number: " + contact_number + "\nOrder Number: " + order_number
 
-            # return render(request, self.template_name, context={'test': 'testing'})
+                send_mail(subject, message, 'autoluxpk@gmail.com', ['autoluxpk@gmail.com'],
+                          fail_silently=False)
+
+                orderData = {
+                    'orderNumber': order_number,
+                    'success': True
+                }
+                return JsonResponse(orderData)
+            except Exception as e:
+                print('Exception: ')
+                print(e)
+
+        else:
             orderData = {
-                'orderNumber': order_number
+                'errors': orderForm.errors,
+                'success': False
             }
             return JsonResponse(orderData)
-
-        return render(request, self.template_name)
 
 
 class CarInformation(View):

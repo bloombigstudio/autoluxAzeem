@@ -161,13 +161,13 @@ class CarYear(models.Model):
 
 
 class UserWithoutAccount(models.Model):
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$',
-                                 message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
+                                 message="Contact Number is not valid")
     contact_number = models.CharField(validators=[phone_regex], max_length=17, blank=True)  # validators should be a list
-    address = models.CharField(max_length=200)
-    email = models.EmailField(max_length=30)
+    address = models.CharField(max_length=500)
+    email = models.EmailField(max_length=100)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
