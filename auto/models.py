@@ -78,7 +78,7 @@ Category_CHOICES = (
 
 
 class Product(models.Model):
-    product_title = models.CharField(max_length=30)
+    product_title = models.CharField(max_length=255)
     product_category = models.CharField(max_length=9, choices=Category_CHOICES, default='EPIC')
     product_image_front = models.ImageField(upload_to='images')
     front_image_thumbnail = ImageSpecField(source='product_image_front',

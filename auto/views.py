@@ -105,7 +105,8 @@ class Products(TemplateView):
             params['page_data'] = page_data
             if page_title == "Suvs":
                 params['page_title'] = "4x4/SUV items"
-
+            elif page_title == 'Utilites':
+                params['page_title'] = "Outdoor Utilities"
             else:
                 params['page_title'] = page_title
 
