@@ -74,21 +74,20 @@
                     </p>
                 {% endif %}
             <h5>{{ item.product_description }}</h5>
-{#					<div class="rating1">#}
-{#						<span class="starRating">#}
-{#							<input id="rating5" type="radio" name="rating" value="5">#}
-{#							<label for="rating5">5</label>#}
-{#							<input id="rating4" type="radio" name="rating" value="4">#}
-{#							<label for="rating4">4</label>#}
-{#							<input id="rating3" type="radio" name="rating" value="3" checked="">#}
-{#							<label for="rating3">3</label>#}
-{#							<input id="rating2" type="radio" name="rating" value="2">#}
-{#							<label for="rating2">2</label>#}
-{#							<input id="rating1" type="radio" name="rating" value="1">#}
-{#							<label for="rating1">1</label>#}
-{#						</span>#}
-{#					</div>#}
 
+            {% if productColors %}
+            <div class="center multiselect-colors" id="product-colors">
+                <div>Colors:</div>
+                <div id="ck-button">
+                    {% for colorItem in productColors %}
+                        <label>
+                          <input type="checkbox" class="color-checkbox" value="{{ colorItem.color }}">
+                            <span>{{ colorItem.color }}</span>
+                       </label>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
             <div class="center">
                 <p>
                   </p><div class="input-group">
@@ -342,14 +341,20 @@ $(".input-number").keydown(function (e) {
     {% for item in  all_products%}
         $(document).on('submit', '#add_to_cart_{{ item.id }}', function(e) {
             e.preventDefault();
+            e.stopPropagation();
             $('#item-added-to-cart').modal('show');
             setTimeout(function() {$('#item-added-to-cart').modal('hide');}, 1000);
             var status_code = true;
             var items = JSON.parse(localStorage["cart"]);
+            var selectedcolors = [];
+            $('#ck-button input:checked').each(function() {
+                selectedcolors.push($(this).val());
+            });
             for (var i = 0; i < items.products.length; i++) {
                  if(items.products[i].id == {{ item.id }}){
-                     {#counter = parseInt(items.products[i].quantity) + 1;#}
+
                      items.products[i].quantity = e.target.item_quantity.value;
+                     items.products[i].colors = selectedcolors;
                      item = JSON.stringify(items);
                      localStorage.setItem("cart", item);
                      status_code = false;
@@ -363,6 +368,7 @@ $(".input-number").keydown(function (e) {
             product.price = e.target.amount.value;
             product.description = e.target.item_description.value;
             product.quantity = e.target.item_quantity.value;
+            product.colors = selectedcolors
             product.image = e.target.item_image.value;
             saveToSession(product);
           }

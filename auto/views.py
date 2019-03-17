@@ -223,8 +223,10 @@ class ProductDescription(TemplateView):
 
         item_id = kwargs.get('id')
         selected_item = ProductSpecification.objects.filter(product_id_id=item_id)
+        productColors = selected_item.first().product_id.product_colors.all()
         new_arrivals = Product.objects.all().order_by('-id')[:4]
 
+        params['productColors'] = productColors
         params['item'] = selected_item.first()
         params['new_arrivals'] = new_arrivals
         return render(request, self.template_name,params)
@@ -351,6 +353,14 @@ class PlaceOrder(TemplateView):
                         return False, ce
 
                 for order in cart_object["products"]:
+                    if(len(order['colors'])):
+                        orderColors = order['colors']
+                        colors = ''
+                        for color in orderColors:
+                            colors = colors + color + ','
+                    else:
+                        colors = ''
+
                     item_count = float(order['price']) * float(order['quantity'])
                     if payment_method == "Online Payment":
                         user.user_without_account = Order(user=user,
@@ -361,6 +371,7 @@ class PlaceOrder(TemplateView):
                                                           total_price=item_count,
                                                           payment_status=True,
                                                           charge_id = charge.id,
+                                                          colors=colors,
                                                           order_number=order_number)
                         # user_order.save()
                         user.user_without_account.save()
@@ -373,6 +384,7 @@ class PlaceOrder(TemplateView):
                                                           item_price=order['price'],
                                                           total_price=item_count,
                                                           payment_status=False,
+                                                          colors=colors,
                                                           order_number=order_number)
                         # direct_order.save()
                         user.user_without_account.save()
