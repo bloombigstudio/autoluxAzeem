@@ -303,7 +303,8 @@ class PlaceOrder(TemplateView):
             'orderForm': orderForm,
             'payment_method': payment_method,
             'token':token,
-            'orderBackgroundImage': orderBackgroundImage.background_image.url
+            'orderBackgroundImage': orderBackgroundImage.background_image.url,
+            'orderMobileBackgroundImage': orderBackgroundImage.mobile_image.url
         }
 
         return render(request,self.template_name,args)

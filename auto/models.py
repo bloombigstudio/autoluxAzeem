@@ -171,6 +171,7 @@ class SliderImage(models.Model):
 
 class OrderPageBackground(models.Model):
     background_image = models.ImageField(upload_to="images", blank=True, null=True, verbose_name='Order Page Background')
+    mobile_image = models.ImageField(upload_to="images", blank=True, null=True, verbose_name='Order Page Mobile Background')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -189,6 +190,7 @@ class HomePageCategoriesImages(models.Model):
     car_detailing = models.ImageField(upload_to="images", blank=True, null=True, verbose_name='CAR DETAILING')
     outdoor_utilities = models.ImageField(upload_to="images", blank=True, null=True, verbose_name='OUTDOOR UTILITIES')
     shop_now = models.ImageField(upload_to="images", blank=True, null=True, verbose_name='SHOP NOW')
+    shop_now_mobile = models.ImageField(upload_to="images", blank=True, null=True, verbose_name='SHOP NOW MOBILE')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
