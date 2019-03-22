@@ -226,6 +226,8 @@ class ProductDescription(TemplateView):
         productColors = selected_item.first().product_id.product_colors.all()
         new_arrivals = Product.objects.all().order_by('-id')[:4]
 
+        category_wise_images = CategoryWiseImageBackground.objects.latest()
+        params['defaultBackground'] = category_wise_images.others
         params['productColors'] = productColors
         params['item'] = selected_item.first()
         params['new_arrivals'] = new_arrivals
