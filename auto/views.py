@@ -330,6 +330,8 @@ class PlaceOrder(TemplateView):
                 json_order = request.POST['cart_info']
                 cart_object = json.loads(json_order)
 
+                colors = ''
+
                 if (len(cart_object['products']) == 0):
                     orderData = {
                         'errors': 'You do not have any items in your cart',
@@ -358,7 +360,6 @@ class PlaceOrder(TemplateView):
                 for order in cart_object["products"]:
                     if(len(order['colors'])):
                         orderColors = order['colors']
-                        colors = ''
                         for color in orderColors:
                             colors = colors + color + ','
                     else:
