@@ -359,7 +359,7 @@ class PlaceOrder(TemplateView):
 
                 orderProducts = cart_object["products"];
                 for order in orderProducts:
-                    if(order['colors']):
+                    if 'colors' in order:
                         orderColors = order['colors']
                         for color in orderColors:
                             colors = colors + color + ','
