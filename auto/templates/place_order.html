@@ -101,7 +101,7 @@
         </div>
       <div class="w3ls-contact  w3l-sub">
 
-        <input type="submit" value="Place Order">
+        <input type="submit" value="Place Order" id="place-order-btn">
 
       </div>
     </form>
@@ -131,10 +131,20 @@
         <script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
     <script>
 
+        var cart = {};
+        cart.products = [];
+        if(!localStorage.getItem('cart')){
+            window.localStorage.setItem('cart', JSON.stringify(cart));
+        }
+
+    </script>
+    <script>
+
 
         $('#submit_form').on('submit', function(event){
             event.preventDefault();
             cart_info = localStorage.cart;
+            $('#place-order-btn').attr("disabled", true);
 
             $.ajax({
                 type: "POST",
@@ -155,8 +165,10 @@
                         $('#order_number').html(result.orderNumber)
                         $('#thanksModal').modal('toggle');
                         $('#form_errors').hide();
-                        window.localStorage.removeItem("cart");
+                        var cart = {};
+                        cart.products = [];
                         window.localStorage.clear();
+                        window.localStorage.setItem('cart', JSON.stringify(cart));
                     } else {
                         if(result.errors && result.errors.contact_number) {
                             $('#form_errors').text(result.errors.contact_number.toString());
@@ -166,6 +178,7 @@
                             $('#form_errors').show();
                         }
                     }
+                    $('#place-order-btn').removeAttr("disabled");
                 },
                 error:function(result) {
                     console.log(result);

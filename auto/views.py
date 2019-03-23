@@ -324,18 +324,18 @@ class PlaceOrder(TemplateView):
                 payment_method = request.POST['payment_method']
                 token = request.POST['token']
 
-                if(request.POST.get('cart_info') == None):
-                    orderData = {
-                        'errors': 'You do not have any items in your cart',
-                        'success': False
-                    }
-                    return JsonResponse(orderData)
-
                 user = orderForm.save()
 
                 order_number = uuid.uuid4().hex[:6].upper()
                 json_order = request.POST['cart_info']
                 cart_object = json.loads(json_order)
+
+                if (len(cart_object['products']) == 0):
+                    orderData = {
+                        'errors': 'You do not have any items in your cart',
+                        'success': False
+                    }
+                    return JsonResponse(orderData)
 
                 total_bill = 0
                 charge = "Stripe Payment id"

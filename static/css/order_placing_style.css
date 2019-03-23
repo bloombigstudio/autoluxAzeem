@@ -430,6 +430,12 @@ label.bot_w3 {
 	background: #eee;
 	color: #000;
 }
+
+.w3ls-contact input[type=submit]:disabled, .w3ls-contact input[type=submit][disabled] {
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+}
 /*--copyright--*/
 
 .copy-wthree {

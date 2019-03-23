@@ -76,46 +76,6 @@
     if(!localStorage.getItem('cart')){
         window.localStorage.setItem('cart', JSON.stringify(cart));
     }
-    {% for item in  all_products%}
-        $(document).on('submit', '#add_to_cart{{ item.id }}', function(e) {
-            e.preventDefault();
-            $('#item-added-to-cart').modal('show');
-            setTimeout(function() {$('#item-added-to-cart').modal('hide');}, 1000);
-            var status_code = true;
-            var items = JSON.parse(localStorage["cart"]);
-            for (var i = 0; i < items.products.length; i++) {
-                 if(items.products[i].id == {{ item.id }}){
-                     counter = parseInt(items.products[i].quantity) + 1;
-                     items.products[i].quantity = counter.toString();
-                     item = JSON.stringify(items);
-                     localStorage.setItem("cart", item);
-                     status_code = false;
-                   break;
-                 }
-            }
-          if (status_code === true) {
-            var product = {};
-            product.id = e.target.item_id.value;
-            product.name = e.target.item_name.value;
-            product.price = e.target.amount.value;
-            product.description = e.target.item_description.value;
-            product.quantity = e.target.item_quantity.value;
-            product.image = e.target.item_image.value;
-            saveToSession(product);
-          }
-        });
-    {% endfor %}
-
-    function saveToSession(product) {
-    // Retrieve the cart object from local storage
-    if (localStorage && localStorage.getItem('cart')) {
-        var cart = JSON.parse(localStorage.getItem('cart'));
-
-        cart.products.push(product);
-
-        localStorage.setItem('cart', JSON.stringify(cart));
-    }
-}
 
 </script>
 
@@ -128,7 +88,6 @@
                     var items = JSON.parse(localStorage["cart"]);
                       for (var i = 0; i < items.products.length; i++) {
                          if(items.products[i].id == {{ item.id }}){
-                             {#debugger;#}
                            items.products.splice(i,1);
                            break;
                          }
@@ -465,7 +424,59 @@ $(".car-year ul li li").click(function(){
 
 </script>
 
+<script>
+        function addItemToCart(itemId) {
+            var productTitle = $(`#title-${+itemId}`)[0].innerText;
+            var discountedPrice = $(`#discounted-price-${+itemId}`)[0].innerText;
+            var productImage = $(`#product-image-${+itemId}`)[0].children[0].src;
+            discountedPrice = discountedPrice.replace('Rs ', "");
 
+            var product = {};
+            product.id = +itemId;
+            product.name = productTitle;
+            product.price = discountedPrice;
+            product.description = "None";
+            product.quantity = 1;
+            product.colors = [];
+            product.image = productImage;
+
+            var isUpdateRequest = false;
+            items = [];
+            if(localStorage.cart) {
+                items = JSON.parse(localStorage.cart);
+            }
+
+            if(items && items.products && items.products.length > 0) {
+             for (var i = 0; i < items.products.length; i++) {
+                 if(+items.products[i].id == +itemId) {
+                     isUpdateRequest = true;
+                     $('#item-already-in-cart').modal('show');
+
+                     setTimeout(function() {
+                        $('#item-already-in-cart').modal('hide');
+                        }, 1000);
+                     return;
+                 }
+             }
+            }
+
+            if(!isUpdateRequest) {
+                var cart = JSON.parse(localStorage.getItem('cart'));
+                if(!cart) {
+                    cart = {};
+                    cart.products = [];
+                }
+                cart.products.push(product);
+                localStorage.setItem('cart', JSON.stringify(cart));
+            }
+
+            $('#item-added-to-cart').modal('show');
+
+            setTimeout(function() {
+                $('#item-added-to-cart').modal('hide');
+                }, 1000);
+        }
+    </script>
 
 </body>
 </html>
