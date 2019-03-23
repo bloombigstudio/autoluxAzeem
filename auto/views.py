@@ -324,8 +324,6 @@ class PlaceOrder(TemplateView):
                 payment_method = request.POST['payment_method']
                 token = request.POST['token']
 
-                colors = ''
-
                 if(request.POST.get('cart_info') == None):
                     orderData = {
                         'errors': 'You do not have any items in your cart',
@@ -360,8 +358,11 @@ class PlaceOrder(TemplateView):
                 for order in cart_object["products"]:
                     if(len(order['colors'])):
                         orderColors = order['colors']
+                        colors = ''
                         for color in orderColors:
                             colors = colors + color + ','
+                    else:
+                        colors = ''
 
                     item_count = float(order['price']) * float(order['quantity'])
                     if payment_method == "Online Payment":
@@ -409,15 +410,13 @@ class PlaceOrder(TemplateView):
             except Exception as e:
                 print('Exception: ')
                 print(e)
-                return render(request, self.template_name, {'form': orderForm})
 
         else:
-            return render(request,self.template_name, {'form': orderForm})
-            # orderData = {
-            #     'errors': orderForm.errors,
-            #     'success': False
-            # }
-            # return JsonResponse(orderData)
+            orderData = {
+                'errors': orderForm.errors,
+                'success': False
+            }
+            return JsonResponse(orderData)
 
 
 class CarInformation(View):
