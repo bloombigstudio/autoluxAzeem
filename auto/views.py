@@ -411,6 +411,12 @@ class PlaceOrder(TemplateView):
                 print('Exception: ')
                 print(e)
 
+                orderData = {
+                    'errors': e,
+                    'success': False
+                }
+                return JsonResponse(orderData)
+
         else:
             orderData = {
                 'errors': orderForm.errors,

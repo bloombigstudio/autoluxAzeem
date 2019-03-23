@@ -169,6 +169,7 @@
                         cart.products = [];
                         window.localStorage.clear();
                         window.localStorage.setItem('cart', JSON.stringify(cart));
+                        $('#place-order-btn').removeAttr("disabled");
                     } else {
                         if(result.errors && result.errors.contact_number) {
                             $('#form_errors').text(result.errors.contact_number.toString());
@@ -177,12 +178,14 @@
                             $('#form_errors').text(result.errors);
                             $('#form_errors').show();
                         }
+                        $('#place-order-btn').removeAttr("disabled");
                     }
                     $('#place-order-btn').removeAttr("disabled");
                 },
                 error:function(result) {
                     console.log(result);
                     alert('error');
+                    $('#place-order-btn').removeAttr("disabled");
                 }
             });
         });
