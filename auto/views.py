@@ -357,8 +357,9 @@ class PlaceOrder(TemplateView):
                     except stripe.error.CardError as ce:
                         return False, ce
 
-                for order in cart_object["products"]:
-                    if(order['colors'] and len(order['colors'])):
+                orderProducts = cart_object["products"];
+                for order in orderProducts:
+                    if(order['colors']):
                         orderColors = order['colors']
                         for color in orderColors:
                             colors = colors + color + ','
