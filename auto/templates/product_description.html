@@ -106,25 +106,28 @@
                 <p></p>
             </div>
             <div class="occasion-cart">
+                <button class="add-to-cart-btn" onclick='addToCart()'>
+                    Add to Cart
+                </button>
             {#  Add to cart form    #}
-            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                <form action="#" method="post" id="add_to_cart_{{ item.product_id.id }}">
-                {% csrf_token %}
-                    <fieldset>
-                        <input type="hidden" name="item_id" value="{{ item.product_id.id}}" />
-                        <input type="hidden" name="item_name" value="{{ item.product_id.product_title }}" />
-                        <input type="hidden" name="item_description" value="{{ item.product_id.product_related_name.first.product_description }}" />
-                        <input type="hidden" name="item_image" value="{{ item.product_id.product_image_front }}" />
-                        {% if item.product_id.product_discounted_price != null %}
-                            <input type="hidden" name="amount" value="{{ item.product_id.product_discounted_price }}" />
-                         {% else %}
-                            <input type="hidden" name="amount" value="{{ item.product_id.product_price }}" />
-                        {% endif %}
-                         <input id="item_quantity_pd" type="hidden" name="item_quantity" value="1" />
-                        <input type="submit" name="submit" value="Add to cart" class="button" onclick="setQuantity()"/>
-                    </fieldset>
-                </form>
-            </div>
+{#            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">#}
+{#                <form action="#" method="post" id="add_to_cart_{{ item.product_id.id }}">#}
+{#                {% csrf_token %}#}
+{#                    <fieldset>#}
+{#                        <input type="hidden" name="item_id" value="{{ item.product_id.id}}" />#}
+{#                        <input type="hidden" name="item_name" value="{{ item.product_id.product_title }}" />#}
+{#                        <input type="hidden" name="item_description" value="{{ item.product_id.product_related_name.first.product_description }}" />#}
+{#                        <input type="hidden" name="item_image" value="{{ item.product_id.product_image_front }}" />#}
+{#                        {% if item.product_id.product_discounted_price != null %}#}
+{#                            <input type="hidden" name="amount" value="{{ item.product_id.product_discounted_price }}" />#}
+{#                         {% else %}#}
+{#                            <input type="hidden" name="amount" value="{{ item.product_id.product_price }}" />#}
+{#                        {% endif %}#}
+{#                         <input id="item_quantity_pd" type="hidden" name="item_quantity" value="1" />#}
+{#                        <input type="submit" name="submit" value="Add to cart" class="button" onclick="setQuantity()"/>#}
+{#                    </fieldset>#}
+{#                </form>#}
+{#            </div>#}
 
             </div>
 {#            <ul class="social-nav model-3d-0 footer-social w3_agile_social single_page_w3ls">#}
@@ -331,69 +334,65 @@ $(".input-number").keydown(function (e) {
     });
     </script>
 
-    <script>
+    <script type="text/javascript">
+        function setQuantity() {
+            $('#item_quantity_pd').val($('#pd_quantity_value').val());
+        }
 
-    var cart = {};
-    cart.products = [];
-    if(!localStorage.getItem('cart')){
-        window.localStorage.setItem('cart', JSON.stringify(cart));
-    }
-    {% for item in  all_products%}
-        $(document).on('submit', '#add_to_cart_{{ item.id }}', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
+        function addToCart() {
             $('#item-added-to-cart').modal('show');
-            setTimeout(function() {$('#item-added-to-cart').modal('hide');}, 1000);
-            var status_code = true;
-            var items = JSON.parse(localStorage["cart"]);
+
+            setTimeout(function() {
+                $('#item-added-to-cart').modal('hide');
+                }, 1000);
+
+            var isUpdateRequest = false;
+            items = [];
+            if(localStorage.cart) {
+                items = JSON.parse(localStorage.cart);
+            }
             var selectedcolors = [];
             $('#ck-button input:checked').each(function() {
                 selectedcolors.push($(this).val());
             });
-            for (var i = 0; i < items.products.length; i++) {
-                 if(items.products[i].id == {{ item.id }}){
 
-                     items.products[i].quantity = e.target.item_quantity.value;
+            var productQuantity = $('#pd_quantity_value').val();
+
+            if(items && items.products && items.products.length > 0) {
+             for (var i = 0; i < items.products.length; i++) {
+                 if(+items.products[i].id == {{ item.id }}) {
+                     isUpdateRequest = true;
+                     items.products[i].quantity = productQuantity;
                      items.products[i].colors = selectedcolors;
                      item = JSON.stringify(items);
                      localStorage.setItem("cart", item);
-                     status_code = false;
-                   break;
+                     return;
                  }
+             }
             }
-          if (status_code === true) {
-            var product = {};
-            product.id = e.target.item_id.value;
-            product.name = e.target.item_name.value;
-            product.price = e.target.amount.value;
-            product.description = e.target.item_description.value;
-            product.quantity = e.target.item_quantity.value;
-            product.colors = selectedcolors
-            product.image = e.target.item_image.value;
-            saveToSession(product);
-          }
-        });
-    {% endfor %}
 
-    function saveToSession(product) {
-    // Retrieve the cart object from local storage
-    if (localStorage && localStorage.getItem('cart')) {
-        var cart = JSON.parse(localStorage.getItem('cart'));
+            if(!isUpdateRequest) {
+                var product = {};
+                product.id = "{{ item.id }}";
+                product.name = "{{ item.product_id.product_title }}";
+                product.price = "{{ item.product_id.product_discounted_price }}";
+                product.description = "{{ item.product_description }}";
+                product.quantity = productQuantity;
+                product.colors = selectedcolors;
+                product.image = "{{ item.product_id.product_image_back.url}}";
+                addProductToCart(product);
+            }
+        }
 
-        cart.products.push(product);
-
-        localStorage.setItem('cart', JSON.stringify(cart));
-    }
-}
-
-</script>
-
-
-
-
-    <script>
-        function setQuantity() {
-            $('#item_quantity_pd').val($('#pd_quantity_value').val());
+        function addProductToCart(product) {
+            var cart = JSON.parse(localStorage.getItem('cart'));
+            if(!cart) {
+                cart = [];
+                cart.products = [];
+            }
+            cart.products.push(product);
+            localStorage.setItem('cart', JSON.stringify(cart));
         }
     </script>
+
 {% endblock %}

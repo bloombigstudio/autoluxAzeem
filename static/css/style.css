@@ -6532,3 +6532,18 @@ label {
     margin-top: 1em;
     margin-bottom: 5em;
 }
+
+.add-to-cart-btn {
+    font-size: 13px;
+    color: #fff;
+    background: #da2f2f;
+    text-decoration: none;
+    position: relative;
+    border: none;
+    text-transform: uppercase;
+    padding: 10px 30px;
+    outline: none;
+    letter-spacing: 1px;
+    font-weight: 600;
+    border-radius: 5px;
+}

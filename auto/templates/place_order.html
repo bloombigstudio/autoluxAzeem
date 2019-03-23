@@ -134,7 +134,7 @@
 
         $('#submit_form').on('submit', function(event){
             event.preventDefault();
-            cart_info = localStorage["cart"];
+            cart_info = localStorage.cart;
 
             $.ajax({
                 type: "POST",
@@ -156,6 +156,7 @@
                         $('#thanksModal').modal('toggle');
                         $('#form_errors').hide();
                         window.localStorage.removeItem("cart");
+                        window.localStorage.clear();
                     } else {
                         if(result.errors && result.errors.contact_number) {
                             $('#form_errors').text(result.errors.contact_number.toString());
