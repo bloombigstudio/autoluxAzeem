@@ -167,34 +167,32 @@
                     {% if all_products %}
                         {% for item in all_products|slice:":30"  %}
                         <div class="col-md-3 product-men filter {{ item.product_category|cut:" " }}">
-                        <div class="men-pro-item simpleCart_shelfItem">
-                        <a href="{% url 'single' id=item.id %}">
-                            <div id="product-image-{{ item.id }}" class="men-thumb-item men-thumb-item-custom-products">
-                                <img src="{{ item.product_image_front.url }}" alt="" class="pro-image-front">
-                                <img src="{{ item.product_image_back.url }}" alt="" class="pro-image-back">
-                            </div>
-                        </a>
-                            <div class="item-info-product ">
-                                <h4><a id="title-{{ item.id }}" href="{% url 'single' id=item.id %}">{{ item.product_title }}</a></h4>
-                                {% if item.product_discounted_price != null %}
-                                    <div class="info-product-price">
-                                        <span class="item_price" id="discounted-price-{{ item.id }}">Rs {{ item.product_discounted_price|floatformat }}</span>
-                                        <del>Rs {{ item.product_price|floatformat }}</del>
+                            <div class="men-pro-item simpleCart_shelfItem">
+                                <a href="{% url 'single' id=item.id %}">
+                                    <div id="product-image-{{ item.id }}" class="men-thumb-item men-thumb-item-custom-products">
+                                        <img src="{{ item.product_image_front.url }}" alt="" class="pro-image-front">
+                                        <img src="{{ item.product_image_back.url }}" alt="" class="pro-image-back">
                                     </div>
-                                {% else %}
-                                    <div class="info-product-price">
-                                        <span class="item_price" id="price-{{ item.id }}">Rs {{ item.product_price|floatformat }}</span>
-                                    </div>
-                                {% endif %}
+                                </a>
+                                <div class="item-info-product ">
+                                    <h4><a id="title-{{ item.id }}" href="{% url 'single' id=item.id %}">{{ item.product_title }}</a></h4>
+                                    {% if item.product_discounted_price != null %}
+                                        <div class="info-product-price">
+                                            <span class="item_price" id="discounted-price-{{ item.id }}">Rs {{ item.product_discounted_price|floatformat }}</span>
+                                            <del>Rs {{ item.product_price|floatformat }}</del>
+                                        </div>
+                                    {% else %}
+                                        <div class="info-product-price">
+                                            <span class="item_price" id="price-{{ item.id }}">Rs {{ item.product_price|floatformat }}</span>
+                                        </div>
+                                    {% endif %}
 
-                            <button class="add-to-cart-btn" id="addtocart-{{ item.id }}" onclick='addItemToCart("{{ item.id }}")'>
-                                Add to Cart
-                            </button>
-                            {#  Add to cart form    #}
-{#                            {% include 'add-to-cart-partial.html' %}#}
+                                    <button class="add-to-cart-btn" id="addtocart-{{ item.id }}" onclick='addItemToCart("{{ item.id }}")'>
+                                        Add to Cart
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
                         {% endfor %}
                     {% endif %}
 				</div>

@@ -31,7 +31,14 @@ class Index(TemplateView):
         product_filter = ProductFilter(request.GET, queryset=product_list)
         silder_images = SliderImage.objects.all()
 
-        all_products = Product.objects.all().order_by('-id')
+        categories = Category_CHOICES
+
+        all_products = []
+
+        for category in categories:
+            products = Product.objects.filter(product_category=category[0]).order_by('-created_at')[:8]
+            all_products = all_products + list(products)
+
         home_categories_images = HomePageCategoriesImages.objects.latest()
 
         params['all_products'] = all_products
