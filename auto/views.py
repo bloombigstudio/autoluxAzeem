@@ -181,6 +181,19 @@ class Products(TemplateView):
             price = request.POST['sorting-price']
             order = request.POST['sorting-order']
             items = request.POST['sorting-items']
+            category = ''
+            if(request.POST['categories_search']):
+                category = request.POST['categories_search']
+
+            if category == "LED Lights":
+                category = "Leds"
+            elif category == "Car Detailing":
+                category = "Detailing"
+            elif category == "SUV Items":
+                category = "Suvs"
+            elif category == "Outdoor Utilities":
+                category = "Utilites"
+
             searched_item = request.POST['searched-item']
             new_price = [x.strip() for x in price.split('-')]
             min_price = new_price[0].split('s')[1]
@@ -199,7 +212,11 @@ class Products(TemplateView):
                 if items != "All":
                     query = query[:int(items)]
             else:
-                query = Product.objects.filter(product_category=page_title, product_price__range=(min_price, max_price)).order_by(sorting_order)
+                if category == 'All':
+                    query = Product.objects.filter(product_price__range=(min_price, max_price)).order_by(sorting_order)
+                else:
+                    query = Product.objects.filter(product_category=category, product_price__range=(min_price, max_price)).order_by(sorting_order)
+
                 if items != "All":
                     query = query[:int(items)]
             params['searched_item'] = searched_item
