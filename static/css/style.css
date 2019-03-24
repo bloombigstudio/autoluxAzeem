@@ -6547,3 +6547,20 @@ label {
     font-weight: 600;
     border-radius: 5px;
 }
+@media (max-width: 500px) {
+    .info-product-price del {
+        color: grey;
+    }
+
+    .header-middle form input[type="search"] {
+        color: grey;
+    }
+
+    .contact-us-title-setting {
+        color: white !important;
+    }
+}
+
+.banner-boasdasdotom-w3-agileits {
+    margin-top: 15vh;
+}
