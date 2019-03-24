@@ -225,9 +225,28 @@ class ProductDescription(TemplateView):
         selected_item = ProductSpecification.objects.filter(product_id_id=item_id)
         productColors = selected_item.first().product_id.product_colors.all()
         new_arrivals = Product.objects.all().order_by('-id')[:4]
-
         category_wise_images = CategoryWiseImageBackground.objects.latest()
-        params['defaultBackground'] = category_wise_images.others
+        product_category = selected_item.first().product_id.product_category
+        backgroundImage = ''
+
+        if product_category == 'Exterior':
+            backgroundImage = category_wise_images.exterior.url
+        elif product_category == 'Interior':
+            backgroundImage = category_wise_images.interior.url
+        elif product_category == 'Mats':
+            backgroundImage = category_wise_images.mats.url
+        elif product_category == 'Detailing':
+            backgroundImage = category_wise_images.car_detailing.url
+        elif product_category == 'Leds':
+            backgroundImage = category_wise_images.led_lights.url
+        elif product_category == 'Suvs':
+            backgroundImage = category_wise_images.suv_items.url
+        elif product_category == 'Utilites':
+            backgroundImage = category_wise_images.outdoor_utilities.url
+        else:
+            backgroundImage = category_wise_images.others.url
+
+        params['backgroundImage'] = backgroundImage
         params['productColors'] = productColors
         params['item'] = selected_item.first()
         params['new_arrivals'] = new_arrivals
