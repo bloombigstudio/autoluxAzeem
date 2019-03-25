@@ -6566,6 +6566,14 @@ label {
     .contact-us-title-setting {
         color: white !important;
     }
+
+    .apply-filters-button button, .sorting select {
+        font-weight: bold;
+    }
+
+    .sorting select option {
+        font-weight: bold;
+    }
 }
 
 .banner-boasdasdotom-w3-agileits {
