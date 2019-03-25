@@ -6549,11 +6549,15 @@ label {
 }
 @media (max-width: 500px) {
     .info-product-price del {
-        color: grey;
+        color: #404040;
+    }
+
+    .single-right-left del {
+        color: #404040;
     }
 
     .header-middle form input[type="search"] {
-        color: grey;
+        color: #404040;
     }
 
     .contact-us-title-setting {
