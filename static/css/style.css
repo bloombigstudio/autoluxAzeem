@@ -6550,14 +6550,17 @@ label {
 @media (max-width: 500px) {
     .info-product-price del {
         color: #404040;
+        font-weight: bold;
     }
 
     .single-right-left del {
         color: #404040;
+        font-weight: bold;
     }
 
     .header-middle form input[type="search"] {
         color: #404040;
+        font-weight: bold;
     }
 
     .contact-us-title-setting {
