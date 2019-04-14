@@ -85,77 +85,80 @@
             </div>
             <div class="col-md-8 products-right">
                 <h5>Products</h5>
-                <form method="get" action="{% url 'products' item_name=item_category %}">
 
-                <div class="container main-filter-div">
-                      <div class="span2 investRange">
-                        <div class="btn-group">
+                {% if page_title != 'Filter By Car' %}
+                    <form method="get" action="{% url 'products' item_name=item_category %}">
 
-                          <button id="min-max-price-range" class="form-control selectpicker select-btn  dropdown-toggle searchParams" href="#" data-toggle="dropdown" tabindex="6">
-                            <div class="filter-option pull-left span_price">
-                              <span id="price_range1"> </span> - <span id="price_range2">Price Range</span> </div>
-                            <span class="bs-caret" style="float: right;"><span class="caret"></span></span>
-                          </button>
+                    <div class="container main-filter-div">
+                          <div class="span2 investRange">
+                            <div class="btn-group">
 
-                          <div class="dropdown-menu ddRange" role="menu" style="width: 295px;padding-top: 12px;">
-                            <div class="rangemenu">
-                              <div class="freeformPrice">
-                                <div class="col-md-5">
-                                  <input name="product_price_min" id="min_price_id" type="text" class="min_input form-control" placeholder="Min Price">
+                              <button id="min-max-price-range" class="form-control selectpicker select-btn  dropdown-toggle searchParams" href="#" data-toggle="dropdown" tabindex="6">
+                                <div class="filter-option pull-left span_price">
+                                  <span id="price_range1"> </span> - <span id="price_range2">Price Range</span> </div>
+                                <span class="bs-caret" style="float: right;"><span class="caret"></span></span>
+                              </button>
+
+                              <div class="dropdown-menu ddRange" role="menu" style="width: 295px;padding-top: 12px;">
+                                <div class="rangemenu">
+                                  <div class="freeformPrice">
+                                    <div class="col-md-5">
+                                      <input name="product_price_min" id="min_price_id" type="text" class="min_input form-control" placeholder="Min Price">
+                                    </div>
+                                    <div class="col-md-2 "><span class="arrow"></span></div>
+                                    <div class="col-md-5">
+                                      <input name="product_price_max" id="max_price_id" type="text" class="max_input form-control" placeholder="Max Price">
+                                    </div>
+                                  </div>
+
+                                  <div class="price_Ranges rangesMax col-md-5">
+                                    <a class="max_value" value="" href="javascript:void(0)">Any Max</a>
+                                    <a class="max_value" value="1000000" href="javascript:void(0)">10 lakhs</a>
+                                    <a class="max_value" value="2500000" href="javascript:void(0)">25 lakhs</a>
+                                    <a class="max_value" value="5000000" href="javascript:void(0)">50 lakhs</a>
+                                    <a class="max_value" value="10000000" href="javascript:void(0)">1 cr</a>
+                                    <a class="max_value" value="50000000" href="javascript:void(0)">5 cr</a>
+                                    <a class="max_value" value="100000000" href="javascript:void(0)">10 cr</a>
+                                    <a class="max_value" value="500000000" href="javascript:void(0)">50 cr</a>
+                                    <a class="max_value" value="1000000000" href="javascript:void(0)">100 cr</a>
+                                    <a class="max_value" value="2000000000" href="javascript:void(0)">200 cr</a>
+                                    <a class="max_value" value="5000000000" href="javascript:void(0)">500 cr</a>
+                                  </div>
+                                  <div class="col-md-2"> </div>
+
+                                  <div class="price_Ranges rangesMin col-md-5">
+                                    <a class="min_value" value="" href="javascript:void(0)">Any Min</a>
+                                    <a class="min_value" value="1000000" href="javascript:void(0)">10 lakhs</a>
+                                    <a class="min_value" value="2500000" href="javascript:void(0)">25 lakhs</a>
+                                    <a class="min_value" value="5000000" href="javascript:void(0)">50 lakhs</a>
+                                    <a class="min_value" value="10000000" href="javascript:void(0)">1 cr</a>
+                                    <a class="min_value" value="50000000" href="javascript:void(0)">5 cr</a>
+                                    <a class="min_value" value="100000000" href="javascript:void(0)">10 cr</a>
+                                    <a class="min_value" value="500000000" href="javascript:void(0)">50 cr</a>
+                                    <a class="min_value" value="1000000000" href="javascript:void(0)">100 cr</a>
+                                    <a class="min_value" value="2000000000" href="javascript:void(0)">200 cr</a>
+                                    <a class="min_value" value="5000000000" href="javascript:void(0)">500 cr</a>
+                                  </div>
                                 </div>
-                                <div class="col-md-2 "><span class="arrow"></span></div>
-                                <div class="col-md-5">
-                                  <input name="product_price_max" id="max_price_id" type="text" class="max_input form-control" placeholder="Max Price">
+
+                                <div class="btnClear">
+                                  <a href="javascript:void(0)" class="btn btn-link">Clear</a>
                                 </div>
                               </div>
 
-                              <div class="price_Ranges rangesMax col-md-5">
-                                <a class="max_value" value="" href="javascript:void(0)">Any Max</a>
-                                <a class="max_value" value="1000000" href="javascript:void(0)">10 lakhs</a>
-                                <a class="max_value" value="2500000" href="javascript:void(0)">25 lakhs</a>
-                                <a class="max_value" value="5000000" href="javascript:void(0)">50 lakhs</a>
-                                <a class="max_value" value="10000000" href="javascript:void(0)">1 cr</a>
-                                <a class="max_value" value="50000000" href="javascript:void(0)">5 cr</a>
-                                <a class="max_value" value="100000000" href="javascript:void(0)">10 cr</a>
-                                <a class="max_value" value="500000000" href="javascript:void(0)">50 cr</a>
-                                <a class="max_value" value="1000000000" href="javascript:void(0)">100 cr</a>
-                                <a class="max_value" value="2000000000" href="javascript:void(0)">200 cr</a>
-                                <a class="max_value" value="5000000000" href="javascript:void(0)">500 cr</a>
-                              </div>
-                              <div class="col-md-2"> </div>
-
-                              <div class="price_Ranges rangesMin col-md-5">
-                                <a class="min_value" value="" href="javascript:void(0)">Any Min</a>
-                                <a class="min_value" value="1000000" href="javascript:void(0)">10 lakhs</a>
-                                <a class="min_value" value="2500000" href="javascript:void(0)">25 lakhs</a>
-                                <a class="min_value" value="5000000" href="javascript:void(0)">50 lakhs</a>
-                                <a class="min_value" value="10000000" href="javascript:void(0)">1 cr</a>
-                                <a class="min_value" value="50000000" href="javascript:void(0)">5 cr</a>
-                                <a class="min_value" value="100000000" href="javascript:void(0)">10 cr</a>
-                                <a class="min_value" value="500000000" href="javascript:void(0)">50 cr</a>
-                                <a class="min_value" value="1000000000" href="javascript:void(0)">100 cr</a>
-                                <a class="min_value" value="2000000000" href="javascript:void(0)">200 cr</a>
-                                <a class="min_value" value="5000000000" href="javascript:void(0)">500 cr</a>
-                              </div>
-                            </div>
-
-                            <div class="btnClear">
-                              <a href="javascript:void(0)" class="btn btn-link">Clear</a>
                             </div>
                           </div>
 
+                              {% render_field filter.form.sorting class="form-control" %}
+                              {% render_field filter.form.product_category class="form-control" %}
+                              <input type="hidden" value="{{ currentPage }}" name="page">
+                                {% if page_title == 'Search Results' %}
+                                    <input type="hidden" value="{{ searchTerm }}" name="product_title">
+                                {% endif %}
+                                <button type="submit" class="submit-filters">Apply Filters</button>
                         </div>
-                      </div>
-
-                          {% render_field filter.form.sorting class="form-control" %}
-                          {% render_field filter.form.product_category class="form-control" %}
-                          <input type="hidden" value="{{ currentPage }}" name="page">
-                            {% if page_title == 'Search Results' %}
-                                <input type="hidden" value="{{ searchTerm }}" name="product_title">
-                            {% endif %}
-                            <button type="submit" class="submit-filters">Apply Filters</button>
-                    </div>
-                </form>
+                    </form>
+                {% endif %}
                 <div class="single-pro">
                     {% if object_list and foundNothing == False %}
                         {% for item in object_list %}

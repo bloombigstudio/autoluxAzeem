@@ -325,6 +325,9 @@ class PlaceOrder(TemplateView):
                 send_mail(subject, message, 'autoluxpk@gmail.com', ['autoluxpk@gmail.com'],
                           fail_silently=False)
 
+                send_mail(subject, message, 'autoluxpk@gmail.com', [email],
+                          fail_silently=False)
+
                 orderData = {
                     'orderNumber': order_number,
                     'success': True
