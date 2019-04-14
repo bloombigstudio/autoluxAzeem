@@ -294,12 +294,11 @@
               </div>
               <div class="row">
                 <div class="filter-by-car-buttons">
-                    <form action="{% url 'products' item_name="Search" %}" method="post" id="car-selection-form">
-                        {% csrf_token %}
+                    <form action="{% url 'products' item_name="filterbycar" %}" method="get" id="car-selection-form">
                        <fieldset>
-                           <input id="selected-car-make" type="hidden" name="selected_car_make" value="" />
-                           <input id="selected-car-model" type="hidden" name="selected_car_model" value="" />
-                           <input id="selected-car-year" type="hidden" name="selected_car_year" value="" />
+                           <input id="selected-car-make" type="hidden" name="make" value="" />
+                           <input id="selected-car-model" type="hidden" name="model" value="" />
+                           <input id="selected-car-year" type="hidden" name="year" value="" />
                        </fieldset>
                       <div class="modal-footer">
                         <button id="filter-done-button" class="btn done-button" onclick="searchByCarFunc()">Done</button>

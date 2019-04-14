@@ -73,7 +73,14 @@ class Products(ListView):
         categoryFilter = self.request.GET.get('product_category')
         sort_by = 'created_at'
 
-        if item_name != "SearchResults" and (categoryFilter == None or categoryFilter == ''):
+        if item_name == 'filterbycar':
+            car_make = self.request.GET.get('make')
+            car_year = self.request.GET.get('year')
+            car_model = self.request.GET.get('model')
+            context = Product.objects.filter(cars_related_name__car_year=car_year.strip(),
+                                           cars_related_name__model__car_model=car_model.strip(),
+                                           cars_related_name__model__company__car_make=car_make.strip())
+        elif item_name != "SearchResults" and (categoryFilter == None or categoryFilter == ''):
             context = Product.objects.filter(product_category__iexact=item_name).order_by(sort_by)
         else:
             context = super(Products, self).get_queryset()
@@ -100,6 +107,8 @@ class Products(ListView):
             context['page_title'] = "4x4/SUV items"
         elif item_name == 'Utilites':
             context['page_title'] = "Outdoor Utilities"
+        elif item_name == 'filterbycar':
+            context['page_title'] = 'Filter By Car'
         else:
             context['page_title'] = item_name
 
