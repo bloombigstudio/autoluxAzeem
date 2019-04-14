@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load widget_tweaks %}
+{% load templatetags %}
+
 {% block css %}
     <link rel="shortcut icon" href="{% static 'images/logo.png' %}" type="image/gif" sizes="16x16">
     <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all"/>
@@ -8,7 +11,6 @@
     <link href="{% static 'css/easy-responsive-tabs.css' %}" rel='stylesheet' type='text/css'/>
     <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.css' %}">
 
-    <!-- //for bootstrap working -->
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
     <link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic'
           rel='stylesheet' type='text/css'>
@@ -41,7 +43,7 @@
                     {{ page_title }}
                 </h3>
             </div>
-            <!--/w3_short-->
+
             <div class="services-breadcrumb">
                 <div class="agile_inner_breadcrumb">
 
@@ -51,25 +53,13 @@
                     </ul>
                 </div>
             </div>
-            <!--//w3_short-->
         </div>
     </div>
 
-    <!-- banner-bootom-w3-agileits -->
     <div class="banner-bootom-w3-agileits">
         <div class="container">
             <!-- mens -->
             <div class="col-md-4 products-left">
-                <div class="filter-price">
-                    <h3>Filter By <span>Price</span></h3>
-                    <ul class="dropdown-menu6">
-                        <li>
-                            <div id="slider-range"></div>
-                            <input name="price" type="text" id="amount"
-                                   style="border: 0; color: #ffffff; font-weight: normal;"/>
-                        </li>
-                    </ul>
-                </div>
                 <div class="css-treeview">
                     <h4>Categories</h4>
                     <ul class="tree-list-pad">
@@ -94,71 +84,81 @@
                 <div class="clearfix"></div>
             </div>
             <div class="col-md-8 products-right">
-                {#			<h5>Product <span>Compare(0)</span></h5>#}
                 <h5>Products</h5>
-                <div class="sort-grid">
-                    <div class="sorting">
-                        <h6>Sort By</h6>
-                        <select id="country1" class="frm-field required sect">
-                            <option value="null">Default</option>
-                            <option value="LowToHigh">Low to high</option>
-                            <option value="HighToLow">High to low</option>
-                            <option value="AToZ">A to Z</option>
-                            <option value="ZToA">Z to A</option>
-                        </select>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="sorting">
-                        <h6>Showing</h6>
-                        <select id="country2" class="frm-field required sect">
-                            <option value="All">All</option>
-                            <option value="7">7</option>
-                            <option value="14">14</option>
-                            <option value="28">28</option>
-                        </select>
-                        <div class="clearfix"></div>
-                    </div>
+                <form method="get" action="{% url 'products' item_name=item_category %}">
 
-                    <div class="sorting">
-                        <h6>Specific Categories</h6>
-                        <select id="categories_search" class="frm-field required sect">
-                            <option value="all">All</option>
-                            <option value="interior">Interior</option>
-                            <option value="exterior">Exterior</option>
-                            <option value="mats">Mats</option>
-                            <option value="car_detailing">Car Detailing</option>
-                            <option value="led_lights">LED Lights</option>
-                            <option value="suv_items">SUV Items</option>
-                            <option value="outdoor_utilities">Outdoor Utilities</option>
-                        </select>
-                        <div class="clearfix"></div>
-                    </div>
+                <div class="container main-filter-div">
+                      <div class="span2 investRange">
+                        <div class="btn-group">
 
-                    <div class="sorting apply_filters">
-                        <div class="apply-filters-button">
-                            <form action="{% url 'products' item_name=item_category %}" id="sorting-form-id"
-                                  method="POST">
-                                {% csrf_token %}
-                                <input type="hidden" name="sorting-price" id="price_value" value="">
-                                <input type="hidden" name="sorting-order" id="order_value" value="">
-                                <input type="hidden" name="sorting-items" id="items_value" value="">
-                                <input type="hidden" name="categories_search" id="items_categories" value="">
-                                {#                            <input type="hidden" name="sorting-category" id="category_value" value="">#}
-                                <input type="hidden" name="searched-item" value="{{ searched_item }}">
-                                <input type="hidden" name="searched-car-make" value="{{ selected_car_make }}">
-                                <input type="hidden" name="searched-car-model" value="{{ selected_car_model }}">
-                                <input type="hidden" name="searched-car-year" value="{{ selected_car_year }}">
-                                <button type="button" onclick="load_data()">Apply Filters</button>
-                            </form>
+                          <button id="min-max-price-range" class="form-control selectpicker select-btn  dropdown-toggle searchParams" href="#" data-toggle="dropdown" tabindex="6">
+                            <div class="filter-option pull-left span_price">
+                              <span id="price_range1"> </span> - <span id="price_range2">Price Range</span> </div>
+                            <span class="bs-caret" style="float: right;"><span class="caret"></span></span>
+                          </button>
+
+                          <div class="dropdown-menu ddRange" role="menu" style="width: 295px;padding-top: 12px;">
+                            <div class="rangemenu">
+                              <div class="freeformPrice">
+                                <div class="col-md-5">
+                                  <input name="product_price_min" id="min_price_id" type="text" class="min_input form-control" placeholder="Min Price">
+                                </div>
+                                <div class="col-md-2 "><span class="arrow"></span></div>
+                                <div class="col-md-5">
+                                  <input name="product_price_max" id="max_price_id" type="text" class="max_input form-control" placeholder="Max Price">
+                                </div>
+                              </div>
+
+                              <div class="price_Ranges rangesMax col-md-5">
+                                <a class="max_value" value="" href="javascript:void(0)">Any Max</a>
+                                <a class="max_value" value="1000000" href="javascript:void(0)">10 lakhs</a>
+                                <a class="max_value" value="2500000" href="javascript:void(0)">25 lakhs</a>
+                                <a class="max_value" value="5000000" href="javascript:void(0)">50 lakhs</a>
+                                <a class="max_value" value="10000000" href="javascript:void(0)">1 cr</a>
+                                <a class="max_value" value="50000000" href="javascript:void(0)">5 cr</a>
+                                <a class="max_value" value="100000000" href="javascript:void(0)">10 cr</a>
+                                <a class="max_value" value="500000000" href="javascript:void(0)">50 cr</a>
+                                <a class="max_value" value="1000000000" href="javascript:void(0)">100 cr</a>
+                                <a class="max_value" value="2000000000" href="javascript:void(0)">200 cr</a>
+                                <a class="max_value" value="5000000000" href="javascript:void(0)">500 cr</a>
+                              </div>
+                              <div class="col-md-2"> </div>
+
+                              <div class="price_Ranges rangesMin col-md-5">
+                                <a class="min_value" value="" href="javascript:void(0)">Any Min</a>
+                                <a class="min_value" value="1000000" href="javascript:void(0)">10 lakhs</a>
+                                <a class="min_value" value="2500000" href="javascript:void(0)">25 lakhs</a>
+                                <a class="min_value" value="5000000" href="javascript:void(0)">50 lakhs</a>
+                                <a class="min_value" value="10000000" href="javascript:void(0)">1 cr</a>
+                                <a class="min_value" value="50000000" href="javascript:void(0)">5 cr</a>
+                                <a class="min_value" value="100000000" href="javascript:void(0)">10 cr</a>
+                                <a class="min_value" value="500000000" href="javascript:void(0)">50 cr</a>
+                                <a class="min_value" value="1000000000" href="javascript:void(0)">100 cr</a>
+                                <a class="min_value" value="2000000000" href="javascript:void(0)">200 cr</a>
+                                <a class="min_value" value="5000000000" href="javascript:void(0)">500 cr</a>
+                              </div>
+                            </div>
+
+                            <div class="btnClear">
+                              <a href="javascript:void(0)" class="btn btn-link">Clear</a>
+                            </div>
+                          </div>
+
                         </div>
+                      </div>
+
+                          {% render_field filter.form.sorting class="form-control" %}
+                          {% render_field filter.form.product_category class="form-control" %}
+                          <input type="hidden" value="{{ currentPage }}" name="page">
+                            {% if page_title == 'Search Results' %}
+                                <input type="hidden" value="{{ searchTerm }}" name="product_title">
+                            {% endif %}
+                            <button type="submit" class="submit-filters">Apply Filters</button>
                     </div>
-                    <div class="clearfix"></div>
-
-                </div>
-
+                </form>
                 <div class="single-pro">
-                    {% if page_data %}
-                        {% for item in page_data %}
+                    {% if object_list and foundNothing == False %}
+                        {% for item in object_list %}
 
                             <div class="col-md-4 product-men">
                                 <div class="men-pro-item simpleCart_shelfItem">
@@ -185,46 +185,44 @@
                                         <button class="add-to-cart-btn" id="addtocart-{{ item.id }}" onclick='addItemToCart("{{ item.id }}")'>
                                             Add to Cart
                                         </button>
-{#                                        {% include 'add-to-cart-partial.html' %}#}
-
                                     </div>
                                 </div>
                             </div>
                         {% endfor %}
+
+                    {% else %}
+                        <div style="text-align: center; font-weight: bold;">No results found</div>
                     {% endif %}
 
                     <div class="clearfix"></div>
                 </div>
-            </div>
+            {% if is_paginated %}
+                  <ul class="pagination">
+                    {% if page_obj.has_previous %}
+                        <li><a href="{% query_transform page=page_obj.previous_page_number %}">&laquo;</a></li>
+                    {% else %}
+                      <li class="disabled"><span>&laquo;</span></li>
+                    {% endif %}
+                    {% for i in paginator.page_range %}
+                      {% if page_obj.number == i %}
+                        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                      {% else %}
+                          <li><a href="{% query_transform page=i %}">{{ i }}</a></li>
+                      {% endif %}
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                        <li><a href="{% query_transform page=page_obj.next_page_number  %}">&raquo;</a></li>
+                    {% else %}
+                      <li class="disabled"><span>&raquo;</span></li>
+                    {% endif %}
+                  </ul>
+                {% endif %}
+                    <div class="clearfix"></div>
 
-            {% if page_data.has_other_pages %}
-                <div align="center">
-                    <ul class="pagination">
-                        {% if page_data.has_previous %}
-                            <li><a href="?page={{ page_data.previous_page_number }}">&laquo;</a></li>
-                        {% else %}
-                            <li class="disabled"><span>&laquo;</span></li>
-                        {% endif %}
-                        {% for i in page_data.paginator.page_range %}
-                            {% if users.number == i %}
-                                <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-                            {% else %}
-                                <li><a href="?page={{ i }}">{{ i }}</a></li>
-                            {% endif %}
-                        {% endfor %}
-                        {% if page_data.has_next %}
-                            <li><a href="?page={{ page_data.next_page_number }}">&raquo;</a></li>
-                        {% else %}
-                            <li class="disabled"><span>&raquo;</span></li>
-                        {% endif %}
-                    </ul>
                 </div>
-            {% endif %}
-
 
         </div>
     </div>
-    <!-- //mens -->
 
     <!-- js -->
     <script type="text/javascript" src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
@@ -257,9 +255,150 @@
 
     {% if searched_item %}
         $(document).ready(function () {
-            $('#my-id-yoo').val('{{ searched_item }}');
+            $('#search-term-id').val('{{ searched_item }}');
         });
     {% endif %}
+
+    </script>
+
+    <script>
+        var min_price_value, max_price_value;
+        $('#min_price_id').focusout((val) => {
+            min_price_value = $('#min_price_id').val();
+            document.getElementById('price_range1').innerHTML = min_price_value;
+        });
+
+        $('#max_price_id').focusout((val) => {
+            max_price_value = $('#max_price_id').val();
+            document.getElementById('price_range2').innerHTML = max_price_value;
+        });
+
+        function getUrlVars()
+        {
+            var vars = [], hash;
+            var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+            for(var i = 0; i < hashes.length; i++)
+            {
+                hash = hashes[i].split('=');
+                vars.push(hash[0]);
+                vars[hash[0]] = hash[1];
+            }
+            return vars;
+        }
+
+        var queryParams = getUrlVars();
+
+        if(queryParams['product_price_min']) {
+            document.getElementById('price_range1').innerHTML = queryParams['product_price_min'];
+        }
+
+        if(queryParams['product_price_max']) {
+            document.getElementById('price_range2').innerHTML = queryParams['product_price_max'];
+        }
+
+    </script>
+    <script>
+
+          $('.dropdown-menu.ddRange')
+        .click(function(e) {
+          e.stopPropagation();
+        });
+
+      function disableDropDownRangeOptions(max_values, minValue) {
+        if (max_values) {
+          max_values.each(function() {
+            var maxValue = $(this).attr("value");
+
+            if (parseInt(maxValue) < parseInt(minValue)) {
+              $(this).addClass('disabled');
+            } else {
+              $(this).removeClass('disabled');
+            }
+          });
+        }
+      }
+
+      function setuinvestRangeDropDownList(min_values, max_values, min_input, max_input, clearLink, dropDownControl) {
+          min_values.click(function() {
+          var minValue = $(this).attr('value');
+          min_input.val(minValue);
+          document.getElementById('price_range1').innerHTML = minValue;
+
+          disableDropDownRangeOptions(max_values, minValue);
+
+          validateDropDownInputs();
+        });
+
+        max_values.click(function() {
+          var maxValue = $(this).attr('value');
+          max_input.val(maxValue);
+          document.getElementById('price_range2').innerHTML = maxValue;
+
+          toggleDropDown();
+        });
+
+        clearLink.click(function() {
+          min_input.val('');
+          max_input.val('');
+
+          disableDropDownRangeOptions(max_values);
+
+          validateDropDownInputs();
+        });
+
+        min_input.on('input',
+          function() {
+            var minValue = min_input.val();
+
+            disableDropDownRangeOptions(max_values, minValue);
+            validateDropDownInputs();
+          });
+
+        max_input.on('input', validateDropDownInputs);
+
+        max_input.blur('input',
+          function() {
+            toggleDropDown();
+          });
+
+        function validateDropDownInputs() {
+          var minValue = parseInt(min_input.val());
+          var maxValue = parseInt(max_input.val());
+
+          if (maxValue > 0 && minValue > 0 && maxValue < minValue) {
+            min_input.addClass('inputError');
+            max_input.addClass('inputError');
+
+            return false;
+          } else {
+            min_input.removeClass('inputError');
+            max_input.removeClass('inputError');
+
+            return true;
+          }
+        }
+
+        function toggleDropDown() {
+          if (validateDropDownInputs() &&
+            parseInt(min_input.val()) > 0 &&
+            parseInt(max_input.val()) > 0) {
+
+            // auto close if two values are valid
+
+              if(dropDownControl && dropDownControl.dropdown) {
+                dropDownControl.dropdown('toggle');
+              }
+          }
+        }
+      }
+
+      setuinvestRangeDropDownList(
+        $('.investRange .min_value'),
+        $('.investRange .max_value'),
+        $('.investRange .freeformPrice .min_input'),
+        $('.investRange .freeformPrice .max_input'),
+        $('.investRange .btnClear'),
+        $('.investRange .dropdown-toggle'));
 
     </script>
 

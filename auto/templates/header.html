@@ -29,7 +29,7 @@
         <!-- header-bot -->
             <div class="col-md-4 header-middle header-middle-custom">
                 <form action="{% url 'products' item_name="SearchResults" %}" method="GET">
-                    {% render_field filter.form.product_title type="search" id="my-id-yoo" class="input_search_header_custom" placeholder="Search here..." required=""%}
+                    {% render_field filter.form.product_title type="search" id="search-term-id" class="input_search_header_custom" placeholder="Search here..." required="false"%}
                     <input class="input_submit_header_custom" type="submit" value=" ">
                     <div class="clearfix"></div>
                 </form>

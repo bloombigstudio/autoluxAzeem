@@ -1,16 +1,46 @@
 import django_filters
 from django.forms import TextInput, fields
-
 from auto.models import Product
 
+SORT_CHOICES = {
+    ('lowToHigh', 'Low to High'),
+    ('highToLow', 'High to Low'),
+    ('aToz', 'A To Z'),
+    ('zToa', 'Z To A'),
+}
+
+CATEGORY_CHOICES = {
+    ('Interior', 'INTERIOR'),
+    ('Exterior', 'EXTERIOR'),
+    ('Mats', 'MATS'),
+    ('Detailing', 'DETAILING'),
+    ('Leds', 'LEDS'),
+    ('Suvs', 'SUVS'),
+    ('Utilites', 'UTILITES'),
+    ('Others', 'OTHERS'),
+}
 
 class ProductFilter(django_filters.FilterSet):
-    product_title = django_filters.CharFilter(lookup_expr='icontains')
     class Meta:
         model = Product
-        fields = ['product_title',]
-        # fields = {
-        #     'product_title': ['icontains'],
-        # }
+        fields = ['product_title', 'product_category', 'product_price']
 
+    product_title = django_filters.CharFilter(lookup_expr='icontains')
+    sorting = django_filters.ChoiceFilter(label="Sort By", choices=SORT_CHOICES, method="filter_by_sort")
+    product_category = django_filters.ChoiceFilter(label="Select category", choices=CATEGORY_CHOICES, lookup_expr='iexact')
+    product_price = django_filters.RangeFilter()
 
+    def filter_by_sort(self, queryset, name, value):
+        if value == 'lowToHigh':
+            expression = 'product_price'
+        elif value == 'highToLow':
+            expression = '-product_price'
+        elif value == 'aToz':
+            expression = 'product_title'
+        elif value == 'zToa':
+            expression = '-product_title'
+
+        return queryset.order_by(expression)
+
+    # def filter_by_category(self, queryset, name, value):
+    #     return queryset.filter(product_category=value)

@@ -6579,3 +6579,84 @@ label {
 .banner-boasdasdotom-w3-agileits {
     margin-top: 15vh;
 }
+
+.arrow{
+color: #ccc;
+    background-color: #ccc;
+    display: inline-block;
+    height: 1px;
+    width: 12px;
+    position: relative;
+
+}
+.max_value{
+    padding: 6px 6px 6px 30px;
+}
+
+.price_Ranges {
+    float: right;
+    width: 50%;
+}
+.price_Ranges a {
+    display: block;
+    text-align: left;
+    padding: 6px 0 6px 0;
+    color: #6f6e6e;
+    font-weight: 500;
+}
+.price_Ranges a.max_value {
+    padding-right: 12px;
+    padding-left: 12px;
+   margin-left: 30px;
+}
+.price_Ranges a.min_value {
+    padding-right: 22px;
+        padding-left: 12px;
+}
+.price_Ranges a.disabled {
+    pointer-events: none;
+    cursor: default;
+    color: #E5E4E2;
+}
+.price_Ranges a:hover {
+   background: #0074e4;
+   color: #fff;
+   cursor: pointer;
+text-decoration: none;
+}
+.btnClear {
+    clear: both;
+    border-top: 1px solid #dadada;
+    padding: 5px 0 0 0;
+    text-align: center;
+}
+input.inputError,
+input.inputError:focus {
+    border-color: #e2231a;
+    background-color: white;
+    color: #e2231a;
+    box-shadow: inset 0 0 5px #F7BDBB;
+    border-radius: 0;
+}
+.main-filter-div {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    place-content: space-between;
+    width: 100%;
+    margin-top: 20px;
+}
+.main-filter-div .investRange {
+    margin-right: 16px;
+}
+.main-filter-div select {
+    margin-right: 16px;
+    max-width: 20%;
+}
+.submit-filters {
+    border: 1px solid #da2f2f;
+    color: white;
+    border-radius: 5px;
+    background-color: #da2f2f;
+    padding: 2px 5px 2px 5px;
+}
