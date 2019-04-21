@@ -5,14 +5,68 @@
 {% endblock %}
 
 {% block content %}
-    {% for posts in post %}
-        <h2>
-        <a href="{{ posts.get_absolute_url }}">
-            {{ posts.title }}
-        </a>
-        </h2>
-        <p>Written by {{ posts.author }} on {{ posts.published }}</p>
-        <hr>
-        {{ posts.content|truncatewords:40|linebreaks }}
-    {% endfor %}
+    <div class="banner-bootom-w3-agileits">
+        <div class="container">
+            <!-- mens -->
+            <div class="col-md-4 products-left">
+                <div class="css-treeview">
+                    <h4>Categories</h4>
+                    <ul class="tree-list-pad">
+                        <li><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <a
+                                href="{% url 'products' item_name='Interior' %}">Interior</a></label></li>
+                        <li><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <a
+                                href="{% url 'products' item_name='Exterior' %}">Exterior</a></label></li>
+                        <li><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <a
+                                href="{% url 'products' item_name='Mats' %}">Mats</a></label></li>
+                        <li><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <a
+                                href="{% url 'products' item_name='Detailing' %}">Car Detailing</a></label></li>
+                        <li><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <a
+                                href="{% url 'products' item_name='Leds' %}">LED lights</a></label></li>
+                        <li><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <a
+                                href="{% url 'products' item_name='Suvs' %}">SUV Items</a></label></li>
+                        <li><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <a
+                                href="{% url 'products' item_name='Utilites' %}">Outdoor Utilities</a></label></li>
+                        <li><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> <a
+                                href="{% url 'products' item_name='Others' %}">Others</a></label></li>
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="col-md-8 products-right">
+                <h5>Blogs</h5>
+            {% for posts in post %}
+{#                <a href="{{ posts.get_absolute_url }}">#}
+{#                    {{ posts.title }}#}
+{#                </a>#}
+{#                <img src="{{ posts.image.url }}">#}
+{#                </h2>#}
+{#                <p>Written by {{ posts.author }} on {{ posts.published }}</p>#}
+{#                <hr>#}
+{#                {{ posts.content|truncatewords:40|linebreaks }}#}
+
+            <div class="single-pro">
+                <div class="col-md-4 product-men">
+                    <div class="men-pro-item simpleCart_shelfItem">
+                        <a href="{{ posts.get_absolute_url }}">
+                            <div class="men-thumb-item-custom-products">
+                                <img src="{{ posts.image.url }}" alt=""
+                                     class="pro-image-front">
+                            </div>
+                        </a>
+                        <div class="item-info-product ">
+                            <h4 style="padding-bottom: 20px;">
+                                <a href="{{ posts.get_absolute_url }}" style="color: #000;">{{ posts.title }}</a></h4>
+
+                            <button class="add-to-cart-btn">
+                                <a href="{{ posts.get_absolute_url }}"
+                                style="color: white;">View</a>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -6048,7 +6048,7 @@ label {
     margin: auto -3px;
 }
 .menu_list_custom li a{
-    padding: 15px;
+    padding: 10px;
 }
 @media (max-width:1200px){
     .menu_list_custom li a{
@@ -6659,4 +6659,19 @@ input.inputError:focus {
     border-radius: 5px;
     background-color: #da2f2f;
     padding: 2px 5px 2px 5px;
+}
+.blog-image-main {
+    display: flex;
+    flex-direction: column;
+    place-content: center;
+    align-items: center;
+    margin-top: 5em;
+}
+.blog-detail-main {
+    display: flex;
+    flex-direction: column;
+    max-width: 60%;
+    place-content: center;
+    align-items: center;
+    margin: 2em auto;
 }

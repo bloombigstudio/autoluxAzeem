@@ -10,6 +10,7 @@ class Post(models.Model):
         ('published', 'Published'),
     )
     title = models.CharField(max_length=250)
+    image = models.ImageField(upload_to='images/blog', null=True, blank=True)
     slug = models.SlugField(max_length=250)
     content = models.TextField()
     seo_title = models.CharField(max_length=250)
