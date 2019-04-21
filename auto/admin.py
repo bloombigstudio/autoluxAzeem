@@ -1,6 +1,7 @@
 from django.contrib import admin
 
 from auto.models import *
+from blog.models import Post
 
 
 class ProductSpecificationInline(admin.TabularInline):
@@ -49,5 +50,6 @@ admin.site.register(UserWithoutAccount, UsersAdmin)
 admin.site.register(OrderPageBackground)
 admin.site.register(HomePageCategoriesImages, HomePageCategoriesImagesAdmin)
 admin.site.register(CategoryWiseImageBackground, CategoryWiseImagesAdmin)
+admin.site.register(Post)
 
 
