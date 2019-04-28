@@ -165,7 +165,7 @@
                 </div>
                 <div class="new-arrival-products">
                     {% if all_products %}
-                        {% for item in all_products|slice:":30"  %}
+                        {% for item in all_products %}
                         <div class="col-md-3 product-men filter {{ item.product_category|cut:" " }}">
                             <div class="men-pro-item simpleCart_shelfItem">
                                 <a href="{% url 'single' id=item.id %}">
