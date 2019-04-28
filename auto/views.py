@@ -36,7 +36,7 @@ class Index(TemplateView):
         categories = Category_CHOICES
 
         for category in categories:
-            self.all_products += Product.objects.filter(product_category=category[0]).order_by('-created_at')[0:4]
+            self.all_products += Product.objects.filter(product_category=category[0]).order_by('-created_at')[0:8]
             # self.all_products = self.all_products + list(products)
 
         home_categories_images = HomePageCategoriesImages.objects.latest()
