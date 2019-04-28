@@ -27,21 +27,20 @@ params = {'signUp': signUpForm, 'signIn': signInForm, "all_cars": all_cars}
 
 class Index(TemplateView):
     template_name = 'index.html'
-    all_products = []
 
     def get(self, request, *args, **kwargs):
         product_filter = ProductFilter(request.GET, queryset=product_list)
         silder_images = SliderImage.objects.all()
 
         categories = Category_CHOICES
+        all_products = []
 
         for category in categories:
-            self.all_products += Product.objects.filter(product_category=category[0]).order_by('-created_at')[0:8]
-            # self.all_products = self.all_products + list(products)
+            all_products += Product.objects.filter(product_category=category[0]).order_by('-created_at')[0:8]
 
         home_categories_images = HomePageCategoriesImages.objects.latest()
 
-        params['all_products'] = self.all_products
+        params['all_products'] = all_products
         params['stripe_key'] = settings.STRIPE_PUBLIC_KEY
         params['filter'] = product_filter
         params['slider_images'] = silder_images
