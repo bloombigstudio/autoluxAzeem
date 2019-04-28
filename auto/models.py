@@ -7,6 +7,7 @@ from django.contrib.auth.models import BaseUserManager
 from imagekit.models import ImageSpecField
 from pilkit.processors import ResizeToFill
 import json
+from autoslug import AutoSlugField
 
 Category_CHOICES = (
     ('Interior', 'INTERIOR'),
@@ -31,6 +32,7 @@ class ProductColors(models.Model):
 
 class Product(models.Model):
     product_title = models.CharField(max_length=255)
+    product_slug = AutoSlugField(null=True, default=None, unique=True, populate_from='product_title')
     product_category = models.CharField(max_length=9, choices=Category_CHOICES, default='EPIC')
     product_image_front = models.ImageField(upload_to='images')
     front_image_thumbnail = ImageSpecField(source='product_image_front',

@@ -135,13 +135,13 @@
                                 <img src="{{ item.product_image_back.url }}" alt="" class="pro-image-back">
                                     <div class="men-cart-pro">
                                         <div class="inner-men-cart-pro">
-                                            <a href="{% url 'single' id=item.id %}" class="link-product-add-cart">Quick View</a>
+                                            <a href="{% url 'single' category=item.product_category itemslug=item.product_slug %}" class="link-product-add-cart">Quick View</a>
                                         </div>
                                     </div>
                                     <span class="product-new-top">New</span>
                             </div>
                             <div class="item-info-product ">
-                                <h4><a id="title-{{ item.id }}" href="{% url 'single' id=item.id %}">{{ item.product_title }}</a></h4>
+                                <h4><a id="title-{{ item.id }}" href="{% url 'single' category=item.product_category  itemslug=item.product_slug %}">{{ item.product_title }}</a></h4>
                                 {% if item.product_discounted_price != null %}
                                     <div class="info-product-price">
                                         <span class="item_price" id="discounted-price-{{ item.id }}">Rs {{ item.product_discounted_price }}</span>

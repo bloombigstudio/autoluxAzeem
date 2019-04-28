@@ -123,8 +123,8 @@ class ProductDescription(TemplateView):
         product_filter = ProductFilter(request.GET, queryset=product_list)
         params['filter'] = product_filter
 
-        item_id = kwargs.get('id')
-        selected_item = ProductSpecification.objects.filter(product_id_id=item_id)
+        item_slug = kwargs.get('itemslug')
+        selected_item = ProductSpecification.objects.filter(product_id__product_slug=item_slug)
         productColors = selected_item.first().product_id.product_colors.all()
         new_arrivals = Product.objects.all().order_by('-id')[:4]
         category_wise_images = CategoryWiseImageBackground.objects.latest()
