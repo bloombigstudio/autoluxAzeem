@@ -98,6 +98,7 @@ class Products(ListView):
         context['item_category'] = item_name
         context['searchTerm'] = searchTerm
         context['filter'] = self.product_filter
+        context['all_cars'] = CarCompany.objects.all()
 
         if item_name == "SearchResults":
             context['page_title'] = "Search Results"
@@ -152,6 +153,7 @@ class ProductDescription(TemplateView):
         params['productColors'] = productColors
         params['item'] = selected_item.first()
         params['new_arrivals'] = new_arrivals
+        params['all_cars'] = CarCompany.objects.all()
         return render(request, self.template_name,params)
 
 
@@ -160,6 +162,7 @@ class Contact(TemplateView):
     def get(self, request, *args, **kwargs):
         product_filter = ProductFilter(request.GET, queryset=product_list)
         params['filter'] = product_filter
+        params['all_cars'] = CarCompany.objects.all()
 
         if 'Email' in request.GET:
             subject = request.GET['Subject']

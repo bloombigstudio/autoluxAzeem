@@ -165,7 +165,7 @@
 
                             <div class="col-md-4 product-men">
                                 <div class="men-pro-item simpleCart_shelfItem">
-                                    <a href="{% url 'single' category=item.product_category itemslug=item.product_slug %}">
+                                    <a href="{% url 'single' category=item.product_category itemslug=item.product_slug %}" onclick='productClick("{{ item.id }}")'>
                                         <div id="product-image-{{ item.id }}" class="men-thumb-item men-thumb-item-custom-products">
                                             <img src="{{ item.product_image_front.url }}" alt=""
                                                  class="pro-image-front">
