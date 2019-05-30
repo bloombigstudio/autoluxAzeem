@@ -200,7 +200,7 @@
                     <div class="clearfix"></div>
                 </div>
             {% if is_paginated %}
-                  <ul class="pagination">
+                  <ul class="pagination pagination_custom">
                     {% if page_obj.has_previous %}
                         <li><a href="{% query_transform page=page_obj.previous_page_number %}">&laquo;</a></li>
                     {% else %}

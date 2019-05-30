@@ -6675,3 +6675,16 @@ input.inputError:focus {
     align-items: center;
     margin: 2em auto;
 }
+
+.pagination_custom .active a, .pagination_custom .active span{
+    background-color: #da2f2f;
+    border-color: #da2f2f;
+}
+.pagination_custom .active a:hover, .pagination_custom .active a:focus,
+.pagination_custom .active span:hover, .pagination_custom .active span:focus {
+    background-color: #e60000;
+    border-color: #e60000;
+}
+.pagination_custom > li > a, .pagination_custom > li > span {
+    color: #000;
+}
