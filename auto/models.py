@@ -35,11 +35,13 @@ class Product(models.Model):
     product_slug = AutoSlugField(null=True, default=None, unique=True, populate_from='product_title')
     product_category = models.CharField(max_length=9, choices=Category_CHOICES, default='EPIC')
     product_image_front = models.ImageField(upload_to='images')
+    product_image_front_alt = models.CharField(max_length=200, blank=True, null=True)
     front_image_thumbnail = ImageSpecField(source='product_image_front',
                                       processors=[ResizeToFill(200, 150)],
                                       format='JPEG',
                                       options={'quality': 50})
     product_image_back = models.ImageField(upload_to='images')
+    product_image_back_alt = models.CharField(max_length=200, blank=True, null=True)
     back_image_thumbnail = ImageSpecField(source='product_image_back',
                                            processors=[ResizeToFill(200, 150)],
                                            format='JPEG',
@@ -47,6 +49,7 @@ class Product(models.Model):
     product_price = models.FloatField(null=False,default=0)
     product_discounted_price = models.FloatField(blank=True, null=True)
     product_colors = models.ManyToManyField(ProductColors,null=True, blank=True)
+    product_meta_description = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -59,16 +62,19 @@ class ProductSpecification(models.Model):
     product_description = models.CharField(max_length=200)
     product_information = models.CharField(max_length=200)
     product_review = models.CharField(max_length=200)
+    first_image_alt = models.CharField(max_length=200, blank=True, null=True)
     first_image = models.ImageField(upload_to='images')
     first_image_thumbnail = ImageSpecField(source='first_image',
                                           processors=[ResizeToFill(200, 150)],
                                           format='JPEG',
                                           options={'quality': 50})
+    second_image_alt = models.CharField(max_length=200, blank=True, null=True)
     second_image = models.ImageField(upload_to='images')
     second_image_thumbnail = ImageSpecField(source='second_image',
                                            processors=[ResizeToFill(200, 150)],
                                            format='JPEG',
                                            options={'quality': 50})
+    third_image_alt = models.CharField(max_length=200, blank=True, null=True)
     third_image = models.ImageField(upload_to='images')
     third_image_thumbnail = ImageSpecField(source='third_image',
                                            processors=[ResizeToFill(200, 150)],
@@ -161,6 +167,7 @@ class Order(models.Model):
 
 
 class SliderImage(models.Model):
+    main_slider_image_alt = models.CharField(max_length=200, blank=True, null=True)
     main_slider_image = models.ImageField(upload_to='images')
     slider_image_thumbnail = ImageSpecField(source='main_slider_image',
                                            processors=[ResizeToFill(1400, 600)],
@@ -185,14 +192,27 @@ class OrderPageBackground(models.Model):
 
 
 class HomePageCategoriesImages(models.Model):
+    led_lights_alt = models.CharField(max_length=200, blank=True, null=True)
     led_lights = models.ImageField(upload_to="images", blank=True, null=True, verbose_name='LED LIGHTS')
+
+    interior_alt = models.CharField(max_length=200, blank=True, null=True)
     interior = models.ImageField(upload_to="images", blank=True, null=True, verbose_name='INTERIOR')
+
+    suv_items_alt = models.CharField(max_length=200, blank=True, null=True)
     suv_items = models.ImageField(upload_to="images", blank=True, null=True, verbose_name='SUV ITEMS 4X4')
+
+    exterior_alt = models.CharField(max_length=200, blank=True, null=True)
     exterior = models.ImageField(upload_to="images", blank=True, null=True, verbose_name='EXTERIOR')
+
+    car_detailing_alt = models.CharField(max_length=200, blank=True, null=True)
     car_detailing = models.ImageField(upload_to="images", blank=True, null=True, verbose_name='CAR DETAILING')
+
+    outdoor_utilities_alt = models.CharField(max_length=200, blank=True, null=True)
     outdoor_utilities = models.ImageField(upload_to="images", blank=True, null=True, verbose_name='OUTDOOR UTILITIES')
+
     shop_now = models.ImageField(upload_to="images", blank=True, null=True, verbose_name='SHOP NOW')
     shop_now_mobile = models.ImageField(upload_to="images", blank=True, null=True, verbose_name='SHOP NOW MOBILE')
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -201,14 +221,30 @@ class HomePageCategoriesImages(models.Model):
 
 
 class CategoryWiseImageBackground(models.Model):
+    interior_alt = models.CharField(max_length=200, blank=True, null=True)
     interior = models.ImageField(upload_to="images", blank=True, null=True, verbose_name='INTERIOR')
+
+    exterior_alt = models.CharField(max_length=200, blank=True, null=True)
     exterior = models.ImageField(upload_to="images", blank=True, null=True, verbose_name='EXTERIOR')
+
+    mats_alt = models.CharField(max_length=200, blank=True, null=True)
     mats = models.ImageField(upload_to="images", blank=True, null=True, verbose_name='MATS')
+
+    car_detailing_alt = models.CharField(max_length=200, blank=True, null=True)
     car_detailing = models.ImageField(upload_to="images", blank=True, null=True, verbose_name='CAR DETAILING')
+
+    led_lights_alt = models.CharField(max_length=200, blank=True, null=True)
     led_lights = models.ImageField(upload_to="images", blank=True, null=True, verbose_name='LED LIGHTS')
+
+    suv_items_alt = models.CharField(max_length=200, blank=True, null=True)
     suv_items = models.ImageField(upload_to="images", blank=True, null=True, verbose_name='SUV ITEMS 4X4')
+
+    outdoor_utilities_alt = models.CharField(max_length=200, blank=True, null=True)
     outdoor_utilities = models.ImageField(upload_to="images", blank=True, null=True, verbose_name='OUTDOOR UTILITIES')
+
+    others_alt = models.CharField(max_length=200, blank=True, null=True)
     others= models.ImageField(upload_to="images", blank=True, null=True, verbose_name='OTHERS')
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

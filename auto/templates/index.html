@@ -39,14 +39,14 @@
                 {% for image in slider_images %}
                     {% if forloop.counter == 1 %}
                         <div class="item active custom-carousel-class">
-                            <img src="{{ image.main_slider_image.url }}">
+                            <img src="{{ image.main_slider_image.url }}" alt="{{ image.main_slider_image_alt }}">
 {#                            <div class="col-md-offset-2 col-md-8 carousel-caption-custom" align="center">#}
 {#                                <a class="hvr-outline-out button2" href="{% url 'products' item_name='Interior'%}">Shop Now </a>#}
 {#                            </div>#}
                         </div>
                     {% else %}
                         <div class="item custom-carousel-class">
-                            <img src="{{ image.main_slider_image.url }}">
+                            <img src="{{ image.main_slider_image.url }}" alt="{{ image.main_slider_image_alt }}">
 {#                            <div class="col-md-offset-2 col-md-8 carousel-caption-custom" align="center">#}
 {#                                <a class="hvr-outline-out button2" href="{% url 'products' item_name='Interior'%}">Shop Now </a>#}
 {#                            </div>#}
@@ -74,7 +74,7 @@
 					<a href="{% url 'products' item_name='Leds' %}">
 					 <div class="bb-middle-agileits-w3layouts grid">
 								 <figure class="effect-roxy">
-							<img src="{{ home_categories_images.led_lights.url }}" alt=" " class="img-responsive" />
+							<img src="{{ home_categories_images.led_lights.url }}" alt="{{ home_categories_images.led_lights_alt }}" class="img-responsive" />
 							<figcaption>
 								<h3><span>LED</span>lights </h3>
 {#								<p>Upto 55%</p>#}
@@ -85,7 +85,7 @@
 				<a href="{% url 'products' item_name='Suvs'%}">
 					<div class="bb-middle-agileits-w3layouts forth grid">
 						<figure class="effect-roxy">
-							<img src="{{ home_categories_images.suv_items.url }}" alt=" " class="img-responsive">
+							<img src="{{ home_categories_images.suv_items.url }}" alt="{{ home_categories_images.suv_items_alt }}" class="img-responsive">
 							<figcaption>
 								<h3><span>4x4/</span>SUV items </h3>
 {#								<p>Upto 65%</p>#}
@@ -97,7 +97,7 @@
 					<a href="{% url 'products' item_name='Detailing'%}">
 						<div class="bb-middle-agileits-w3layouts forth grid" style="margin-bottom: 15px;">
 							<figure class="effect-roxy">
-								<img src="{{ home_categories_images.car_detailing.url }}" alt=" " class="img-responsive">
+								<img src="{{ home_categories_images.car_detailing.url }}" alt="{{ home_categories_images.car_detailing_alt }}" class="img-responsive">
 								<figcaption>
 									<h3><span>Car</span> Detailing</h3>
 {#									<p>Upto 65%</p>#}
@@ -112,7 +112,7 @@
 		      <a href="{% url 'products' item_name='Interior'%}">
 		       <div class="bb-middle-agileits-w3layouts grid">
 			           <figure class="effect-roxy">
-							<img src="{{ home_categories_images.interior.url }}" alt=" " class="img-responsive" />
+							<img src="{{ home_categories_images.interior.url }}" alt="{{ home_categories_images.interior_alt }}" class="img-responsive" />
 							<figcaption>
 								<h3><span>I</span>nterior </h3>
 {#								<p>Upto 55%</p>#}
@@ -123,19 +123,19 @@
 				<a href="{% url 'products' item_name='Exterior'%}">
 		      <div class="bb-middle-agileits-w3layouts forth grid">
 						<figure class="effect-roxy">
-							<img src="{{ home_categories_images.exterior.url }}" alt=" " class="img-responsive">
+							<img src="{{ home_categories_images.exterior.url }}" alt="{{ home_categories_images.exterior_alt }}" class="img-responsive">
 							<figcaption>
 								<h3><span>E</span>xterior </h3>
 {#								<p>Upto 65%</p>#}
 							</figcaption>
-						</figure>
+						</figure>_
 					</div>
 					</a>
 
 					<a href="{% url 'products' item_name='Utilites'%}">
 						<div class="bb-middle-agileits-w3layouts forth grid">
 							<figure class="effect-roxy">
-								<img src="{{ home_categories_images.outdoor_utilities.url }}" alt=" " class="img-responsive">
+								<img src="{{ home_categories_images.outdoor_utilities.url }}" alt="{{ home_categories_images.outdoor_utilities_alt }}" class="img-responsive">
 								<figcaption>
 									<h3><span>Outdoor </span>Utilites </h3>
 {#									<p>Upto 65%</p>#}
@@ -170,8 +170,8 @@
                             <div class="men-pro-item simpleCart_shelfItem">
                                 <a href="{% url 'single' category=item.product_category itemslug=item.product_slug %}">
                                     <div id="product-image-{{ item.id }}" class="men-thumb-item men-thumb-item-custom-products">
-                                        <img src="{{ item.product_image_front.url }}" alt="" class="pro-image-front">
-                                        <img src="{{ item.product_image_back.url }}" alt="" class="pro-image-back">
+                                        <img src="{{ item.product_image_front.url }}" alt="{{ item.product_image_front_alt }}" class="pro-image-front">
+                                        <img src="{{ item.product_image_back.url }}" alt="{{ item.product_image_back_alt }}" class="pro-image-back">
                                     </div>
                                 </a>
                                 <div class="item-info-product">

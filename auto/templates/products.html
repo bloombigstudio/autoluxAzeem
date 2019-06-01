@@ -19,23 +19,23 @@
 
     <div class="contact-us-image">
         {% if page_title == "Interior" %}
-            <img class="category-header-img" src="{{ category_wise_images.interior.url }}">
+            <img class="category-header-img" src="{{ category_wise_images.interior.url }}" alt="{{ category_wise_images.interior_alt }}">
         {% elif  page_title == "Exterior" %}
-            <img class="category-header-img" src="{{ category_wise_images.exterior.url }}">
+            <img class="category-header-img" src="{{ category_wise_images.exterior.url }}" alt="{{ category_wise_images.exterior_alt }}">
         {% elif  page_title == "Mats" %}
-            <img class="category-header-img" src="{{ category_wise_images.mats.url }}">
+            <img class="category-header-img" src="{{ category_wise_images.mats.url }}" alt="{{ category_wise_images.mats_alt }}">
         {% elif  page_title == "Detailing" %}
-            <img class="category-header-img" src="{{ category_wise_images.car_detailing.url }}">
+            <img class="category-header-img" src="{{ category_wise_images.car_detailing.url }}" alt="{{ category_wise_images.car_detailing_alt }}">
         {% elif  page_title == "Leds" %}
-            <img class="category-header-img" src="{{ category_wise_images.led_lights.url }}">
+            <img class="category-header-img" src="{{ category_wise_images.led_lights.url }}" alt="{{ category_wise_images.led_lights_alt }}">
         {% elif  page_title == "4x4/SUV items" %}
-            <img class="category-header-img" src="{{ category_wise_images.suv_items.url }}">
+            <img class="category-header-img" src="{{ category_wise_images.suv_items.url }}" alt="{{ category_wise_images.suv_items_alt }}">
         {% elif  page_title == "Outdoor Utilities" %}
-            <img class="category-header-img" src="{{ category_wise_images.outdoor_utilities.url }}">
+            <img class="category-header-img" src="{{ category_wise_images.outdoor_utilities.url }}" alt="{{ category_wise_images.outdoor_utilities_alt }}">
         {% elif  page_title == "Others" %}
-            <img class="category-header-img" src="{{ category_wise_images.others.url }}">
+            <img class="category-header-img" src="{{ category_wise_images.others.url }}" alt="{{ category_wise_images.others_alt }}">
         {% else %}
-            <img class="category-header-img" src="{{ category_wise_images.interior.url }}">
+            <img class="category-header-img" src="{{ category_wise_images.interior.url }}" alt="{{ category_wise_images.interior_alt }}">
         {% endif %}
         <div class="col-md-12 myclass">
             <div class="col-md-offset-5 col-md-3">
@@ -167,9 +167,9 @@
                                 <div class="men-pro-item simpleCart_shelfItem">
                                     <a href="{% url 'single' category=item.product_category itemslug=item.product_slug %}" onclick='productClick("{{ item.id }}")'>
                                         <div id="product-image-{{ item.id }}" class="men-thumb-item men-thumb-item-custom-products">
-                                            <img src="{{ item.product_image_front.url }}" alt=""
+                                            <img src="{{ item.product_image_front.url }}" alt="{{ item.product_image_front_alt }}"
                                                  class="pro-image-front">
-                                            <img src="{{ item.product_image_back.url }}" alt="" class="pro-image-back">
+                                            <img src="{{ item.product_image_back.url }}" alt="{{ item.product_image_back_alt }}" class="pro-image-back">
                                         </div>
                                     </a>
                                     <div class="item-info-product ">
