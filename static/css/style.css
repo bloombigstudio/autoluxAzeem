@@ -1446,11 +1446,6 @@ position:relative;
     position: relative;
 	width: 80%;
 }
-.product-men {
-    /*margin: top;*/
-    margin-top: 2em;
-    height: 45vh;
-}
 button.w3view-cart {
     outline: none;
     border: none;
@@ -5960,13 +5955,7 @@ label {
     right: 0;
     margin: auto;
 }
-.men-thumb-item-custom-products {
-    /*height: 226px;*/
-    /*max-width: 255px;*/
-    /*position: relative;*/
-    /*margin: 0 auto;*/
-    height: 25vh;
-}
+
 .men-thumb-item-custom-products img {
     max-height: 100%;
     max-width: 100%;
@@ -6576,10 +6565,6 @@ label {
     }
 }
 
-.banner-boasdasdotom-w3-agileits {
-    margin-top: 15vh;
-}
-
 .arrow{
 color: #ccc;
     background-color: #ccc;
@@ -6676,6 +6661,12 @@ input.inputError:focus {
     margin: 2em auto;
 }
 
+.pagination_custom {
+    display: flex;
+    flex-direction: row;
+    place-content: center;
+}
+
 .pagination_custom .active a, .pagination_custom .active span{
     background-color: #da2f2f;
     border-color: #da2f2f;
@@ -6687,4 +6678,80 @@ input.inputError:focus {
 }
 .pagination_custom > li > a, .pagination_custom > li > span {
     color: #000;
+}
+
+
+/**/
+
+.view-group {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+.thumbnail
+{
+    margin-bottom: 30px;
+    padding: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+}
+
+.item.list-group-item
+{
+    float: none;
+    width: 100%;
+    background-color: #fff;
+    margin-bottom: 30px;
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+    padding: 0 1rem;
+    border: 0;
+}
+.item.list-group-item .img-event {
+    float: left;
+    width: 30%;
+}
+
+.item.list-group-item .list-group-image
+{
+    margin-right: 10px;
+}
+.item.list-group-item .thumbnail
+{
+    margin-bottom: 0px;
+    display: inline-block;
+}
+.item.list-group-item .caption
+{
+    float: left;
+    width: 70%;
+    margin: 0;
+}
+
+.item.list-group-item:before, .item.list-group-item:after
+{
+    display: table;
+    content: " ";
+}
+
+.item.list-group-item:after {
+    clear: both;
+}
+.product-men {
+    /*margin: top;*/
+    margin-top: 2em;
+    max-height: 45vh;
+}
+
+.men-thumb-item-custom-products {
+    max-height: 25vh;
+}
+
+.banner-boasdasdotom-w3-agileits {
+    margin-top: 15vh;
 }
