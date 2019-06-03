@@ -6698,3 +6698,22 @@ input.inputError:focus {
     align-items: stretch;
     max-height: 100%;
 }
+
+.h-100-p {
+    height: 100%;
+}
+
+.h-200 {
+    height: 200px;
+    min-height: 200px;
+}
+
+.h-120 {
+    height: 120px;
+    min-height: 120px;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
