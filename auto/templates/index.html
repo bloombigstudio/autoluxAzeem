@@ -163,18 +163,22 @@
                         <button class="btn filter-button custom-buttons" data-filter="Others">Others</button>
                     </div>
                 </div>
-                <div class="new-arrival-products">
+                <div class="new-arrival-products row product_listing">
                     {% if all_products %}
                         {% for item in all_products %}
                         <div class="col-md-3 product-men filter {{ item.product_category|cut:" " }}">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <a href="{% url 'single' category=item.product_category itemslug=item.product_slug %}">
-                                    <div id="product-image-{{ item.id }}" class="men-thumb-item men-thumb-item-custom-products">
-                                        <img src="{{ item.product_image_front.url }}" alt="{{ item.product_image_front_alt }}" class="pro-image-front">
-                                        <img src="{{ item.product_image_back.url }}" alt="{{ item.product_image_back_alt }}" class="pro-image-back">
+                            <div class="men-pro-item simpleCart_shelfItem h-100-p">
+                                <div class="h-200">
+                                    <div class="h-100-p">
+                                        <a href="{% url 'single' category=item.product_category itemslug=item.product_slug %}">
+                                            <div id="product-image-{{ item.id }}" class="men-thumb-item men-thumb-item-custom-products h-100-p flex-row">
+                                                <img src="{{ item.product_image_front.url }}" alt="{{ item.product_image_front_alt }}" class="pro-image-front">
+                                                <img src="{{ item.product_image_back.url }}" alt="{{ item.product_image_back_alt }}" class="pro-image-back">
+                                            </div>
+                                        </a>
                                     </div>
-                                </a>
-                                <div class="item-info-product">
+                                </div>
+                                <div class="item-info-product h-120">
                                     <h4><a id="title-{{ item.id }}" href="{% url 'single' category=item.product_category itemslug=item.product_slug %}">{{ item.product_title }}</a></h4>
                                     {% if item.product_discounted_price != null %}
                                         <div class="info-product-price">
@@ -200,7 +204,7 @@
     </div>
 	<!-- //new_arrivals -->
 	<!-- /we-offer -->
-		<div class="sale-w3ls deliver-across">
+		<div class="sale-w3ls deliver-across w-100-p">
 			<div class="container">
 				<h6>Delivery across all Pakistan</h6>
 				<a class="hvr-outline-out button2" href="{% url 'products' item_name="Exterior" %}">Shop Now </a>
