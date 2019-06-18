@@ -3327,7 +3327,7 @@ color: #000;
     margin: 0;
 }
 .w3_agile_latest_arrivals {
-    margin: 4em auto 0;
+    margin: 2em auto 0;
 }
 .responsive_tabs_agileits {
     margin-top: 3em;
@@ -6721,4 +6721,19 @@ input.inputError:focus {
 .flex-row {
     display: flex;
     flex-direction: row;
+}
+
+.new_arrivals_custom {
+    flex-flow: row wrap;
+    height: 100%;
+    flex-direction: row;
+    box-sizing: border-box;
+    display: flex;
+    place-content: stretch space-evenly;
+    align-items: stretch;
+    max-height: 100%;
+}
+.new_arrivals_custom_heading {
+    margin-bottom: 0em !important;
+    padding-top: 1em;
 }

@@ -124,14 +124,13 @@
     </div>
 	<!-- //new_arrivals -->
 	  	<!--/slider_owl-->
-
-    <div class="w3_agile_latest_arrivals">
-        <h3 class="wthree_text_info">New <span>Arrivals</span></h3>
+    <h3 class="wthree_text_info new_arrivals_custom_heading">New <span>Arrivals</span></h3>
+    <div class="w3_agile_latest_arrivals new_arrivals_custom">
             {% if new_arrivals %}
                 {% for item in new_arrivals %}
                     <div class="col-md-3 product-men">
-                        <div class="men-pro-item simpleCart_shelfItem">
-                            <div id="product-image-{{ item.id }}" class="men-thumb-item men-thumb-item-custom-products">
+                        <div class="men-pro-item simpleCart_shelfItem h-100-p">
+                            <div id="product-image-{{ item.id }}" class="men-thumb-item men-thumb-item-custom-products h-200">
                                 <img src="{{ item.product_image_front.url }}" alt="{{ item.product_image_front_alt }}" class="pro-image-front">
                                 <img src="{{ item.product_image_back.url }}" alt="{{ item.product_image_back_alt }}" class="pro-image-back">
                                     <div class="men-cart-pro">
