@@ -185,8 +185,8 @@
                                     <h4><a id="title-{{ item.id }}" href="{% url 'single' category=item.product_category itemslug=item.product_slug %}">{{ item.product_title }}</a></h4>
                                     {% if item.product_discounted_price != null %}
                                         <div class="info-product-price">
+											<del>Rs {{ item.product_price|floatformat }}</del>
                                             <span class="item_price" id="discounted-price-{{ item.id }}">Rs {{ item.product_discounted_price|floatformat }}</span>
-                                            <del>Rs {{ item.product_price|floatformat }}</del>
                                         </div>
                                     {% else %}
                                         <div class="info-product-price">
