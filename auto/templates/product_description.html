@@ -49,8 +49,8 @@
             <h3>{{ item.product_id.product_title }}</h3>
                 {% if item.product_id.product_discounted_price != null %}
                     <p>
-                        <span class="item_price">Rs {{ item.product_id.product_discounted_price|floatformat }}</span>
                         <del>Rs {{ item.product_id.product_price|floatformat }}</del>
+                        <span class="item_price">Rs {{ item.product_id.product_discounted_price|floatformat }}</span>
                     </p>
                 {% else %}
                     <p>
